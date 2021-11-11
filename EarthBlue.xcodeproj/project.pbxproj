@@ -11,8 +11,59 @@
 		AD5EC6C22736BD96007BAD06 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5EC6C12736BD96007BAD06 /* SceneDelegate.swift */; };
 		AD5EC6C92736BD97007BAD06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD5EC6C82736BD97007BAD06 /* Assets.xcassets */; };
 		AD5EC6CC2736BD97007BAD06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD5EC6CA2736BD97007BAD06 /* LaunchScreen.storyboard */; };
+		AD93F28E273D0DB600AC7EF2 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD93F28D273D0DB600AC7EF2 /* MockURLProtocol.swift */; };
+		AD93F291273D109A00AC7EF2 /* NaturalEventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD93F290273D109A00AC7EF2 /* NaturalEventsService.swift */; };
+		AD93F293273D10CD00AC7EF2 /* NaturalEventsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD93F292273D10CD00AC7EF2 /* NaturalEventsRouter.swift */; };
+		AD93F296273D115100AC7EF2 /* NaturalEventsRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD93F295273D115100AC7EF2 /* NaturalEventsRouterTests.swift */; };
+		ADAEE4D9273B150600FABA5A /* NetworkingServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAEE4D1273B150600FABA5A /* NetworkingServices.framework */; };
+		ADAEE4E1273B150600FABA5A /* NetworkingServices.h in Headers */ = {isa = PBXBuildFile; fileRef = ADAEE4D3273B150600FABA5A /* NetworkingServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADAEE4E4273B150600FABA5A /* NetworkingServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAEE4D1273B150600FABA5A /* NetworkingServices.framework */; };
+		ADAEE4E5273B150600FABA5A /* NetworkingServices.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ADAEE4D1273B150600FABA5A /* NetworkingServices.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ADAEE4EF273B153B00FABA5A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ADAEE4EE273B153B00FABA5A /* Alamofire */; };
+		ADAEE4F1273B166700FABA5A /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAEE4F0273B166700FABA5A /* NetworkManagerTests.swift */; };
+		ADAEE4F4273B16A700FABA5A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAEE4F3273B16A700FABA5A /* NetworkManager.swift */; };
+		ADC00577273D664A005D5EF2 /* NaturalEventsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */; };
+		ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */; };
 		ADD616152736C8C4007A1D1D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD616142736C8C4007A1D1D /* MainView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ADAEE4DA273B150600FABA5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD5EC6B42736BD96007BAD06 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADAEE4D0273B150600FABA5A;
+			remoteInfo = NetworkingServices;
+		};
+		ADAEE4DC273B150600FABA5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD5EC6B42736BD96007BAD06 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD5EC6BB2736BD96007BAD06;
+			remoteInfo = EarthBlue;
+		};
+		ADAEE4E2273B150600FABA5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD5EC6B42736BD96007BAD06 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADAEE4D0273B150600FABA5A;
+			remoteInfo = NetworkingServices;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		ADAEE4E9273B150600FABA5A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ADAEE4E5273B150600FABA5A /* NetworkingServices.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		AD5EC6BC2736BD96007BAD06 /* EarthBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -21,6 +72,17 @@
 		AD5EC6C82736BD97007BAD06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD5EC6CB2736BD97007BAD06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD5EC6CD2736BD97007BAD06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD93F28D273D0DB600AC7EF2 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		AD93F290273D109A00AC7EF2 /* NaturalEventsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalEventsService.swift; sourceTree = "<group>"; };
+		AD93F292273D10CD00AC7EF2 /* NaturalEventsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalEventsRouter.swift; sourceTree = "<group>"; };
+		AD93F295273D115100AC7EF2 /* NaturalEventsRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalEventsRouterTests.swift; sourceTree = "<group>"; };
+		ADAEE4D1273B150600FABA5A /* NetworkingServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkingServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADAEE4D3273B150600FABA5A /* NetworkingServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingServices.h; sourceTree = "<group>"; };
+		ADAEE4D8273B150600FABA5A /* NetworkingServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkingServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADAEE4F0273B166700FABA5A /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		ADAEE4F3273B16A700FABA5A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaturalEventsServiceTests.swift; path = "NetworkingServices/Natural Events Service/NaturalEventsServiceTests.swift"; sourceTree = SOURCE_ROOT; };
+		ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		ADD616142736C8C4007A1D1D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -29,6 +91,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADAEE4E4273B150600FABA5A /* NetworkingServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADAEE4CE273B150600FABA5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADAEE4EF273B153B00FABA5A /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADAEE4D5273B150600FABA5A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADAEE4D9273B150600FABA5A /* NetworkingServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,6 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				AD5EC6BE2736BD96007BAD06 /* EarthBlue */,
+				ADAEE4D2273B150600FABA5A /* NetworkingServices */,
+				ADAEE4DE273B150600FABA5A /* NetworkingServicesTests */,
 				AD5EC6BD2736BD96007BAD06 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				AD5EC6BC2736BD96007BAD06 /* EarthBlue.app */,
+				ADAEE4D1273B150600FABA5A /* NetworkingServices.framework */,
+				ADAEE4D8273B150600FABA5A /* NetworkingServicesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,6 +143,69 @@
 				AD5EC6CD2736BD97007BAD06 /* Info.plist */,
 			);
 			path = EarthBlue;
+			sourceTree = "<group>";
+		};
+		AD93F28F273D0DBE00AC7EF2 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				AD93F28D273D0DB600AC7EF2 /* MockURLProtocol.swift */,
+				ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		AD93F294273D10D800AC7EF2 /* Natural Events Service */ = {
+			isa = PBXGroup;
+			children = (
+				AD93F290273D109A00AC7EF2 /* NaturalEventsService.swift */,
+				AD93F292273D10CD00AC7EF2 /* NaturalEventsRouter.swift */,
+			);
+			path = "Natural Events Service";
+			sourceTree = "<group>";
+		};
+		AD93F297273D115A00AC7EF2 /* Natural Events Service Tests */ = {
+			isa = PBXGroup;
+			children = (
+				ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */,
+				AD93F295273D115100AC7EF2 /* NaturalEventsRouterTests.swift */,
+			);
+			path = "Natural Events Service Tests";
+			sourceTree = "<group>";
+		};
+		ADAEE4D2273B150600FABA5A /* NetworkingServices */ = {
+			isa = PBXGroup;
+			children = (
+				ADAEE4D3273B150600FABA5A /* NetworkingServices.h */,
+				ADAEE4F5273B16AD00FABA5A /* Network Manager */,
+				AD93F294273D10D800AC7EF2 /* Natural Events Service */,
+			);
+			path = NetworkingServices;
+			sourceTree = "<group>";
+		};
+		ADAEE4DE273B150600FABA5A /* NetworkingServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				AD93F28F273D0DBE00AC7EF2 /* Shared */,
+				ADAEE4F2273B166B00FABA5A /* Network Manager Tests */,
+				AD93F297273D115A00AC7EF2 /* Natural Events Service Tests */,
+			);
+			path = NetworkingServicesTests;
+			sourceTree = "<group>";
+		};
+		ADAEE4F2273B166B00FABA5A /* Network Manager Tests */ = {
+			isa = PBXGroup;
+			children = (
+				ADAEE4F0273B166700FABA5A /* NetworkManagerTests.swift */,
+			);
+			path = "Network Manager Tests";
+			sourceTree = "<group>";
+		};
+		ADAEE4F5273B16AD00FABA5A /* Network Manager */ = {
+			isa = PBXGroup;
+			children = (
+				ADAEE4F3273B16A700FABA5A /* NetworkManager.swift */,
+			);
+			path = "Network Manager";
 			sourceTree = "<group>";
 		};
 		ADD6160C2736C24D007A1D1D /* AppDelegate */ = {
@@ -82,6 +228,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		ADAEE4CC273B150600FABA5A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADAEE4E1273B150600FABA5A /* NetworkingServices.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		AD5EC6BB2736BD96007BAD06 /* EarthBlue */ = {
 			isa = PBXNativeTarget;
@@ -90,15 +247,57 @@
 				AD5EC6B82736BD96007BAD06 /* Sources */,
 				AD5EC6B92736BD96007BAD06 /* Frameworks */,
 				AD5EC6BA2736BD96007BAD06 /* Resources */,
+				ADAEE4E9273B150600FABA5A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				ADAEE4E3273B150600FABA5A /* PBXTargetDependency */,
 			);
 			name = EarthBlue;
 			productName = EarthBlue;
 			productReference = AD5EC6BC2736BD96007BAD06 /* EarthBlue.app */;
 			productType = "com.apple.product-type.application";
+		};
+		ADAEE4D0273B150600FABA5A /* NetworkingServices */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADAEE4E6273B150600FABA5A /* Build configuration list for PBXNativeTarget "NetworkingServices" */;
+			buildPhases = (
+				ADAEE4CC273B150600FABA5A /* Headers */,
+				ADAEE4CD273B150600FABA5A /* Sources */,
+				ADAEE4CE273B150600FABA5A /* Frameworks */,
+				ADAEE4CF273B150600FABA5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NetworkingServices;
+			packageProductDependencies = (
+				ADAEE4EE273B153B00FABA5A /* Alamofire */,
+			);
+			productName = NetworkingServices;
+			productReference = ADAEE4D1273B150600FABA5A /* NetworkingServices.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ADAEE4D7273B150600FABA5A /* NetworkingServicesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADAEE4EA273B150600FABA5A /* Build configuration list for PBXNativeTarget "NetworkingServicesTests" */;
+			buildPhases = (
+				ADAEE4D4273B150600FABA5A /* Sources */,
+				ADAEE4D5273B150600FABA5A /* Frameworks */,
+				ADAEE4D6273B150600FABA5A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ADAEE4DB273B150600FABA5A /* PBXTargetDependency */,
+				ADAEE4DD273B150600FABA5A /* PBXTargetDependency */,
+			);
+			name = NetworkingServicesTests;
+			productName = NetworkingServicesTests;
+			productReference = ADAEE4D8273B150600FABA5A /* NetworkingServicesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -113,6 +312,14 @@
 					AD5EC6BB2736BD96007BAD06 = {
 						CreatedOnToolsVersion = 13.0;
 					};
+					ADAEE4D0273B150600FABA5A = {
+						CreatedOnToolsVersion = 13.0;
+						LastSwiftMigration = 1300;
+					};
+					ADAEE4D7273B150600FABA5A = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = AD5EC6BB2736BD96007BAD06;
+					};
 				};
 			};
 			buildConfigurationList = AD5EC6B72736BD96007BAD06 /* Build configuration list for PBXProject "EarthBlue" */;
@@ -124,11 +331,16 @@
 				Base,
 			);
 			mainGroup = AD5EC6B32736BD96007BAD06;
+			packageReferences = (
+				ADAEE4ED273B153B00FABA5A /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = AD5EC6BD2736BD96007BAD06 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				AD5EC6BB2736BD96007BAD06 /* EarthBlue */,
+				ADAEE4D0273B150600FABA5A /* NetworkingServices */,
+				ADAEE4D7273B150600FABA5A /* NetworkingServicesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -140,6 +352,20 @@
 			files = (
 				AD5EC6CC2736BD97007BAD06 /* LaunchScreen.storyboard in Resources */,
 				AD5EC6C92736BD97007BAD06 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADAEE4CF273B150600FABA5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADAEE4D6273B150600FABA5A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +382,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ADAEE4CD273B150600FABA5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD93F291273D109A00AC7EF2 /* NaturalEventsService.swift in Sources */,
+				ADAEE4F4273B16A700FABA5A /* NetworkManager.swift in Sources */,
+				AD93F293273D10CD00AC7EF2 /* NaturalEventsRouter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADAEE4D4273B150600FABA5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADAEE4F1273B166700FABA5A /* NetworkManagerTests.swift in Sources */,
+				AD93F296273D115100AC7EF2 /* NaturalEventsRouterTests.swift in Sources */,
+				ADC00577273D664A005D5EF2 /* NaturalEventsServiceTests.swift in Sources */,
+				AD93F28E273D0DB600AC7EF2 /* MockURLProtocol.swift in Sources */,
+				ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ADAEE4DB273B150600FABA5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADAEE4D0273B150600FABA5A /* NetworkingServices */;
+			targetProxy = ADAEE4DA273B150600FABA5A /* PBXContainerItemProxy */;
+		};
+		ADAEE4DD273B150600FABA5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD5EC6BB2736BD96007BAD06 /* EarthBlue */;
+			targetProxy = ADAEE4DC273B150600FABA5A /* PBXContainerItemProxy */;
+		};
+		ADAEE4E3273B150600FABA5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADAEE4D0273B150600FABA5A /* NetworkingServices */;
+			targetProxy = ADAEE4E2273B150600FABA5A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AD5EC6CA2736BD97007BAD06 /* LaunchScreen.storyboard */ = {
@@ -289,6 +555,7 @@
 		AD5EC6E72736BD98007BAD06 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -316,6 +583,7 @@
 		AD5EC6E82736BD98007BAD06 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -340,6 +608,115 @@
 			};
 			name = Release;
 		};
+		ADAEE4E7273B150600FABA5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 45VBTWJ842;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mohammedmirsal.NetworkingServices;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		ADAEE4E8273B150600FABA5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 45VBTWJ842;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mohammedmirsal.NetworkingServices;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		ADAEE4EB273B150600FABA5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45VBTWJ842;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mohammedmirsal.NetworkingServicesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EarthBlue.app/EarthBlue";
+			};
+			name = Debug;
+		};
+		ADAEE4EC273B150600FABA5A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45VBTWJ842;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mohammedmirsal.NetworkingServicesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EarthBlue.app/EarthBlue";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -361,7 +738,44 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		ADAEE4E6273B150600FABA5A /* Build configuration list for PBXNativeTarget "NetworkingServices" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADAEE4E7273B150600FABA5A /* Debug */,
+				ADAEE4E8273B150600FABA5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADAEE4EA273B150600FABA5A /* Build configuration list for PBXNativeTarget "NetworkingServicesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADAEE4EB273B150600FABA5A /* Debug */,
+				ADAEE4EC273B150600FABA5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ADAEE4ED273B153B00FABA5A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ADAEE4EE273B153B00FABA5A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADAEE4ED273B153B00FABA5A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AD5EC6B42736BD96007BAD06 /* Project object */;
 }
