@@ -32,7 +32,7 @@ class NaturalEventsServiceTests: XCTestCase {
     // MARK: Testing eventsFeed
     func testEventsFeedWithValidDataResponse_ShouldReturnDecodedObject() async {
         arrangeSutWithValidDataResponseFromNetworkManager()
-        let eventsAsStringResult = await sut.eventsFeed(type: [String : String].self)
+        let eventsAsStringResult = await sut.defaultEventsFeed(type: [String : String].self)
         switch eventsAsStringResult {
         case .success:
             break
@@ -43,7 +43,7 @@ class NaturalEventsServiceTests: XCTestCase {
     
     func testEventsFeedWithInvalidDataResponse_ShouldThrowError() async {
         arrangeSutWithInvalidDataResponseFromNetworkManager()
-        let eventsAsStringResult = await sut.eventsFeed(type: [String : String].self)
+        let eventsAsStringResult = await sut.defaultEventsFeed(type: [String : String].self)
         switch eventsAsStringResult {
         case .success:
             XCTFail()

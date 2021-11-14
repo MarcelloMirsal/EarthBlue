@@ -8,7 +8,9 @@
 import SwiftUI
 struct MainView: View {
     var body: some View {
-        EmptyView()
+        TabView {
+            EventsView()
+        }
     }
 }
 
@@ -17,3 +19,4 @@ struct MainView_Previews: PreviewProvider {
         MainView()
     }
 }
+

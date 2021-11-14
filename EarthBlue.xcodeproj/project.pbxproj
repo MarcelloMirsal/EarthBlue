@@ -25,6 +25,12 @@
 		ADC00577273D664A005D5EF2 /* NaturalEventsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */; };
 		ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */; };
 		ADD616152736C8C4007A1D1D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD616142736C8C4007A1D1D /* MainView.swift */; };
+		ADE77B8A274011320061AB3F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B89274011320061AB3F /* EventViewModel.swift */; };
+		ADE77B99274011940061AB3F /* EventsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B98274011940061AB3F /* EventsViewModelTests.swift */; };
+		ADE77B9B274123CD0061AB3F /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B9A274123CD0061AB3F /* EventsView.swift */; };
+		ADE77B9D27412FC90061AB3F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B9C27412FC90061AB3F /* Event.swift */; };
+		ADE77BA1274144450061AB3F /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77BA0274144450061AB3F /* Mocks.swift */; };
+		ADF49647273EE588003ADB9C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF49646273EE588003ADB9C /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +54,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = ADAEE4D0273B150600FABA5A;
 			remoteInfo = NetworkingServices;
+		};
+		ADE77B93274011630061AB3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD5EC6B42736BD96007BAD06 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD5EC6BB2736BD96007BAD06;
+			remoteInfo = EarthBlue;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -84,6 +97,13 @@
 		ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaturalEventsServiceTests.swift; path = "NetworkingServices/Natural Events Service/NaturalEventsServiceTests.swift"; sourceTree = SOURCE_ROOT; };
 		ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		ADD616142736C8C4007A1D1D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		ADE77B89274011320061AB3F /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		ADE77B8F274011630061AB3F /* EarthBlueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthBlueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADE77B98274011940061AB3F /* EventsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModelTests.swift; sourceTree = "<group>"; };
+		ADE77B9A274123CD0061AB3F /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
+		ADE77B9C27412FC90061AB3F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		ADE77BA0274144450061AB3F /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+		ADF49646273EE588003ADB9C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +131,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ADE77B8C274011630061AB3F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -118,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				AD5EC6BE2736BD96007BAD06 /* EarthBlue */,
+				ADE77B90274011630061AB3F /* EarthBlueTests */,
 				ADAEE4D2273B150600FABA5A /* NetworkingServices */,
 				ADAEE4DE273B150600FABA5A /* NetworkingServicesTests */,
 				AD5EC6BD2736BD96007BAD06 /* Products */,
@@ -130,6 +158,7 @@
 				AD5EC6BC2736BD96007BAD06 /* EarthBlue.app */,
 				ADAEE4D1273B150600FABA5A /* NetworkingServices.framework */,
 				ADAEE4D8273B150600FABA5A /* NetworkingServicesTests.xctest */,
+				ADE77B8F274011630061AB3F /* EarthBlueTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +170,8 @@
 				ADD6160C2736C24D007A1D1D /* AppDelegate */,
 				ADD6160D2736C25B007A1D1D /* Assets */,
 				AD5EC6CD2736BD97007BAD06 /* Info.plist */,
+				ADF49648273EEA84003ADB9C /* shared UI */,
+				ADF4964B273EEAB5003ADB9C /* Natural Events */,
 			);
 			path = EarthBlue;
 			sourceTree = "<group>";
@@ -226,6 +257,49 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		ADE77B90274011630061AB3F /* EarthBlueTests */ = {
+			isa = PBXGroup;
+			children = (
+				ADE77B9F274131F50061AB3F /* Natural Events Tests */,
+			);
+			path = EarthBlueTests;
+			sourceTree = "<group>";
+		};
+		ADE77B9E27412FCD0061AB3F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ADE77B9C27412FC90061AB3F /* Event.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		ADE77B9F274131F50061AB3F /* Natural Events Tests */ = {
+			isa = PBXGroup;
+			children = (
+				ADE77B98274011940061AB3F /* EventsViewModelTests.swift */,
+				ADE77BA0274144450061AB3F /* Mocks.swift */,
+			);
+			path = "Natural Events Tests";
+			sourceTree = "<group>";
+		};
+		ADF49648273EEA84003ADB9C /* shared UI */ = {
+			isa = PBXGroup;
+			children = (
+				ADF49646273EE588003ADB9C /* Colors.swift */,
+			);
+			path = "shared UI";
+			sourceTree = "<group>";
+		};
+		ADF4964B273EEAB5003ADB9C /* Natural Events */ = {
+			isa = PBXGroup;
+			children = (
+				ADE77B89274011320061AB3F /* EventViewModel.swift */,
+				ADE77B9A274123CD0061AB3F /* EventsView.swift */,
+				ADE77B9E27412FCD0061AB3F /* Models */,
+			);
+			path = "Natural Events";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -299,6 +373,24 @@
 			productReference = ADAEE4D8273B150600FABA5A /* NetworkingServicesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		ADE77B8E274011630061AB3F /* EarthBlueTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADE77B95274011630061AB3F /* Build configuration list for PBXNativeTarget "EarthBlueTests" */;
+			buildPhases = (
+				ADE77B8B274011630061AB3F /* Sources */,
+				ADE77B8C274011630061AB3F /* Frameworks */,
+				ADE77B8D274011630061AB3F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ADE77B94274011630061AB3F /* PBXTargetDependency */,
+			);
+			name = EarthBlueTests;
+			productName = EarthBlueTests;
+			productReference = ADE77B8F274011630061AB3F /* EarthBlueTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -320,6 +412,11 @@
 						CreatedOnToolsVersion = 13.0;
 						TestTargetID = AD5EC6BB2736BD96007BAD06;
 					};
+					ADE77B8E274011630061AB3F = {
+						CreatedOnToolsVersion = 13.0;
+						LastSwiftMigration = 1300;
+						TestTargetID = AD5EC6BB2736BD96007BAD06;
+					};
 				};
 			};
 			buildConfigurationList = AD5EC6B72736BD96007BAD06 /* Build configuration list for PBXProject "EarthBlue" */;
@@ -339,6 +436,7 @@
 			projectRoot = "";
 			targets = (
 				AD5EC6BB2736BD96007BAD06 /* EarthBlue */,
+				ADE77B8E274011630061AB3F /* EarthBlueTests */,
 				ADAEE4D0273B150600FABA5A /* NetworkingServices */,
 				ADAEE4D7273B150600FABA5A /* NetworkingServicesTests */,
 			);
@@ -369,6 +467,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ADE77B8D274011630061AB3F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -377,8 +482,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD5EC6C02736BD96007BAD06 /* AppDelegate.swift in Sources */,
+				ADF49647273EE588003ADB9C /* Colors.swift in Sources */,
 				AD5EC6C22736BD96007BAD06 /* SceneDelegate.swift in Sources */,
+				ADE77B8A274011320061AB3F /* EventViewModel.swift in Sources */,
 				ADD616152736C8C4007A1D1D /* MainView.swift in Sources */,
+				ADE77B9D27412FC90061AB3F /* Event.swift in Sources */,
+				ADE77B9B274123CD0061AB3F /* EventsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +513,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ADE77B8B274011630061AB3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE77B99274011940061AB3F /* EventsViewModelTests.swift in Sources */,
+				ADE77BA1274144450061AB3F /* Mocks.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -421,6 +539,11 @@
 			isa = PBXTargetDependency;
 			target = ADAEE4D0273B150600FABA5A /* NetworkingServices */;
 			targetProxy = ADAEE4E2273B150600FABA5A /* PBXContainerItemProxy */;
+		};
+		ADE77B94274011630061AB3F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD5EC6BB2736BD96007BAD06 /* EarthBlue */;
+			targetProxy = ADE77B93274011630061AB3F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -557,7 +680,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 45VBTWJ842;
@@ -585,7 +707,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 45VBTWJ842;
@@ -717,6 +838,55 @@
 			};
 			name = Release;
 		};
+		ADE77B96274011630061AB3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45VBTWJ842;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mohammedmirsal.EarthBlueTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EarthBlue.app/EarthBlue";
+			};
+			name = Debug;
+		};
+		ADE77B97274011630061AB3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 45VBTWJ842;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mohammedmirsal.EarthBlueTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EarthBlue.app/EarthBlue";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -752,6 +922,15 @@
 			buildConfigurations = (
 				ADAEE4EB273B150600FABA5A /* Debug */,
 				ADAEE4EC273B150600FABA5A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADE77B95274011630061AB3F /* Build configuration list for PBXNativeTarget "EarthBlueTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADE77B96274011630061AB3F /* Debug */,
+				ADE77B97274011630061AB3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -7,15 +7,23 @@
 
 import Foundation
 
-final class NaturalEventsService {
+public protocol NaturalEventsServiceProtocol: AnyObject {
+    func defaultEventsFeed<T: Decodable>(type: T.Type) async -> Result<T,Error>
+}
+
+public final class NaturalEventsService: NaturalEventsServiceProtocol {
     let networkManager: NetworkManagerProtocol
     private let router = NaturalEventsRouter()
     
-    init(networkManager: NetworkManagerProtocol = NetworkManager() ) {
+    init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
     }
     
-    func eventsFeed<T: Decodable>(type: T.Type) async -> Result<T,Error> {
+    public init() {
+        self.networkManager = NetworkManager()
+    }
+    
+    public func defaultEventsFeed<T: Decodable>(type: T.Type) async -> Result<T,Error> {
         let request = router.defaultFeedRequest()
         do {
             let data = try await networkManager.requestData(for: request)
