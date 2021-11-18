@@ -37,15 +37,32 @@ class EventsViewModelTests: XCTestCase {
     }
     
     func testRequestDefaultFeedWithFailureResponse_ErrorMessageShouldBeNotNil() async  {
-        let expectation = expectation(description: "testRequestDefaultFeedWithFailureResponse_ShouldThrowError")
         arrangeSutWithMockedNaturalEventsService(forSuccess: false)
-        sut.$errorMessage.dropFirst().sink { errorMessage in
-            XCTAssertNotNil(errorMessage)
-            expectation.fulfill()
-        }.store(in: &cancellable)
         await sut.requestDefaultFeed()
-        wait(for: [expectation], timeout: 1)
+        XCTAssertTrue(sut.requestStatus == .failed)
     }
+    
+    func testSetRequestStatus_RequestStatusShouldBeUpdated() {
+        let newStatus = EventsViewModel.RequestStatus.success
+        sut.set(requestStatus: newStatus)
+        
+        XCTAssertEqual(sut.requestStatus, newStatus)
+    }
+    
+    @MainActor
+    func testHandleRequestResultWithSuccessResult_ShouldUpdateStatusToSuccess() async {
+        let result = Result<EventsFeed, Error>.success(.init(events: []))
+        await sut.handle(feedRequestResult: result)
+        XCTAssertEqual(sut.requestStatus, .success)
+    }
+    
+    @MainActor
+    func testHandleRequestResultWithFailureResult_ShouldUpdateStatusToFailed() async {
+        let result = Result<EventsFeed, Error>.failure(URLError(.badURL))
+        await sut.handle(feedRequestResult: result)
+        XCTAssertEqual(sut.requestStatus, .failed)
+    }
+    
     
     // MARK: Sut Arranges
     func arrangeSutWithMockedNaturalEventsService(forSuccess: Bool) {

@@ -30,7 +30,7 @@ public final class NaturalEventsService: NaturalEventsServiceProtocol {
             let decodedObject = try router.parse(data: data, to: type)
             return .success(decodedObject)
         } catch {
-            return .failure(error)
+            return .failure( error)
         }
     }
 }

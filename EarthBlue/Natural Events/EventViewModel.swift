@@ -8,10 +8,11 @@
 import Foundation
 import NetworkingServices
 
-final class EventsViewModel: ObservableObject {
+class EventsViewModel: ObservableObject {
     
-    @Published private(set) var eventsFeed: EventsFeed = .init(events: [])
-    @Published private(set) var errorMessage: String?
+    @Published var eventsFeed: EventsFeed = .init(events: [])
+    var errorMessage: String?
+    @Published var requestStatus: RequestStatus = .loading
     
     private let naturalEventsService: NaturalEventsServiceProtocol
     init(naturalEventsService: NaturalEventsServiceProtocol = NaturalEventsService()) {
@@ -24,31 +25,55 @@ final class EventsViewModel: ObservableObject {
         self.eventsFeed = eventsFeed
     }
     
-    @MainActor
-    private func set(errorMessage: String?) {
+    func set(errorMessage: String?) {
         self.errorMessage = errorMessage
+    }
+    
+    func set(requestStatus: RequestStatus) {
+        self.requestStatus = requestStatus
     }
     
     var events: [Event] {
         eventsFeed.events
     }
     
+    var shouldPresentError: Bool {
+        return errorMessage != nil
+    }
+    
+    var shouldShowLoadingIndicator: Bool {
+        return events.isEmpty && requestStatus == .loading
+    }
+    
+    var shouldShowPullToRefresh: Bool {
+        return events.isEmpty && requestStatus == .failed
+    }
+    
     // MARK: Feed Requests
     func requestDefaultFeed() async {
+        set(requestStatus: .loading)
         let feedRequestResult = await naturalEventsService.defaultEventsFeed(type: EventsFeed.self)
         await handle(feedRequestResult: feedRequestResult)
     }
     
-    
     // MARK: handling request results
     @MainActor
-    private func handle(feedRequestResult: Result<EventsFeed, Error>) async  {
+     func handle(feedRequestResult: Result<EventsFeed, Error>) async  {
         switch feedRequestResult {
         case .success(let requestedFeed):
             set(eventsFeed: requestedFeed)
+            set(requestStatus: .success)
         case .failure(let error):
             set(errorMessage: error.localizedDescription)
+            set(requestStatus: .failed)
             break
         }
+    }
+    
+    
+    enum RequestStatus {
+        case loading
+        case success
+        case failed
     }
 }

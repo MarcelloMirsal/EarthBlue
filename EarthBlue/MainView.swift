@@ -10,6 +10,9 @@ struct MainView: View {
     var body: some View {
         TabView {
             EventsView()
+                .tabItem {
+                    Label("Events", systemImage: "bell.fill")
+                }
         }
     }
 }

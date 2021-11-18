@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD4AB63A2743E10E000F3F61 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB6392743E10E000F3F61 /* EventRow.swift */; };
+		AD4AB63C2743E1C4000F3F61 /* Previews.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */; };
+		AD4AB63F2743E1FF000F3F61 /* EventRowMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB63E2743E1FF000F3F61 /* EventRowMocks.swift */; };
+		AD4AB6412743ED71000F3F61 /* EventsViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB6402743ED71000F3F61 /* EventsViewModelMock.swift */; };
 		AD5EC6C02736BD96007BAD06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5EC6BF2736BD96007BAD06 /* AppDelegate.swift */; };
 		AD5EC6C22736BD96007BAD06 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5EC6C12736BD96007BAD06 /* SceneDelegate.swift */; };
 		AD5EC6C92736BD97007BAD06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD5EC6C82736BD97007BAD06 /* Assets.xcassets */; };
 		AD5EC6CC2736BD97007BAD06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD5EC6CA2736BD97007BAD06 /* LaunchScreen.storyboard */; };
+		AD7B284827443C4600737AF1 /* Extensions and helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7B284727443C4600737AF1 /* Extensions and helpers.swift */; };
 		AD93F28E273D0DB600AC7EF2 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD93F28D273D0DB600AC7EF2 /* MockURLProtocol.swift */; };
 		AD93F291273D109A00AC7EF2 /* NaturalEventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD93F290273D109A00AC7EF2 /* NaturalEventsService.swift */; };
 		AD93F293273D10CD00AC7EF2 /* NaturalEventsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD93F292273D10CD00AC7EF2 /* NaturalEventsRouter.swift */; };
@@ -79,12 +84,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AD4AB6392743E10E000F3F61 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
+		AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Previews.xcassets; sourceTree = "<group>"; };
+		AD4AB63E2743E1FF000F3F61 /* EventRowMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowMocks.swift; sourceTree = "<group>"; };
+		AD4AB6402743ED71000F3F61 /* EventsViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModelMock.swift; sourceTree = "<group>"; };
 		AD5EC6BC2736BD96007BAD06 /* EarthBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD5EC6BF2736BD96007BAD06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD5EC6C12736BD96007BAD06 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AD5EC6C82736BD97007BAD06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD5EC6CB2736BD97007BAD06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD5EC6CD2736BD97007BAD06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD7B284727443C4600737AF1 /* Extensions and helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions and helpers.swift"; sourceTree = "<group>"; };
 		AD93F28D273D0DB600AC7EF2 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		AD93F290273D109A00AC7EF2 /* NaturalEventsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalEventsService.swift; sourceTree = "<group>"; };
 		AD93F292273D10CD00AC7EF2 /* NaturalEventsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalEventsRouter.swift; sourceTree = "<group>"; };
@@ -141,6 +151,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD4AB63D2743E1C9000F3F61 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */,
+				AD4AB63E2743E1FF000F3F61 /* EventRowMocks.swift */,
+				AD4AB6402743ED71000F3F61 /* EventsViewModelMock.swift */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		AD5EC6B32736BD96007BAD06 = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +192,8 @@
 				AD5EC6CD2736BD97007BAD06 /* Info.plist */,
 				ADF49648273EEA84003ADB9C /* shared UI */,
 				ADF4964B273EEAB5003ADB9C /* Natural Events */,
+				AD4AB63D2743E1C9000F3F61 /* Preview Content */,
+				AD7B284727443C4600737AF1 /* Extensions and helpers.swift */,
 			);
 			path = EarthBlue;
 			sourceTree = "<group>";
@@ -296,6 +318,7 @@
 				ADE77B89274011320061AB3F /* EventViewModel.swift */,
 				ADE77B9A274123CD0061AB3F /* EventsView.swift */,
 				ADE77B9E27412FCD0061AB3F /* Models */,
+				AD4AB6392743E10E000F3F61 /* EventRow.swift */,
 			);
 			path = "Natural Events";
 			sourceTree = "<group>";
@@ -448,6 +471,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD4AB63C2743E1C4000F3F61 /* Previews.xcassets in Resources */,
 				AD5EC6CC2736BD97007BAD06 /* LaunchScreen.storyboard in Resources */,
 				AD5EC6C92736BD97007BAD06 /* Assets.xcassets in Resources */,
 			);
@@ -484,7 +508,11 @@
 				AD5EC6C02736BD96007BAD06 /* AppDelegate.swift in Sources */,
 				ADF49647273EE588003ADB9C /* Colors.swift in Sources */,
 				AD5EC6C22736BD96007BAD06 /* SceneDelegate.swift in Sources */,
+				AD7B284827443C4600737AF1 /* Extensions and helpers.swift in Sources */,
+				AD4AB63A2743E10E000F3F61 /* EventRow.swift in Sources */,
 				ADE77B8A274011320061AB3F /* EventViewModel.swift in Sources */,
+				AD4AB6412743ED71000F3F61 /* EventsViewModelMock.swift in Sources */,
+				AD4AB63F2743E1FF000F3F61 /* EventRowMocks.swift in Sources */,
 				ADD616152736C8C4007A1D1D /* MainView.swift in Sources */,
 				ADE77B9D27412FC90061AB3F /* Event.swift in Sources */,
 				ADE77B9B274123CD0061AB3F /* EventsView.swift in Sources */,
@@ -682,6 +710,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "EarthBlue/Preview\\ Content";
 				DEVELOPMENT_TEAM = 45VBTWJ842;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EarthBlue/Info.plist;
@@ -709,6 +738,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "EarthBlue/Preview\\ Content";
 				DEVELOPMENT_TEAM = 45VBTWJ842;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EarthBlue/Info.plist;
