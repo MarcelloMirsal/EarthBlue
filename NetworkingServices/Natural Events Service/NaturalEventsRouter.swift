@@ -19,7 +19,7 @@ extension ResponseParser {
 
 class NaturalEventsRouter: ResponseParser {
     private let timeInterval: Double = 10.0
-    let baseURLComponent = URLComponents(string: "https://eonet.sci.gsfc.nasa.gov/api/v3/events")!
+    let baseURLComponent = URLComponents(string: "https://eonet.gsfc.nasa.gov/api/v3/events")!
     
     func defaultFeedRequest() -> URLRequest {
         var urlRequestComponent = baseURLComponent

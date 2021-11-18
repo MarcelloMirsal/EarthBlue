@@ -10,6 +10,7 @@ import XCTest
 
 class NaturalEventsRouterTests: XCTestCase {
     private typealias QueryItem = NaturalEventsRouter.QueryItem
+    let idealBaseURL = URL(string: "https://eonet.gsfc.nasa.gov/api/v3/events")!
     var sut: NaturalEventsRouter!
     
     override func setUpWithError() throws {
@@ -22,7 +23,6 @@ class NaturalEventsRouterTests: XCTestCase {
     }
     
     func testBaseURLComponent_ShouldReturnIdealBaseURL() {
-        let idealBaseURL = URL(string: "https://eonet.sci.gsfc.nasa.gov/api/v3/events")!
         let baseURL = sut.baseURLComponent
         XCTAssertEqual(idealBaseURL, baseURL.url)
     }
@@ -43,7 +43,7 @@ class NaturalEventsRouterTests: XCTestCase {
     
     // MARK: Testing Requests
     func testEventsFeedURLRequest_ShouldReturnDefaultFeedRequest() {
-        let idealURL = URL(string: "https://eonet.sci.gsfc.nasa.gov/api/v3/events?status=all&days=60")!
+        let idealURL = URL(string: "\(idealBaseURL.absoluteString)?status=all&days=60")!
         let defaultFeedRequest = sut.defaultFeedRequest()
         XCTAssertEqual(idealURL, defaultFeedRequest.url!)
     }
