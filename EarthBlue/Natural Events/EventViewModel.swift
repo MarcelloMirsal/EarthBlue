@@ -11,10 +11,10 @@ import NetworkingServices
 class EventsViewModel: ObservableObject {
     
     @Published var eventsFeed: EventsFeed = .init(events: [])
-    var errorMessage: String?
     @Published var requestStatus: RequestStatus = .loading
-    
     private let naturalEventsService: NaturalEventsServiceProtocol
+    var errorMessage: String?
+    
     init(naturalEventsService: NaturalEventsServiceProtocol = NaturalEventsService()) {
         self.naturalEventsService = naturalEventsService
     }
@@ -51,9 +51,15 @@ class EventsViewModel: ObservableObject {
     
     // MARK: Feed Requests
     func requestDefaultFeed() async {
+        print("requestin....")
         set(requestStatus: .loading)
         let feedRequestResult = await naturalEventsService.defaultEventsFeed(type: EventsFeed.self)
         await handle(feedRequestResult: feedRequestResult)
+    }
+    
+    // MARK: Events filtering
+    func filteredEvents(withName nameQuery: String) -> [Event] {
+        return events.lazy.filter({ $0.title.localizedCaseInsensitiveContains(nameQuery) })
     }
     
     // MARK: handling request results
@@ -69,7 +75,6 @@ class EventsViewModel: ObservableObject {
             break
         }
     }
-    
     
     enum RequestStatus {
         case loading

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EventsView: View {
     @ObservedObject var viewModel: EventsViewModel
+    @State private var searchText: String = ""
     
     init(viewModel: EventsViewModel = .init()) {
         self.viewModel = viewModel
@@ -17,13 +18,9 @@ struct EventsView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                List(viewModel.events, id: \.id) { event in
-                    EventRow(event: event)
-                }
-                .refreshable(action: {
-                    await viewModel.requestDefaultFeed()
-                })
-                .navigationTitle("Events")
+                EventsList(searchText: $searchText)
+                    .environmentObject(viewModel)
+                    .navigationTitle("Events")
                 Group {
                     ProgressView("Loading...")
                         .isHidden(!viewModel.shouldShowLoadingIndicator)
@@ -33,6 +30,7 @@ struct EventsView: View {
                 .foregroundColor(.secondary)
             }
         }
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for events in this list")
         .alert("Error", isPresented: .init(get: {
             viewModel.shouldPresentError
         }, set: { _ in
@@ -65,3 +63,72 @@ fileprivate extension EventRow {
         self.init(title: event.title, category: event.category, lastUpdateData: event.lastUpdatedDate, isActive: event.isActive)
     }
 }
+
+fileprivate struct EventsList: View {
+    @Environment(\.isSearching) var isSearching: Bool
+    @Environment(\.dismissSearch) var dismissSearch
+    @EnvironmentObject var viewModel: EventsViewModel
+    @Binding var searchText: String
+    
+    var filteredEvents: [Event] {
+        return viewModel.filteredEvents(withName: searchText)
+    }
+    
+    var body: some View {
+        List(viewModel.events, id: \.id) { event in
+            NavigationLink.init {
+                Text("Event Details View")
+            } label: {
+                EventRow(event: event)
+            }
+            
+        }
+        .refreshable(action: {
+            await viewModel.requestDefaultFeed()
+        })
+        .overlay {
+            if isSearching && !searchText.isEmpty {
+                EventsSearchResultsList(events: filteredEvents)
+                    .background(Colors.systemBackground)
+            }
+        }
+    }
+}
+
+fileprivate struct EventsSearchResultsList: View {
+    let events: [Event]
+    
+    var body: some View {
+        List(events, id: \.id) { event in
+            NavigationLink.init {
+                Text("Event Detail View")
+            } label: {
+                EventSearchResultRow(title: event.title, category: event.category)
+            }
+            
+        }
+        .listStyle(PlainListStyle())
+    }
+}
+
+
+fileprivate struct EventSearchResultRow: View {
+    let title: String
+    let category: String
+    var body: some View {
+        HStack(alignment: .center, spacing: 4) {
+            Label {
+                Text(title)
+                    .multilineTextAlignment(.leading)
+            } icon: {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.secondary)
+            }
+            Spacer()
+            Text(category)
+                .multilineTextAlignment(.trailing)
+                .foregroundColor(.secondary)
+        }
+    }
+}
+

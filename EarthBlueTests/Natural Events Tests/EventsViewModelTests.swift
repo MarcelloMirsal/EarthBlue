@@ -63,6 +63,14 @@ class EventsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.requestStatus, .failed)
     }
     
+    // MARK: Searching tests
+    func testFilterEvents_ShouldReturnFilteredEvents() async  {
+        let searchText = "ice"
+        arrangeSutWithMockedNaturalEventsService(forSuccess: true)
+        await sut.requestDefaultFeed()
+        let filteredEvents = sut.filteredEvents(withName: searchText)
+        XCTAssertTrue(!filteredEvents.isEmpty)
+    }
     
     // MARK: Sut Arranges
     func arrangeSutWithMockedNaturalEventsService(forSuccess: Bool) {

@@ -11,4 +11,5 @@ import SwiftUI
 
 struct Colors {
     static var caption = Color("caption")
+    static var systemBackground = Color(.systemBackground)
 }
