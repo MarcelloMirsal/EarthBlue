@@ -22,7 +22,7 @@ struct EventsView: View {
                     .environmentObject(viewModel)
                     .navigationTitle("Events")
                 Group {
-                    ProgressView("Loading...")
+                    Text("Loading...")
                         .isHidden(!viewModel.shouldShowLoadingIndicator)
                     Text("pull down to refresh")
                         .isHidden(!viewModel.shouldShowPullToRefresh)
@@ -77,7 +77,9 @@ fileprivate struct EventsList: View {
     var body: some View {
         List(viewModel.events, id: \.id) { event in
             NavigationLink.init {
-                Text("Event Details View")
+                EventDetailsView(event: event)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle(event.title)
             } label: {
                 EventRow(event: event)
             }
@@ -101,7 +103,9 @@ fileprivate struct EventsSearchResultsList: View {
     var body: some View {
         List(events, id: \.id) { event in
             NavigationLink.init {
-                Text("Event Detail View")
+                EventDetailsView(event: event)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle(event.title)
             } label: {
                 EventSearchResultRow(title: event.title, category: event.category)
             }

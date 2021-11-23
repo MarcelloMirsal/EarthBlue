@@ -49,4 +49,5 @@ struct Category: Codable {
 // MARK: - Geometry
 struct Geometry: Codable {
     let date: String
+    let coordinates: [Double]
 }

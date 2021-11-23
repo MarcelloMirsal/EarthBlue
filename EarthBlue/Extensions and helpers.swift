@@ -6,6 +6,13 @@
 //
 
 import SwiftUI
+import MapKit
+
+public extension CLLocationCoordinate2D {
+    init(coordinate: [Double]) {
+        self.init(latitude: coordinate.last!, longitude: coordinate.first!)
+    }
+}
 
 extension View {
     /// Hide or show the view based on a boolean value.
@@ -37,10 +44,15 @@ extension View {
 
 extension DateFormatter {
     func eventDate(ISO8601StringDate eventDate: String) -> String {
-        self.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        let dateAfterMapping = self.date(from: eventDate)!
+        let dateAfterMapping = DateFormatter.date(fromISO8601StringDate: eventDate)
         let newDateFormatter = DateFormatter()
         newDateFormatter.dateFormat = "MMM d, yyyy - h:mm a"
         return newDateFormatter.string(from: dateAfterMapping)
+    }
+    
+    static func date(fromISO8601StringDate stringDate: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        return dateFormatter.date(from: stringDate)!
     }
 }

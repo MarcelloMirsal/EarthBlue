@@ -11,7 +11,7 @@ import NetworkingServices
 class EventsViewModel: ObservableObject {
     
     @Published var eventsFeed: EventsFeed = .init(events: [])
-    @Published var requestStatus: RequestStatus = .loading
+    @Published var requestStatus: RequestStatus = .success
     private let naturalEventsService: NaturalEventsServiceProtocol
     var errorMessage: String?
     
@@ -51,7 +51,7 @@ class EventsViewModel: ObservableObject {
     
     // MARK: Feed Requests
     func requestDefaultFeed() async {
-        print("requestin....")
+        guard requestStatus != .loading else { return }
         set(requestStatus: .loading)
         let feedRequestResult = await naturalEventsService.defaultEventsFeed(type: EventsFeed.self)
         await handle(feedRequestResult: feedRequestResult)
