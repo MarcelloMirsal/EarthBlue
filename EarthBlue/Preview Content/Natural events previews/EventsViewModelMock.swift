@@ -15,21 +15,14 @@ class EventsViewModelMockWithError: EventsViewModel {
 }
 
 class EventsViewModelMock: EventsViewModel {
-    let mockedEvents: [Event] = [ .activeEventMock, .closedEventMock ]
+    let mockedEvents: [Event] = [ .activeEventMock, .closedEventMock, .detailedEventMock ]
     
     override func requestDefaultFeed() async {
-        await handle(feedRequestResult: .success(.init(events: mockedEvents)))
+        let feed = EventsFeed(events: mockedEvents)
+        await set(eventsFeed: feed)
+        set(requestStatus: .success)
     }
-    
 }
-
-fileprivate extension Event {
-    
-    static let activeEventMock = Event(id: "0", title: "Tropical Storm Sandra", closed: nil, categories: [.init(id: "0", title: "Wildfires")], geometry: [.init(date: "2021-11-14T00:00:00Z", coordinates: [1,2])])
-    
-    static let closedEventMock = Event(id: "1", title: "Iceberg A69C", closed: "2021-11-14T00:00:00Z", categories: [.init(id: "0", title: "Sea and Lake Ice")], geometry: [.init(date: "2021-11-13T00:00:00Z", coordinates: [2,0])])
-}
-
 
 extension Event {
     static let detailedEventMock = try! JSONDecoder().decode(Event.self, from: jsonData)

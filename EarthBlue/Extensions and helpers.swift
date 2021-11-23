@@ -43,7 +43,7 @@ extension View {
 
 
 extension DateFormatter {
-    func eventDate(ISO8601StringDate eventDate: String) -> String {
+    static func eventDate(ISO8601StringDate eventDate: String) -> String {
         let dateAfterMapping = DateFormatter.date(fromISO8601StringDate: eventDate)
         let newDateFormatter = DateFormatter()
         newDateFormatter.dateFormat = "MMM d, yyyy - h:mm a"

@@ -9,7 +9,6 @@ import Foundation
 import NetworkingServices
 
 class EventsViewModel: ObservableObject {
-    
     @Published var eventsFeed: EventsFeed = .init(events: [])
     @Published var requestStatus: RequestStatus = .success
     private let naturalEventsService: NaturalEventsServiceProtocol
@@ -21,7 +20,7 @@ class EventsViewModel: ObservableObject {
     
     // MARK: Accessors
     @MainActor
-    private func set(eventsFeed: EventsFeed) {
+    func set(eventsFeed: EventsFeed) {
         self.eventsFeed = eventsFeed
     }
     

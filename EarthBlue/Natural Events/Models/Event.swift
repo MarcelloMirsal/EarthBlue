@@ -27,12 +27,11 @@ extension Event {
     }
     
     var lastUpdatedDate: String {
-        let dateFormatter = DateFormatter()
         guard let closingDate = closed else {
             let lastGeometryUpdateDate = geometry.last!.date
-            return dateFormatter.eventDate(ISO8601StringDate: lastGeometryUpdateDate)
+            return DateFormatter.eventDate(ISO8601StringDate: lastGeometryUpdateDate)
         }
-        return dateFormatter.eventDate(ISO8601StringDate: closingDate)
+        return DateFormatter.eventDate(ISO8601StringDate: closingDate)
     }
     
     var isActive: Bool {

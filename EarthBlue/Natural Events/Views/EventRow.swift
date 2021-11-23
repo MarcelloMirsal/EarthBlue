@@ -35,7 +35,7 @@ struct EventRow_Previews: PreviewProvider {
     }
 }
 
-struct EventStatusView: View {
+fileprivate struct EventStatusView: View {
     @State private var isActive: Bool
     init(isActive: Bool) {
         self.isActive = isActive

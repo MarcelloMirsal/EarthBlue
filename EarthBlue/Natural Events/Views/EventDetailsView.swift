@@ -22,15 +22,10 @@ struct EventDetailsView: UIViewControllerRepresentable {
 }
 
 
-class EventDetailsViewController: UIViewController, MKMapViewDelegate {
-    
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .portrait
-    }
-    
-    let mapView = MKMapView()
-    var viewModel: EventDetailsViewModel!
-    let pointIdentifier = "pointIdentifier"
+class EventDetailsViewController: UIViewController {
+    private let mapView = MKMapView()
+    private var viewModel: EventDetailsViewModel!
+    private let pointIdentifier = "pointIdentifier"
     
     convenience init(event: Event) {
         self.init()
@@ -72,7 +67,11 @@ class EventDetailsViewController: UIViewController, MKMapViewDelegate {
             mapView.addAnnotation(annotation)
         }
     }
-    
+}
+
+
+// MARK: MKMapView delegate
+extension EventDetailsViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard annotation is MKPointAnnotation else { return nil }
         let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pointIdentifier)
