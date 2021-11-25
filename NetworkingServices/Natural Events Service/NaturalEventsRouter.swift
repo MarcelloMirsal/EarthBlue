@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ResponseParser {
-    func parse<T: Decodable>(data: Data, to type: T.Type, decoder: JSONDecoder) throws -> T 
+    func parse<T: Decodable>(data: Data, to type: T.Type, decoder: JSONDecoder) throws -> T
 }
 
 extension ResponseParser {
@@ -17,8 +17,8 @@ extension ResponseParser {
     }
 }
 
-class NaturalEventsRouter: ResponseParser {
-    private let timeInterval: Double = 10.0
+public class NaturalEventsRouter: ResponseParser {
+    
     let baseURLComponent = URLComponents(string: "https://eonet.gsfc.nasa.gov/api/v3/events")!
     
     func defaultFeedRequest() -> URLRequest {
@@ -27,14 +27,34 @@ class NaturalEventsRouter: ResponseParser {
             QueryItem.defaultStatus,
             QueryItem.defaultDays
         ]
-        return .init(url: urlRequestComponent.url!, timeoutInterval: timeInterval)
+        return .init(url: urlRequestComponent.url!)
+    }
+    
+    func filteredFeedRequest(dateRange: ClosedRange<Date>, forStatus status: EventStatus) -> URLRequest {
+        var urlRequestComponent = baseURLComponent
+        let startDateValue = stringDateForQuery(from: dateRange.lowerBound)
+        let endDateValue = stringDateForQuery(from: dateRange.upperBound)
+        urlRequestComponent.queryItems = [
+            QueryItem.startDate.queryItem(withValue: startDateValue),
+            QueryItem.endDate.queryItem(withValue: endDateValue),
+            QueryItem.status.queryItem(withValue: status.rawValue)
+        ]
+        return .init(url: urlRequestComponent.url!)
+    }
+    
+    func stringDateForQuery(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
     }
 }
 
-extension NaturalEventsRouter {
+public extension NaturalEventsRouter {
     enum QueryItem: String {
         case status
         case days
+        case startDate = "start"
+        case endDate = "end"
         func queryItem(withValue value: String) -> URLQueryItem {
             return .init(name: self.rawValue, value: value)
         }
@@ -45,6 +65,12 @@ extension NaturalEventsRouter {
         static var defaultDays: URLQueryItem {
             return Self.days.queryItem(withValue: "60")
         }
+    }
+    
+    enum EventStatus: String {
+        case open
+        case closed
+        case all
     }
 }
 

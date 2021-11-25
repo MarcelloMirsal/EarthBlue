@@ -30,10 +30,10 @@ class NaturalEventsServiceTests: XCTestCase {
     }
     
     // MARK: Testing eventsFeed
-    func testEventsFeedWithValidDataResponse_ShouldReturnDecodedObject() async {
+    func testDefaultEventsFeedWithValidDataResponse_ShouldReturnDecodedObject() async {
         arrangeSutWithValidDataResponseFromNetworkManager()
-        let eventsAsStringResult = await sut.defaultEventsFeed(type: [String : String].self)
-        switch eventsAsStringResult {
+        let feedResult = await sut.defaultEventsFeed(type: [String : String].self)
+        switch feedResult {
         case .success:
             break
         case .failure:
@@ -41,10 +41,34 @@ class NaturalEventsServiceTests: XCTestCase {
         }
     }
     
-    func testEventsFeedWithInvalidDataResponse_ShouldThrowError() async {
+    func testDefaultEventsFeedWithInvalidDataResponse_ShouldReturnFailureResult() async {
         arrangeSutWithInvalidDataResponseFromNetworkManager()
-        let eventsAsStringResult = await sut.defaultEventsFeed(type: [String : String].self)
-        switch eventsAsStringResult {
+        let feedResult = await sut.defaultEventsFeed(type: [String : String].self)
+        switch feedResult {
+        case .success:
+            XCTFail()
+        case .failure(let error):
+            XCTAssertNotNil(error as? URLError)
+        }
+    }
+    
+    func testFilteredEventsFeedWithValidDataResponse_ShouldReturnDecodedObject() async {
+        arrangeSutWithValidDataResponseFromNetworkManager()
+        let dateRange = Date.now.advanced(by: -1000)...Date.now
+        let feedResult = await sut.filteredEventsFeed(dateRange: dateRange, status: .open, type: [String : String].self)
+        switch feedResult {
+        case .success:
+            break
+        case .failure:
+            XCTFail()
+        }
+    }
+    
+    func testFilteredEventsFeedWithInvalidDataResponse_ShouldReturnFailureResult() async {
+        arrangeSutWithInvalidDataResponseFromNetworkManager()
+        let dateRange = Date.now.advanced(by: -1000)...Date.now
+        let feedResult = await sut.filteredEventsFeed(dateRange: dateRange, status: .closed, type: [String : String].self )
+        switch feedResult {
         case .success:
             XCTFail()
         case .failure(let error):

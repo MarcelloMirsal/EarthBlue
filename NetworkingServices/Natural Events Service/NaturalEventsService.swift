@@ -9,6 +9,7 @@ import Foundation
 
 public protocol NaturalEventsServiceProtocol: AnyObject {
     func defaultEventsFeed<T: Decodable>(type: T.Type) async -> Result<T,Error>
+    func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventStatus ,type: T.Type) async -> Result<T,Error>
 }
 
 public final class NaturalEventsService: NaturalEventsServiceProtocol {
@@ -24,13 +25,22 @@ public final class NaturalEventsService: NaturalEventsServiceProtocol {
     }
     
     public func defaultEventsFeed<T: Decodable>(type: T.Type) async -> Result<T,Error> {
-        let request = router.defaultFeedRequest()
+        let defaultFeedRequest = router.defaultFeedRequest()
+        return await startNetworkRequest(for: defaultFeedRequest, decodingType: T.self)
+    }
+    
+    public func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventStatus, type: T.Type) async -> Result<T, Error> {
+        let filteredFeedRequest = router.filteredFeedRequest(dateRange: dateRange, forStatus: status)
+        return await startNetworkRequest(for: filteredFeedRequest, decodingType: T.self)
+    }
+    
+    private func startNetworkRequest<T: Decodable>(for urlRequest: URLRequest, decodingType: T.Type) async -> Result<T, Error> {
         do {
-            let data = try await networkManager.requestData(for: request)
-            let decodedObject = try router.parse(data: data, to: type)
+            let data = try await networkManager.requestData(for: urlRequest)
+            let decodedObject = try router.parse(data: data, to: T.self)
             return .success(decodedObject)
         } catch {
-            return .failure( error)
+            return .failure(error)
         }
     }
 }

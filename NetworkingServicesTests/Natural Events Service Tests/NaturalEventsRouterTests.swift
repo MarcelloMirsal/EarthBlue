@@ -27,7 +27,21 @@ class NaturalEventsRouterTests: XCTestCase {
         XCTAssertEqual(idealBaseURL, baseURL.url)
     }
     
+    func testStringDateForQuery_ShouldReturnDateEqualToIdeal() {
+        let idealDateFormation = "2001-01-01"
+        let date = Date.init(timeIntervalSinceReferenceDate: 0)
+        let stringDate = sut.stringDateForQuery(from: date)
+        XCTAssertEqual(stringDate, idealDateFormation)
+    }
+    
     // MARK: Testing QueryItems
+    func testQueryItemRawValues() {
+        XCTAssertEqual(QueryItem.days.rawValue, "days")
+        XCTAssertEqual(QueryItem.status.rawValue, "status")
+        XCTAssertEqual(QueryItem.startDate.rawValue, "start")
+        XCTAssertEqual(QueryItem.endDate.rawValue, "end")
+    }
+    
     func testDefaultQueryItems_ShouldReturnIdealQueryItem() {
         let defaultDays = "60"
         let defaultStatus = "all"
@@ -47,4 +61,28 @@ class NaturalEventsRouterTests: XCTestCase {
         let defaultFeedRequest = sut.defaultFeedRequest()
         XCTAssertEqual(idealURL, defaultFeedRequest.url!)
     }
+    
+    func testFilteredEventsRequest_ShouldReturnRequestWithThePassedParams() {
+        let startDateValue = "2021-01-01"
+        let endDateValue = "2021-12-31"
+        let status = NaturalEventsRouter.EventStatus.all
+        let idealURL = URL(string:  "\(idealBaseURL.absoluteString)?start=\(startDateValue)&end=\(endDateValue)&status=all")!
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let startDate = dateFormatter.date(from: startDateValue)!
+        let endDate = dateFormatter.date(from: endDateValue)!
+        
+        let dateRange = startDate...endDate
+        
+        let filteredFeedRequest = sut.filteredFeedRequest(dateRange: dateRange, forStatus: status)
+        XCTAssertEqual(filteredFeedRequest.url, idealURL)
+    }
+    
+    
+    
+    
 }
+
+

@@ -9,6 +9,10 @@ import Foundation
 @testable import NetworkingServices
 
 class MockNaturalEventsService: NaturalEventsServiceProtocol {
+    func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventStatus, type: T.Type) async -> Result<T, Error> {
+        return .failure(URLError.init(.badServerResponse))
+    }
+    
     private let isSuccessResponse: Bool
     init(isSuccessResponse: Bool) {
         self.isSuccessResponse = isSuccessResponse
