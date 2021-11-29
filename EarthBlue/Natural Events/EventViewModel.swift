@@ -11,6 +11,7 @@ import NetworkingServices
 class EventsViewModel: ObservableObject {
     @Published var eventsFeed: EventsFeed = .init(events: [])
     @Published var requestStatus: RequestStatus = .success
+    @Published var feedFiltering: EventsFeedFiltering?
     private let naturalEventsService: NaturalEventsServiceProtocol
     var errorMessage: String?
     
@@ -32,6 +33,10 @@ class EventsViewModel: ObservableObject {
         self.requestStatus = requestStatus
     }
     
+    func set(feedFiltering: EventsFeedFiltering) {
+        self.feedFiltering = feedFiltering
+    }
+    
     var events: [Event] {
         eventsFeed.events
     }
@@ -48,11 +53,34 @@ class EventsViewModel: ObservableObject {
         return events.isEmpty && requestStatus == .failed
     }
     
+    var isFilteringEnabled: Bool {
+        return requestStatus != .loading
+    }
+    
     // MARK: Feed Requests
+    func refreshEventsFeed() async {
+        guard let feedFiltering = self.feedFiltering else {
+            await requestDefaultFeed()
+            return
+        }
+        await requestFilteredFeedByDateRange(feedFiltering: feedFiltering)
+    }
+    
     func requestDefaultFeed() async {
+        if requestStatus != .loading {
+            await set(eventsFeed: .init(events: []))
+            set(requestStatus: .loading)
+            let feedRequestResult = await naturalEventsService.defaultEventsFeed(type: EventsFeed.self)
+            await handle(feedRequestResult: feedRequestResult)
+        }
+    }
+    
+    func requestFilteredFeedByDateRange(feedFiltering: EventsFeedFiltering) async {
         guard requestStatus != .loading else { return }
+        await set(eventsFeed: .init(events: []))
         set(requestStatus: .loading)
-        let feedRequestResult = await naturalEventsService.defaultEventsFeed(type: EventsFeed.self)
+        guard let dateRange = feedFiltering.dateRange, let status = NaturalEventsRouter.EventStatus(rawValue: feedFiltering.status) else { return }
+        let feedRequestResult = await naturalEventsService.filteredEventsFeed(dateRange: dateRange, status: status, type: EventsFeed.self)
         await handle(feedRequestResult: feedRequestResult)
     }
     
@@ -61,9 +89,9 @@ class EventsViewModel: ObservableObject {
         return events.lazy.filter({ $0.title.localizedCaseInsensitiveContains(nameQuery) })
     }
     
-    // MARK: handling request results
+    // MARK: Handling request results
     @MainActor
-     func handle(feedRequestResult: Result<EventsFeed, Error>) async  {
+    func handle(feedRequestResult: Result<EventsFeed, Error>) async  {
         switch feedRequestResult {
         case .success(let requestedFeed):
             set(eventsFeed: requestedFeed)
@@ -71,7 +99,6 @@ class EventsViewModel: ObservableObject {
         case .failure(let error):
             set(errorMessage: error.localizedDescription)
             set(requestStatus: .failed)
-            break
         }
     }
     

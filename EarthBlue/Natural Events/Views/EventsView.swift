@@ -10,6 +10,8 @@ import SwiftUI
 struct EventsView: View {
     @ObservedObject var viewModel: EventsViewModel
     @State private var searchText: String = ""
+    @State private var canShowFeedFiltering = false
+    @State private var eventsFeedFiltering: EventsFeedFiltering?
     
     init(viewModel: EventsViewModel = .init()) {
         self.viewModel = viewModel
@@ -29,8 +31,29 @@ struct EventsView: View {
                 }
                 .foregroundColor(.secondary)
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button.init {
+                        canShowFeedFiltering = true
+                    } label: {
+                        Label("", systemImage: "line.3.horizontal.decrease.circle")
+                    }
+                    .disabled(!viewModel.isFilteringEnabled)
+                    .sheet(isPresented: $canShowFeedFiltering) {
+                        EventsFilteringView(eventsFeedFiltering: $eventsFeedFiltering)
+                    }
+                }
+            }
         }
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for events in this list")
+        .onChange(of: eventsFeedFiltering, perform: { newValue in
+            guard let feedFiltering = newValue else { return }
+            Task(priority: .high) {
+                viewModel.set(feedFiltering: feedFiltering)
+                canShowFeedFiltering = false
+                await viewModel.requestFilteredFeedByDateRange(feedFiltering: feedFiltering)
+            }
+        })
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for events in this feed")
         .alert("Error", isPresented: .init(get: {
             viewModel.shouldPresentError
         }, set: { _ in
@@ -44,7 +67,6 @@ struct EventsView: View {
             await viewModel.requestDefaultFeed()
         }
     }
-    
 }
 
 struct EventsView_Previews: PreviewProvider {
@@ -56,3 +78,33 @@ struct EventsView_Previews: PreviewProvider {
         .previewLayout(.sizeThatFits)
     }
 }
+
+
+struct EventsFeedFiltering: Equatable {
+    let status: String
+    let dateRange: ClosedRange<Date>?
+}
+
+struct EventsFilteringBuilder {
+    let eventsFiltering: EventsFeedFiltering
+    init() {
+        self.eventsFiltering = .init(status: "", dateRange: nil)
+    }
+    
+    private init(status: String, dateRange: ClosedRange<Date>?) {
+        self.eventsFiltering = .init(status: status, dateRange: dateRange)
+    }
+    
+    func set(status: String) -> Self {
+        return .init(status: status, dateRange: self.eventsFiltering.dateRange)
+    }
+    
+    func set(dateRange: ClosedRange<Date>?) -> Self {
+        return .init(status: self.eventsFiltering.status, dateRange: dateRange)
+    }
+    
+    func build() -> EventsFeedFiltering {
+        return eventsFiltering
+    }
+}
+

@@ -33,7 +33,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AD0F410027381978008A4868"
+               BlueprintIdentifier = "ADE77B8E274011630061AB3F"
                BuildableName = "EarthBlueTests.xctest"
                BlueprintName = "EarthBlueTests"
                ReferencedContainer = "container:EarthBlue.xcodeproj">
@@ -43,7 +43,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AD0F411527381B7D008A4868"
+               BlueprintIdentifier = "ADAEE4D7273B150600FABA5A"
                BuildableName = "NetworkingServicesTests.xctest"
                BlueprintName = "NetworkingServicesTests"
                ReferencedContainer = "container:EarthBlue.xcodeproj">

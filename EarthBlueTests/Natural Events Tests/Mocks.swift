@@ -10,13 +10,16 @@ import Foundation
 
 class MockNaturalEventsService: NaturalEventsServiceProtocol {
     func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventStatus, type: T.Type) async -> Result<T, Error> {
-        return .failure(URLError.init(.badServerResponse))
+        return await defaultEventsFeed(type: type)
     }
     
     private let isSuccessResponse: Bool
     init(isSuccessResponse: Bool) {
         self.isSuccessResponse = isSuccessResponse
     }
+    
+    
+    
     func defaultEventsFeed<T>(type: T.Type) async -> Result<T, Error> where T : Decodable {
         guard isSuccessResponse else {
             return .failure(URLError(.badServerResponse) )

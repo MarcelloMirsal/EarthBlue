@@ -27,8 +27,9 @@ struct EventsList: View {
                 EventRow(event: event)
             }
         }
+        .listStyle(InsetListStyle())
         .refreshable(action: {
-            await viewModel.requestDefaultFeed()
+            await viewModel.refreshEventsFeed()
         })
         .overlay {
             if isSearching && !searchText.isEmpty {

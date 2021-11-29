@@ -26,14 +26,9 @@ class EventsViewModelTests: XCTestCase {
     
     // MARK:- Testing service requests
     func testRequestDefaultFeedWithSuccessfulResponse_ShouldSetNewEventsFeed() async {
-        let expectation = expectation(description: "testRequestDefaultFeedWithSuccessfulResponse")
         arrangeSutWithMockedNaturalEventsService(forSuccess: true)
-        sut.$eventsFeed.dropFirst().sink { eventsFeed in
-            XCTAssertFalse(eventsFeed.events.isEmpty)
-            expectation.fulfill()
-        }.store(in: &cancellable)
         await sut.requestDefaultFeed()
-        wait(for: [expectation], timeout: 1)
+        XCTAssertFalse(sut.events.isEmpty)
     }
     
     func testRequestDefaultFeedWithFailureResponse_ErrorMessageShouldBeNotNil() async  {
@@ -42,13 +37,25 @@ class EventsViewModelTests: XCTestCase {
         XCTAssertTrue(sut.requestStatus == .failed)
     }
     
+    func testRequestFilteredFeedByDateRange_ShouldSetNewEventsFeed() async {
+        arrangeSutWithMockedNaturalEventsService(forSuccess: true)
+        let feedFiltering = EventsFilteringBuilder()
+            .set(status: NaturalEventsRouter.EventStatus.all.rawValue)
+            .set(dateRange: Date.now...Date.now)
+            .build()
+        XCTAssertTrue(sut.events.isEmpty)
+        await sut.requestFilteredFeedByDateRange(feedFiltering: feedFiltering)
+        XCTAssertFalse(sut.events.isEmpty)
+    }
+    
     func testSetRequestStatus_RequestStatusShouldBeUpdated() {
         let newStatus = EventsViewModel.RequestStatus.success
         sut.set(requestStatus: newStatus)
-        
+
         XCTAssertEqual(sut.requestStatus, newStatus)
     }
     
+    // MARK: Test request result handling
     @MainActor
     func testHandleRequestResultWithSuccessResult_ShouldUpdateStatusToSuccess() async {
         let result = Result<EventsFeed, Error>.success(.init(events: []))
