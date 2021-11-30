@@ -15,10 +15,24 @@ class EventDetailsViewModel {
     }
     
     func locationsInfo() -> [EventLocationInfo] {
-        return event.geometry.map({
-            let date = DateFormatter.eventDate(ISO8601StringDate: $0.date)
-            let locationCoordinate = CLLocationCoordinate2D(coordinate: $0.coordinates)
-            return EventLocationInfo(date: date, location: locationCoordinate)
-        })
+        let locationsInfo: [[EventLocationInfo]] = event.geometry.map { geoDetails in
+            switch geoDetails.coordinates {
+            case .pointCoordinates(let pointCoordinate):
+                return [EventLocationInfo(date: geoDetails.date, location: .init(coordinate: pointCoordinate))]
+            case .polygonCoordinate(let polygonCoordinate):
+                return mapPolygonCoordinates(polygonCoordinates: polygonCoordinate, date: geoDetails.date)
+            }
+        }
+        return locationsInfo.flatMap({$0})
     }
+    
+    func mapPolygonCoordinates(polygonCoordinates: [[[Double]]], date: String) -> [EventLocationInfo] {
+        let flattedCoordinates = polygonCoordinates.flatMap({$0})
+        return flattedCoordinates.map { coordinate in
+            return EventLocationInfo(date: date, location: .init(coordinate: coordinate))
+        }
+    }
+    
+    
+    
 }
