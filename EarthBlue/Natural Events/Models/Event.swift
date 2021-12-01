@@ -21,6 +21,12 @@ struct Event: Codable {
     let geometry: [Geometry]
 }
 
+extension Event: Equatable {
+    static func ==(lhs: Event, rhs: Event) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 extension Event {
     var category: String {
         return categories.last?.title ?? ""

@@ -19,6 +19,20 @@ class EventsFilteringViewModelTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    // MARK: testing EventsFiltering
+    func testDateRangeEventsFiltering_ShouldReturnEventsFilteringWithPassedFilters() {
+        let startDate = Date.now.advanced(by: -10000)
+        let endDate = Date.now
+        let status = "all"
+        
+        let eventsFiltering = sut.dateRangeEventsFiltering(startDate: startDate, endDate: endDate, status: status)
+        
+        XCTAssertEqual(startDate, eventsFiltering.dateRange?.lowerBound)
+        XCTAssertEqual(endDate, eventsFiltering.dateRange?.upperBound)
+        XCTAssertEqual(status, eventsFiltering.status)
+        
+    }
+    
     // MARK: testing date ranges
     func testEndingDatePickerRange_ShouldReturnDateRangeAdvancedByTwoYears() {
         let startDate = Date(timeIntervalSinceReferenceDate: 0)

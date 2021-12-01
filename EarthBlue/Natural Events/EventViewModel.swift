@@ -9,11 +9,11 @@ import Foundation
 import NetworkingServices
 
 class EventsViewModel: ObservableObject {
-    @Published var eventsFeed: EventsFeed = .init(events: [])
-    @Published var requestStatus: RequestStatus = .success
-    @Published var feedFiltering: EventsFeedFiltering?
+    @Published private(set) var eventsFeed: EventsFeed = .init(events: [])
+    @Published private(set) var requestStatus: RequestStatus = .success
+    @Published private(set) var feedFiltering: EventsFeedFiltering?
     private let naturalEventsService: NaturalEventsServiceProtocol
-    var errorMessage: String?
+    private(set) var errorMessage: String?
     
     init(naturalEventsService: NaturalEventsServiceProtocol = NaturalEventsService()) {
         self.naturalEventsService = naturalEventsService
@@ -76,13 +76,18 @@ class EventsViewModel: ObservableObject {
     }
     
     func requestFilteredFeedByDateRange(feedFiltering: EventsFeedFiltering) async {
-        guard requestStatus != .loading else { return }
-        await set(eventsFeed: .init(events: []))
-        set(requestStatus: .loading)
-        guard let dateRange = feedFiltering.dateRange, let status = NaturalEventsRouter.EventStatus(rawValue: feedFiltering.status) else { return }
-        let feedRequestResult = await naturalEventsService.filteredEventsFeed(dateRange: dateRange, status: status, type: EventsFeed.self)
-        await handle(feedRequestResult: feedRequestResult)
+        if requestStatus != .loading {
+            guard let dateRange = feedFiltering.dateRange, let status = NaturalEventsRouter.EventStatus(rawValue: feedFiltering.status) else {
+                return
+            }
+            await set(eventsFeed: .init(events: []))
+            set(requestStatus: .loading)
+            let feedRequestResult = await naturalEventsService.filteredEventsFeed(dateRange: dateRange, status: status, type: EventsFeed.self)
+            await handle(feedRequestResult: feedRequestResult)
+        }
     }
+    
+    
     
     // MARK: Events filtering
     func filteredEvents(withName nameQuery: String) -> [Event] {

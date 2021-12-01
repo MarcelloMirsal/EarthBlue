@@ -19,9 +19,20 @@ class EventDetailsViewModelTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testGetEventLocationInfo_ShouldReturnNotEmptyArray() {
+    func testGetEventLocationInfoFromPointCoordinates_ShouldReturnNotEmptyArray() {
         let locationsInfo = sut.locationsInfo()
-        XCTAssertTrue(!locationsInfo.isEmpty)
+        
+        XCTAssertTrue(!locationsInfo.isEmpty,
+                      "locations info should return not empty LocationInfo array that has been mapped from event geometry point coordinates.")
+    }
+    
+    func testGetEventLocationInfoFromPolygonCoordinates_ShouldReturnNotEmptyArray() {
+        sut = .init(event: .polygonDetailedEventMock)
+        
+        let locationsInfo = sut.locationsInfo()
+        
+        XCTAssertTrue(!locationsInfo.isEmpty,
+                      "locations info should return not empty LocationInfo array that has been mapped from event geometry polygon coordinates.")
     }
     
 }
