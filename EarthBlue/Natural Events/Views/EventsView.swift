@@ -26,8 +26,11 @@ struct EventsView: View {
                 Group {
                     Text("Loading...")
                         .isHidden(!viewModel.shouldShowLoadingIndicator)
-                    Text("pull down to refresh")
+                    Text("Pull down to refresh.")
                         .isHidden(!viewModel.shouldShowPullToRefresh)
+                    Text("No events found, try another feed filtering options.")
+                        .multilineTextAlignment(.center)
+                        .isHidden(!viewModel.shouldShowNoEventsFound)
                 }
                 .foregroundColor(.secondary)
             }
@@ -46,11 +49,10 @@ struct EventsView: View {
             }
         }
         .onChange(of: eventsFeedFiltering, perform: { newValue in
-            guard let feedFiltering = newValue else { return }
             Task(priority: .high) {
                 canShowFeedFiltering = false
-                viewModel.set(feedFiltering: feedFiltering)
-                await viewModel.requestFilteredFeedByDateRange(feedFiltering: feedFiltering)
+                viewModel.set(feedFiltering: newValue)
+                await viewModel.refreshEventsFeed()
             }
         })
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for events in this feed")

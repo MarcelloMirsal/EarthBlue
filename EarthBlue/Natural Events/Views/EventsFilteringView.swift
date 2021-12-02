@@ -9,20 +9,25 @@ import SwiftUI
 
 struct EventsFilteringView: View {
     let viewModel: EventsFilteringViewModel = .init()
+    private let defaultFeedFiltering = EventsFilteringBuilder.defaultFeedFiltering
     @Environment(\.presentationMode) var presentationMode
-    @State private var startDate = Date.now
-    @State private var endDate = Date.now
+    @State private var startDate: Date = .now
+    @State private var endDate: Date = .now
     @State private var isDateRangeActive = true
-    @State private var selectedStatus: String = "all"
+    @State private var selectedStatus: FeedStatusOptions = .all
     @Binding private(set) var eventsFeedFiltering: EventsFeedFiltering?
-    let statusOptions = ["active", "closed", "all"]
+    let statusOptions = FeedStatusOptions.allCases
+    
+    init(eventsFeedFiltering: Binding<EventsFeedFiltering?>) {
+        self._eventsFeedFiltering = eventsFeedFiltering
+    }
     
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack(alignment: .bottom) {
                 Form {
                     Section("range") {
-                        Toggle("Date range", isOn: $isDateRangeActive)
+                        Toggle("Date range", isOn: .constant(isDateRangeActive))
                         if isDateRangeActive {
                             DatePicker("start",
                                        selection: $startDate,
@@ -39,46 +44,74 @@ struct EventsFilteringView: View {
                     Section("Status") {
                         Picker("status", selection: $selectedStatus) {
                             ForEach(statusOptions, id: \.self) { status in
-                                Text(status).tag(status)
+                                Text(status.rawValue).tag(status)
                             }
                         }
                     }
                     
                 }
+            
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarTitle("New Filtered Feed")
-                Button("Submit") {
-                    eventsFeedFiltering = viewModel.dateRangeEventsFiltering(startDate: startDate, endDate: endDate, status: selectedStatus)
+                HStack(spacing: 8) {
+                    Button("Reset to Defaults") {
+                        updateUI(from: viewModel.defaultFeedFiltering)
+                    }
+                    .buttonStyle(.bordered)
+                    Button("Submit") {
+                        eventsFeedFiltering = viewModel.dateRangeEventsFiltering(startDate: startDate, endDate: endDate, status: selectedStatus)
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .font(.headline)
-                .buttonStyle(.borderedProminent)
+                .background(Color(.systemGroupedBackground))
                 .padding(.bottom)
+                .font(.headline)
                 .controlSize(.large)
             }
             .onChange(of: startDate, perform: { newValue in
                 // updating selected end date whenever start date change
                 endDate = startDate
             })
-            .background(Color(.systemGroupedBackground))
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("cancel", role: .cancel) {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                }
+            .onAppear {
+                updateUI(from: eventsFeedFiltering ?? viewModel.defaultFeedFiltering)
             }
+        }
+    }
+    
+    func updateUI(from feedFiltering: EventsFeedFiltering) {
+        if let dateRange = feedFiltering.dateRange {
+            isDateRangeActive = true
+            startDate = dateRange.lowerBound
+            endDate = dateRange.upperBound
+            selectedStatus = feedFiltering.status
         }
     }
 }
 
 struct EventsFilteringView_Previews: PreviewProvider {
     static var previews: some View {
-        let feedFiltering = EventsFilteringBuilder().build()
+        let newFeedFiltering = EventsFilteringBuilder().build()
+        let configuredFeedFiltering = EventsFilteringBuilder()
+            .set(dateRange: .now.addingTimeInterval(-10000000)...Date.now)
+            .set(status: .closed)
+            .build()
         Group {
-            Color.red
+            Color.gray
         }
         .sheet(isPresented: .constant(true)) {
-            EventsFilteringView(eventsFeedFiltering: .constant(feedFiltering))
+            EventsFilteringView(eventsFeedFiltering: .constant(newFeedFiltering))
+        }
+        Group {
+            Color.gray
+        }
+        .sheet(isPresented: .constant(true)) {
+            EventsFilteringView(eventsFeedFiltering: .constant(configuredFeedFiltering))
         }
     }
+}
+
+enum FeedStatusOptions: String, CaseIterable {
+    case active
+    case closed
+    case all
 }

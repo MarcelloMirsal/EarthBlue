@@ -44,7 +44,7 @@ class EventsViewModelTests: XCTestCase {
     func testRequestFilteredFeedWithSuccessfulResponse_EventsFeedShouldBeNotEmpty() async {
         arrangeSutWithMockedNaturalEventsService(forSuccess: true)
         let feedFiltering = EventsFilteringBuilder()
-            .set(status: NaturalEventsRouter.EventStatus.all.rawValue)
+            .set(status: .all)
             .set(dateRange: Date.now...Date.now)
             .build()
         
@@ -57,7 +57,7 @@ class EventsViewModelTests: XCTestCase {
     func testRequestFilteredFeedWithFailedResponse_ErrorMessageShouldBeNotNil() async {
         arrangeSutWithMockedNaturalEventsService(forSuccess: false)
         let feedFiltering = EventsFilteringBuilder()
-            .set(status: NaturalEventsRouter.EventStatus.all.rawValue)
+            .set(status: .all)
             .set(dateRange: Date.now...Date.now)
             .build()
         
@@ -68,7 +68,7 @@ class EventsViewModelTests: XCTestCase {
     }
     
     func testRequestFilteredFeedWithNilDateRange_ShouldCancelRequestAndReturn() async {
-        let feedFiltering = EventsFeedFiltering(status: "all", dateRange: nil)
+        let feedFiltering = EventsFeedFiltering(status: .all, dateRange: nil)
         XCTAssertTrue(sut.events.isEmpty)
         
         await sut.requestFilteredFeedByDateRange(feedFiltering: feedFiltering)
@@ -86,7 +86,7 @@ class EventsViewModelTests: XCTestCase {
     
     func testRefreshEventsFeedForFilteredEvents_EventsFeedShouldBeNotEmpty() async {
         arrangeSutWithMockedNaturalEventsService(forSuccess: true)
-        sut.set(feedFiltering: .init(status: "all", dateRange: Date.now...Date.now))
+        sut.set(feedFiltering: .init(status: .all, dateRange: Date.now...Date.now))
         
         await sut.refreshEventsFeed()
         
@@ -95,6 +95,33 @@ class EventsViewModelTests: XCTestCase {
     
     func testRequestStatus_ShouldBeEqualToSuccessWhenInitialized() {
         XCTAssertEqual(sut.requestStatus, .success, "request should be in success status when first initialized, to allow the UI to send new feed requests, if request == success new request can be placed.")
+    }
+    
+    func testMappingFeedStatusOptionsToEventsStatus_ActiveShouldBeMappedToOpen() {
+        let feedStatus = FeedStatusOptions.active
+        
+        let eventsStatus = sut.map(feedStatusOption: feedStatus)
+        
+        XCTAssertEqual(eventsStatus, .open,
+                       "FeedStatusOptions.active should be mapped to NaturalEventsService internal type EventsStatus.open.")
+    }
+    
+    func testMappingFeedStatusOptionsToEventsStatus_ClosedShouldBeMappedToClosed() {
+        let feedStatus = FeedStatusOptions.closed
+        
+        let eventsStatus = sut.map(feedStatusOption: feedStatus)
+        
+        XCTAssertEqual(eventsStatus, .closed,
+                       "FeedStatusOptions.closed should be mapped to NaturalEventsService internal type EventsStatus.closed.")
+    }
+    
+    func testMappingFeedStatusOptionsToEventsStatus_AllStatusShouldBeMappedToAll() {
+        let feedStatus = FeedStatusOptions.all
+        
+        let eventsStatus = sut.map(feedStatusOption: feedStatus)
+        
+        XCTAssertEqual(eventsStatus, .all,
+                       "FeedStatusOptions.all should be mapped to NaturalEventsService internal type EventsStatus.all .")
     }
     
     func testSetRequestStatus_RequestStatusShouldBeUpdated() {

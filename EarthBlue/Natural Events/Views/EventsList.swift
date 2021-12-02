@@ -18,16 +18,20 @@ struct EventsList: View {
     }
     
     var body: some View {
-        List(viewModel.events, id: \.id) { event in
-            NavigationLink.init {
-                EventDetailsView(event: event)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .navigationTitle(event.title)
-            } label: {
-                EventRow(event: event)
+        List {
+            Section {
+                ForEach(viewModel.events, id: \.id) { event in
+                    NavigationLink.init {
+                        EventDetailsView(event: event)
+                            .navigationBarTitleDisplayMode(.inline)
+                            .navigationTitle(event.title)
+                    } label: {
+                        EventRow(event: event)
+                    }
+                }
             }
         }
-        .listStyle(InsetListStyle())
+        .listStyle(PlainListStyle())
         .refreshable(action: {
             await viewModel.refreshEventsFeed()
         })

@@ -8,21 +8,26 @@
 import Foundation
 
 struct EventsFeedFiltering: Equatable {
-    let status: String
-    let dateRange: ClosedRange<Date>?
+    let id = UUID()
+    let status: FeedStatusOptions
+    var dateRange: ClosedRange<Date>?
 }
 
 struct EventsFilteringBuilder {
+    static let defaultFeedFiltering: EventsFeedFiltering = Self()
+        .set(status: .all)
+        .set(dateRange: Date.now...Date.now)
+        .build()
     let eventsFiltering: EventsFeedFiltering
     init() {
-        self.eventsFiltering = .init(status: "", dateRange: nil)
+        self.eventsFiltering = .init(status: .all, dateRange: nil)
     }
     
-    private init(status: String, dateRange: ClosedRange<Date>?) {
+    private init(status: FeedStatusOptions, dateRange: ClosedRange<Date>?) {
         self.eventsFiltering = .init(status: status, dateRange: dateRange)
     }
     
-    func set(status: String) -> Self {
+    func set(status: FeedStatusOptions) -> Self {
         return .init(status: status, dateRange: self.eventsFiltering.dateRange)
     }
     

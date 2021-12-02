@@ -30,7 +30,7 @@ public class NaturalEventsRouter: ResponseParser {
         return .init(url: urlRequestComponent.url!)
     }
     
-    func filteredFeedRequest(dateRange: ClosedRange<Date>, forStatus status: EventStatus) -> URLRequest {
+    func filteredFeedRequest(dateRange: ClosedRange<Date>, forStatus status: EventsStatus) -> URLRequest {
         var urlRequestComponent = baseURLComponent
         let startDateValue = stringDateForQuery(from: dateRange.lowerBound)
         let endDateValue = stringDateForQuery(from: dateRange.upperBound)
@@ -67,7 +67,7 @@ public extension NaturalEventsRouter {
         }
     }
     
-    enum EventStatus: String {
+    enum EventsStatus: String {
         case open
         case closed
         case all

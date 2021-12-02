@@ -33,7 +33,7 @@ class EventsViewModel: ObservableObject {
         self.requestStatus = requestStatus
     }
     
-    func set(feedFiltering: EventsFeedFiltering) {
+    func set(feedFiltering: EventsFeedFiltering?) {
         self.feedFiltering = feedFiltering
     }
     
@@ -51,6 +51,10 @@ class EventsViewModel: ObservableObject {
     
     var shouldShowPullToRefresh: Bool {
         return events.isEmpty && requestStatus == .failed
+    }
+    
+    var shouldShowNoEventsFound: Bool {
+        return events.isEmpty && requestStatus == .success
     }
     
     var isFilteringEnabled: Bool {
@@ -77,9 +81,10 @@ class EventsViewModel: ObservableObject {
     
     func requestFilteredFeedByDateRange(feedFiltering: EventsFeedFiltering) async {
         if requestStatus != .loading {
-            guard let dateRange = feedFiltering.dateRange, let status = NaturalEventsRouter.EventStatus(rawValue: feedFiltering.status) else {
+            guard let dateRange = feedFiltering.dateRange else {
                 return
             }
+            let status = map(feedStatusOption: feedFiltering.status)
             await set(eventsFeed: .init(events: []))
             set(requestStatus: .loading)
             let feedRequestResult = await naturalEventsService.filteredEventsFeed(dateRange: dateRange, status: status, type: EventsFeed.self)
@@ -87,7 +92,16 @@ class EventsViewModel: ObservableObject {
         }
     }
     
-    
+    func map(feedStatusOption: FeedStatusOptions) -> NaturalEventsRouter.EventsStatus {
+        switch feedStatusOption {
+        case .active:
+            return .open
+        case .closed:
+            return .closed
+        case .all:
+            return .all
+        }
+    }
     
     // MARK: Events filtering
     func filteredEvents(withName nameQuery: String) -> [Event] {

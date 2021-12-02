@@ -65,7 +65,7 @@ class NaturalEventsRouterTests: XCTestCase {
     func testFilteredEventsRequest_ShouldReturnRequestWithThePassedParams() {
         let startDateValue = "2021-01-01"
         let endDateValue = "2021-12-31"
-        let status = NaturalEventsRouter.EventStatus.all
+        let status = NaturalEventsRouter.EventsStatus.all
         let idealURL = URL(string:  "\(idealBaseURL.absoluteString)?start=\(startDateValue)&end=\(endDateValue)&status=all")!
         
         let dateFormatter = DateFormatter()

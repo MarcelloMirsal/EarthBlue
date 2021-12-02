@@ -20,15 +20,22 @@ class EventsFilteringViewModelTests: XCTestCase {
     }
     
     // MARK: testing EventsFiltering
+    func testDefaultFeedFiltering_ShouldReturnDefaultFeedFilteringFromFilteringBuilder() {
+        let expectedDefaultFeedFiltering = EventsFilteringBuilder.defaultFeedFiltering
+        
+        XCTAssertEqual(sut.defaultFeedFiltering, expectedDefaultFeedFiltering,
+                       "defaultFeedFiltering should be equal to default feed filtering that provided by EventsFilteringBuilder")
+    }
+    
     func testDateRangeEventsFiltering_ShouldReturnEventsFilteringWithPassedFilters() {
         let startDate = Date.now.advanced(by: -10000)
         let endDate = Date.now
-        let status = "all"
+        let status = FeedStatusOptions.all
         
-        let eventsFiltering = sut.dateRangeEventsFiltering(startDate: startDate, endDate: endDate, status: status)
+        guard let eventsFiltering = sut.dateRangeEventsFiltering(startDate: startDate, endDate: endDate, status: status) else {XCTFail() ; return}
         
-        XCTAssertEqual(startDate, eventsFiltering.dateRange?.lowerBound)
-        XCTAssertEqual(endDate, eventsFiltering.dateRange?.upperBound)
+        XCTAssertEqual(startDate, eventsFiltering.dateRange!.lowerBound)
+        XCTAssertEqual(endDate, eventsFiltering.dateRange!.upperBound)
         XCTAssertEqual(status, eventsFiltering.status)
         
     }

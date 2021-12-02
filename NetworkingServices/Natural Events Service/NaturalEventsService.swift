@@ -9,7 +9,7 @@ import Foundation
 
 public protocol NaturalEventsServiceProtocol: AnyObject {
     func defaultEventsFeed<T: Decodable>(type: T.Type) async -> Result<T,Error>
-    func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventStatus ,type: T.Type) async -> Result<T,Error>
+    func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventsStatus ,type: T.Type) async -> Result<T,Error>
 }
 
 public final class NaturalEventsService: NaturalEventsServiceProtocol {
@@ -29,7 +29,7 @@ public final class NaturalEventsService: NaturalEventsServiceProtocol {
         return await startNetworkRequest(for: defaultFeedRequest, decodingType: T.self)
     }
     
-    public func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventStatus, type: T.Type) async -> Result<T, Error> {
+    public func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventsStatus, type: T.Type) async -> Result<T, Error> {
         let filteredFeedRequest = router.filteredFeedRequest(dateRange: dateRange, forStatus: status)
         return await startNetworkRequest(for: filteredFeedRequest, decodingType: T.self)
     }

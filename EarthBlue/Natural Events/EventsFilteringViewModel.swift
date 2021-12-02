@@ -8,11 +8,15 @@
 import Foundation
 
 class EventsFilteringViewModel {
-    func dateRangeEventsFiltering(startDate: Date, endDate: Date, status: String) -> EventsFeedFiltering {
-        return EventsFilteringBuilder()
+    
+    let defaultFeedFiltering = EventsFilteringBuilder.defaultFeedFiltering
+    
+    func dateRangeEventsFiltering(startDate: Date, endDate: Date, status: FeedStatusOptions) -> EventsFeedFiltering? {
+        let feedFiltering = EventsFilteringBuilder()
             .set(status: status)
             .set(dateRange: startDate...endDate)
             .build()
+        return feedFiltering == defaultFeedFiltering ? nil : feedFiltering
     }
     
     func startingDatePickerRange() -> ClosedRange<Date> {
