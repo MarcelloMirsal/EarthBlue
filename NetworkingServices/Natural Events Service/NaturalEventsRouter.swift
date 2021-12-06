@@ -30,15 +30,15 @@ public class NaturalEventsRouter: ResponseParser {
         return .init(url: urlRequestComponent.url!)
     }
     
-    func filteredFeedRequest(dateRange: ClosedRange<Date>, forStatus status: EventsStatus) -> URLRequest {
+    func filteredFeedRequest(days: Int? = nil, dateRange: ClosedRange<Date>? = nil, forStatus status: EventsStatus) -> URLRequest {
         var urlRequestComponent = baseURLComponent
-        let startDateValue = stringDateForQuery(from: dateRange.lowerBound)
-        let endDateValue = stringDateForQuery(from: dateRange.upperBound)
-        urlRequestComponent.queryItems = [
-            QueryItem.startDate.queryItem(withValue: startDateValue),
-            QueryItem.endDate.queryItem(withValue: endDateValue),
-            QueryItem.status.queryItem(withValue: status.rawValue)
-        ]
+        var queryItems = [URLQueryItem]()
+        queryItems.append(contentsOf: getQueryItems(from: dateRange))
+        if let days = days {
+            queryItems.append(QueryItem.days.queryItem(withValue: days.description))
+        }
+        queryItems.append(QueryItem.status.queryItem(withValue: status.rawValue))
+        urlRequestComponent.queryItems = queryItems
         return .init(url: urlRequestComponent.url!)
     }
     
@@ -46,6 +46,16 @@ public class NaturalEventsRouter: ResponseParser {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: date)
+    }
+    
+    private func getQueryItems(from dateRange: ClosedRange<Date>?) -> [URLQueryItem] {
+        guard let dateRange = dateRange else {return []}
+        let startDateValue = stringDateForQuery(from: dateRange.lowerBound)
+        let endDateValue = stringDateForQuery(from: dateRange.upperBound)
+        return [
+            QueryItem.startDate.queryItem(withValue: startDateValue),
+            QueryItem.endDate.queryItem(withValue: endDateValue),
+        ]
     }
 }
 

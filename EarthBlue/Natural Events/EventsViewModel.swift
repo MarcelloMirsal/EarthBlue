@@ -67,7 +67,7 @@ class EventsViewModel: ObservableObject {
             await requestDefaultFeed()
             return
         }
-        await requestFilteredFeedByDateRange(feedFiltering: feedFiltering)
+        await requestFilteredFeed(feedFiltering: feedFiltering)
     }
     
     func requestDefaultFeed() async {
@@ -79,15 +79,18 @@ class EventsViewModel: ObservableObject {
         }
     }
     
-    func requestFilteredFeedByDateRange(feedFiltering: EventsFeedFiltering) async {
+    func requestFilteredFeed(feedFiltering: EventsFeedFiltering) async {
         if requestStatus != .loading {
-            guard let dateRange = feedFiltering.dateRange else {
-                return
-            }
-            let status = map(feedStatusOption: feedFiltering.status)
             await set(eventsFeed: .init(events: []))
             set(requestStatus: .loading)
-            let feedRequestResult = await naturalEventsService.filteredEventsFeed(dateRange: dateRange, status: status, type: EventsFeed.self)
+            let status = map(feedStatusOption: feedFiltering.status)
+            let feedRequestResult: Result<EventsFeed, Error>
+            switch feedFiltering.filteringType {
+            case .days(let days):
+                feedRequestResult = await naturalEventsService.filteredEventsFeed(days: days, status: status, type: EventsFeed.self)
+            case .dateRange(let dateRange):
+                feedRequestResult = await naturalEventsService.filteredEventsFeed(dateRange: dateRange, status: status, type: EventsFeed.self)
+            }
             await handle(feedRequestResult: feedRequestResult)
         }
     }

@@ -80,6 +80,17 @@ class NaturalEventsRouterTests: XCTestCase {
         XCTAssertEqual(filteredFeedRequest.url, idealURL)
     }
     
+    func testFilteredEventsRequestByDates_ShouldReturnRequestWithPassedParamsAsExpecteURL() {
+        let days = 60
+        let status = NaturalEventsRouter.EventsStatus.all
+        let expectedURL = URL(string:  "\(idealBaseURL.absoluteString)?days=\(days)&status=\(status.rawValue)")!
+        
+        let filteredFeedRequest = sut.filteredFeedRequest(days: days, forStatus: status)
+        
+        XCTAssertEqual(filteredFeedRequest.url, expectedURL,
+                       "filtered feed URL should be equal to the expected URL")
+    }
+    
     
     
     

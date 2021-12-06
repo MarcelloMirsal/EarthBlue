@@ -9,6 +9,11 @@ import Foundation
 @testable import NetworkingServices
 
 class MockNaturalEventsService: NaturalEventsServiceProtocol {
+    
+    func filteredEventsFeed<T>(days: Int, status: NaturalEventsRouter.EventsStatus, type: T.Type) async -> Result<T, Error> where T : Decodable {
+        return await defaultEventsFeed(type: type)
+    }
+    
     func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventsStatus, type: T.Type) async -> Result<T, Error> {
         return await defaultEventsFeed(type: type)
     }

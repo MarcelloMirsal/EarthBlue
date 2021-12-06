@@ -41,7 +41,7 @@
 		ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */; };
 		ADD616152736C8C4007A1D1D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD616142736C8C4007A1D1D /* MainView.swift */; };
 		ADD8881B274DAB4C00B7B89C /* EventMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD8881A274DAB4C00B7B89C /* EventMocks.swift */; };
-		ADE77B8A274011320061AB3F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B89274011320061AB3F /* EventViewModel.swift */; };
+		ADE77B8A274011320061AB3F /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B89274011320061AB3F /* EventsViewModel.swift */; };
 		ADE77B99274011940061AB3F /* EventsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B98274011940061AB3F /* EventsViewModelTests.swift */; };
 		ADE77B9B274123CD0061AB3F /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B9A274123CD0061AB3F /* EventsView.swift */; };
 		ADE77B9D27412FC90061AB3F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B9C27412FC90061AB3F /* Event.swift */; };
@@ -129,7 +129,7 @@
 		ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		ADD616142736C8C4007A1D1D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		ADD8881A274DAB4C00B7B89C /* EventMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMocks.swift; sourceTree = "<group>"; };
-		ADE77B89274011320061AB3F /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		ADE77B89274011320061AB3F /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
 		ADE77B8F274011630061AB3F /* EarthBlueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthBlueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE77B98274011940061AB3F /* EventsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModelTests.swift; sourceTree = "<group>"; };
 		ADE77B9A274123CD0061AB3F /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
@@ -364,7 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				AD4E2C59274BDA1300686DC2 /* EventDetailsViewModel.swift */,
-				ADE77B89274011320061AB3F /* EventViewModel.swift */,
+				ADE77B89274011320061AB3F /* EventsViewModel.swift */,
 				ADE77B9E27412FCD0061AB3F /* Models */,
 				ADD8881D274DAEEE00B7B89C /* Views */,
 				AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */,
@@ -563,7 +563,7 @@
 				ADA4D973274D365F00009099 /* EventsList.swift in Sources */,
 				AD6A96542757841100D060F2 /* EventsFeedFiltering.swift in Sources */,
 				AD6A96562757892600D060F2 /* EventsFilteringViewModel.swift in Sources */,
-				ADE77B8A274011320061AB3F /* EventViewModel.swift in Sources */,
+				ADE77B8A274011320061AB3F /* EventsViewModel.swift in Sources */,
 				ADB3E080274F8D1700CACEDB /* EventsFilteringView.swift in Sources */,
 				AD4AB6412743ED71000F3F61 /* EventsViewModelMock.swift in Sources */,
 				AD4AB63F2743E1FF000F3F61 /* EventRowMocks.swift in Sources */,

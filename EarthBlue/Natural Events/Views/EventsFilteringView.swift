@@ -8,32 +8,63 @@
 import SwiftUI
 
 struct EventsFilteringView: View {
-    let viewModel: EventsFilteringViewModel = .init()
-    private let defaultFeedFiltering = EventsFilteringBuilder.defaultFeedFiltering
+    var viewModel: EventsFilteringViewModel = .init()
     @Environment(\.presentationMode) var presentationMode
+    @State private var isDaysRangeActive = true
+    @State private var isDateRangeActive = false
     @State private var startDate: Date = .now
     @State private var endDate: Date = .now
-    @State private var isDateRangeActive = true
     @State private var selectedStatus: FeedStatusOptions = .all
     @Binding private(set) var eventsFeedFiltering: EventsFeedFiltering?
+    @State var numberOfDays: String = "1"
+    var formattedNumberOfDays: String {
+        return viewModel.formattedNumberOfDays(fromTextFieldString: numberOfDays)
+    }
+    @FocusState var isNumberOfDaysFocused: Bool
     let statusOptions = FeedStatusOptions.allCases
     
     init(eventsFeedFiltering: Binding<EventsFeedFiltering?>) {
         self._eventsFeedFiltering = eventsFeedFiltering
     }
     
+    
     var body: some View {
         NavigationView {
-            ZStack(alignment: .bottom) {
+            VStack {
                 Form {
-                    Section("range") {
-                        Toggle("Date range", isOn: .constant(isDateRangeActive))
+                    Section("By Days") {
+                        Toggle("Last days", isOn: $isDaysRangeActive)
+                            .onChange(of: isDaysRangeActive) { newValue in
+                                isDateRangeActive = !newValue
+                            }
+                        if isDaysRangeActive {
+                            TextField("Number of days", text: .init(get: {
+                                formattedNumberOfDays
+                            }, set: { newValue in
+                                numberOfDays = newValue
+                            }), prompt: nil)
+                                .keyboardType(.numberPad)
+                                .focused($isNumberOfDaysFocused)
+                                .onChange(of: isNumberOfDaysFocused) { newValue in
+                                    guard newValue == false else { return }
+                                    if numberOfDays.isEmpty { numberOfDays = "1" }
+                                }
+                        }
+                    }
+                    Section("By Date") {
+                        Toggle("Date range", isOn: $isDateRangeActive)
+                            .onChange(of: isDateRangeActive) { newValue in
+                                isDaysRangeActive = !newValue
+                            }
                         if isDateRangeActive {
                             DatePicker("start",
                                        selection: $startDate,
                                        in: viewModel.startingDatePickerRange(),
                                        displayedComponents: .date
                             )
+                                .onChange(of: startDate) { newValue in
+                                    endDate = newValue
+                                }
                             DatePicker("end",
                                        selection: $endDate,
                                        in: viewModel.endingDatePickerRange(startDate: startDate),
@@ -42,7 +73,7 @@ struct EventsFilteringView: View {
                         }
                     }
                     Section("Status") {
-                        Picker("status", selection: $selectedStatus) {
+                        Picker("Selected status", selection: $selectedStatus) {
                             ForEach(statusOptions, id: \.self) { status in
                                 Text(status.rawValue).tag(status)
                             }
@@ -50,62 +81,62 @@ struct EventsFilteringView: View {
                     }
                     
                 }
-            
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarTitle("New Filtered Feed")
-                HStack(spacing: 8) {
-                    Button("Reset to Defaults") {
+            }
+            .toolbar {
+                ToolbarItem.init(placement: .navigationBarLeading) {
+                    Button("Reset") {
                         updateUI(from: viewModel.defaultFeedFiltering)
                     }
-                    .buttonStyle(.bordered)
-                    Button("Submit") {
-                        eventsFeedFiltering = viewModel.dateRangeEventsFiltering(startDate: startDate, endDate: endDate, status: selectedStatus)
-                    }
-                    .buttonStyle(.borderedProminent)
                 }
-                .background(Color(.systemGroupedBackground))
-                .padding(.bottom)
-                .font(.headline)
-                .controlSize(.large)
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        presentationMode.wrappedValue.dismiss()
+                        if isDaysRangeActive {
+                            guard let formattedNumberOfDays = Int(formattedNumberOfDays) else { return }
+                            eventsFeedFiltering = viewModel.feedFiltering(byDays: formattedNumberOfDays, status: selectedStatus)
+                        } else if isDateRangeActive {
+                            eventsFeedFiltering = viewModel.dateRangeEventsFiltering(startDate: startDate, endDate: endDate, status: selectedStatus)
+                        }
+                    }
+                }
             }
-            .onChange(of: startDate, perform: { newValue in
-                // updating selected end date whenever start date change
-                endDate = startDate
-            })
-            .onAppear {
-                updateUI(from: eventsFeedFiltering ?? viewModel.defaultFeedFiltering)
-            }
+        }
+        .task {
+            updateUI(from: eventsFeedFiltering ?? .defaultFiltering)
         }
     }
     
     func updateUI(from feedFiltering: EventsFeedFiltering) {
-        if let dateRange = feedFiltering.dateRange {
+        switch feedFiltering.filteringType {
+        case .days(let days):
+            isDaysRangeActive = true
+            numberOfDays = "\(days)"
+        case .dateRange(let dateRange):
             isDateRangeActive = true
             startDate = dateRange.lowerBound
             endDate = dateRange.upperBound
-            selectedStatus = feedFiltering.status
         }
+        selectedStatus = feedFiltering.status
     }
 }
 
 struct EventsFilteringView_Previews: PreviewProvider {
     static var previews: some View {
-        let newFeedFiltering = EventsFilteringBuilder().build()
-        let configuredFeedFiltering = EventsFilteringBuilder()
-            .set(dateRange: .now.addingTimeInterval(-10000000)...Date.now)
-            .set(status: .closed)
-            .build()
+        let datesFeedFiltering = EventsFeedFiltering(status: .active, filteringType: .dateRange( Date()...Date() ))
+        let daysFeedFiltering = EventsFeedFiltering.defaultFiltering
         Group {
             Color.gray
         }
         .sheet(isPresented: .constant(true)) {
-            EventsFilteringView(eventsFeedFiltering: .constant(newFeedFiltering))
+            EventsFilteringView(eventsFeedFiltering: .constant(datesFeedFiltering))
         }
         Group {
             Color.gray
         }
         .sheet(isPresented: .constant(true)) {
-            EventsFilteringView(eventsFeedFiltering: .constant(configuredFeedFiltering))
+            EventsFilteringView(eventsFeedFiltering: .constant(daysFeedFiltering))
         }
     }
 }

@@ -43,12 +43,9 @@ class EventsViewModelTests: XCTestCase {
     
     func testRequestFilteredFeedWithSuccessfulResponse_EventsFeedShouldBeNotEmpty() async {
         arrangeSutWithMockedNaturalEventsService(forSuccess: true)
-        let feedFiltering = EventsFilteringBuilder()
-            .set(status: .all)
-            .set(dateRange: Date.now...Date.now)
-            .build()
+        let feedFiltering = EventsFeedFiltering.defaultFiltering
         
-        await sut.requestFilteredFeedByDateRange(feedFiltering: feedFiltering)
+        await sut.requestFilteredFeed(feedFiltering: feedFiltering)
         
         XCTAssertFalse(sut.events.isEmpty,
                        "events feed should be not empty when request succeed.")
@@ -56,24 +53,12 @@ class EventsViewModelTests: XCTestCase {
     
     func testRequestFilteredFeedWithFailedResponse_ErrorMessageShouldBeNotNil() async {
         arrangeSutWithMockedNaturalEventsService(forSuccess: false)
-        let feedFiltering = EventsFilteringBuilder()
-            .set(status: .all)
-            .set(dateRange: Date.now...Date.now)
-            .build()
+        let feedFiltering = EventsFeedFiltering(status: .closed, filteringType: .dateRange(Date()...Date()))
         
-        await sut.requestFilteredFeedByDateRange(feedFiltering: feedFiltering)
+        await sut.requestFilteredFeed(feedFiltering: feedFiltering)
         
         XCTAssertNotNil(sut.errorMessage,
                        "Error message should be not nil when an error occurred, it must have the error message.")
-    }
-    
-    func testRequestFilteredFeedWithNilDateRange_ShouldCancelRequestAndReturn() async {
-        let feedFiltering = EventsFeedFiltering(status: .all, dateRange: nil)
-        XCTAssertTrue(sut.events.isEmpty)
-        
-        await sut.requestFilteredFeedByDateRange(feedFiltering: feedFiltering)
-        
-        XCTAssertTrue(sut.events.isEmpty, "when date range is nil requesting filtered events should return and not change the state of the model.")
     }
     
     func testRefreshEventsFeedForDefaultEvents_EventsFeedShouldBeNotEmpty() async {
@@ -86,7 +71,7 @@ class EventsViewModelTests: XCTestCase {
     
     func testRefreshEventsFeedForFilteredEvents_EventsFeedShouldBeNotEmpty() async {
         arrangeSutWithMockedNaturalEventsService(forSuccess: true)
-        sut.set(feedFiltering: .init(status: .all, dateRange: Date.now...Date.now))
+        sut.set(feedFiltering: .defaultFiltering)
         
         await sut.refreshEventsFeed()
         

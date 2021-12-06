@@ -76,6 +76,36 @@ class NaturalEventsServiceTests: XCTestCase {
         }
     }
     
+    func testFilteredEventsFeedByDaysWithSuccessfulResponse_ShouldReturnSuccessResultWithDecodedObject() async {
+        let days = 10
+        let status = NaturalEventsRouter.EventsStatus.all
+        arrangeSutWithValidDataResponseFromNetworkManager()
+        
+        let feedResult = await sut.filteredEventsFeed(days: days, status: status, type: [String : String].self)
+        
+        switch feedResult {
+        case .success:
+            break
+        case .failure:
+            XCTFail("feed result should return no error when request response is success ")
+        }
+    }
+    
+    func testFilteredEventsFeedByDaysWithFailedResponse_ShouldReturnResultWithError() async {
+        let days = 10
+        let status = NaturalEventsRouter.EventsStatus.all
+        arrangeSutWithInvalidDataResponseFromNetworkManager()
+        
+        let feedResult = await sut.filteredEventsFeed(days: days, status: status, type: [String : String].self)
+        
+        switch feedResult {
+        case .success:
+            XCTFail("feed result should return a failure result when request reponse is failed")
+        case .failure:
+            break
+        }
+    }
+    
     // MARK: Sut Arranges
     func arrangeSutWithValidDataResponseFromNetworkManager() {
         let mockNetworkManager = MockNetworkManager(isSuccess: true)

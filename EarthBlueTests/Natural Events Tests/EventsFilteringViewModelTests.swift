@@ -18,10 +18,28 @@ class EventsFilteringViewModelTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+
+    func testFormattedNumberOfDaysFromTextFieldString_ShouldExtractNumbersFromString() {
+        let textFieldValue = "1m2,3,4,5"
+        let expectedValue = "12345"
+        
+        let formattedNumberOfDays = sut.formattedNumberOfDays(fromTextFieldString: textFieldValue)
+        
+        XCTAssertEqual(formattedNumberOfDays, expectedValue)
+    }
+    
+    func testDaysRange_ShouldReturnRangeFromOneDayToTwoYearsInDays() {
+        let expectedDays = 1...730
+        
+        let daysRangeFilter = sut.daysRange
+        
+        XCTAssertEqual(daysRangeFilter, expectedDays,
+                       "days range should be between 1...730 (one day -> two years)")
+    }
     
     // MARK: testing EventsFiltering
     func testDefaultFeedFiltering_ShouldReturnDefaultFeedFilteringFromFilteringBuilder() {
-        let expectedDefaultFeedFiltering = EventsFilteringBuilder.defaultFeedFiltering
+        let expectedDefaultFeedFiltering = EventsFeedFiltering.defaultFiltering
         
         XCTAssertEqual(sut.defaultFeedFiltering, expectedDefaultFeedFiltering,
                        "defaultFeedFiltering should be equal to default feed filtering that provided by EventsFilteringBuilder")
@@ -33,11 +51,26 @@ class EventsFilteringViewModelTests: XCTestCase {
         let status = FeedStatusOptions.all
         
         guard let eventsFiltering = sut.dateRangeEventsFiltering(startDate: startDate, endDate: endDate, status: status) else {XCTFail() ; return}
+        guard case .dateRange(let dateRange) = eventsFiltering.filteringType else {
+            XCTFail()
+            return
+        }
         
-        XCTAssertEqual(startDate, eventsFiltering.dateRange!.lowerBound)
-        XCTAssertEqual(endDate, eventsFiltering.dateRange!.upperBound)
+        XCTAssertEqual(startDate, dateRange.lowerBound)
+        XCTAssertEqual(endDate, dateRange.upperBound)
         XCTAssertEqual(status, eventsFiltering.status)
         
+    }
+    // MARK: Testing Events Filtering by Days
+    func testEventsFeedFilteringByDays_ShouldReturnFilteringWithDaysFilterngTypeAndPaasedDays() {
+        let days = 60
+        let status = FeedStatusOptions.closed
+        let feedFiltering = sut.feedFiltering(byDays: days, status: status)
+        
+        XCTAssertEqual(feedFiltering.status, status,
+                       "status should be equal to the passed status")
+        XCTAssertEqual(feedFiltering.filteringType, .days(days),
+                       "filtering type should be equal to the passed type")
     }
     
     // MARK: testing date ranges

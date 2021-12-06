@@ -14,7 +14,7 @@ class EventsViewModelMockWithError: EventsViewModel {
         await handle(feedRequestResult: .failure(URLError(.badURL)))
     }
     
-    override func requestFilteredFeedByDateRange(feedFiltering: EventsFeedFiltering) async {
+    override func requestFilteredFeed(feedFiltering: EventsFeedFiltering) async {
         await handle(feedRequestResult: .failure(URLError(.badURL)))
     }
 }
@@ -28,7 +28,7 @@ class EventsViewModelMock: EventsViewModel {
         set(requestStatus: .success)
     }
     
-    override func requestFilteredFeedByDateRange(feedFiltering: EventsFeedFiltering) async {
+    override func requestFilteredFeed(feedFiltering: EventsFeedFiltering) async {
         let feed = EventsFeed(events: mockedEvents.shuffled())
         await set(eventsFeed: feed)
         set(requestStatus: .success)

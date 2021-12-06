@@ -9,14 +9,23 @@ import Foundation
 
 class EventsFilteringViewModel {
     
-    let defaultFeedFiltering = EventsFilteringBuilder.defaultFeedFiltering
+    let defaultFeedFiltering = EventsFeedFiltering.defaultFiltering
+    
+    var daysRange: ClosedRange<Int> {
+        return 1...730
+    }
+    
+    func formattedNumberOfDays(fromTextFieldString value: String) -> String {
+        return value.filter({$0.isNumber})
+    }
     
     func dateRangeEventsFiltering(startDate: Date, endDate: Date, status: FeedStatusOptions) -> EventsFeedFiltering? {
-        let feedFiltering = EventsFilteringBuilder()
-            .set(status: status)
-            .set(dateRange: startDate...endDate)
-            .build()
-        return feedFiltering == defaultFeedFiltering ? nil : feedFiltering
+        let dateRange = startDate...endDate
+        return EventsFeedFiltering(status: status, filteringType: .dateRange(dateRange))
+    }
+    
+    func feedFiltering(byDays days: Int, status: FeedStatusOptions) -> EventsFeedFiltering {
+        return .init(status: status, filteringType: .days(days))
     }
     
     func startingDatePickerRange() -> ClosedRange<Date> {
