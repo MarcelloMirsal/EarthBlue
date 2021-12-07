@@ -50,6 +50,32 @@ struct Category: Codable {
     let id, title: String
 }
 
+extension Category: Hashable, Comparable {
+    static func < (lhs: Category, rhs: Category) -> Bool {
+        return lhs.title < rhs.title
+    }
+}
+
+extension Category {
+    static var defaultCategories: [Category] {
+        [
+            .init(id: "drought", title: "Drought"),
+            .init(id: "dustHaze", title: "Dust and Haze"),
+            .init(id: "earthquakes", title: "Earthquakes"),
+            .init(id: "floods", title: "Floods"),
+            .init(id: "landslides", title: "Landslides"),
+            .init(id: "manmade", title: "Manmade"),
+            .init(id: "seaLakeIce", title: "Sea and Lake Ice"),
+            .init(id: "severeStorms", title: "Severe Storms"),
+            .init(id: "snow", title: "Snow"),
+            .init(id: "tempExtremes", title: "Temperature Extremes"),
+            .init(id: "volcanoes", title: "Volcanoes"),
+            .init(id: "waterColor", title: "Water Color"),
+            .init(id: "wildfires", title: "Wildfires")
+        ]
+    }
+}
+
 
 // MARK: - Geometry
 struct Geometry: Codable {

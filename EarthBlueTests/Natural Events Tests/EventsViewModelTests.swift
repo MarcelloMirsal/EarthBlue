@@ -22,7 +22,8 @@ class EventsViewModelTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    // MARK:- Testing service requests
+    
+    // MARK: Testing service requests
     func testRequestDefaultFeedWithSuccessfulResponse_EventsFeedShouldBeNotEmpty() async {
         arrangeSutWithMockedNaturalEventsService(forSuccess: true)
         
@@ -82,6 +83,7 @@ class EventsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.requestStatus, .success, "request should be in success status when first initialized, to allow the UI to send new feed requests, if request == success new request can be placed.")
     }
     
+    // MARK: Test Mappers
     func testMappingFeedStatusOptionsToEventsStatus_ActiveShouldBeMappedToOpen() {
         let feedStatus = FeedStatusOptions.active
         

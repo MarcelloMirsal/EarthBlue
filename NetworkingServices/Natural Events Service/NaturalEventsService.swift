@@ -9,8 +9,8 @@ import Foundation
 
 public protocol NaturalEventsServiceProtocol: AnyObject {
     func defaultEventsFeed<T: Decodable>(type: T.Type) async -> Result<T,Error>
-    func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventsStatus ,type: T.Type) async -> Result<T,Error>
-    func filteredEventsFeed<T: Decodable>(days: Int, status: NaturalEventsRouter.EventsStatus ,type: T.Type) async -> Result<T,Error>
+    func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventsStatus, categories: [String]? ,type: T.Type) async -> Result<T,Error>
+    func filteredEventsFeed<T: Decodable>(days: Int, status: NaturalEventsRouter.EventsStatus, categories: [String]? ,type: T.Type) async -> Result<T,Error>
 }
 
 public final class NaturalEventsService: NaturalEventsServiceProtocol {
@@ -30,13 +30,13 @@ public final class NaturalEventsService: NaturalEventsServiceProtocol {
         return await startNetworkRequest(for: defaultFeedRequest, decodingType: T.self)
     }
     
-    public func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventsStatus, type: T.Type) async -> Result<T, Error> {
-        let filteredFeedRequest = router.filteredFeedRequest(dateRange: dateRange, forStatus: status)
+    public func filteredEventsFeed<T: Decodable>(dateRange: ClosedRange<Date>, status: NaturalEventsRouter.EventsStatus, categories: [String]? = nil, type: T.Type) async -> Result<T, Error> {
+        let filteredFeedRequest = router.filteredFeedRequest(dateRange: dateRange, forStatus: status, categories: categories)
         return await startNetworkRequest(for: filteredFeedRequest, decodingType: T.self)
     }
     
-    public func filteredEventsFeed<T>(days: Int, status: NaturalEventsRouter.EventsStatus, type: T.Type) async -> Result<T, Error> where T : Decodable {
-        let filteredFeedRequest = router.filteredFeedRequest(days: days, forStatus: status)
+    public func filteredEventsFeed<T>(days: Int, status: NaturalEventsRouter.EventsStatus, categories: [String]? = nil, type: T.Type) async -> Result<T, Error> where T : Decodable {
+        let filteredFeedRequest = router.filteredFeedRequest(days: days, forStatus: status, categories: categories)
         return await startNetworkRequest(for: filteredFeedRequest, decodingType: T.self)
     }
     

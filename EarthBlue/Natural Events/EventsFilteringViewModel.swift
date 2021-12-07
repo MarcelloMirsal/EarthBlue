@@ -7,12 +7,19 @@
 
 import Foundation
 
-class EventsFilteringViewModel {
-    
+class EventsFilteringViewModel: ObservableObject {
     let defaultFeedFiltering = EventsFeedFiltering.defaultFiltering
+    
+    @Published private(set) var selectedCategories = Set(Category.defaultCategories)
+    let categories = Category.defaultCategories
+    
     
     var daysRange: ClosedRange<Int> {
         return 1...730
+    }
+    
+    func isCategorySelected(category: Category) -> Bool {
+        return selectedCategories.contains(category)
     }
     
     func formattedNumberOfDays(fromTextFieldString value: String) -> String {
@@ -21,11 +28,13 @@ class EventsFilteringViewModel {
     
     func dateRangeEventsFiltering(startDate: Date, endDate: Date, status: FeedStatusOptions) -> EventsFeedFiltering? {
         let dateRange = startDate...endDate
-        return EventsFeedFiltering(status: status, filteringType: .dateRange(dateRange))
+        let categories = getSelectedCategoriesIds()
+        return EventsFeedFiltering(status: status, filteringType: .dateRange(dateRange), categories: categories)
     }
     
     func feedFiltering(byDays days: Int, status: FeedStatusOptions) -> EventsFeedFiltering {
-        return .init(status: status, filteringType: .days(days))
+        let categories = getSelectedCategoriesIds()
+        return .init(status: status, filteringType: .days(days), categories: categories)
     }
     
     func startingDatePickerRange() -> ClosedRange<Date> {
@@ -39,5 +48,31 @@ class EventsFilteringViewModel {
         let endDate = Calendar.current.date(byAdding: .year, value: yearsAdvanceFactor, to: startDate)!
         let upperBoundDate = endDate > .now ? Date.now : endDate
         return .init(uncheckedBounds: (lower: startDate, upper: upperBoundDate))
+    }
+    
+    // TODO: Needs testing
+    func getSelectedCategoriesIds() -> [String]? {
+        guard selectedCategories != Set(categories) else {
+            return nil
+        }
+        return selectedCategories.map({ $0.id })
+    }
+    
+    // TODO: Needs testing
+    func setSelectedCategories(byIds ids: [String]?) {
+        guard let ids = ids else {
+            selectedCategories = .init(categories)
+            return
+        }
+        let categoriesToSelect = categories.filter({ ids.contains($0.id) })
+        selectedCategories = .init(categoriesToSelect)
+    }
+    @MainActor
+    func handleSelection(forCategory category: Category) {
+        if selectedCategories.contains(category) {
+            selectedCategories.remove(category)
+        } else {
+            selectedCategories.insert(category)
+        }
     }
 }

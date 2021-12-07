@@ -12,6 +12,7 @@ struct EventsFeedFiltering: Equatable {
     let id = UUID()
     let status: FeedStatusOptions
     let filteringType: FilteringType
+    var categories: [String]?
     
     enum FilteringType: Equatable {
         case dateRange(ClosedRange<Date>)

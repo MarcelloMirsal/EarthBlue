@@ -84,17 +84,19 @@ class EventsViewModel: ObservableObject {
             await set(eventsFeed: .init(events: []))
             set(requestStatus: .loading)
             let status = map(feedStatusOption: feedFiltering.status)
+            let categories = feedFiltering.categories
             let feedRequestResult: Result<EventsFeed, Error>
             switch feedFiltering.filteringType {
             case .days(let days):
-                feedRequestResult = await naturalEventsService.filteredEventsFeed(days: days, status: status, type: EventsFeed.self)
+                feedRequestResult = await naturalEventsService.filteredEventsFeed(days: days, status: status, categories: categories, type: EventsFeed.self)
             case .dateRange(let dateRange):
-                feedRequestResult = await naturalEventsService.filteredEventsFeed(dateRange: dateRange, status: status, type: EventsFeed.self)
+                feedRequestResult = await naturalEventsService.filteredEventsFeed(dateRange: dateRange, status: status, categories: categories, type: EventsFeed.self)
             }
             await handle(feedRequestResult: feedRequestResult)
         }
     }
     
+    // MARK: Models Mappers
     func map(feedStatusOption: FeedStatusOptions) -> NaturalEventsRouter.EventsStatus {
         switch feedStatusOption {
         case .active:

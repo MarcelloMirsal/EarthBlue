@@ -40,6 +40,7 @@ class NaturalEventsRouterTests: XCTestCase {
         XCTAssertEqual(QueryItem.status.rawValue, "status")
         XCTAssertEqual(QueryItem.startDate.rawValue, "start")
         XCTAssertEqual(QueryItem.endDate.rawValue, "end")
+        XCTAssertEqual(QueryItem.category.rawValue, "category")
     }
     
     func testDefaultQueryItems_ShouldReturnIdealQueryItem() {
@@ -91,9 +92,14 @@ class NaturalEventsRouterTests: XCTestCase {
                        "filtered feed URL should be equal to the expected URL")
     }
     
-    
-    
+    func testFilteredEventsRequestWithCategories_ShouldReturnRequestWithPassedCategories() {
+        let days = 60
+        let status = NaturalEventsRouter.EventsStatus.all
+        let expectedURL = URL(string:  "\(idealBaseURL.absoluteString)?days=\(days)&status=\(status.rawValue)&category=1,2")!
+        
+        let filteredFeedRequest = sut.filteredFeedRequest(days: days, forStatus: .all, categories: ["1", "2"])
+        
+        XCTAssertEqual(expectedURL, filteredFeedRequest.url)
+    }
     
 }
-
-

@@ -30,7 +30,7 @@ public class NaturalEventsRouter: ResponseParser {
         return .init(url: urlRequestComponent.url!)
     }
     
-    func filteredFeedRequest(days: Int? = nil, dateRange: ClosedRange<Date>? = nil, forStatus status: EventsStatus) -> URLRequest {
+    func filteredFeedRequest(days: Int? = nil, dateRange: ClosedRange<Date>? = nil, forStatus status: EventsStatus, categories: [String]? = nil) -> URLRequest {
         var urlRequestComponent = baseURLComponent
         var queryItems = [URLQueryItem]()
         queryItems.append(contentsOf: getQueryItems(from: dateRange))
@@ -38,6 +38,9 @@ public class NaturalEventsRouter: ResponseParser {
             queryItems.append(QueryItem.days.queryItem(withValue: days.description))
         }
         queryItems.append(QueryItem.status.queryItem(withValue: status.rawValue))
+        if let categoriesQuery = getQueryItems(from: categories) {
+            queryItems.append(categoriesQuery)
+        }
         urlRequestComponent.queryItems = queryItems
         return .init(url: urlRequestComponent.url!)
     }
@@ -57,6 +60,12 @@ public class NaturalEventsRouter: ResponseParser {
             QueryItem.endDate.queryItem(withValue: endDateValue),
         ]
     }
+    
+    private func getQueryItems(from categories: [String]?) -> URLQueryItem? {
+        guard let ids = categories else { return nil}
+        let formattedIds = ids.joined(separator: ",") // A,B,C
+        return QueryItem.category.queryItem(withValue: formattedIds)
+    }
 }
 
 public extension NaturalEventsRouter {
@@ -65,6 +74,7 @@ public extension NaturalEventsRouter {
         case days
         case startDate = "start"
         case endDate = "end"
+        case category
         func queryItem(withValue value: String) -> URLQueryItem {
             return .init(name: self.rawValue, value: value)
         }

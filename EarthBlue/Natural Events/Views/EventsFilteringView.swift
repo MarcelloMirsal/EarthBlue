@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventsFilteringView: View {
-    var viewModel: EventsFilteringViewModel = .init()
+    @StateObject var viewModel: EventsFilteringViewModel = .init()
     @Environment(\.presentationMode) var presentationMode
     @State private var isDaysRangeActive = true
     @State private var isDateRangeActive = false
@@ -21,6 +21,7 @@ struct EventsFilteringView: View {
         return viewModel.formattedNumberOfDays(fromTextFieldString: numberOfDays)
     }
     @FocusState var isNumberOfDaysFocused: Bool
+    @State var isCategoriesExpanded = false
     let statusOptions = FeedStatusOptions.allCases
     
     init(eventsFeedFiltering: Binding<EventsFeedFiltering?>) {
@@ -79,7 +80,16 @@ struct EventsFilteringView: View {
                             }
                         }
                     }
-                    
+                    DisclosureGroup("Categories", isExpanded: $isCategoriesExpanded) {
+                        List(viewModel.categories, id: \.id) { category in
+                            let isCategorySelected = viewModel.isCategorySelected(category: category)
+                            CategoryView(title: category.title, isSelected: isCategorySelected)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    viewModel.handleSelection(forCategory: category)
+                                }
+                        }
+                    }
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarTitle("New Filtered Feed")
@@ -118,6 +128,7 @@ struct EventsFilteringView: View {
             startDate = dateRange.lowerBound
             endDate = dateRange.upperBound
         }
+        viewModel.setSelectedCategories(byIds: feedFiltering.categories)
         selectedStatus = feedFiltering.status
     }
 }
@@ -125,18 +136,11 @@ struct EventsFilteringView: View {
 struct EventsFilteringView_Previews: PreviewProvider {
     static var previews: some View {
         let datesFeedFiltering = EventsFeedFiltering(status: .active, filteringType: .dateRange( Date()...Date() ))
-        let daysFeedFiltering = EventsFeedFiltering.defaultFiltering
         Group {
             Color.gray
         }
         .sheet(isPresented: .constant(true)) {
             EventsFilteringView(eventsFeedFiltering: .constant(datesFeedFiltering))
-        }
-        Group {
-            Color.gray
-        }
-        .sheet(isPresented: .constant(true)) {
-            EventsFilteringView(eventsFeedFiltering: .constant(daysFeedFiltering))
         }
     }
 }
@@ -145,4 +149,21 @@ enum FeedStatusOptions: String, CaseIterable {
     case active
     case closed
     case all
+}
+
+
+struct CategoryView: View {
+    let title: String
+    let isSelected: Bool
+    var body: some View {
+        HStack {
+            Text(title)
+            Spacer()
+            Image(systemName: "checkmark")
+                .font(.body.weight(.medium))
+                .opacity(isSelected ? 1 : 0)
+                .foregroundColor(.blue)
+                .controlSize(.small)
+        }
+    }
 }
