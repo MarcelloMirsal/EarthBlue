@@ -107,7 +107,7 @@ struct EventsFilteringView: View {
                             guard let formattedNumberOfDays = Int(formattedNumberOfDays) else { return }
                             eventsFeedFiltering = viewModel.feedFiltering(byDays: formattedNumberOfDays, status: selectedStatus)
                         } else if isDateRangeActive {
-                            eventsFeedFiltering = viewModel.dateRangeEventsFiltering(startDate: startDate, endDate: endDate, status: selectedStatus)
+                            eventsFeedFiltering = viewModel.feedFilteringByDateRange(startDate: startDate, endDate: endDate, status: selectedStatus)
                         }
                     }
                 }
@@ -152,7 +152,7 @@ enum FeedStatusOptions: String, CaseIterable {
 }
 
 
-struct CategoryView: View {
+fileprivate struct CategoryView: View {
     let title: String
     let isSelected: Bool
     var body: some View {

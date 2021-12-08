@@ -9,25 +9,12 @@ import Foundation
 
 class EventsFilteringViewModel: ObservableObject {
     let defaultFeedFiltering = EventsFeedFiltering.defaultFiltering
-    
     @Published private(set) var selectedCategories = Set(Category.defaultCategories)
     let categories = Category.defaultCategories
+    var daysRange = 1...730
     
-    var daysRange: ClosedRange<Int> {
-        return 1...730
-    }
-    
-    func isCategorySelected(category: Category) -> Bool {
-        return selectedCategories.contains(category)
-    }
-    
-    func formattedNumberOfDays(fromTextFieldString value: String) -> String {
-        let filteredValue = value.filter({$0.isNumber})
-        guard let numberFromFiltering = Int(filteredValue) else { return filteredValue }
-        return daysRange.contains(numberFromFiltering) ? "\(numberFromFiltering)" : "\(daysRange.upperBound)"
-    }
-    
-    func dateRangeEventsFiltering(startDate: Date, endDate: Date, status: FeedStatusOptions) -> EventsFeedFiltering? {
+    // MARK: Events Filtering
+    func feedFilteringByDateRange(startDate: Date, endDate: Date, status: FeedStatusOptions) -> EventsFeedFiltering? {
         let dateRange = startDate...endDate
         let categories = getSelectedCategoriesIds()
         return EventsFeedFiltering(status: status, filteringType: .dateRange(dateRange), categories: categories)
@@ -36,6 +23,12 @@ class EventsFilteringViewModel: ObservableObject {
     func feedFiltering(byDays days: Int, status: FeedStatusOptions) -> EventsFeedFiltering {
         let categories = getSelectedCategoriesIds()
         return .init(status: status, filteringType: .days(days), categories: categories)
+    }
+    
+    func formattedNumberOfDays(fromTextFieldString value: String) -> String {
+        let filteredValue = value.filter({$0.isNumber})
+        guard let numberFromFiltering = Int(filteredValue) else { return filteredValue }
+        return daysRange.contains(numberFromFiltering) ? "\(numberFromFiltering)" : "\(daysRange.upperBound)"
     }
     
     func startingDatePickerRange() -> ClosedRange<Date> {
@@ -51,7 +44,11 @@ class EventsFilteringViewModel: ObservableObject {
         return .init(uncheckedBounds: (lower: startDate, upper: upperBoundDate))
     }
     
-    // TODO: Needs testing
+    // MARK: Category operations
+    func isCategorySelected(category: Category) -> Bool {
+        return selectedCategories.contains(category)
+    }
+    
     func getSelectedCategoriesIds() -> [String]? {
         guard selectedCategories != Set(categories) else {
             return nil
@@ -59,18 +56,18 @@ class EventsFilteringViewModel: ObservableObject {
         return selectedCategories.map({ $0.id })
     }
     
-    // TODO: Needs testing
     func setSelectedCategories(byIds ids: [String]?) {
-        guard let ids = ids else {
+        if let ids = ids {
+            let categoriesToSelect = categories.filter({ ids.contains($0.id) })
+            selectedCategories = .init(categoriesToSelect)
+        } else {
             selectedCategories = .init(categories)
-            return
         }
-        let categoriesToSelect = categories.filter({ ids.contains($0.id) })
-        selectedCategories = .init(categoriesToSelect)
     }
+    
     @MainActor
     func handleSelection(forCategory category: Category) {
-        if selectedCategories.contains(category) {
+        if selectedCategories.contains(category) && selectedCategories.count != 1 {
             selectedCategories.remove(category)
         } else {
             selectedCategories.insert(category)

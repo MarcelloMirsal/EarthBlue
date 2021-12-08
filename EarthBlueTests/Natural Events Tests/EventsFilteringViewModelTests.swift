@@ -71,12 +71,12 @@ class EventsFilteringViewModelTests: XCTestCase {
                        "defaultFeedFiltering should be equal to default feed filtering that provided by EventsFilteringBuilder")
     }
     
-    func testDateRangeEventsFiltering_ShouldReturnEventsFilteringWithPassedFilters() async {
+    func testFeedFilteringByDate_ShouldReturnEventsFilteringWithPassedFilters() async {
         let startDate = Date.now.advanced(by: -10000)
         let endDate = Date.now
         let status = FeedStatusOptions.all
         
-        guard let eventsFiltering = sut.dateRangeEventsFiltering(startDate: startDate, endDate: endDate, status: status) else {XCTFail() ; return}
+        guard let eventsFiltering = sut.feedFilteringByDateRange(startDate: startDate, endDate: endDate, status: status) else {XCTFail() ; return}
         guard case .dateRange(let dateRange) = eventsFiltering.filteringType else {
             XCTFail()
             return
@@ -132,5 +132,68 @@ class EventsFilteringViewModelTests: XCTestCase {
         XCTAssertEqual(formattedDateRangeUpperBound, formattedEndDate)
     }
     
+    // MARK: Testing Categories operations
+    func testIsCategorySelected_ShouldReturnTrueIfCategoryIsSelected() async {
+        let categoryToSelect = Category(id: "id", title: "title")
+        await sut.handleSelection(forCategory: categoryToSelect)
+        
+        let isCategorySelected = sut.isCategorySelected(category: categoryToSelect)
+        
+        XCTAssertTrue(isCategorySelected,
+                      "selected categories should contain any selected category")
+    }
+    
+    func testSetSelectedCategoriesByIds_SelectedCategoriesIdsShouldBeEqualToPassedIds() {
+        let categoriesIds = Array(Category.defaultCategories[1...3]).map({$0.id}).sorted()
+        
+        sut.setSelectedCategories(byIds: categoriesIds)
+        let selectedCategoriesIds = sut.getSelectedCategoriesIds()?.sorted()
+        
+        XCTAssertEqual(categoriesIds, selectedCategoriesIds)
+    }
+    
+    func testGetSelectedCategoriesIds_ShouldReturnNilIfSelectedCategoriesEqualToAllCategories() {
+        let ids = sut.getSelectedCategoriesIds()
+        
+        XCTAssertNil(ids,
+                     "Should return nil IDs when all categories are selected, because the default categories for filtering is equal to nil")
+    }
+    
+    func testGetSelectedCategoriesIds_ShouldReturnIdsFromAllSelectedCategories() {
+        let selectedCategoriesIds = Array(Category.defaultCategories[0...2]).map({$0.id}).sorted()
+        sut.setSelectedCategories(byIds: selectedCategoriesIds)
+        
+        let ids = sut.getSelectedCategoriesIds()?.sorted()
+        
+        XCTAssertEqual(ids, selectedCategoriesIds,
+                       "ids should be equal to all selected categories's id.")
+    }
+    
+    func testHandleSelectionForCategory_ShouldSelectCategoryIfItNotSelected() async {
+        let newCategory = Category(id: "id" , title: "title")
+        
+        await sut.handleSelection(forCategory: newCategory)
+        
+        XCTAssertTrue(sut.isCategorySelected(category: newCategory))
+    }
+    
+    func testHandleSelectionForCategory_ShouldDeSelectCategoryIfItSelected() async {
+        let selectedCategory = sut.selectedCategories.first!
+        
+        await sut.handleSelection(forCategory: selectedCategory)
+        
+        XCTAssertFalse(sut.isCategorySelected(category: selectedCategory))
+    }
+    
+    func testHandleSelectionForCategory_ShouldReturnIfTheSelectedCategoryIsTheLast() async {
+        let selectedCategory = Category.defaultCategories.first!
+        sut.setSelectedCategories(byIds: [selectedCategory.id])
+        XCTAssertTrue(sut.isCategorySelected(category: selectedCategory),
+                      "selected categories should contains only the selectedCategory")
+        
+        await sut.handleSelection(forCategory: selectedCategory)
+        
+        XCTAssertTrue(sut.isCategorySelected(category: selectedCategory))
+    }
     
 }
