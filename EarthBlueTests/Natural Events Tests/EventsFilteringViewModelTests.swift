@@ -45,6 +45,15 @@ class EventsFilteringViewModelTests: XCTestCase {
         XCTAssertEqual(formattedNumberOfDays, expectedValue)
     }
     
+    func testFormattedNumberOfDaysFromTextFieldString_ShouldReturnNumberBoundedToDaysRange() {
+        let textFieldValue = "1000"
+        let expectedValue = sut.daysRange.upperBound
+        
+        let formattedNumberOfDays = sut.formattedNumberOfDays(fromTextFieldString: textFieldValue)
+        
+        XCTAssertEqual(Int(formattedNumberOfDays), expectedValue)
+    }
+    
     func testDaysRange_ShouldReturnRangeFromOneDayToTwoYearsInDays() {
         let expectedDays = 1...730
         

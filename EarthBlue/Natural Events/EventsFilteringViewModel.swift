@@ -13,7 +13,6 @@ class EventsFilteringViewModel: ObservableObject {
     @Published private(set) var selectedCategories = Set(Category.defaultCategories)
     let categories = Category.defaultCategories
     
-    
     var daysRange: ClosedRange<Int> {
         return 1...730
     }
@@ -23,7 +22,9 @@ class EventsFilteringViewModel: ObservableObject {
     }
     
     func formattedNumberOfDays(fromTextFieldString value: String) -> String {
-        return value.filter({$0.isNumber})
+        let filteredValue = value.filter({$0.isNumber})
+        guard let numberFromFiltering = Int(filteredValue) else { return filteredValue }
+        return daysRange.contains(numberFromFiltering) ? "\(numberFromFiltering)" : "\(daysRange.upperBound)"
     }
     
     func dateRangeEventsFiltering(startDate: Date, endDate: Date, status: FeedStatusOptions) -> EventsFeedFiltering? {

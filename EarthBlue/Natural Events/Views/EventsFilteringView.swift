@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct EventsFilteringView: View {
     @StateObject var viewModel: EventsFilteringViewModel = .init()
@@ -40,15 +41,14 @@ struct EventsFilteringView: View {
                             }
                         if isDaysRangeActive {
                             TextField("Number of days", text: .init(get: {
-                                formattedNumberOfDays
+                                return numberOfDays
                             }, set: { newValue in
                                 numberOfDays = newValue
                             }), prompt: nil)
                                 .keyboardType(.numberPad)
-                                .focused($isNumberOfDaysFocused)
-                                .onChange(of: isNumberOfDaysFocused) { newValue in
-                                    guard newValue == false else { return }
-                                    if numberOfDays.isEmpty { numberOfDays = "1" }
+                                .onReceive(Just(numberOfDays)) { val in
+                                    guard val != formattedNumberOfDays else { return }
+                                    numberOfDays = formattedNumberOfDays
                                 }
                         }
                     }
