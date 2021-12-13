@@ -28,7 +28,7 @@ class EventDetailsViewModel {
         return locationsInfo.flatMap({$0})
     }
     
-    func mapPolygonCoordinates(polygonCoordinates: [[[Double]]], date: String) -> [EventLocationInfo] {
+    private func mapPolygonCoordinates(polygonCoordinates: [[[Double]]], date: String) -> [EventLocationInfo] {
         let flattedCoordinates = polygonCoordinates.flatMap({$0})
         return flattedCoordinates.map { coordinate in
             return EventLocationInfo(date: date, location: .init(coordinate: coordinate))
@@ -36,5 +36,15 @@ class EventDetailsViewModel {
     }
     
     
+    func isCoordinatesInPoint() -> Bool {
+        switch event.geometry.first?.coordinates {
+        case .pointCoordinates:
+            return true
+        case .polygonCoordinate:
+            return false
+        case .none:
+            return false
+        }
+    }
     
 }

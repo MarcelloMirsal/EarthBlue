@@ -19,6 +19,7 @@ struct Event: Codable {
     let closed: String?
     let categories: [Category]
     let geometry: [Geometry]
+    let sources: [EventSource]
 }
 
 extension Event: Equatable {
@@ -116,4 +117,10 @@ enum GeoCoordinateType: Codable {
             try container.encode(polygonCoordinate)
         }
     }
+}
+
+// MARK: - EventSource
+struct EventSource: Codable {
+    let id: String
+    let url: String
 }
