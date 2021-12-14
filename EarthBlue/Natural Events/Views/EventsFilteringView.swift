@@ -45,7 +45,7 @@ struct EventsFilteringView: View {
                             }, set: { newValue in
                                 numberOfDays = newValue
                             }), prompt: nil)
-                                .keyboardType(.numberPad)
+                                .keyboardType(.asciiCapableNumberPad)
                                 .onReceive(Just(numberOfDays)) { val in
                                     guard val != formattedNumberOfDays else { return }
                                     numberOfDays = formattedNumberOfDays
