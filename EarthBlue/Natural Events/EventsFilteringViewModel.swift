@@ -26,9 +26,11 @@ class EventsFilteringViewModel: ObservableObject {
     }
     
     func formattedNumberOfDays(fromTextFieldString value: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale(identifier: "EN")
         let filteredValue = value.filter({$0.isNumber})
-        guard let numberFromFiltering = Int(filteredValue) else { return filteredValue }
-        return daysRange.contains(numberFromFiltering) ? "\(numberFromFiltering)" : "\(daysRange.upperBound)" 
+        guard let localizedNumber = numberFormatter.number(from: filteredValue) as? Int else { return filteredValue }
+        return daysRange.contains(localizedNumber) ? "\(localizedNumber)" : "\(daysRange.upperBound)"
     }
     
     func startingDatePickerRange() -> ClosedRange<Date> {
