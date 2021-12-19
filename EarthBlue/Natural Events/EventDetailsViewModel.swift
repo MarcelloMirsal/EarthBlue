@@ -36,14 +36,14 @@ class EventDetailsViewModel {
     }
     
     
-    func isCoordinatesInPoint() -> Bool {
+    func isCoordinatesInPoint() -> Bool? {
         switch event.geometry.first?.coordinates {
         case .pointCoordinates:
             return true
         case .polygonCoordinate:
             return false
         case .none:
-            return false
+            return nil
         }
     }
     

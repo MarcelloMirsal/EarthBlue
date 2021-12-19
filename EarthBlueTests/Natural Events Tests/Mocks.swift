@@ -10,6 +10,11 @@ import Foundation
 
 class MockNaturalEventsService: NaturalEventsServiceProtocol {
     
+    func eventDetails<T>(eventId: String, type: T.Type) async -> Result<T, Error> where T : Decodable {
+        return await defaultEventsFeed(type: type)
+    }
+    
+    
     func filteredEventsFeed<T>(days: Int, status: NaturalEventsRouter.EventsStatus,  categories: [String]?, type: T.Type) async -> Result<T, Error> where T : Decodable {
         return await defaultEventsFeed(type: type)
     }

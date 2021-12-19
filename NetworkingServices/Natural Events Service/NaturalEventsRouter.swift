@@ -30,6 +30,13 @@ public class NaturalEventsRouter: ResponseParser {
         return .init(url: urlRequestComponent.url!)
     }
     
+    func eventDetailsRequest(eventId: String) -> URLRequest {
+        let eventDetailsURL = baseURLComponent.url!.appendingPathComponent(eventId)
+        var eventDetailsRequest = URLRequest(url: eventDetailsURL)
+        eventDetailsRequest.timeoutInterval = 10
+        return eventDetailsRequest
+    }
+    
     func filteredFeedRequest(days: Int? = nil, dateRange: ClosedRange<Date>? = nil, forStatus status: EventsStatus, categories: [String]? = nil) -> URLRequest {
         var urlRequestComponent = baseURLComponent
         var queryItems = [URLQueryItem]()

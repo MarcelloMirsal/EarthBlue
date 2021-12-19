@@ -28,6 +28,16 @@ struct EventsList: View {
                     } label: {
                         EventRow(event: event)
                     }
+                    .swipeActions {
+                        Button {
+                            let bookmarkStore = EventBookmarkStore()
+                            bookmarkStore.append(eventBookmark: .init(id: event.id, title: event.title))
+                        } label: {
+                            Image(systemName: "book")
+                        }
+                        .tint(.blue)
+
+                    }
                 }
             }
         }

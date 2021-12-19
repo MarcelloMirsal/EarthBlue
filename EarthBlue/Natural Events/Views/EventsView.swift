@@ -11,6 +11,7 @@ struct EventsView: View {
     @ObservedObject var viewModel: EventsViewModel
     @State private var searchText: String = ""
     @State private var canShowFeedFiltering = false
+    @State private var canShowBookmarkedEvents = false
     @State private var eventsFeedFiltering: EventsFeedFiltering?
     
     init(viewModel: EventsViewModel = .init()) {
@@ -35,6 +36,16 @@ struct EventsView: View {
                 .foregroundColor(.secondary)
             }
             .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        canShowBookmarkedEvents = true
+                    } label: {
+                        Label("", systemImage: "book")
+                    }
+                    .sheet(isPresented: $canShowBookmarkedEvents) {
+                        EventsBookmarksView()
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         canShowFeedFiltering = true

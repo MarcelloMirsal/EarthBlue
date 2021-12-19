@@ -102,4 +102,13 @@ class NaturalEventsRouterTests: XCTestCase {
         XCTAssertEqual(expectedURL, filteredFeedRequest.url)
     }
     
+    func testEventDetailsRequest_ShouldReturnRequestEqualToExpectedRequest() {
+        let eventId = "EventID"
+        let expectedURL = idealBaseURL.appendingPathComponent(eventId)
+        
+        let eventDetailsRequest = sut.eventDetailsRequest(eventId: eventId)
+        
+        XCTAssertEqual(expectedURL, eventDetailsRequest.url)
+    }
+    
 }

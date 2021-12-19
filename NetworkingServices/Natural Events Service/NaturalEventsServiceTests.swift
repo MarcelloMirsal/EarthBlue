@@ -106,6 +106,20 @@ class NaturalEventsServiceTests: XCTestCase {
         }
     }
     
+    func testEventDetailsWithSuccessResponse_ShouldReturnDecodableObject() async {
+        let eventId = "EVENT-ID"
+        arrangeSutWithValidDataResponseFromNetworkManager()
+        let result = await sut.eventDetails(eventId: eventId, type: [String : String].self)
+        
+        switch result {
+        case .success(let decodableObject):
+            XCTAssertNotNil(decodableObject)
+            XCTAssertFalse(decodableObject.isEmpty)
+        case .failure:
+            XCTFail("Response should be succeeded, and return not nil decodable object")
+        }
+    }
+    
     // MARK: Sut Arranges
     func arrangeSutWithValidDataResponseFromNetworkManager() {
         let mockNetworkManager = MockNetworkManager(isSuccess: true)

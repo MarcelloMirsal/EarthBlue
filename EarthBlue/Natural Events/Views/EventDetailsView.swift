@@ -116,7 +116,8 @@ class EventDetailsViewController: UIViewController {
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.delegate = self
         mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: pointIdentifier)
-        if viewModel.isCoordinatesInPoint() {
+        guard let isCoordinatesInPoint = viewModel.isCoordinatesInPoint() else { return } // no coordinates found
+        if isCoordinatesInPoint {
             addingAnnotationToMapView()
         } else {
             addingPolygonOverlay()
