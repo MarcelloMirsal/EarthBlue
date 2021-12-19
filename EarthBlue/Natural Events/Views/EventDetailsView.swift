@@ -213,7 +213,7 @@ struct EventDetailsInfoView: View {
                 .listRowBackground(Color.clear)
                 
             } header: {
-                Text(Event.activeEventMock.title)
+                Text(event.title)
                     .padding()
                     .multilineTextAlignment(.leading)
                     .font(.largeTitle.bold())
