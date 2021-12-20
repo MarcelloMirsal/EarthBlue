@@ -32,8 +32,8 @@ final class NetworkManager: NetworkManagerProtocol {
                 case .success(let data):
                     continuation.resume(returning: data)
                 case .failure(let afError):
-                    let mappedError = afError.underlyingError as! URLError
-                    continuation.resume(throwing: mappedError)
+                    let afErrorWrapper = AFErrorWrapper(afError: afError)
+                    continuation.resume(throwing: afErrorWrapper.mappedError())
                 }
             }
         })

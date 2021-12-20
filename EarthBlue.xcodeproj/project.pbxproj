@@ -23,6 +23,7 @@
 		AD62C7162768A8D6002F6AF2 /* EventsBookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD62C7152768A8D6002F6AF2 /* EventsBookmarksView.swift */; };
 		AD6A96542757841100D060F2 /* EventsFeedFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A96532757841100D060F2 /* EventsFeedFiltering.swift */; };
 		AD6A96562757892600D060F2 /* EventsFilteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */; };
+		AD7642CB2770A7E700B69C3D /* Networking Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7642CA2770A7E700B69C3D /* Networking Errors.swift */; };
 		AD7B284827443C4600737AF1 /* Extensions and helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7B284727443C4600737AF1 /* Extensions and helpers.swift */; };
 		AD8206BD2769DDD7006DCEBC /* EventsBookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8206BC2769DDD7006DCEBC /* EventsBookmarkStore.swift */; };
 		AD8206BF2769DE0C006DCEBC /* EventBookmarkStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8206BE2769DE0C006DCEBC /* EventBookmarkStoreTests.swift */; };
@@ -119,6 +120,7 @@
 		AD62C7152768A8D6002F6AF2 /* EventsBookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsBookmarksView.swift; sourceTree = "<group>"; };
 		AD6A96532757841100D060F2 /* EventsFeedFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFeedFiltering.swift; sourceTree = "<group>"; };
 		AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFilteringViewModel.swift; sourceTree = "<group>"; };
+		AD7642CA2770A7E700B69C3D /* Networking Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Networking Errors.swift"; sourceTree = "<group>"; };
 		AD7B284727443C4600737AF1 /* Extensions and helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions and helpers.swift"; sourceTree = "<group>"; };
 		AD8206BC2769DDD7006DCEBC /* EventsBookmarkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsBookmarkStore.swift; sourceTree = "<group>"; };
 		AD8206BE2769DE0C006DCEBC /* EventBookmarkStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventBookmarkStoreTests.swift; path = "EarthBlue/Natural Events/EventBookmarkStoreTests.swift"; sourceTree = SOURCE_ROOT; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				ADAEE4F3273B16A700FABA5A /* NetworkManager.swift */,
+				AD7642CA2770A7E700B69C3D /* Networking Errors.swift */,
 			);
 			path = "Network Manager";
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD93F291273D109A00AC7EF2 /* NaturalEventsService.swift in Sources */,
+				AD7642CB2770A7E700B69C3D /* Networking Errors.swift in Sources */,
 				ADAEE4F4273B16A700FABA5A /* NetworkManager.swift in Sources */,
 				AD93F293273D10CD00AC7EF2 /* NaturalEventsRouter.swift in Sources */,
 			);

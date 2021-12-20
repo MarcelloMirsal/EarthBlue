@@ -6,9 +6,11 @@
 //
 
 import NetworkingServices
+import Combine
 
 class EventsBookmarksViewModel: ObservableObject {
     @Published private(set) var eventsBookmark: [EventBookmark]
+    @Published private(set) var errorMessage: String?
     let naturalEventsService = NaturalEventsService()
     let eventBookmarkStore: EventBookmarkStore
     var lastLoadedEvent: Event?
@@ -19,6 +21,11 @@ class EventsBookmarksViewModel: ObservableObject {
         self.eventsBookmark = []
         self.eventBookmarkStore = .init()
         readBookmarks()
+    }
+    
+    @MainActor
+    func set(errorMessage: String?) {
+        self.errorMessage = errorMessage
     }
     
     func filteredBookmarks(nameQuery: String) -> [EventBookmark] {
@@ -46,6 +53,7 @@ class EventsBookmarksViewModel: ObservableObject {
             lastLoadedEvent = event
             return event
         case .failure(let error):
+            await set(errorMessage: error.localizedDescription)
             lastLoadedEvent = nil
             throw error
         }

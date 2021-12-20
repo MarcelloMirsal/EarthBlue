@@ -48,8 +48,8 @@ class NetworkManagerTests: XCTestCase {
         do {
             let _ = try await sut.requestData(for: fakeURLRequest)
             XCTFail()
-        } catch {
-            XCTAssertNotNil(error as? URLError)
+        } catch let error {
+            XCTAssertNotNil(error as? NetworkError)
         }
     }
     

@@ -46,13 +46,16 @@ public final class NaturalEventsService: NaturalEventsServiceProtocol {
         return await startNetworkRequest(for: eventDetailsRequest, decodingType: T.self)
     }
     
-    private func startNetworkRequest<T: Decodable>(for urlRequest: URLRequest, decodingType: T.Type) async -> Result<T, Error> {
+    func startNetworkRequest<T: Decodable>(for urlRequest: URLRequest, decodingType: T.Type) async -> Result<T, Error> {
         do {
             let data = try await networkManager.requestData(for: urlRequest)
             let decodedObject = try router.parse(data: data, to: T.self)
             return .success(decodedObject)
+        }
+        catch let networkError as NetworkError {
+            return .failure(ServiceError.networkingFailure(networkError))
         } catch {
-            return .failure(error)
+            return .failure(ServiceError.decoding)
         }
     }
 }

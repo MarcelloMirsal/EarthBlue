@@ -21,6 +21,8 @@ class MockNetworkManager: NetworkManagerProtocol {
             }
 """.data(using: .utf8)!
         }
-        else { throw URLError(.badServerResponse) }
+        else { throw NetworkError.badResponse }
     }
 }
+
+

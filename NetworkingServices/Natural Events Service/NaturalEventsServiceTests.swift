@@ -48,7 +48,7 @@ class NaturalEventsServiceTests: XCTestCase {
         case .success:
             XCTFail()
         case .failure(let error):
-            XCTAssertNotNil(error as? URLError)
+            XCTAssertNotNil(error as? ServiceError)
         }
     }
     
@@ -72,7 +72,7 @@ class NaturalEventsServiceTests: XCTestCase {
         case .success:
             XCTFail()
         case .failure(let error):
-            XCTAssertNotNil(error as? URLError)
+            XCTAssertNotNil(error as? ServiceError)
         }
     }
     
@@ -117,6 +117,21 @@ class NaturalEventsServiceTests: XCTestCase {
             XCTAssertFalse(decodableObject.isEmpty)
         case .failure:
             XCTFail("Response should be succeeded, and return not nil decodable object")
+        }
+    }
+    
+    func testStartNetworkRequestWithWrongDecodingType_ShouldReturnFailureResultOfDecodingType() async {
+        arrangeSutWithValidDataResponseFromNetworkManager()
+        let urlRequest = NaturalEventsRouter().defaultFeedRequest()
+        
+        let result = await sut.startNetworkRequest(for: urlRequest, decodingType: [Int].self)
+        switch result {
+        case .success:
+            XCTFail("test should be failed because the decoding type is wrong")
+        case .failure(let error):
+            let serviceError = error as? ServiceError
+            XCTAssertNotNil(serviceError)
+            XCTAssertEqual(serviceError, ServiceError.decoding)
         }
     }
     
