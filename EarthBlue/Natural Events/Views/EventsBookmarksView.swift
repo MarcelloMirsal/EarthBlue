@@ -11,8 +11,6 @@ struct EventsBookmarksView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel = EventsBookmarksViewModel()
     @State private var searchingText: String = ""
-    @State private var canShowEventDetails = false
-    @State private var isBookmarkDetailsLoading = false
     
     var eventsBookmark: [EventBookmark] {
         return searchingText.isEmpty ? viewModel.eventsBookmark : filteredBookmarks
@@ -31,19 +29,12 @@ struct EventsBookmarksView: View {
             List {
                 ForEach(eventsBookmark.sorted(), id: \.id) { bookmark in
                     ZStack(alignment: .leading) {
-                        NavigationLink(destination: EventDetailsView(event: viewModel.event), isActive: $canShowEventDetails ) {
+                        NavigationLink(destination: EventDetailsView(event: viewModel.eventToShow), isActive: $viewModel.shouldPresentEventDetails) {
                             EmptyView()
                         }
                         .disabled(true)
                         Button(bookmark.title) {
-                            Task(priority: .userInitiated) {
-                                do {
-                                    isBookmarkDetailsLoading = true
-                                    try await viewModel.eventDetails(forEventId: bookmark.id)
-                                    isBookmarkDetailsLoading = false
-                                    canShowEventDetails = true
-                                }
-                            }
+                            viewModel.eventDetails(forEventId: bookmark.id)
                         }
                     }
                     .swipeActions(content: {
@@ -55,7 +46,14 @@ struct EventsBookmarksView: View {
                     })
                 }
             }
-            .disabled(isBookmarkDetailsLoading)
+            .alert(isPresented: .init(get: {
+                return viewModel.errorMessage != nil
+            }, set: { _ in
+                viewModel.errorMessage = nil
+            }), content: {
+                .init(title: Text("Error"), message: Text(viewModel.errorMessage ?? ""), dismissButton: nil)
+            })
+            .disabled(viewModel.isEventDetailsLoading)
             .toolbar(content: {
                 Button("Done") {
                     dismiss()
@@ -68,7 +66,7 @@ struct EventsBookmarksView: View {
             .navigationBarTitleDisplayMode(.inline)
             .overlay {
                 TaskProgressView()
-                    .isHidden(!isBookmarkDetailsLoading, remove: !isBookmarkDetailsLoading)
+                    .isHidden(!viewModel.isEventDetailsLoading, remove: !viewModel.isEventDetailsLoading)
             }
         }
         .onDisappear {

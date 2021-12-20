@@ -10,22 +10,21 @@ import Combine
 
 class EventsBookmarksViewModel: ObservableObject {
     @Published private(set) var eventsBookmark: [EventBookmark]
-    @Published private(set) var errorMessage: String?
-    let naturalEventsService = NaturalEventsService()
-    let eventBookmarkStore: EventBookmarkStore
-    var lastLoadedEvent: Event?
-    var event: Event {
+    @Published var shouldPresentEventDetails = false
+    @Published var isEventDetailsLoading = false
+    @Published var errorMessage: String? = nil
+    
+    private let naturalEventsService = NaturalEventsService()
+    private let eventBookmarkStore: EventBookmarkStore
+    private var lastLoadedEvent: Event?
+    
+    var eventToShow: Event {
         return lastLoadedEvent ?? .init(id: "0", title: "", closed: "", categories: [], geometry: [], sources: [])
     }
     init() {
         self.eventsBookmark = []
         self.eventBookmarkStore = .init()
         readBookmarks()
-    }
-    
-    @MainActor
-    func set(errorMessage: String?) {
-        self.errorMessage = errorMessage
     }
     
     func filteredBookmarks(nameQuery: String) -> [EventBookmark] {
@@ -45,18 +44,31 @@ class EventsBookmarksViewModel: ObservableObject {
         eventBookmarkStore.write(eventsBookmark: Set(eventsBookmark))
     }
     
-    @discardableResult
-    func eventDetails(forEventId eventId: String) async throws -> Event {
-        let result = await naturalEventsService.eventDetails(eventId: eventId, type: Event.self)
-        switch result {
-        case .success(let event):
-            lastLoadedEvent = event
-            return event
-        case .failure(let error):
-            await set(errorMessage: error.localizedDescription)
-            lastLoadedEvent = nil
-            throw error
+    @MainActor
+    func eventDetails(forEventId eventId: String) {
+        Task(priority: .userInitiated) {
+            isEventDetailsLoading = true
+            let result = await naturalEventsService.eventDetails(eventId: eventId, type: Event.self)
+            switch result {
+            case .success(let event):
+                handleSuccessLoading(event: event)
+                break
+            case .failure(let error):
+                handleFailure(error: error)
+            }
+            isEventDetailsLoading = false
         }
+    }
+    
+    @MainActor
+    private func handleSuccessLoading(event: Event) {
+        lastLoadedEvent = event
+        shouldPresentEventDetails = true
+    }
+    
+    @MainActor
+    private func handleFailure(error: Error) {
+        errorMessage = error.localizedDescription
     }
 }
 
