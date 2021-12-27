@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AD115AEA275140E5001303F2 /* EventsFilteringViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD115AE9275140E5001303F2 /* EventsFilteringViewModelTests.swift */; };
+		AD42CA132778A15D0021F2C0 /* EPICImageryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD42CA122778A15D0021F2C0 /* EPICImageryView.swift */; };
 		AD4AB63A2743E10E000F3F61 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB6392743E10E000F3F61 /* EventRow.swift */; };
 		AD4AB63C2743E1C4000F3F61 /* Previews.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */; };
 		AD4AB63F2743E1FF000F3F61 /* EventRowMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB63E2743E1FF000F3F61 /* EventRowMocks.swift */; };
@@ -20,6 +21,7 @@
 		AD5EC6C22736BD96007BAD06 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5EC6C12736BD96007BAD06 /* SceneDelegate.swift */; };
 		AD5EC6C92736BD97007BAD06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD5EC6C82736BD97007BAD06 /* Assets.xcassets */; };
 		AD5EC6CC2736BD97007BAD06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD5EC6CA2736BD97007BAD06 /* LaunchScreen.storyboard */; };
+		AD5F17A727774ECA003E98FE /* ImageryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F17A627774ECA003E98FE /* ImageryView.swift */; };
 		AD62C7162768A8D6002F6AF2 /* EventsBookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD62C7152768A8D6002F6AF2 /* EventsBookmarksView.swift */; };
 		AD6A96542757841100D060F2 /* EventsFeedFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A96532757841100D060F2 /* EventsFeedFiltering.swift */; };
 		AD6A96562757892600D060F2 /* EventsFilteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */; };
@@ -47,6 +49,7 @@
 		ADC00577273D664A005D5EF2 /* NaturalEventsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */; };
 		ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */; };
 		ADD616152736C8C4007A1D1D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD616142736C8C4007A1D1D /* MainView.swift */; };
+		ADD7EDFD2778D6EC005E36BA /* EPICFilteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD7EDFC2778D6EC005E36BA /* EPICFilteringView.swift */; };
 		ADD8881B274DAB4C00B7B89C /* EventMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD8881A274DAB4C00B7B89C /* EventMocks.swift */; };
 		ADE77B8A274011320061AB3F /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B89274011320061AB3F /* EventsViewModel.swift */; };
 		ADE77B99274011940061AB3F /* EventsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B98274011940061AB3F /* EventsViewModelTests.swift */; };
@@ -103,6 +106,7 @@
 
 /* Begin PBXFileReference section */
 		AD115AE9275140E5001303F2 /* EventsFilteringViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFilteringViewModelTests.swift; sourceTree = "<group>"; };
+		AD42CA122778A15D0021F2C0 /* EPICImageryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageryView.swift; sourceTree = "<group>"; };
 		AD4AB6392743E10E000F3F61 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Previews.xcassets; sourceTree = "<group>"; };
 		AD4AB63E2743E1FF000F3F61 /* EventRowMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowMocks.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 		AD5EC6C82736BD97007BAD06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD5EC6CB2736BD97007BAD06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD5EC6CD2736BD97007BAD06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD5F17A627774ECA003E98FE /* ImageryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageryView.swift; sourceTree = "<group>"; };
 		AD62C7152768A8D6002F6AF2 /* EventsBookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsBookmarksView.swift; sourceTree = "<group>"; };
 		AD6A96532757841100D060F2 /* EventsFeedFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFeedFiltering.swift; sourceTree = "<group>"; };
 		AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFilteringViewModel.swift; sourceTree = "<group>"; };
@@ -142,6 +147,7 @@
 		ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaturalEventsServiceTests.swift; path = "NetworkingServices/Natural Events Service/NaturalEventsServiceTests.swift"; sourceTree = SOURCE_ROOT; };
 		ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		ADD616142736C8C4007A1D1D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		ADD7EDFC2778D6EC005E36BA /* EPICFilteringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICFilteringView.swift; sourceTree = "<group>"; };
 		ADD8881A274DAB4C00B7B89C /* EventMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMocks.swift; sourceTree = "<group>"; };
 		ADE77B89274011320061AB3F /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
 		ADE77B8F274011630061AB3F /* EarthBlueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthBlueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +193,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AD42CA142778A1640021F2C0 /* EPIC Imagery */ = {
+			isa = PBXGroup;
+			children = (
+				AD42CA122778A15D0021F2C0 /* EPICImageryView.swift */,
+				ADD7EDFC2778D6EC005E36BA /* EPICFilteringView.swift */,
+			);
+			path = "EPIC Imagery";
+			sourceTree = "<group>";
+		};
 		AD4AB63D2743E1C9000F3F61 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,8 +244,18 @@
 				ADF4964B273EEAB5003ADB9C /* Natural Events */,
 				AD4AB63D2743E1C9000F3F61 /* Preview Content */,
 				AD7B284727443C4600737AF1 /* Extensions and helpers.swift */,
+				AD5F17A827774ED0003E98FE /* Imagery */,
 			);
 			path = EarthBlue;
+			sourceTree = "<group>";
+		};
+		AD5F17A827774ED0003E98FE /* Imagery */ = {
+			isa = PBXGroup;
+			children = (
+				AD5F17A627774ECA003E98FE /* ImageryView.swift */,
+				AD42CA142778A1640021F2C0 /* EPIC Imagery */,
+			);
+			path = Imagery;
 			sourceTree = "<group>";
 		};
 		AD93F28F273D0DBE00AC7EF2 /* Shared */ = {
@@ -580,6 +605,7 @@
 				AD4E2C5A274BDA1300686DC2 /* EventDetailsViewModel.swift in Sources */,
 				AD5EC6C22736BD96007BAD06 /* SceneDelegate.swift in Sources */,
 				AD7B284827443C4600737AF1 /* Extensions and helpers.swift in Sources */,
+				AD5F17A727774ECA003E98FE /* ImageryView.swift in Sources */,
 				AD4AB63A2743E10E000F3F61 /* EventRow.swift in Sources */,
 				AD96A7B4276F4570007A2ACD /* EventsBookmarksViewModel.swift in Sources */,
 				ADA4D973274D365F00009099 /* EventsList.swift in Sources */,
@@ -588,6 +614,7 @@
 				AD6A96562757892600D060F2 /* EventsFilteringViewModel.swift in Sources */,
 				ADE77B8A274011320061AB3F /* EventsViewModel.swift in Sources */,
 				ADB3E080274F8D1700CACEDB /* EventsFilteringView.swift in Sources */,
+				AD42CA132778A15D0021F2C0 /* EPICImageryView.swift in Sources */,
 				AD4AB6412743ED71000F3F61 /* EventsViewModelMock.swift in Sources */,
 				AD4AB63F2743E1FF000F3F61 /* EventRowMocks.swift in Sources */,
 				ADD8881B274DAB4C00B7B89C /* EventMocks.swift in Sources */,
@@ -595,6 +622,7 @@
 				ADE77B9D27412FC90061AB3F /* Event.swift in Sources */,
 				AD4E2C60274BE80D00686DC2 /* EventDetailsView.swift in Sources */,
 				AD8206BD2769DDD7006DCEBC /* EventsBookmarkStore.swift in Sources */,
+				ADD7EDFD2778D6EC005E36BA /* EPICFilteringView.swift in Sources */,
 				AD62C7162768A8D6002F6AF2 /* EventsBookmarksView.swift in Sources */,
 				ADA4D975274D3CF200009099 /* EventLocationInfo.swift in Sources */,
 				ADE77B9B274123CD0061AB3F /* EventsView.swift in Sources */,

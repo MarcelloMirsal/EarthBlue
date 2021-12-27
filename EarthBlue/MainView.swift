@@ -13,6 +13,10 @@ struct MainView: View {
                 .tabItem {
                     Label("Events", systemImage: "bell.fill")
                 }
+            ImageryView()
+                .tabItem {
+                    Label("Imagery", systemImage: "camera.aperture")
+                }
         }
     }
 }
