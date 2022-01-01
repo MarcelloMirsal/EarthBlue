@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		AD115AEA275140E5001303F2 /* EventsFilteringViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD115AE9275140E5001303F2 /* EventsFilteringViewModelTests.swift */; };
-		AD42CA132778A15D0021F2C0 /* EPICImageryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD42CA122778A15D0021F2C0 /* EPICImageryView.swift */; };
+		AD3567C7277B516A00BB9E62 /* TaskProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */; };
 		AD4AB63A2743E10E000F3F61 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB6392743E10E000F3F61 /* EventRow.swift */; };
 		AD4AB63C2743E1C4000F3F61 /* Previews.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */; };
 		AD4AB63F2743E1FF000F3F61 /* EventRowMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB63E2743E1FF000F3F61 /* EventRowMocks.swift */; };
 		AD4AB6412743ED71000F3F61 /* EventsViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB6402743ED71000F3F61 /* EventsViewModelMock.swift */; };
+		AD4D15072779B39100BC6FDE /* EPICImageryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4D15062779B39100BC6FDE /* EPICImageryService.swift */; };
+		AD4D150A2779E14E00BC6FDE /* EPICImageryRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4D15092779E14E00BC6FDE /* EPICImageryRouterTests.swift */; };
+		AD4D150C2779E57400BC6FDE /* EPICImageryServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4D150B2779E57400BC6FDE /* EPICImageryServiceTests.swift */; };
 		AD4E2C5A274BDA1300686DC2 /* EventDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E2C59274BDA1300686DC2 /* EventDetailsViewModel.swift */; };
 		AD4E2C5C274BDA4100686DC2 /* EventDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E2C5B274BDA4100686DC2 /* EventDetailsViewModelTests.swift */; };
 		AD4E2C5E274BDF6500686DC2 /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E2C5D274BDF6500686DC2 /* ExtensionsTests.swift */; };
@@ -21,7 +24,6 @@
 		AD5EC6C22736BD96007BAD06 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5EC6C12736BD96007BAD06 /* SceneDelegate.swift */; };
 		AD5EC6C92736BD97007BAD06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD5EC6C82736BD97007BAD06 /* Assets.xcassets */; };
 		AD5EC6CC2736BD97007BAD06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD5EC6CA2736BD97007BAD06 /* LaunchScreen.storyboard */; };
-		AD5F17A727774ECA003E98FE /* ImageryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5F17A627774ECA003E98FE /* ImageryView.swift */; };
 		AD62C7162768A8D6002F6AF2 /* EventsBookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD62C7152768A8D6002F6AF2 /* EventsBookmarksView.swift */; };
 		AD6A96542757841100D060F2 /* EventsFeedFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A96532757841100D060F2 /* EventsFeedFiltering.swift */; };
 		AD6A96562757892600D060F2 /* EventsFilteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */; };
@@ -36,6 +38,10 @@
 		AD93F296273D115100AC7EF2 /* NaturalEventsRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD93F295273D115100AC7EF2 /* NaturalEventsRouterTests.swift */; };
 		AD96A7B4276F4570007A2ACD /* EventsBookmarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96A7B3276F4570007A2ACD /* EventsBookmarksViewModel.swift */; };
 		AD96A7B6276F4AF1007A2ACD /* EventsBookmarksViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD96A7B5276F4AF1007A2ACD /* EventsBookmarksViewModelTests.swift */; };
+		AD9EB0FD277CC0DC0079AF0F /* ImageryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EB0FC277CC0DC0079AF0F /* ImageryView.swift */; };
+		AD9EB101277CC0E70079AF0F /* EPICImageryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EB0FE277CC0E70079AF0F /* EPICImageryViewModel.swift */; };
+		AD9EB102277CC0E70079AF0F /* EPICFilteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EB0FF277CC0E70079AF0F /* EPICFilteringView.swift */; };
+		AD9EB103277CC0E70079AF0F /* EPICImageryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EB100277CC0E70079AF0F /* EPICImageryView.swift */; };
 		ADA4D973274D365F00009099 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA4D972274D365F00009099 /* EventsList.swift */; };
 		ADA4D975274D3CF200009099 /* EventLocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA4D974274D3CF200009099 /* EventLocationInfo.swift */; };
 		ADAEE4D9273B150600FABA5A /* NetworkingServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAEE4D1273B150600FABA5A /* NetworkingServices.framework */; };
@@ -49,7 +55,6 @@
 		ADC00577273D664A005D5EF2 /* NaturalEventsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */; };
 		ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */; };
 		ADD616152736C8C4007A1D1D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD616142736C8C4007A1D1D /* MainView.swift */; };
-		ADD7EDFD2778D6EC005E36BA /* EPICFilteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD7EDFC2778D6EC005E36BA /* EPICFilteringView.swift */; };
 		ADD8881B274DAB4C00B7B89C /* EventMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD8881A274DAB4C00B7B89C /* EventMocks.swift */; };
 		ADE77B8A274011320061AB3F /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B89274011320061AB3F /* EventsViewModel.swift */; };
 		ADE77B99274011940061AB3F /* EventsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B98274011940061AB3F /* EventsViewModelTests.swift */; };
@@ -106,11 +111,14 @@
 
 /* Begin PBXFileReference section */
 		AD115AE9275140E5001303F2 /* EventsFilteringViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFilteringViewModelTests.swift; sourceTree = "<group>"; };
-		AD42CA122778A15D0021F2C0 /* EPICImageryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageryView.swift; sourceTree = "<group>"; };
+		AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskProgressView.swift; sourceTree = "<group>"; };
 		AD4AB6392743E10E000F3F61 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Previews.xcassets; sourceTree = "<group>"; };
 		AD4AB63E2743E1FF000F3F61 /* EventRowMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowMocks.swift; sourceTree = "<group>"; };
 		AD4AB6402743ED71000F3F61 /* EventsViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModelMock.swift; sourceTree = "<group>"; };
+		AD4D15062779B39100BC6FDE /* EPICImageryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageryService.swift; sourceTree = "<group>"; };
+		AD4D15092779E14E00BC6FDE /* EPICImageryRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageryRouterTests.swift; sourceTree = "<group>"; };
+		AD4D150B2779E57400BC6FDE /* EPICImageryServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageryServiceTests.swift; sourceTree = "<group>"; };
 		AD4E2C59274BDA1300686DC2 /* EventDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModel.swift; sourceTree = "<group>"; };
 		AD4E2C5B274BDA4100686DC2 /* EventDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		AD4E2C5D274BDF6500686DC2 /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
@@ -121,7 +129,6 @@
 		AD5EC6C82736BD97007BAD06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD5EC6CB2736BD97007BAD06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD5EC6CD2736BD97007BAD06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AD5F17A627774ECA003E98FE /* ImageryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageryView.swift; sourceTree = "<group>"; };
 		AD62C7152768A8D6002F6AF2 /* EventsBookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsBookmarksView.swift; sourceTree = "<group>"; };
 		AD6A96532757841100D060F2 /* EventsFeedFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFeedFiltering.swift; sourceTree = "<group>"; };
 		AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFilteringViewModel.swift; sourceTree = "<group>"; };
@@ -136,6 +143,10 @@
 		AD93F295273D115100AC7EF2 /* NaturalEventsRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalEventsRouterTests.swift; sourceTree = "<group>"; };
 		AD96A7B3276F4570007A2ACD /* EventsBookmarksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsBookmarksViewModel.swift; sourceTree = "<group>"; };
 		AD96A7B5276F4AF1007A2ACD /* EventsBookmarksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsBookmarksViewModelTests.swift; sourceTree = "<group>"; };
+		AD9EB0FC277CC0DC0079AF0F /* ImageryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageryView.swift; sourceTree = "<group>"; };
+		AD9EB0FE277CC0E70079AF0F /* EPICImageryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPICImageryViewModel.swift; sourceTree = "<group>"; };
+		AD9EB0FF277CC0E70079AF0F /* EPICFilteringView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPICFilteringView.swift; sourceTree = "<group>"; };
+		AD9EB100277CC0E70079AF0F /* EPICImageryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPICImageryView.swift; sourceTree = "<group>"; };
 		ADA4D972274D365F00009099 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
 		ADA4D974274D3CF200009099 /* EventLocationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLocationInfo.swift; sourceTree = "<group>"; };
 		ADAEE4D1273B150600FABA5A /* NetworkingServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkingServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,7 +158,6 @@
 		ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaturalEventsServiceTests.swift; path = "NetworkingServices/Natural Events Service/NaturalEventsServiceTests.swift"; sourceTree = SOURCE_ROOT; };
 		ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		ADD616142736C8C4007A1D1D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		ADD7EDFC2778D6EC005E36BA /* EPICFilteringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICFilteringView.swift; sourceTree = "<group>"; };
 		ADD8881A274DAB4C00B7B89C /* EventMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMocks.swift; sourceTree = "<group>"; };
 		ADE77B89274011320061AB3F /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
 		ADE77B8F274011630061AB3F /* EarthBlueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthBlueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,8 +206,9 @@
 		AD42CA142778A1640021F2C0 /* EPIC Imagery */ = {
 			isa = PBXGroup;
 			children = (
-				AD42CA122778A15D0021F2C0 /* EPICImageryView.swift */,
-				ADD7EDFC2778D6EC005E36BA /* EPICFilteringView.swift */,
+				AD9EB0FF277CC0E70079AF0F /* EPICFilteringView.swift */,
+				AD9EB100277CC0E70079AF0F /* EPICImageryView.swift */,
+				AD9EB0FE277CC0E70079AF0F /* EPICImageryViewModel.swift */,
 			);
 			path = "EPIC Imagery";
 			sourceTree = "<group>";
@@ -209,6 +220,23 @@
 				ADD8881C274DABAB00B7B89C /* Natural events previews */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AD4D15082779E12400BC6FDE /* EPICImageryService */ = {
+			isa = PBXGroup;
+			children = (
+				AD4D15062779B39100BC6FDE /* EPICImageryService.swift */,
+			);
+			path = EPICImageryService;
+			sourceTree = "<group>";
+		};
+		AD4D150D2779E58100BC6FDE /* EPICImagery Service Tests */ = {
+			isa = PBXGroup;
+			children = (
+				AD4D15092779E14E00BC6FDE /* EPICImageryRouterTests.swift */,
+				AD4D150B2779E57400BC6FDE /* EPICImageryServiceTests.swift */,
+			);
+			path = "EPICImagery Service Tests";
 			sourceTree = "<group>";
 		};
 		AD5EC6B32736BD96007BAD06 = {
@@ -252,7 +280,7 @@
 		AD5F17A827774ED0003E98FE /* Imagery */ = {
 			isa = PBXGroup;
 			children = (
-				AD5F17A627774ECA003E98FE /* ImageryView.swift */,
+				AD9EB0FC277CC0DC0079AF0F /* ImageryView.swift */,
 				AD42CA142778A1640021F2C0 /* EPIC Imagery */,
 			);
 			path = Imagery;
@@ -291,6 +319,7 @@
 				ADAEE4D3273B150600FABA5A /* NetworkingServices.h */,
 				ADAEE4F5273B16AD00FABA5A /* Network Manager */,
 				AD93F294273D10D800AC7EF2 /* Natural Events Service */,
+				AD4D15082779E12400BC6FDE /* EPICImageryService */,
 			);
 			path = NetworkingServices;
 			sourceTree = "<group>";
@@ -301,6 +330,7 @@
 				AD93F28F273D0DBE00AC7EF2 /* Shared */,
 				ADAEE4F2273B166B00FABA5A /* Network Manager Tests */,
 				AD93F297273D115A00AC7EF2 /* Natural Events Service Tests */,
+				AD4D150D2779E58100BC6FDE /* EPICImagery Service Tests */,
 			);
 			path = NetworkingServicesTests;
 			sourceTree = "<group>";
@@ -400,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				ADF49646273EE588003ADB9C /* Colors.swift */,
+				AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */,
 			);
 			path = "shared UI";
 			sourceTree = "<group>";
@@ -605,24 +636,26 @@
 				AD4E2C5A274BDA1300686DC2 /* EventDetailsViewModel.swift in Sources */,
 				AD5EC6C22736BD96007BAD06 /* SceneDelegate.swift in Sources */,
 				AD7B284827443C4600737AF1 /* Extensions and helpers.swift in Sources */,
-				AD5F17A727774ECA003E98FE /* ImageryView.swift in Sources */,
 				AD4AB63A2743E10E000F3F61 /* EventRow.swift in Sources */,
 				AD96A7B4276F4570007A2ACD /* EventsBookmarksViewModel.swift in Sources */,
 				ADA4D973274D365F00009099 /* EventsList.swift in Sources */,
+				AD9EB101277CC0E70079AF0F /* EPICImageryViewModel.swift in Sources */,
 				AD6A96542757841100D060F2 /* EventsFeedFiltering.swift in Sources */,
 				AD8206C12769EE01006DCEBC /* EventBookmark.swift in Sources */,
 				AD6A96562757892600D060F2 /* EventsFilteringViewModel.swift in Sources */,
 				ADE77B8A274011320061AB3F /* EventsViewModel.swift in Sources */,
 				ADB3E080274F8D1700CACEDB /* EventsFilteringView.swift in Sources */,
-				AD42CA132778A15D0021F2C0 /* EPICImageryView.swift in Sources */,
+				AD9EB102277CC0E70079AF0F /* EPICFilteringView.swift in Sources */,
+				AD9EB0FD277CC0DC0079AF0F /* ImageryView.swift in Sources */,
 				AD4AB6412743ED71000F3F61 /* EventsViewModelMock.swift in Sources */,
 				AD4AB63F2743E1FF000F3F61 /* EventRowMocks.swift in Sources */,
 				ADD8881B274DAB4C00B7B89C /* EventMocks.swift in Sources */,
 				ADD616152736C8C4007A1D1D /* MainView.swift in Sources */,
 				ADE77B9D27412FC90061AB3F /* Event.swift in Sources */,
 				AD4E2C60274BE80D00686DC2 /* EventDetailsView.swift in Sources */,
+				AD9EB103277CC0E70079AF0F /* EPICImageryView.swift in Sources */,
 				AD8206BD2769DDD7006DCEBC /* EventsBookmarkStore.swift in Sources */,
-				ADD7EDFD2778D6EC005E36BA /* EPICFilteringView.swift in Sources */,
+				AD3567C7277B516A00BB9E62 /* TaskProgressView.swift in Sources */,
 				AD62C7162768A8D6002F6AF2 /* EventsBookmarksView.swift in Sources */,
 				ADA4D975274D3CF200009099 /* EventLocationInfo.swift in Sources */,
 				ADE77B9B274123CD0061AB3F /* EventsView.swift in Sources */,
@@ -635,6 +668,7 @@
 			files = (
 				AD93F291273D109A00AC7EF2 /* NaturalEventsService.swift in Sources */,
 				AD7642CB2770A7E700B69C3D /* Networking Errors.swift in Sources */,
+				AD4D15072779B39100BC6FDE /* EPICImageryService.swift in Sources */,
 				ADAEE4F4273B16A700FABA5A /* NetworkManager.swift in Sources */,
 				AD93F293273D10CD00AC7EF2 /* NaturalEventsRouter.swift in Sources */,
 			);
@@ -646,8 +680,10 @@
 			files = (
 				ADAEE4F1273B166700FABA5A /* NetworkManagerTests.swift in Sources */,
 				AD93F296273D115100AC7EF2 /* NaturalEventsRouterTests.swift in Sources */,
+				AD4D150A2779E14E00BC6FDE /* EPICImageryRouterTests.swift in Sources */,
 				ADC00577273D664A005D5EF2 /* NaturalEventsServiceTests.swift in Sources */,
 				AD93F28E273D0DB600AC7EF2 /* MockURLProtocol.swift in Sources */,
+				AD4D150C2779E57400BC6FDE /* EPICImageryServiceTests.swift in Sources */,
 				ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

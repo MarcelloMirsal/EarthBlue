@@ -125,10 +125,11 @@ class EventsViewModel: ObservableObject {
             set(requestStatus: .failed)
         }
     }
-    
-    enum RequestStatus {
-        case loading
-        case success
-        case failed
-    }
+}
+
+
+enum RequestStatus {
+    case loading
+    case success
+    case failed
 }

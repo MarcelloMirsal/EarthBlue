@@ -112,7 +112,7 @@ class EventsViewModelTests: XCTestCase {
     }
     
     func testSetRequestStatus_RequestStatusShouldBeUpdated() {
-        let newStatus = EventsViewModel.RequestStatus.success
+        let newStatus = RequestStatus.success
         
         sut.set(requestStatus: newStatus)
 

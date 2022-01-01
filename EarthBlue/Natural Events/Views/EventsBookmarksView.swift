@@ -83,14 +83,3 @@ struct EventsBookmarksView_Previews: PreviewProvider {
             }
     }
 }
-
-
-struct TaskProgressView: View {
-    var body: some View {
-        ProgressView()
-            .tint(.primary)
-            .padding(18)
-            .background(Color(uiColor: .systemFill))
-            .cornerRadius(8)
-    }
-}
