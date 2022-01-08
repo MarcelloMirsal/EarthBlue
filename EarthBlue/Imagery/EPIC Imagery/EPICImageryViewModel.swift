@@ -7,19 +7,36 @@
 
 import NetworkingServices
 import Combine
-import Foundation
 
 class EPICImageryViewModel: ObservableObject {
     @Published var epicImages: [EPICImageIdentifiable]
     @Published private(set) var error: Error?
     @Published private var requestStatus: RequestStatus = .success
-    
+    @Published var imageryFiltering: EPICImageryFiltering? = nil
+    var cancellable = Set<AnyCancellable>()
     
     let imageryService = EPICImageryService()
     init() {
         self.epicImages = []
         Task {
             await requestDefaultFeed()
+        }
+        $imageryFiltering
+            .sink(receiveValue: feedFilteringHandler)
+            .store(in: &cancellable)
+    }
+    
+    lazy var feedFilteringHandler: (EPICImageryFiltering?) -> () = { [unowned self]  newImageryFiltering in
+        if let newImageryFiltering = newImageryFiltering {
+            self.epicImages = []
+            Task {
+                await self.requestFilteredFeed()
+            }
+        } else {
+            self.epicImages = []
+            Task {
+                await self.requestDefaultFeed()
+            }
         }
     }
     
@@ -34,6 +51,10 @@ class EPICImageryViewModel: ObservableObject {
     
     var isFailedLoading: Bool {
         return requestStatus == .failed
+    }
+    
+    var isFeedImagesEmpty: Bool {
+        return requestStatus == .success && epicImages.isEmpty
     }
     
     func feedSectionDate() -> String {
@@ -54,7 +75,7 @@ class EPICImageryViewModel: ObservableObject {
         dateFormatter.locale = .current
         dateFormatter.calendar = .current
         let imageDate = dateFormatter.date(from: epicImage.date)!
-        let imageURLRequest = epicRouter.thumbImageRequest(imageName: epicImage.image, date: imageDate, isEnhanced: false)
+        let imageURLRequest = epicRouter.thumbImageRequest(imageName: epicImage.image, date: imageDate, isEnhanced: imageryFiltering?.isEnhanced ?? false)
         return imageURLRequest
     }
     
@@ -67,8 +88,20 @@ class EPICImageryViewModel: ObservableObject {
     }
     
     @MainActor
+    func requestFilteredFeed() async {
+        guard requestStatus != .loading, let feedFiltering = imageryFiltering else { return }
+        requestStatus = .loading
+        let result = await imageryService.requestFilteredFeed(isImageryEnhanced: feedFiltering.isEnhanced, date: feedFiltering.date, decodingType: [EPICImage].self)
+        handle(requestResult: result)
+    }
+    
+    @MainActor
     func refreshFeed() async {
-        await requestDefaultFeed()
+        if let _ = imageryFiltering {
+            await requestFilteredFeed()
+        } else {
+            await requestDefaultFeed()
+        }
     }
     
     private func handle(requestResult: Result<[EPICImage], Error>) {
@@ -83,15 +116,6 @@ class EPICImageryViewModel: ObservableObject {
     }
     
 }
-
-
-struct EPICImage: Codable {
-    let identifier: String
-    let image: String
-    let caption: String
-    let date: String
-}
-
 
 struct EPICImageIdentifiable: Identifiable {
     var id: UUID = .init()

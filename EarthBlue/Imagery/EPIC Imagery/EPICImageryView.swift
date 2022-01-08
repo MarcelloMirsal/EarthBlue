@@ -42,7 +42,7 @@ struct EPICImageryView: View {
             .ignoresSafeArea(edges: .horizontal)
             .navigationTitle("EPIC")
             .refreshable {
-                await viewModel.requestDefaultFeed()
+                await viewModel.refreshFeed()
             }
             .toolbar(content: {
                 ToolbarItem {
@@ -54,7 +54,7 @@ struct EPICImageryView: View {
                 }
             })
             .sheet(isPresented: $shouldShowFilteringView, content: {
-                EPICFilteringView()
+                EPICFilteringView(imageryFiltering: $viewModel.imageryFiltering)
             })
             .alert("Error", isPresented: .init(get: {
                 return viewModel.error != nil
@@ -65,12 +65,15 @@ struct EPICImageryView: View {
             } message: {
                 Text(viewModel.error?.localizedDescription ?? "an error occurred please try again.")
             }
-
             if viewModel.isFeedLoading && viewModel.epicImages.isEmpty {
                 TaskProgressView()
             }
             if viewModel.isFailedLoading && viewModel.epicImages.isEmpty {
                 Text("pull down to refresh")
+                    .foregroundColor(.secondary)
+            }
+            if viewModel.isFeedImagesEmpty {
+                Text("Sorry, images are not available yet for this date.")
                     .foregroundColor(.secondary)
             }
         }

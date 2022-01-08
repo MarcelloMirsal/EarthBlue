@@ -16,7 +16,7 @@ struct ImageryView: View {
                         NavigationLink {
                             EPICImageryView()
                         } label: {
-                            ImageryTypeView(imageName: "EPICImageThumb", title: "Earth Polychromatic Imaging Camera (EPIC)")
+                            ImageryProviderView(imageName: "EPICImageThumb", title: "Earth Polychromatic Imaging Camera (EPIC)", providerInfo: ImageryProviderInfoFactory.makeEPICImageryProviderInfo())
                         }
                     }
                 } header: {
@@ -31,6 +31,7 @@ struct ImageryView: View {
             }
             .navigationTitle("Imagery")
             .listStyle(PlainListStyle())
+            EPICImageryView()
         }
     }
 }
@@ -42,9 +43,11 @@ struct ImageryView_Previews: PreviewProvider {
 }
 
 
-struct ImageryTypeView: View {
+struct ImageryProviderView: View {
+    @State private var shouldPresentInfoView = false
     let imageName: String
     let title: String
+    let providerInfo: ImageryProviderInfo
     var body: some View {
         ZStack(alignment: .top) {
             Image(imageName)
@@ -59,8 +62,46 @@ struct ImageryTypeView: View {
                     .font(.title2.bold())
                     .foregroundColor(.white)
                 Spacer()
+                Button {
+                    shouldPresentInfoView = true
+                } label: {
+                    Image(systemName: "info.circle")
+                        .font(.title)
+                }
             }
             .padding()
+            .sheet(isPresented: $shouldPresentInfoView) {
+                ImageryProviderInfoView(providerInfo: providerInfo)
+            }
         }
+    }
+}
+
+struct ImageryProviderInfoView: View {
+    @Environment(\.dismiss) var dismiss
+    let providerInfo: ImageryProviderInfo
+    var body: some View {
+        NavigationView {
+            List {
+                Section {
+                    Text(providerInfo.description)
+                        .foregroundColor(.primary)
+                        .multilineTextAlignment(.leading)
+                        .listRowSeparator(.hidden)
+                        .lineSpacing(0.5)
+                    Link("more info...", destination: providerInfo.sourceURL)
+                }
+            }
+            .navigationTitle(providerInfo.title)
+            .listStyle(PlainListStyle())
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+        
     }
 }

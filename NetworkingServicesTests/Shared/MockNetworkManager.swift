@@ -10,16 +10,21 @@ import Foundation
 
 class MockNetworkManager: NetworkManagerProtocol {
     private let isSuccess: Bool
-    init(isSuccess: Bool) {
+    private let stringData: String?
+    init(isSuccess: Bool, stringData: String? = nil) {
         self.isSuccess = isSuccess
+        self.stringData = stringData
     }
     func requestData(for urlRequest: URLRequest) async throws -> Data {
         if isSuccess {
-            return """
+            guard let stringData = stringData else {
+                return """
             {
             "title": "JSON_String"
             }
 """.data(using: .utf8)!
+            }
+            return stringData.data(using: .utf8)!
         }
         else { throw NetworkError.badResponse }
     }

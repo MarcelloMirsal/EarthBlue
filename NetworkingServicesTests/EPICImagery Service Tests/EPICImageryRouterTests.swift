@@ -72,8 +72,22 @@ class EPICImageryRouterTests: XCTestCase {
         XCTAssertEqual(thumbImageRequest.url, expectedURL)
     }
     
+    func testRequestAvailableDatesForNaturalImages_ShouldReturnURLEqualToExpectedURL() {
+        let expectedURL = URL(string: "https://api.nasa.gov/EPIC/api/natural/available?api_key=\(sut.apiKey)")
+        
+        let naturalAvailableDatesRequest = sut.availableDatesRequest()
+        
+        XCTAssertEqual(naturalAvailableDatesRequest.url, expectedURL)
+    }
     
-    
-    
-    
+    func testFilteredFeedRequest_ShouldReturnURLEqualToExpectedURL() {
+        let dateComponents = DateComponents(calendar: .current, timeZone: .current, year: 2022, month: 1, day: 6)
+        let isImageryEnhanced = false
+        let filteringDate = dateComponents.date!
+        let expectedURL = URL(string: "https://api.nasa.gov/EPIC/api/natural/date/2022-01-06?api_key=\(sut.apiKey)")!
+        
+        let filteredFeedRequest = sut.filteredFeedRequest(isImageryEnhanced: isImageryEnhanced, date: filteringDate)
+        
+        XCTAssertEqual(filteredFeedRequest.url, expectedURL)
+    }
 }
