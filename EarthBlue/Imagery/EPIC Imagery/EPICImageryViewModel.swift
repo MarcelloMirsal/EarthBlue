@@ -9,7 +9,7 @@ import NetworkingServices
 import Combine
 
 class EPICImageryViewModel: ObservableObject {
-    @Published var epicImages: [EPICImageIdentifiable]
+    @Published var epicImagesFeed: EPICImagesFeed
     @Published private(set) var error: Error?
     @Published private var requestStatus: RequestStatus = .success
     @Published var imageryFiltering: EPICImageryFiltering? = nil
@@ -17,7 +17,7 @@ class EPICImageryViewModel: ObservableObject {
     
     let imageryService = EPICImageryService()
     init() {
-        self.epicImages = []
+        self.epicImagesFeed = .init(isEnhanced: false, epicImages: [])
         Task {
             await requestDefaultFeed()
         }
@@ -27,13 +27,12 @@ class EPICImageryViewModel: ObservableObject {
     }
     
     lazy var feedFilteringHandler: (EPICImageryFiltering?) -> () = { [unowned self]  newImageryFiltering in
+        epicImagesFeed = .init(epicImages: [])
         if let newImageryFiltering = newImageryFiltering {
-            self.epicImages = []
             Task {
                 await self.requestFilteredFeed()
             }
         } else {
-            self.epicImages = []
             Task {
                 await self.requestDefaultFeed()
             }
@@ -54,11 +53,12 @@ class EPICImageryViewModel: ObservableObject {
     }
     
     var isFeedImagesEmpty: Bool {
-        return requestStatus == .success && epicImages.isEmpty
+        return requestStatus == .success && epicImagesFeed.epicImages.isEmpty
     }
     
     func feedSectionDate() -> String {
-        guard let imageDate = epicImages.first?.epicImage.date else { return "" }
+        let epicImage = epicImagesFeed.epicImages.first
+        guard let imageDate = epicImage?.date else { return "" }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.locale = .current
@@ -70,12 +70,7 @@ class EPICImageryViewModel: ObservableObject {
     
     func thumbImageURLRequest(for epicImage: EPICImage) -> URLRequest {
         let epicRouter = EPICImageryRouter()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.locale = .current
-        dateFormatter.calendar = .current
-        let imageDate = dateFormatter.date(from: epicImage.date)!
-        let imageURLRequest = epicRouter.thumbImageRequest(imageName: epicImage.image, date: imageDate, isEnhanced: imageryFiltering?.isEnhanced ?? false)
+        let imageURLRequest = epicRouter.thumbImageRequest(imageName: epicImage.image, stringDate: epicImage.date, isEnhanced: imageryFiltering?.isEnhanced ?? false)
         return imageURLRequest
     }
     
@@ -107,7 +102,8 @@ class EPICImageryViewModel: ObservableObject {
     private func handle(requestResult: Result<[EPICImage], Error>) {
         switch requestResult {
         case .success(let images):
-            epicImages = images.map({EPICImageIdentifiable(epicImage: $0)})
+            let isEnhanced = imageryFiltering?.isEnhanced ?? false
+            epicImagesFeed = .init(isEnhanced: isEnhanced, epicImages: images)
             requestStatus = .success
         case .failure(let error):
             set(error: error)
@@ -117,7 +113,12 @@ class EPICImageryViewModel: ObservableObject {
     
 }
 
-struct EPICImageIdentifiable: Identifiable {
-    var id: UUID = .init()
-    let epicImage: EPICImage
+struct EPICImagesFeed {
+    var isEnhanced: Bool
+    var epicImages: [EPICImage]
+    
+    init(isEnhanced: Bool = false, epicImages: [EPICImage]) {
+        self.isEnhanced = isEnhanced
+        self.epicImages = epicImages
+    }
 }

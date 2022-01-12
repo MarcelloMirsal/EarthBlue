@@ -33,8 +33,11 @@ public struct EPICImageryRouter {
         return URLRequest(url: urlComponents.url!)
     }
     
-    public func thumbImageRequest(imageName: String, date: Date, isEnhanced: Bool = false) -> URLRequest {
-        let imagePathURL = imagePathURL(fromDate: date, imageName: imageName, imageType: .thumb, isEnhanced: isEnhanced)
+    public func thumbImageRequest(imageName: String, stringDate: String, isEnhanced: Bool = false) -> URLRequest {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let imageDate = dateFormatter.date(from: stringDate)!
+        let imagePathURL = imagePathURL(fromDate: imageDate, imageName: imageName, imageType: .thumb, isEnhanced: isEnhanced)
         var urlComponents = URLComponents(url: imagePathURL, resolvingAgainstBaseURL: true)!
         urlComponents.queryItems = [ .init(name: QueryItemKeys.apiKey.rawValue, value: apiKey) ]
         return URLRequest(url: urlComponents.url!)

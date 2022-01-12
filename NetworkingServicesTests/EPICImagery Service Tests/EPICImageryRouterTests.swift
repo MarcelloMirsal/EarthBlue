@@ -51,23 +51,21 @@ class EPICImageryRouterTests: XCTestCase {
     }
     
     func testThumbImageRequest_ShouldReturnURLEqualToExpectedURL() {
-        let dateComponents = DateComponents(calendar: .current, timeZone: .current, year: 2015, month: 10, day: 31)
-        let imageDate = dateComponents.date!
+        let imageDate = "2015-10-31 19:00:00"
         let imageName = "epic_1b_20151031074844"
         let expectedURL = URL(string: "https://epic.gsfc.nasa.gov/archive/natural/2015/10/31/thumbs/epic_1b_20151031074844.jpg?api_key=\(EPICImageryRouter().apiKey)")
         
-        let thumbImageRequest = sut.thumbImageRequest(imageName: imageName, date: imageDate, isEnhanced: false)
+        let thumbImageRequest = sut.thumbImageRequest(imageName: imageName, stringDate: imageDate, isEnhanced: false)
         
         XCTAssertEqual(thumbImageRequest.url, expectedURL)
     }
     
     func testThumbImageRequestForEnhanced_ShouldReturnURLEqualToExpectedURL() {
-        let dateComponents = DateComponents(calendar: .current, timeZone: .current, year: 2015, month: 10, day: 31)
-        let imageDate = dateComponents.date!
+        let imageDate = "2015-10-31 19:00:00"
         let imageName = "epic_1b_20151031074844"
         let expectedURL = URL(string: "https://epic.gsfc.nasa.gov/archive/enhanced/2015/10/31/thumbs/epic_1b_20151031074844.jpg?api_key=\(EPICImageryRouter().apiKey)")
         
-        let thumbImageRequest = sut.thumbImageRequest(imageName: imageName, date: imageDate, isEnhanced: true)
+        let thumbImageRequest = sut.thumbImageRequest(imageName: imageName, stringDate: imageDate, isEnhanced: true)
         
         XCTAssertEqual(thumbImageRequest.url, expectedURL)
     }

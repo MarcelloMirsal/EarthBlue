@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EPICImage: Codable {
+struct EPICImage: Codable, Hashable {
     let identifier: String
     let image: String
     let caption: String

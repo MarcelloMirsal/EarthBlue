@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct EPICImageryView: View {
     @StateObject var viewModel: EPICImageryViewModel
     @State private var shouldShowFilteringView = false
+    @State private var shouldShowImageSliderView = false
     init(viewModel: EPICImageryViewModel = .init()) {
         self._viewModel = .init(wrappedValue: viewModel)
     }
@@ -20,10 +22,14 @@ struct EPICImageryView: View {
             List {
                 LazyVGrid(columns: columns, spacing: 2) {
                     Section {
-                        ForEach($viewModel.epicImages) { image in
-                            let epicImage = image.wrappedValue.epicImage
+                        ForEach(viewModel.epicImagesFeed.epicImages, id: \.identifier) { epicImage in
                             let url = viewModel.thumbImageURLRequest(for: epicImage).url!
-                            EPICImageView(imageURL: url)
+                            Button {
+                                shouldShowImageSliderView = true
+                            } label: {
+                                EPICImageView(imageURL: url)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     } header: {
                         HStack {
@@ -53,6 +59,10 @@ struct EPICImageryView: View {
                     }
                 }
             })
+            .fullScreenCover(isPresented: $shouldShowImageSliderView, content: {
+                EPICImageSliderView(epicImagesFeed: viewModel.epicImagesFeed)
+                    .ignoresSafeArea(.all)
+            })
             .sheet(isPresented: $shouldShowFilteringView, content: {
                 EPICFilteringView(imageryFiltering: $viewModel.imageryFiltering)
             })
@@ -65,10 +75,10 @@ struct EPICImageryView: View {
             } message: {
                 Text(viewModel.error?.localizedDescription ?? "an error occurred please try again.")
             }
-            if viewModel.isFeedLoading && viewModel.epicImages.isEmpty {
+            if viewModel.isFeedLoading && viewModel.epicImagesFeed.epicImages.isEmpty {
                 TaskProgressView()
             }
-            if viewModel.isFailedLoading && viewModel.epicImages.isEmpty {
+            if viewModel.isFailedLoading && viewModel.epicImagesFeed.epicImages.isEmpty {
                 Text("pull down to refresh")
                     .foregroundColor(.secondary)
             }
@@ -97,31 +107,18 @@ struct EPICImageView: View {
     let imageURL: URL
     var body: some View {
         VStack(spacing: 0) {
-            AsyncImage(url: imageURL) { phase in
-                switch phase {
-                case .empty:
-                    ZStack {
-                        Image("EPICImageThumb").resizable() // used to set grid item's size while its loading
-                            .scaledToFit()
-                            .blur(radius: 16, opaque: true)
-                            .opacity(0)
-                        TaskProgressView()
-                    }
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                case .failure:
-                    Image("EPICImageThumb").resizable() // used to set grid item's size when it is failed.
+            KFImage(imageURL)
+                .onFailureImage(KFCrossPlatformImage.init(systemName: "wifi.exclamationmark"))
+                .placeholder {
+                    Image("EPICImageThumb").resizable() // used to set grid item's size while its loading
                         .scaledToFit()
+                        .blur(radius: 16, opaque: true)
                         .opacity(0)
-                        .overlay {
-                            Image(systemName: "wifi.exclamationmark")
-                        }
-                @unknown default:
-                    EmptyView()
+                    TaskProgressView()
                 }
-            }
+                .fade(duration: 0.25)
+                .resizable()
+                .scaledToFit()
         }
         .border(Color.gray.opacity(0.5), width: 0.5)
     }
