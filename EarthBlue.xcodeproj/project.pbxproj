@@ -16,6 +16,7 @@
 		AD1D9CBD278CCC47002905A1 /* EPICImageSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D9CBC278CCC47002905A1 /* EPICImageSliderView.swift */; };
 		AD1D9CBF278CCC66002905A1 /* EPICImageSliderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD1D9CBE278CCC66002905A1 /* EPICImageSliderViewController.storyboard */; };
 		AD3567C7277B516A00BB9E62 /* TaskProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */; };
+		AD430552278ED2A300E76FC1 /* EPICImageryFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD430551278ED2A300E76FC1 /* EPICImageryFiltering.swift */; };
 		AD4AB63A2743E10E000F3F61 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB6392743E10E000F3F61 /* EventRow.swift */; };
 		AD4AB63C2743E1C4000F3F61 /* Previews.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */; };
 		AD4AB63F2743E1FF000F3F61 /* EventRowMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB63E2743E1FF000F3F61 /* EventRowMocks.swift */; };
@@ -132,6 +133,7 @@
 		AD1D9CBC278CCC47002905A1 /* EPICImageSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageSliderView.swift; sourceTree = "<group>"; };
 		AD1D9CBE278CCC66002905A1 /* EPICImageSliderViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EPICImageSliderViewController.storyboard; sourceTree = "<group>"; };
 		AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskProgressView.swift; sourceTree = "<group>"; };
+		AD430551278ED2A300E76FC1 /* EPICImageryFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageryFiltering.swift; sourceTree = "<group>"; };
 		AD4AB6392743E10E000F3F61 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Previews.xcassets; sourceTree = "<group>"; };
 		AD4AB63E2743E1FF000F3F61 /* EventRowMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRowMocks.swift; sourceTree = "<group>"; };
@@ -254,9 +256,18 @@
 				AD9EB100277CC0E70079AF0F /* EPICImageryView.swift */,
 				AD9EB0FE277CC0E70079AF0F /* EPICImageryViewModel.swift */,
 				ADFFEE3527897CC00060C7B6 /* EPICFilteringViewModel.swift */,
-				ADFFEE3727897CE60060C7B6 /* EPICImage.swift */,
+				AD430553278ED2A800E76FC1 /* Models */,
 			);
 			path = "EPIC Imagery";
+			sourceTree = "<group>";
+		};
+		AD430553278ED2A800E76FC1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ADFFEE3727897CE60060C7B6 /* EPICImage.swift */,
+				AD430551278ED2A300E76FC1 /* EPICImageryFiltering.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		AD4AB63D2743E1C9000F3F61 /* Preview Content */ = {
@@ -522,7 +533,6 @@
 				9B18D4D168D9624C2A099DEA /* Pods-NetworkingServices-NetworkingServicesTests.debug.xcconfig */,
 				164618F284C7623D28B82494 /* Pods-NetworkingServices-NetworkingServicesTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -843,6 +853,7 @@
 				AD4AB6412743ED71000F3F61 /* EventsViewModelMock.swift in Sources */,
 				AD4AB63F2743E1FF000F3F61 /* EventRowMocks.swift in Sources */,
 				ADD8881B274DAB4C00B7B89C /* EventMocks.swift in Sources */,
+				AD430552278ED2A300E76FC1 /* EPICImageryFiltering.swift in Sources */,
 				ADD616152736C8C4007A1D1D /* MainView.swift in Sources */,
 				AD1D9CBD278CCC47002905A1 /* EPICImageSliderView.swift in Sources */,
 				ADE77B9D27412FC90061AB3F /* Event.swift in Sources */,
@@ -1076,7 +1087,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1105,7 +1116,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 struct MainView: View {
     var body: some View {
         TabView {

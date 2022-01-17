@@ -33,17 +33,21 @@ struct AFErrorWrapper {
         case .responseValidationFailed:
             return .badResponse
         case .sessionTaskFailed(let error):
-            guard let urlError = error as? URLError, urlError.errorCode == -1009 else {
+            guard let urlError = error as? URLError else { return .requestTimedOut }
+            switch urlError.code {
+            case .notConnectedToInternet, .dataNotAllowed:
+                return .noInternetConnection
+            case .timedOut:
                 return .requestTimedOut
+            default:
+                return .badResponse
             }
-            return .noInternetConnection
         default:
             print(afError.underlyingError ?? "")
             return .unspecified
         }
     }
 }
-
 
 public enum ServiceError: Error, LocalizedError, Equatable {
     case networkingFailure(NetworkError)

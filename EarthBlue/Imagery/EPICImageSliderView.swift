@@ -10,17 +10,23 @@ import SwiftUI
 import Kingfisher
 import NetworkingServices
 
+
+typealias EPICImagesFeed = EPICImageryViewModel.EPICImagesFeed
+
 struct EPICImageSliderView: UIViewControllerRepresentable {
+    typealias UIViewControllerType = EPICImageSliderViewController
+    
     let epicImagesFeed: EPICImagesFeed
+    init(epicImagesFeed: EPICImagesFeed) {
+        self.epicImagesFeed = epicImagesFeed
+    }
     func makeUIViewController(context: Context) -> EPICImageSliderViewController {
-        EPICImageSliderViewController.instantiate(epicImagesFeed: epicImagesFeed)
+        return EPICImageSliderViewController.instantiate(epicImagesFeed: epicImagesFeed)
     }
     
     func updateUIViewController(_ uiViewController: EPICImageSliderViewController, context: Context) {
         
     }
-    
-    typealias UIViewControllerType = EPICImageSliderViewController
 }
 
 struct EPICImageSliderView_Preview: PreviewProvider {
@@ -30,15 +36,14 @@ struct EPICImageSliderView_Preview: PreviewProvider {
 }
 
 
-class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate {
-    
+class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
     static func instantiate(epicImagesFeed: EPICImagesFeed) -> Self {
         let epicImageSliderViewController = UIStoryboard(name: "EPICImageSliderViewController", bundle: nil).instantiateInitialViewController() as! Self
         epicImageSliderViewController.epicImagesFeed = epicImagesFeed
         return epicImageSliderViewController
     }
     
-    @IBOutlet weak var pageControlView: UIPageControl!
     @IBOutlet weak var collectionView: UICollectionView!
     var epicImagesFeed: EPICImagesFeed!
     var dataSource: UICollectionViewDiffableDataSource<Section, EPICImage>!
@@ -49,8 +54,6 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate 
         super.viewDidLoad()
         setupCollectionView()
         setupDataSource()
-        pageControlView.numberOfPages = epicImagesFeed.epicImages.count
-        pageControlView.currentPage = 0
     }
     
     // MARK: Setup methods
@@ -70,10 +73,10 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate 
     fileprivate func setupDataSource() {
         dataSource = .init(collectionView: collectionView, cellProvider: { [cellRegistration = cellRegistration] collectionView, indexPath, epicImage in
             let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: epicImage)
+            cell.prepareForReuse()
             return cell
         })
         collectionView.dataSource = dataSource
-        
         var updatedSnapshot = dataSource.snapshot()
         updatedSnapshot.appendSections([.main])
         updatedSnapshot.appendItems(epicImagesFeed.epicImages, toSection: .main)
@@ -88,18 +91,11 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate 
         cell.imageView.kf.setImage(with: urlRequest.url!)
     }
     
-    // MARK: CollectionView Delegate methods
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.prepareForReuse()
-        guard let cell = collectionView.visibleCells.first else { return }
-        guard let visibleCellIndexPath = collectionView.indexPath(for: cell) else { return }
-        pageControlView.currentPage = visibleCellIndexPath.row
-    }
-    
+    // MARK: handlers
     @IBAction func handleDismiss() {
         dismiss(animated: true)
     }
-    
+
     enum Section {
         case main
     }
@@ -115,6 +111,8 @@ class ImageViewCell: UICollectionViewCell, UIScrollViewDelegate {
         scrollView.maximumZoomScale = 4
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.bounces = true
+        scrollView.alwaysBounceHorizontal = true
         scrollView.delegate = self
         return scrollView
     }()

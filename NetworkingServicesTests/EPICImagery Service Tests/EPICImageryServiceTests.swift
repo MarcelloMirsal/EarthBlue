@@ -66,32 +66,6 @@ class EPICImageryServiceTests: XCTestCase {
         }
     }
     
-    func testRequestAvailableDatesWithWrongDataResponse_ShouldReturnFailureResult() async {
-        let result = await sut.requestAvailableDates()
-        switch result {
-        case .success:
-            XCTFail()
-        case .failure(let error):
-            XCTAssertNotNil(error as? ServiceError)
-        }
-    }
-    
-    func testRequestAvailableDates_ShouldReturnSuccessResult() async {
-        let datesArray = ["2015-06-13" , "2015-06-13" , "2015-06-13" , "2015-06-13"]
-        let jsonData = try! JSONEncoder().encode(datesArray)
-        let jsonStringData = String(data: jsonData, encoding: .utf8)!
-        sut = .init(networkManager: MockNetworkManager(isSuccess: true, stringData: jsonStringData))
-        
-        let result = await sut.requestAvailableDates()
-        
-        switch result {
-        case .success(let dates):
-            XCTAssertFalse(dates.isEmpty)
-        case .failure:
-            XCTFail()
-        }
-    }
-    
     func testRequestFilteredFeed_ShouldReturnSuccessfulResult() async {
         sut = .init(networkManager: MockNetworkManager(isSuccess: true))
         let result = await sut.requestFilteredFeed(isImageryEnhanced: false, date: .now, decodingType: [String : String].self)

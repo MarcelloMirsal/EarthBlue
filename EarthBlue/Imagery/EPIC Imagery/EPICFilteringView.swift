@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct EPICFilteringView: View {
-    @StateObject var viewModel = EPICFilteringViewModel()
+    @StateObject var viewModel: EPICFilteringViewModel
     @Binding var imageryFiltering: EPICImageryFiltering?
     @Environment(\.dismiss) var dismiss
+    
+    init(imageryFiltering: Binding<EPICImageryFiltering?>) {
+        self._viewModel = .init(wrappedValue: .init(lastImageryFiltering: imageryFiltering.wrappedValue))
+        self._imageryFiltering = imageryFiltering
+    }
+    
     var body: some View {
         NavigationView {
             Form {
@@ -22,14 +28,8 @@ struct EPICFilteringView: View {
                 
                 Section {
                     DatePicker("Images date", selection: $viewModel.selectedDate, in: viewModel.datesRange, displayedComponents: .date)
-                    
                 }
             }
-            .disabled(viewModel.availableDates.isEmpty)
-            .overlay(content: {
-                TaskProgressView()
-                    .isHidden(!viewModel.availableDates.isEmpty)
-            })
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("reset") {
@@ -56,9 +56,4 @@ struct EPICFilteringView_Previews: PreviewProvider {
     static var previews: some View {
         EPICFilteringView(imageryFiltering: .constant(nil))
     }
-}
-
-struct EPICImageryFiltering: Equatable {
-    let date: Date
-    let isEnhanced: Bool
 }

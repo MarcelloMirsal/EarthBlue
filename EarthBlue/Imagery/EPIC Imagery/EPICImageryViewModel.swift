@@ -9,13 +9,18 @@ import NetworkingServices
 import Combine
 
 class EPICImageryViewModel: ObservableObject {
-    @Published var epicImagesFeed: EPICImagesFeed
+    @Published private(set) var epicImagesFeed: EPICImagesFeed
     @Published private(set) var error: Error?
-    @Published private var requestStatus: RequestStatus = .success
+    @Published private(set) var requestStatus: RequestStatus = .success
     @Published var imageryFiltering: EPICImageryFiltering? = nil
     var cancellable = Set<AnyCancellable>()
     
     let imageryService = EPICImageryService()
+    
+    var feedImages: [EPICImageIdentifiable] {
+        return epicImagesFeed.epicImages.map({ EPICImageIdentifiable(epicImage: $0) })
+    }
+    
     init() {
         self.epicImagesFeed = .init(isEnhanced: false, epicImages: [])
         Task {
@@ -43,7 +48,11 @@ class EPICImageryViewModel: ObservableObject {
     func set(error: Error?) {
         self.error = error
     }
-
+    
+    func index(of epicImage: EPICImage) -> Int {
+        return epicImagesFeed.epicImages.firstIndex(where: {epicImage == $0}) ?? -1
+    }
+    
     var isFeedLoading: Bool {
         return requestStatus == .loading
     }
@@ -113,12 +122,23 @@ class EPICImageryViewModel: ObservableObject {
     
 }
 
-struct EPICImagesFeed {
-    var isEnhanced: Bool
-    var epicImages: [EPICImage]
+extension EPICImageryViewModel {
     
-    init(isEnhanced: Bool = false, epicImages: [EPICImage]) {
-        self.isEnhanced = isEnhanced
-        self.epicImages = epicImages
+    struct EPICImagesFeed {
+        var isEnhanced: Bool
+        var epicImages: [EPICImage]
+        
+        init(isEnhanced: Bool = false, epicImages: [EPICImage]) {
+            self.isEnhanced = isEnhanced
+            self.epicImages = epicImages
+        }
     }
+    
+    
+    struct EPICImageIdentifiable: Identifiable, Equatable {
+        var id: UUID = .init()
+        let epicImage: EPICImage
+    }
+    
+    
 }

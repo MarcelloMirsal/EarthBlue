@@ -31,7 +31,6 @@ struct ImageryView: View {
             }
             .navigationTitle("Imagery")
             .listStyle(PlainListStyle())
-            EPICImageryView()
         }
     }
 }

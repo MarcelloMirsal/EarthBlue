@@ -12,6 +12,7 @@ struct EPICImageryView: View {
     @StateObject var viewModel: EPICImageryViewModel
     @State private var shouldShowFilteringView = false
     @State private var shouldShowImageSliderView = false
+    @State private var selectedEPICImage: EPICImageryViewModel.EPICImageIdentifiable?
     init(viewModel: EPICImageryViewModel = .init()) {
         self._viewModel = .init(wrappedValue: viewModel)
     }
@@ -22,10 +23,10 @@ struct EPICImageryView: View {
             List {
                 LazyVGrid(columns: columns, spacing: 2) {
                     Section {
-                        ForEach(viewModel.epicImagesFeed.epicImages, id: \.identifier) { epicImage in
-                            let url = viewModel.thumbImageURLRequest(for: epicImage).url!
+                        ForEach(viewModel.feedImages) { identifiableImage in
+                            let url = viewModel.thumbImageURLRequest(for: identifiableImage.epicImage).url!
                             Button {
-                                shouldShowImageSliderView = true
+                                selectedEPICImage = identifiableImage
                             } label: {
                                 EPICImageView(imageURL: url)
                             }
@@ -59,9 +60,9 @@ struct EPICImageryView: View {
                     }
                 }
             })
-            .fullScreenCover(isPresented: $shouldShowImageSliderView, content: {
-                EPICImageSliderView(epicImagesFeed: viewModel.epicImagesFeed)
-                    .ignoresSafeArea(.all)
+            .fullScreenCover(item: $selectedEPICImage, content: { selectedImage in
+                let selectedImageFeed = EPICImagesFeed(isEnhanced: viewModel.epicImagesFeed.isEnhanced, epicImages: [selectedImage.epicImage])
+                EPICImageSliderView(epicImagesFeed: selectedImageFeed)
             })
             .sheet(isPresented: $shouldShowFilteringView, content: {
                 EPICFilteringView(imageryFiltering: $viewModel.imageryFiltering)
@@ -106,20 +107,13 @@ struct EPICImageryView_Previews: PreviewProvider {
 struct EPICImageView: View {
     let imageURL: URL
     var body: some View {
-        VStack(spacing: 0) {
-            KFImage(imageURL)
-                .onFailureImage(KFCrossPlatformImage.init(systemName: "wifi.exclamationmark"))
-                .placeholder {
-                    Image("EPICImageThumb").resizable() // used to set grid item's size while its loading
-                        .scaledToFit()
-                        .blur(radius: 16, opaque: true)
-                        .opacity(0)
-                    TaskProgressView()
-                }
-                .fade(duration: 0.25)
-                .resizable()
-                .scaledToFit()
-        }
-        .border(Color.gray.opacity(0.5), width: 0.5)
+        KFImage(imageURL)
+            .placeholder({
+                Color(uiColor: .lightGray.withAlphaComponent(0.25))
+            })
+            .retry(maxCount: 2, interval: .seconds(2))
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .border(Color.gray.opacity(0.5), width: 0.5)
     }
 }

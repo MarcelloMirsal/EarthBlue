@@ -23,11 +23,6 @@ public class EPICImageryService {
         return await networkRequest(urlRequest: urlRequest, decodingType: decodableType)
     }
     
-    public func requestAvailableDates() async -> Result<[String], Error> {
-        let availableDateRequest = router.availableDatesRequest()
-        return await networkRequest(urlRequest: availableDateRequest, decodingType: [String].self)
-    }
-    
     public func requestFilteredFeed<T: Decodable>(isImageryEnhanced: Bool, date: Date, decodingType: T.Type) async -> Result<T, Error> {
         let filteredFeedRequest = router.filteredFeedRequest(isImageryEnhanced: isImageryEnhanced, date: date)
         return await networkRequest(urlRequest: filteredFeedRequest, decodingType: T.self)

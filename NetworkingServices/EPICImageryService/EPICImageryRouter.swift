@@ -64,15 +64,6 @@ public struct EPICImageryRouter {
         return archiveBaseURL
     }
     
-    func availableDatesRequest() -> URLRequest {
-        var availableDatesURL = baseURL
-        availableDatesURL.appendPathComponent(Paths.naturalDates.rawValue)
-        var availableDatesURLComponents = URLComponents(url: availableDatesURL, resolvingAgainstBaseURL: true)!
-        availableDatesURLComponents.queryItems = [ .init(name: QueryItemKeys.apiKey.rawValue, value: apiKey) ]
-        return .init(url: availableDatesURLComponents.url!)
-    }
-    
-    
     func parse<T: Decodable>(data: Data, to type: T.Type, decoder: JSONDecoder = .init()) throws -> T {
         do {
             let decodableObject = try decoder.decode(type, from: data)
@@ -95,7 +86,7 @@ public struct EPICImageryRouter {
         case defaultFeed = "/natural/images"
         case naturalFiltered = "/natural/date"
         case enhancedFiltered = "/enhanced/date"
-        case thumbImages = "/thumbs"
+        case thumbImages = "/jpg"
         case originalImages = "/png"
         case natural = "/natural"
         case enhanced = "/enhanced"
