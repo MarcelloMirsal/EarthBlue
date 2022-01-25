@@ -40,20 +40,42 @@
                                     <action selector="handleDismiss" destination="BYZ-38-t0r" eventType="touchUpInside" id="fXQ-UP-4mM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNb-sQ-3Yo">
+                                <rect key="frame" x="16" y="60" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="6an-Wq-kiH"/>
+                                    <constraint firstAttribute="width" constant="60" id="c1d-0C-hQQ"/>
+                                </constraints>
+                                <buttonConfiguration key="configuration" style="gray" image="ellipsis" catalog="system" title="" cornerStyle="large">
+                                    <backgroundConfiguration key="background"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="handleImageOptions:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Vk-tL-EmS"/>
+                                </connections>
+                            </button>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G5b-XN-PRh">
+                                <rect key="frame" x="0.0" y="44" width="414" height="4"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bNb-sQ-3Yo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="4fC-P4-WrK"/>
                             <constraint firstItem="okr-Xc-k2L" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="56u-rI-hjW"/>
+                            <constraint firstItem="G5b-XN-PRh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7nY-ZO-mDC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="okr-Xc-k2L" secondAttribute="bottom" id="Hak-tA-Raw"/>
+                            <constraint firstItem="bNb-sQ-3Yo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="HoQ-p1-1GS"/>
                             <constraint firstItem="okr-Xc-k2L" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Ivl-j3-yrC"/>
+                            <constraint firstItem="G5b-XN-PRh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QxF-ic-rRY"/>
                             <constraint firstItem="71v-Zu-fiY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="TSe-Ps-uRq"/>
                             <constraint firstItem="okr-Xc-k2L" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kjg-e2-VME"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="G5b-XN-PRh" secondAttribute="trailing" id="wDy-dh-j0H"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="71v-Zu-fiY" secondAttribute="trailing" constant="16" id="wj9-M0-l8q"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="okr-Xc-k2L" id="4gu-NC-CdG"/>
+                        <outlet property="progressView" destination="G5b-XN-PRh" id="4RH-7P-Mua"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -62,6 +84,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -34,13 +34,25 @@ public struct EPICImageryRouter {
     }
     
     public func thumbImageRequest(imageName: String, stringDate: String, isEnhanced: Bool = false) -> URLRequest {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let imageDate = dateFormatter.date(from: stringDate)!
+        let imageDate = date(fromISO8601DateFormat: stringDate)
         let imagePathURL = imagePathURL(fromDate: imageDate, imageName: imageName, imageType: .thumb, isEnhanced: isEnhanced)
         var urlComponents = URLComponents(url: imagePathURL, resolvingAgainstBaseURL: true)!
         urlComponents.queryItems = [ .init(name: QueryItemKeys.apiKey.rawValue, value: apiKey) ]
         return URLRequest(url: urlComponents.url!)
+    }
+    
+    public func originalImageRequest(imageName: String, stringDate: String, isEnhanced: Bool) -> URLRequest {
+        let imageDate = date(fromISO8601DateFormat: stringDate)
+        let imagePathURL = imagePathURL(fromDate: imageDate, imageName: imageName, imageType: .original, isEnhanced: isEnhanced)
+        var urlComponents = URLComponents(url: imagePathURL, resolvingAgainstBaseURL: true)!
+        urlComponents.queryItems = [ .init(name: QueryItemKeys.apiKey.rawValue, value: apiKey) ]
+        return URLRequest(url: urlComponents.url!)
+    }
+    
+    private func date(fromISO8601DateFormat stringDate: String ) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.date(from: stringDate)!
     }
     
     private func imagePathURL(fromDate date: Date, imageName: String, imageType: ImageType, isEnhanced: Bool) -> URL {

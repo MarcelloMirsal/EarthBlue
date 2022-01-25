@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Photos
 
 struct ImageryView: View {
     var body: some View {
@@ -31,6 +32,9 @@ struct ImageryView: View {
             }
             .navigationTitle("Imagery")
             .listStyle(PlainListStyle())
+            .task {
+                PHPhotoLibrary.requestAuthorization(for: .addOnly, handler: { _ in} )
+            }
         }
     }
 }
