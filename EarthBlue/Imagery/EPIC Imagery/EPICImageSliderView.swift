@@ -40,22 +40,22 @@ struct EPICImageSliderView_Preview: PreviewProvider {
 
 class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    
     static func instantiate(epicImagesFeed: EPICImagesFeed) -> Self {
         let epicImageSliderViewController = UIStoryboard(name: "EPICImageSliderViewController", bundle: nil).instantiateInitialViewController() as! Self
         epicImageSliderViewController.epicImagesFeed = epicImagesFeed
         return epicImageSliderViewController
     }
+    
     deinit {
         originalImageryDownloadTask?.cancel()
     }
     
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var collectionView: UICollectionView!
+    lazy var cellRegistration: UICollectionView.CellRegistration<SliderImageViewCell, EPICImage> = .init(handler: imageCellRegistrationHandler)
+    var dataSource: UICollectionViewDiffableDataSource<Section, EPICImage>!
     
     var epicImagesFeed: EPICImagesFeed!
-    var dataSource: UICollectionViewDiffableDataSource<Section, EPICImage>!
-    lazy var cellRegistration: UICollectionView.CellRegistration<SliderImageViewCell, EPICImage> = .init(handler: imageCellRegistrationHandler)
     let epicImageryRouter = EPICImageryRouter()
     var originalImageryDownloadTask: DownloadTask?
     
@@ -93,40 +93,6 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate,
         dataSource.apply(updatedSnapshot)
     }
     
-    func imageOptionsAlertController(forImage image: UIImage, epicImage: EPICImage) -> UIAlertController {
-        let alertController = UIAlertController(title: "Imagery options", message: nil, preferredStyle: .actionSheet)
-        [
-            UIAlertAction(title: "Save", style: .default) { [weak self] action in
-                self?.saveImageActionHandler(action, image)
-            },
-            UIAlertAction(title: "Load high quality imagery", style: .default) { [weak self] action in
-                self?.loadHighQualityImage(epicImage: epicImage)
-            },
-            UIAlertAction(title: "Share", style: .default) { [weak self]  action in
-                self?.shareImageActionHandler(action, image)
-            },
-            UIAlertAction(title: "cancel", style: .cancel),
-        ].forEach({ alertController.addAction($0) })
-        return alertController
-    }
-    
-    
-    func loadHighQualityImage(epicImage: EPICImage) {
-        guard originalImageryDownloadTask == nil else { return }
-        progressView.isHidden = false
-        let urlRequest = EPICImageryRouter().originalImageRequest(imageName: epicImage.image, stringDate: epicImage.date, isEnhanced: epicImagesFeed.isEnhanced)
-        Kingfisher.ImageDownloader.default.downloadTimeout = 2 * 60
-        originalImageryDownloadTask = KingfisherManager.shared.retrieveImage(with: urlRequest.url!, options: [.waitForCache]) { [weak self] receivedSize, totalSize in
-            let progress = Double(receivedSize) / Double(totalSize)
-            self?.progressView.setProgress(Float(progress), animated: true)
-        } completionHandler: { [weak self] result in
-            guard var currentSnapshot = self?.dataSource.snapshot() else {return}
-            currentSnapshot.reloadSections([.main])
-            self?.dataSource.apply(currentSnapshot, animatingDifferences: false)
-            self?.progressView.isHidden = true
-        }
-    }
-    
     
     // MARK: Cell registration handler
     lazy var imageCellRegistrationHandler: (SliderImageViewCell, IndexPath, EPICImage) -> () = { [epicImagesFeed = epicImagesFeed!, weak self] cell, indexPath, epicImage in
@@ -146,17 +112,35 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate,
         }
     }
     
-    // MARK: handlers
-    @IBAction func handleDismiss() {
-        dismiss(animated: true)
-    }
-    
+    // MARK: button actions handlers
     @IBAction func handleImageOptions(_ sender: Any) {
         guard let currentCell = collectionView.visibleCells.first as? SliderImageViewCell else {return}
         guard let indexPath = collectionView.indexPath(for: currentCell) else { return }
         guard let image = currentCell.imageView.image else { return }
         let epicImage = epicImagesFeed.epicImages[indexPath.row]
-        present(imageOptionsAlertController(forImage: image, epicImage: epicImage), animated: true)
+        present(makeImageOptionsAlertController(forImage: image, epicImage: epicImage), animated: true)
+    }
+    
+    @IBAction func handleDismiss() {
+        dismiss(animated: true)
+    }
+    
+    // MARK: Image Options AlertController
+    func makeImageOptionsAlertController(forImage image: UIImage, epicImage: EPICImage) -> UIAlertController {
+        let alertController = UIAlertController(title: "Imagery options", message: nil, preferredStyle: .actionSheet)
+        [
+            UIAlertAction(title: "Save", style: .default) { [weak self] action in
+                self?.saveImageActionHandler(action, image)
+            },
+            UIAlertAction(title: "Load high quality imagery", style: .default) { [weak self] action in
+                self?.loadHighQualityImage(epicImage: epicImage)
+            },
+            UIAlertAction(title: "Share", style: .default) { [weak self]  action in
+                self?.shareImageActionHandler(action, image)
+            },
+            UIAlertAction(title: "cancel", style: .cancel),
+        ].forEach({ alertController.addAction($0) })
+        return alertController
     }
     
     // MARK: Imagery Options Handlers
@@ -165,6 +149,22 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate,
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         } else {
             self?.presentImageAuthNotGrantedAlert()
+        }
+    }
+    
+    func loadHighQualityImage(epicImage: EPICImage) {
+        guard originalImageryDownloadTask == nil else { return }
+        progressView.isHidden = false
+        let urlRequest = EPICImageryRouter().originalImageRequest(imageName: epicImage.image, stringDate: epicImage.date, isEnhanced: epicImagesFeed.isEnhanced)
+        Kingfisher.ImageDownloader.default.downloadTimeout = 2 * 60
+        originalImageryDownloadTask = KingfisherManager.shared.retrieveImage(with: urlRequest.url!, options: [.waitForCache]) { [weak self] receivedSize, totalSize in
+            let progress = Double(receivedSize) / Double(totalSize)
+            self?.progressView.setProgress(Float(progress), animated: true)
+        } completionHandler: { [weak self] result in
+            guard var currentSnapshot = self?.dataSource.snapshot() else {return}
+            currentSnapshot.reloadSections([.main])
+            self?.dataSource.apply(currentSnapshot, animatingDifferences: false)
+            self?.progressView.isHidden = true
         }
     }
     
@@ -191,85 +191,3 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate,
     }
 }
 
-class SliderImageViewCell: UICollectionViewCell, UIScrollViewDelegate {
-    lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemBackground
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.zoomScale = 1
-        scrollView.minimumZoomScale = 1
-        scrollView.maximumZoomScale = 4
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.bounces = true
-        scrollView.alwaysBounceHorizontal = true
-        scrollView.delegate = self
-        return scrollView
-    }()
-
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return imageView
-    }
-    
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        let imageViewSize = imageView.frame.size
-        let scrollViewSize = scrollView.bounds.size
-        
-        let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
-        let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
-        
-        scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
-    }
-    
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        contentView.addSubview(scrollView)
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
-        
-        scrollView.addSubview(imageView)
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
-        ])
-        
-        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(gesture:)))
-        doubleTapGesture.numberOfTapsRequired = 2
-        scrollView.addGestureRecognizer(doubleTapGesture)
-    }
-    
-    @objc
-    func handleDoubleTap(gesture: UITapGestureRecognizer) {
-        let selectedPoint = gesture.location(in: imageView)
-        if scrollView.zoomScale >= scrollView.maximumZoomScale {
-            scrollView.setZoomScale(1, animated: true)
-        } else {
-            scrollView.zoom(to: .init(origin: selectedPoint, size: .zero), animated: true)
-        }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        scrollView.zoomScale = 1
-    }
-    
-    enum Section {
-        case main
-    }
-    
-}

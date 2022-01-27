@@ -9,25 +9,27 @@ import SwiftUI
 import Photos
 
 struct ImageryView: View {
+    
+    let gridItem = GridItem.init(.adaptive(minimum: 300), spacing: 0)
     var body: some View {
         NavigationView {
             ScrollView {
-                Section {
-                    VStack(spacing: 0) {
+                LazyVGrid(columns: [gridItem], alignment: .center, spacing: 0) {
+                    Section {
                         NavigationLink {
                             EPICImageryView()
                         } label: {
                             ImageryProviderView(imageName: "EPICImageThumb", title: "Earth Polychromatic Imaging Camera (EPIC)", providerInfo: ImageryProviderInfoFactory.makeEPICImageryProviderInfo())
                         }
+                    } header: {
+                        HStack {
+                            Text("SATELLITES")
+                                .font(.title3.weight(.heavy))
+                            Spacer()
+                        }
+                        .padding(8)
+                        .shadow(radius: 8)
                     }
-                } header: {
-                    HStack {
-                        Text("SATELLITES")
-                            .font(.title3.weight(.heavy))
-                        Spacer()
-                    }
-                    .padding(8)
-                    .shadow(radius: 8)
                 }
             }
             .navigationTitle("Imagery")
