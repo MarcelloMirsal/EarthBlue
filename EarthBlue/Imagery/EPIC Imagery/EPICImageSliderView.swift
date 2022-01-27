@@ -55,7 +55,7 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate,
     
     var epicImagesFeed: EPICImagesFeed!
     var dataSource: UICollectionViewDiffableDataSource<Section, EPICImage>!
-    lazy var cellRegistration: UICollectionView.CellRegistration<ImageViewCell, EPICImage> = .init(handler: imageCellRegistrationHandler)
+    lazy var cellRegistration: UICollectionView.CellRegistration<SliderImageViewCell, EPICImage> = .init(handler: imageCellRegistrationHandler)
     let epicImageryRouter = EPICImageryRouter()
     var originalImageryDownloadTask: DownloadTask?
     
@@ -129,7 +129,7 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate,
     
     
     // MARK: Cell registration handler
-    lazy var imageCellRegistrationHandler: (ImageViewCell, IndexPath, EPICImage) -> () = { [epicImagesFeed = epicImagesFeed!, weak self] cell, indexPath, epicImage in
+    lazy var imageCellRegistrationHandler: (SliderImageViewCell, IndexPath, EPICImage) -> () = { [epicImagesFeed = epicImagesFeed!, weak self] cell, indexPath, epicImage in
         let router = EPICImageryRouter()
         
         // load high image if cached
@@ -152,7 +152,7 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate,
     }
     
     @IBAction func handleImageOptions(_ sender: Any) {
-        guard let currentCell = collectionView.visibleCells.first as? ImageViewCell else {return}
+        guard let currentCell = collectionView.visibleCells.first as? SliderImageViewCell else {return}
         guard let indexPath = collectionView.indexPath(for: currentCell) else { return }
         guard let image = currentCell.imageView.image else { return }
         let epicImage = epicImagesFeed.epicImages[indexPath.row]
@@ -191,7 +191,7 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate,
     }
 }
 
-class ImageViewCell: UICollectionViewCell, UIScrollViewDelegate {
+class SliderImageViewCell: UICollectionViewCell, UIScrollViewDelegate {
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemBackground
@@ -273,7 +273,3 @@ class ImageViewCell: UICollectionViewCell, UIScrollViewDelegate {
     }
     
 }
-
-
-
-extension UIButton: Placeholder { }
