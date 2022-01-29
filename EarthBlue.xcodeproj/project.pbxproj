@@ -16,6 +16,9 @@
 		AD1D9CBD278CCC47002905A1 /* EPICImageSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D9CBC278CCC47002905A1 /* EPICImageSliderView.swift */; };
 		AD1D9CBF278CCC66002905A1 /* EPICImageSliderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD1D9CBE278CCC66002905A1 /* EPICImageSliderViewController.storyboard */; };
 		AD3567C7277B516A00BB9E62 /* TaskProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */; };
+		AD3C96CA27A59321008B52E3 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96C927A59321008B52E3 /* RequestStatus.swift */; };
+		AD3C96CE27A59899008B52E3 /* RoverImagery.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96CD27A59899008B52E3 /* RoverImagery.swift */; };
+		AD3C96D127A59917008B52E3 /* MarsRoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96D027A59917008B52E3 /* MarsRoverViewModel.swift */; };
 		AD430552278ED2A300E76FC1 /* EPICImageryFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD430551278ED2A300E76FC1 /* EPICImageryFiltering.swift */; };
 		AD4AB63A2743E10E000F3F61 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB6392743E10E000F3F61 /* EventRow.swift */; };
 		AD4AB63C2743E1C4000F3F61 /* Previews.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */; };
@@ -60,6 +63,11 @@
 		ADAEE4F1273B166700FABA5A /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAEE4F0273B166700FABA5A /* NetworkManagerTests.swift */; };
 		ADAEE4F4273B16A700FABA5A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAEE4F3273B16A700FABA5A /* NetworkManager.swift */; };
 		ADB3E080274F8D1700CACEDB /* EventsFilteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB3E07F274F8D1700CACEDB /* EventsFilteringView.swift */; };
+		ADB68EB027A2D18900F460CA /* MarsRoversRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB68EAF27A2D18900F460CA /* MarsRoversRouter.swift */; };
+		ADB68EB327A2D30000F460CA /* MarsRoversRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB68EB227A2D30000F460CA /* MarsRoversRouterTests.swift */; };
+		ADB68EB727A2EDEA00F460CA /* MarsRoversService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB68EB627A2EDEA00F460CA /* MarsRoversService.swift */; };
+		ADB68EB927A2EE0E00F460CA /* MarsRoversServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB68EB827A2EE0E00F460CA /* MarsRoversServiceTests.swift */; };
+		ADB68EBD27A494F200F460CA /* MarsRoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB68EBC27A494F200F460CA /* MarsRoverView.swift */; };
 		ADC00577273D664A005D5EF2 /* NaturalEventsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */; };
 		ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */; };
 		ADD616152736C8C4007A1D1D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD616142736C8C4007A1D1D /* MainView.swift */; };
@@ -134,6 +142,9 @@
 		AD1D9CBC278CCC47002905A1 /* EPICImageSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageSliderView.swift; sourceTree = "<group>"; };
 		AD1D9CBE278CCC66002905A1 /* EPICImageSliderViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EPICImageSliderViewController.storyboard; sourceTree = "<group>"; };
 		AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskProgressView.swift; sourceTree = "<group>"; };
+		AD3C96C927A59321008B52E3 /* RequestStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
+		AD3C96CD27A59899008B52E3 /* RoverImagery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverImagery.swift; sourceTree = "<group>"; };
+		AD3C96D027A59917008B52E3 /* MarsRoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoverViewModel.swift; sourceTree = "<group>"; };
 		AD430551278ED2A300E76FC1 /* EPICImageryFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageryFiltering.swift; sourceTree = "<group>"; };
 		AD4AB6392743E10E000F3F61 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Previews.xcassets; sourceTree = "<group>"; };
@@ -179,6 +190,11 @@
 		ADAEE4F0273B166700FABA5A /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		ADAEE4F3273B16A700FABA5A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		ADB3E07F274F8D1700CACEDB /* EventsFilteringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFilteringView.swift; sourceTree = "<group>"; };
+		ADB68EAF27A2D18900F460CA /* MarsRoversRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoversRouter.swift; sourceTree = "<group>"; };
+		ADB68EB227A2D30000F460CA /* MarsRoversRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoversRouterTests.swift; sourceTree = "<group>"; };
+		ADB68EB627A2EDEA00F460CA /* MarsRoversService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoversService.swift; sourceTree = "<group>"; };
+		ADB68EB827A2EE0E00F460CA /* MarsRoversServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoversServiceTests.swift; sourceTree = "<group>"; };
+		ADB68EBC27A494F200F460CA /* MarsRoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoverView.swift; sourceTree = "<group>"; };
 		ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaturalEventsServiceTests.swift; path = "NetworkingServices/Natural Events Service/NaturalEventsServiceTests.swift"; sourceTree = SOURCE_ROOT; };
 		ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		ADD616142736C8C4007A1D1D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -249,6 +265,33 @@
 				E8B218D3C88F19BEB6B3E791 /* Pods_NetworkingServices_NetworkingServicesTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD3C96CB27A59328008B52E3 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				ADF49646273EE588003ADB9C /* Colors.swift */,
+				AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		AD3C96CC27A59888008B52E3 /* Mars Rovers Imagery */ = {
+			isa = PBXGroup;
+			children = (
+				ADB68EBC27A494F200F460CA /* MarsRoverView.swift */,
+				AD3C96D027A59917008B52E3 /* MarsRoverViewModel.swift */,
+				AD3C96CF27A5989C008B52E3 /* Models */,
+			);
+			path = "Mars Rovers Imagery";
+			sourceTree = "<group>";
+		};
+		AD3C96CF27A5989C008B52E3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AD3C96CD27A59899008B52E3 /* RoverImagery.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		AD42CA142778A1640021F2C0 /* EPIC Imagery */ = {
@@ -334,7 +377,7 @@
 				ADD6160C2736C24D007A1D1D /* AppDelegate */,
 				ADD6160D2736C25B007A1D1D /* Assets */,
 				AD5EC6CD2736BD97007BAD06 /* Info.plist */,
-				ADF49648273EEA84003ADB9C /* shared UI */,
+				ADF49648273EEA84003ADB9C /* shared */,
 				ADF4964B273EEAB5003ADB9C /* Natural Events */,
 				AD4AB63D2743E1C9000F3F61 /* Preview Content */,
 				AD7B284727443C4600737AF1 /* Extensions and helpers.swift */,
@@ -349,6 +392,7 @@
 				ADFFEE3927898BD10060C7B6 /* ImageryProviderInfo.swift */,
 				AD9EB0FC277CC0DC0079AF0F /* ImageryView.swift */,
 				AD42CA142778A1640021F2C0 /* EPIC Imagery */,
+				AD3C96CC27A59888008B52E3 /* Mars Rovers Imagery */,
 			);
 			path = Imagery;
 			sourceTree = "<group>";
@@ -395,6 +439,7 @@
 				ADAEE4F5273B16AD00FABA5A /* Network Manager */,
 				AD93F294273D10D800AC7EF2 /* Natural Events Service */,
 				AD4D15082779E12400BC6FDE /* EPICImageryService */,
+				ADB68EB127A2D2E400F460CA /* Mars Rovers Service */,
 			);
 			path = NetworkingServices;
 			sourceTree = "<group>";
@@ -406,6 +451,7 @@
 				ADAEE4F2273B166B00FABA5A /* Network Manager Tests */,
 				AD93F297273D115A00AC7EF2 /* Natural Events Service Tests */,
 				AD4D150D2779E58100BC6FDE /* EPICImagery Service Tests */,
+				ADB68EBA27A2EE1200F460CA /* Mars Rovers Service Tests */,
 			);
 			path = NetworkingServicesTests;
 			sourceTree = "<group>";
@@ -425,6 +471,32 @@
 				AD7642CA2770A7E700B69C3D /* Networking Errors.swift */,
 			);
 			path = "Network Manager";
+			sourceTree = "<group>";
+		};
+		ADB68EB127A2D2E400F460CA /* Mars Rovers Service */ = {
+			isa = PBXGroup;
+			children = (
+				ADB68EBB27A2EE3200F460CA /* Mars Rovers Service */,
+			);
+			path = "Mars Rovers Service";
+			sourceTree = "<group>";
+		};
+		ADB68EBA27A2EE1200F460CA /* Mars Rovers Service Tests */ = {
+			isa = PBXGroup;
+			children = (
+				ADB68EB227A2D30000F460CA /* MarsRoversRouterTests.swift */,
+				ADB68EB827A2EE0E00F460CA /* MarsRoversServiceTests.swift */,
+			);
+			path = "Mars Rovers Service Tests";
+			sourceTree = "<group>";
+		};
+		ADB68EBB27A2EE3200F460CA /* Mars Rovers Service */ = {
+			isa = PBXGroup;
+			children = (
+				ADB68EAF27A2D18900F460CA /* MarsRoversRouter.swift */,
+				ADB68EB627A2EDEA00F460CA /* MarsRoversService.swift */,
+			);
+			path = "Mars Rovers Service";
 			sourceTree = "<group>";
 		};
 		ADD6160C2736C24D007A1D1D /* AppDelegate */ = {
@@ -501,13 +573,13 @@
 			path = "Natural Events Tests";
 			sourceTree = "<group>";
 		};
-		ADF49648273EEA84003ADB9C /* shared UI */ = {
+		ADF49648273EEA84003ADB9C /* shared */ = {
 			isa = PBXGroup;
 			children = (
-				ADF49646273EE588003ADB9C /* Colors.swift */,
-				AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */,
+				AD3C96CB27A59328008B52E3 /* UI */,
+				AD3C96C927A59321008B52E3 /* RequestStatus.swift */,
 			);
-			path = "shared UI";
+			path = shared;
 			sourceTree = "<group>";
 		};
 		ADF4964B273EEAB5003ADB9C /* Natural Events */ = {
@@ -850,10 +922,12 @@
 				AD6A96562757892600D060F2 /* EventsFilteringViewModel.swift in Sources */,
 				ADE77B8A274011320061AB3F /* EventsViewModel.swift in Sources */,
 				ADB3E080274F8D1700CACEDB /* EventsFilteringView.swift in Sources */,
+				AD3C96CE27A59899008B52E3 /* RoverImagery.swift in Sources */,
 				AD9EB102277CC0E70079AF0F /* EPICFilteringView.swift in Sources */,
 				ADFFEE3A27898BD10060C7B6 /* ImageryProviderInfo.swift in Sources */,
 				AD9EB0FD277CC0DC0079AF0F /* ImageryView.swift in Sources */,
 				AD4AB6412743ED71000F3F61 /* EventsViewModelMock.swift in Sources */,
+				AD3C96CA27A59321008B52E3 /* RequestStatus.swift in Sources */,
 				AD4AB63F2743E1FF000F3F61 /* EventRowMocks.swift in Sources */,
 				ADD8881B274DAB4C00B7B89C /* EventMocks.swift in Sources */,
 				AD430552278ED2A300E76FC1 /* EPICImageryFiltering.swift in Sources */,
@@ -861,8 +935,10 @@
 				AD1D9CBD278CCC47002905A1 /* EPICImageSliderView.swift in Sources */,
 				ADE77B9D27412FC90061AB3F /* Event.swift in Sources */,
 				ADF0A2CD27A07AC9002C5844 /* SliderImageViewCell.swift in Sources */,
+				AD3C96D127A59917008B52E3 /* MarsRoverViewModel.swift in Sources */,
 				AD4E2C60274BE80D00686DC2 /* EventDetailsView.swift in Sources */,
 				AD9EB103277CC0E70079AF0F /* EPICImageryView.swift in Sources */,
+				ADB68EBD27A494F200F460CA /* MarsRoverView.swift in Sources */,
 				AD8206BD2769DDD7006DCEBC /* EventsBookmarkStore.swift in Sources */,
 				AD3567C7277B516A00BB9E62 /* TaskProgressView.swift in Sources */,
 				ADFFEE3827897CE60060C7B6 /* EPICImage.swift in Sources */,
@@ -882,6 +958,8 @@
 				ADAEE4F4273B16A700FABA5A /* NetworkManager.swift in Sources */,
 				AD170FDA2780801700D5AF8B /* EPICImageryRouter.swift in Sources */,
 				AD93F293273D10CD00AC7EF2 /* NaturalEventsRouter.swift in Sources */,
+				ADB68EB027A2D18900F460CA /* MarsRoversRouter.swift in Sources */,
+				ADB68EB727A2EDEA00F460CA /* MarsRoversService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -895,7 +973,9 @@
 				ADC00577273D664A005D5EF2 /* NaturalEventsServiceTests.swift in Sources */,
 				AD93F28E273D0DB600AC7EF2 /* MockURLProtocol.swift in Sources */,
 				AD4D150C2779E57400BC6FDE /* EPICImageryServiceTests.swift in Sources */,
+				ADB68EB327A2D30000F460CA /* MarsRoversRouterTests.swift in Sources */,
 				ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */,
+				ADB68EB927A2EE0E00F460CA /* MarsRoversServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

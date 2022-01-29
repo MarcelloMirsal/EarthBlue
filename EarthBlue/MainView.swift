@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 struct MainView: View {
     var body: some View {
         TabView {
@@ -17,6 +18,10 @@ struct MainView: View {
                 .tabItem {
                     Label("Imagery", systemImage: "camera.aperture")
                 }
+        }
+        .task {
+            ImageCache.default.clearMemoryCache()
+            ImageCache.default.clearDiskCache()
         }
     }
 }

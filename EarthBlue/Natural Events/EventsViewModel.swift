@@ -126,10 +126,3 @@ class EventsViewModel: ObservableObject {
         }
     }
 }
-
-
-enum RequestStatus {
-    case loading
-    case success
-    case failed
-}

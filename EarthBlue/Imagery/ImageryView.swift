@@ -30,6 +30,21 @@ struct ImageryView: View {
                         .padding(8)
                         .shadow(radius: 8)
                     }
+                    Section {
+                        NavigationLink {
+                            MarsRoverView()
+                        } label: {
+                            ImageryProviderView(imageName: "MarsCuriosityRover", title: "Curiosity Rover", providerInfo: ImageryProviderInfoFactory.makeEPICImageryProviderInfo())
+                        }
+                    } header: {
+                        HStack {
+                            Text("Mars Rovers")
+                                .font(.title3.weight(.heavy))
+                            Spacer()
+                        }
+                        .padding(8)
+                        .shadow(radius: 8)
+                    }
                 }
             }
             .navigationTitle("Imagery")

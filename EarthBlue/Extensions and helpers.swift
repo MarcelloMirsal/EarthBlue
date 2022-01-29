@@ -55,4 +55,10 @@ extension DateFormatter {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return dateFormatter.date(from: stringDate)!
     }
+    
+    static func date(from stringDate: String, stringDateFormat: String = "YYYY-MM-DD") -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = stringDateFormat
+        return dateFormatter.date(from: stringDate)!
+    }
 }
