@@ -9,9 +9,9 @@ import SwiftUI
 import Kingfisher
 
 struct MarsRoverView: View {
-    let gridItems: [GridItem] = Array.init(repeating: GridItem(.flexible(minimum: 160), spacing: 4), count: 2)
+    let gridItems: [GridItem] = Array.init(repeating: GridItem(.adaptive(minimum: 160), spacing: 4), count: 2)
     @StateObject var viewModel: MarsRoverViewModel = .init()
-    
+    @State var selectedImagery: RoverImagery? = nil
     var body: some View {
         List {
             HStack(alignment: .center) {
@@ -27,14 +27,19 @@ struct MarsRoverView: View {
                 ForEach(viewModel.cameraTypes, id: \.id) { camera in
                     Section {
                         ForEach(viewModel.imageries(fromCameraType: camera), id: \.id) { imagery in
-                            KFImage(URL(string: imagery.imageryURL)!)
-                                .placeholder {
-                                    Color(uiColor: .lightGray.withAlphaComponent(0.25))
-                                }
-                                .retry(maxCount: 2, interval: .seconds(2))
-                                .cancelOnDisappear(true)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
+                            Button {
+                                selectedImagery = imagery
+                            } label: {
+                                KFImage(URL(string: imagery.imageryURL)!)
+                                    .placeholder {
+                                        Color(uiColor: .lightGray.withAlphaComponent(0.25))
+                                    }
+                                    .retry(maxCount: 2, interval: .seconds(2))
+                                    .cancelOnDisappear(true)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     } header: {
                         HStack(alignment: .center) {
@@ -46,7 +51,6 @@ struct MarsRoverView: View {
                         .padding(4)
                         .background(Colors.systemBackground)
                     }
-                    
                 }
             }
             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
@@ -69,6 +73,14 @@ struct MarsRoverView: View {
         }), content: {
             Alert(title: Text("\(viewModel.error?.localizedDescription ?? "an error occurred")"))
         })
+        .fullScreenCover(isPresented: .init(get: {
+            return selectedImagery != nil
+        }, set: { _ in
+            selectedImagery = nil
+        }) ) {
+            ImagePresentationView(imageURL: .init(string: selectedImagery!.imageryURL)!)
+                .ignoresSafeArea()
+        }
     }
 }
 

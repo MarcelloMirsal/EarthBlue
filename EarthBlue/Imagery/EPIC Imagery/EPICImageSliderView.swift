@@ -175,19 +175,10 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate,
     
     // MARK: presentations
     func presentImageAuthNotGrantedAlert() {
-        let alertController = UIAlertController(title: "can't save image, please grant permission from Settings.", message: nil, preferredStyle: .alert)
-        let permissionsSettingsAction = UIAlertAction(title: "Settings", style: .default) { action in
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-        }
-        let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
-        alertController.addAction(cancelAction)
-        alertController.addAction(permissionsSettingsAction)
-        alertController.preferredAction = permissionsSettingsAction
-        present(alertController, animated: true)
+        present(UIAlertController.imageAuthNotGrantedAlertController(), animated: true)
     }
     
     enum Section {
         case main
     }
 }
-

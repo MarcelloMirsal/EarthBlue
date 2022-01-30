@@ -41,6 +41,19 @@ extension View {
     }
 }
 
+extension UIAlertController {
+    static func imageAuthNotGrantedAlertController() -> UIAlertController {
+        let alertController = UIAlertController(title: "can't save image, please grant permission from Settings.", message: nil, preferredStyle: .alert)
+        let permissionsSettingsAction = UIAlertAction(title: "Settings", style: .default) { action in
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+        }
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
+        alertController.addAction(cancelAction)
+        alertController.addAction(permissionsSettingsAction)
+        alertController.preferredAction = permissionsSettingsAction
+        return alertController
+    }
+}
 
 extension DateFormatter {
     static func eventDate(ISO8601StringDate eventDate: String) -> String {

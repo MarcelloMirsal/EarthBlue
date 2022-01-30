@@ -19,6 +19,8 @@
 		AD3C96CA27A59321008B52E3 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96C927A59321008B52E3 /* RequestStatus.swift */; };
 		AD3C96CE27A59899008B52E3 /* RoverImagery.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96CD27A59899008B52E3 /* RoverImagery.swift */; };
 		AD3C96D127A59917008B52E3 /* MarsRoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96D027A59917008B52E3 /* MarsRoverViewModel.swift */; };
+		AD3C96DC27A59D73008B52E3 /* ImagePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96DA27A59D73008B52E3 /* ImagePresentationViewController.swift */; };
+		AD3C96DD27A59D73008B52E3 /* ImagePresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD3C96DB27A59D73008B52E3 /* ImagePresentationViewController.xib */; };
 		AD430552278ED2A300E76FC1 /* EPICImageryFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD430551278ED2A300E76FC1 /* EPICImageryFiltering.swift */; };
 		AD4AB63A2743E10E000F3F61 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4AB6392743E10E000F3F61 /* EventRow.swift */; };
 		AD4AB63C2743E1C4000F3F61 /* Previews.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */; };
@@ -145,6 +147,8 @@
 		AD3C96C927A59321008B52E3 /* RequestStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
 		AD3C96CD27A59899008B52E3 /* RoverImagery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverImagery.swift; sourceTree = "<group>"; };
 		AD3C96D027A59917008B52E3 /* MarsRoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoverViewModel.swift; sourceTree = "<group>"; };
+		AD3C96DA27A59D73008B52E3 /* ImagePresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePresentationViewController.swift; sourceTree = "<group>"; };
+		AD3C96DB27A59D73008B52E3 /* ImagePresentationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePresentationViewController.xib; sourceTree = "<group>"; };
 		AD430551278ED2A300E76FC1 /* EPICImageryFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageryFiltering.swift; sourceTree = "<group>"; };
 		AD4AB6392743E10E000F3F61 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		AD4AB63B2743E1C4000F3F61 /* Previews.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Previews.xcassets; sourceTree = "<group>"; };
@@ -272,6 +276,8 @@
 			children = (
 				ADF49646273EE588003ADB9C /* Colors.swift */,
 				AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */,
+				AD3C96DA27A59D73008B52E3 /* ImagePresentationViewController.swift */,
+				AD3C96DB27A59D73008B52E3 /* ImagePresentationViewController.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -765,6 +771,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD4AB63C2743E1C4000F3F61 /* Previews.xcassets in Resources */,
+				AD3C96DD27A59D73008B52E3 /* ImagePresentationViewController.xib in Resources */,
 				AD5EC6CC2736BD97007BAD06 /* LaunchScreen.storyboard in Resources */,
 				AD5EC6C92736BD97007BAD06 /* Assets.xcassets in Resources */,
 				AD1D9CBF278CCC66002905A1 /* EPICImageSliderViewController.storyboard in Resources */,
@@ -924,6 +931,7 @@
 				ADB3E080274F8D1700CACEDB /* EventsFilteringView.swift in Sources */,
 				AD3C96CE27A59899008B52E3 /* RoverImagery.swift in Sources */,
 				AD9EB102277CC0E70079AF0F /* EPICFilteringView.swift in Sources */,
+				AD3C96DC27A59D73008B52E3 /* ImagePresentationViewController.swift in Sources */,
 				ADFFEE3A27898BD10060C7B6 /* ImageryProviderInfo.swift in Sources */,
 				AD9EB0FD277CC0DC0079AF0F /* ImageryView.swift in Sources */,
 				AD4AB6412743ED71000F3F61 /* EventsViewModelMock.swift in Sources */,

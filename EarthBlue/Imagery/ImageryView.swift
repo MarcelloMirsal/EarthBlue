@@ -10,7 +10,7 @@ import Photos
 
 struct ImageryView: View {
     
-    let gridItem = GridItem.init(.adaptive(minimum: 300), spacing: 0)
+    let gridItem = GridItem.init(.adaptive(minimum: 272), spacing: 0)
     var body: some View {
         NavigationView {
             ScrollView {
@@ -34,7 +34,7 @@ struct ImageryView: View {
                         NavigationLink {
                             MarsRoverView()
                         } label: {
-                            ImageryProviderView(imageName: "MarsCuriosityRover", title: "Curiosity Rover", providerInfo: ImageryProviderInfoFactory.makeEPICImageryProviderInfo())
+                            ImageryProviderView(imageName: "MarsCuriosityRover", title: "Curiosity Rover", providerInfo: ImageryProviderInfoFactory.makeCuriosityRoverInfo())
                         }
                     } header: {
                         HStack {
@@ -115,10 +115,14 @@ struct ImageryProviderInfoView: View {
             .navigationTitle(providerInfo.title)
             .listStyle(PlainListStyle())
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
                         dismiss()
+                    } label: {
+                        Text("Done")
+                            .bold()
                     }
+
                 }
             }
         }

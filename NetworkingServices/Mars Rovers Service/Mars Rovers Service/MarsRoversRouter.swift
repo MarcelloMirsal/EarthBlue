@@ -27,7 +27,7 @@ struct MarsRoversRouter  {
     }
     
     func twoDaysBeforeNowStringDate() -> String {
-        let twoDaysBeforeDate = Calendar.current.date(byAdding: .day, value: -2, to: .now)!
+        let twoDaysBeforeDate = Calendar.current.date(byAdding: .day, value: -3, to: .now)!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-DD"
         return dateFormatter.string(from: twoDaysBeforeDate)
