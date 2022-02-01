@@ -5,32 +5,32 @@
 //  Created by Marcello Mirsal on 27/01/2022.
 //
 
+
+//baseURL
+//LastAvailableImagery
+
 import Foundation
-struct MarsRoversRouter  {
-    let api_key = "K26yGKzLmYr5Dt8kJSvaz2EC4SHbHE8002rPHV5I"
-    var baseURL: URL {
+
+struct MarsRoversRouter {
+    let apiKey = "K26yGKzLmYr5Dt8kJSvaz2EC4SHbHE8002rPHV5I"
+    let baseURL: URL
+    let routingStrategy: MarsRoversRouterStrategy
+    init() {
         var urlComponents = URLComponents(url: URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers?")!, resolvingAgainstBaseURL: true)!
         urlComponents.queryItems = [
-            .init(name: QueryItemsKeys.apiKey.rawValue, value: api_key)
+            .init(name: QueryItemsKeys.apiKey.rawValue, value: apiKey)
         ]
-        return urlComponents.url!
+        self.baseURL = urlComponents.url!
+        routingStrategy = CuriosityRoverRoutingStrategy(baseURL: baseURL)
     }
     
-    func curiosityLastAvailableImagery() -> URLRequest {
-        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
-        urlComponents.path += Paths.curiosityPhotos.rawValue
-        var queryItems = urlComponents.queryItems ?? [URLQueryItem]()
-        queryItems.insert(.init(name: QueryItemsKeys.earthDate.rawValue, value: twoDaysBeforeNowStringDate()), at: 0)
-        queryItems.insert(.init(name: QueryItemsKeys.camera.rawValue, value: "FHAZ"), at: 0)
-        urlComponents.queryItems = queryItems
-        return .init(url: urlComponents.url!)
+    func lastAvailableImagery() -> URLRequest {
+        return routingStrategy.lastAvailableImageryRequest()
     }
     
-    func twoDaysBeforeNowStringDate() -> String {
-        let twoDaysBeforeDate = Calendar.current.date(byAdding: .day, value: -3, to: .now)!
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-DD"
-        return dateFormatter.string(from: twoDaysBeforeDate)
+    func filteredImageriesRequest(date: Date, cameraType: String?) -> URLRequest {
+        let stringDate = DateFormatter.string(from: date)
+        return routingStrategy.filteredImageriesRequest(date: stringDate, cameraType: cameraType)
     }
     
     func parse<T: Decodable>(data: Data, to type: T.Type, decoder: JSONDecoder = .init()) throws -> T {
@@ -54,4 +54,46 @@ extension MarsRoversRouter {
         case earthDate = "earth_date"
         case camera = "camera"
     }
+}
+
+protocol MarsRoversRouterStrategy {
+    var baseURL: URL { get set }
+    func lastAvailableImageryRequest() -> URLRequest
+    func filteredImageriesRequest(date: String, cameraType: String?) -> URLRequest
+}
+
+extension MarsRoversRouterStrategy {
+    func filteredImageriesRequest(date: String, cameraType: String?) -> URLRequest {
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
+        urlComponents.path += MarsRoversRouter.Paths.curiosityPhotos.rawValue
+        var queryItems = urlComponents.queryItems ?? []
+        queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.earthDate.rawValue, value: date), at: 0)
+        guard let cameraType = cameraType else {
+            urlComponents.queryItems = queryItems
+            return .init(url: urlComponents.url!)
+        }
+        queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.camera.rawValue, value: cameraType), at: 0)
+        urlComponents.queryItems = queryItems
+        return .init(url: urlComponents.url!)
+    }
+}
+
+struct CuriosityRoverRoutingStrategy: MarsRoversRouterStrategy {
+    var baseURL: URL
+    
+    func lastAvailableImageryRequest() -> URLRequest {
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
+        urlComponents.path += MarsRoversRouter.Paths.curiosityPhotos.rawValue
+        var queryItems = urlComponents.queryItems ?? []
+        queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.earthDate.rawValue, value: twoDaysBeforeNowStringDate()), at: 0)
+        queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.camera.rawValue, value: "FHAZ"), at: 0)
+        urlComponents.queryItems = queryItems
+        return .init(url: urlComponents.url!)
+    }
+    
+    func twoDaysBeforeNowStringDate() -> String {
+        let twoDaysBeforeDate = Calendar.current.date(byAdding: .day, value: -2, to: .now)!
+        return DateFormatter.string(from: twoDaysBeforeDate)
+    }
+    
 }

@@ -18,7 +18,7 @@
 		AD3567C7277B516A00BB9E62 /* TaskProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */; };
 		AD3C96CA27A59321008B52E3 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96C927A59321008B52E3 /* RequestStatus.swift */; };
 		AD3C96CE27A59899008B52E3 /* RoverImagery.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96CD27A59899008B52E3 /* RoverImagery.swift */; };
-		AD3C96D127A59917008B52E3 /* MarsRoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96D027A59917008B52E3 /* MarsRoverViewModel.swift */; };
+		AD3C96D127A59917008B52E3 /* MarsRoversViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96D027A59917008B52E3 /* MarsRoversViewModel.swift */; };
 		AD3C96DC27A59D73008B52E3 /* ImagePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3C96DA27A59D73008B52E3 /* ImagePresentationViewController.swift */; };
 		AD3C96DD27A59D73008B52E3 /* ImagePresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD3C96DB27A59D73008B52E3 /* ImagePresentationViewController.xib */; };
 		AD430552278ED2A300E76FC1 /* EPICImageryFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD430551278ED2A300E76FC1 /* EPICImageryFiltering.swift */; };
@@ -38,6 +38,7 @@
 		AD5EC6C92736BD97007BAD06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD5EC6C82736BD97007BAD06 /* Assets.xcassets */; };
 		AD5EC6CC2736BD97007BAD06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD5EC6CA2736BD97007BAD06 /* LaunchScreen.storyboard */; };
 		AD62C7162768A8D6002F6AF2 /* EventsBookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD62C7152768A8D6002F6AF2 /* EventsBookmarksView.swift */; };
+		AD66FC1527A8669800BF8887 /* SharedExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66FC1427A8669800BF8887 /* SharedExtensions.swift */; };
 		AD6A96542757841100D060F2 /* EventsFeedFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A96532757841100D060F2 /* EventsFeedFiltering.swift */; };
 		AD6A96562757892600D060F2 /* EventsFilteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */; };
 		AD7642CB2770A7E700B69C3D /* Networking Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7642CA2770A7E700B69C3D /* Networking Errors.swift */; };
@@ -74,6 +75,7 @@
 		ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */; };
 		ADD616152736C8C4007A1D1D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD616142736C8C4007A1D1D /* MainView.swift */; };
 		ADD8881B274DAB4C00B7B89C /* EventMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD8881A274DAB4C00B7B89C /* EventMocks.swift */; };
+		ADE59BEA27A6CE7800D234C9 /* MarsRoversFilteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE59BE927A6CE7800D234C9 /* MarsRoversFilteringView.swift */; };
 		ADE77B8A274011320061AB3F /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B89274011320061AB3F /* EventsViewModel.swift */; };
 		ADE77B99274011940061AB3F /* EventsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B98274011940061AB3F /* EventsViewModelTests.swift */; };
 		ADE77B9B274123CD0061AB3F /* EventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE77B9A274123CD0061AB3F /* EventsView.swift */; };
@@ -146,7 +148,7 @@
 		AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskProgressView.swift; sourceTree = "<group>"; };
 		AD3C96C927A59321008B52E3 /* RequestStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestStatus.swift; sourceTree = "<group>"; };
 		AD3C96CD27A59899008B52E3 /* RoverImagery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverImagery.swift; sourceTree = "<group>"; };
-		AD3C96D027A59917008B52E3 /* MarsRoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoverViewModel.swift; sourceTree = "<group>"; };
+		AD3C96D027A59917008B52E3 /* MarsRoversViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoversViewModel.swift; sourceTree = "<group>"; };
 		AD3C96DA27A59D73008B52E3 /* ImagePresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePresentationViewController.swift; sourceTree = "<group>"; };
 		AD3C96DB27A59D73008B52E3 /* ImagePresentationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePresentationViewController.xib; sourceTree = "<group>"; };
 		AD430551278ED2A300E76FC1 /* EPICImageryFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageryFiltering.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 		AD5EC6CB2736BD97007BAD06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD5EC6CD2736BD97007BAD06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD62C7152768A8D6002F6AF2 /* EventsBookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsBookmarksView.swift; sourceTree = "<group>"; };
+		AD66FC1427A8669800BF8887 /* SharedExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedExtensions.swift; sourceTree = "<group>"; };
 		AD6A96532757841100D060F2 /* EventsFeedFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFeedFiltering.swift; sourceTree = "<group>"; };
 		AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFilteringViewModel.swift; sourceTree = "<group>"; };
 		AD7642CA2770A7E700B69C3D /* Networking Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Networking Errors.swift"; sourceTree = "<group>"; };
@@ -203,6 +206,7 @@
 		ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		ADD616142736C8C4007A1D1D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		ADD8881A274DAB4C00B7B89C /* EventMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMocks.swift; sourceTree = "<group>"; };
+		ADE59BE927A6CE7800D234C9 /* MarsRoversFilteringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoversFilteringView.swift; sourceTree = "<group>"; };
 		ADE77B89274011320061AB3F /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
 		ADE77B8F274011630061AB3F /* EarthBlueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthBlueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE77B98274011940061AB3F /* EventsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModelTests.swift; sourceTree = "<group>"; };
@@ -286,7 +290,8 @@
 			isa = PBXGroup;
 			children = (
 				ADB68EBC27A494F200F460CA /* MarsRoverView.swift */,
-				AD3C96D027A59917008B52E3 /* MarsRoverViewModel.swift */,
+				ADE59BE927A6CE7800D234C9 /* MarsRoversFilteringView.swift */,
+				AD3C96D027A59917008B52E3 /* MarsRoversViewModel.swift */,
 				AD3C96CF27A5989C008B52E3 /* Models */,
 			);
 			path = "Mars Rovers Imagery";
@@ -446,6 +451,7 @@
 				AD93F294273D10D800AC7EF2 /* Natural Events Service */,
 				AD4D15082779E12400BC6FDE /* EPICImageryService */,
 				ADB68EB127A2D2E400F460CA /* Mars Rovers Service */,
+				AD66FC1427A8669800BF8887 /* SharedExtensions.swift */,
 			);
 			path = NetworkingServices;
 			sourceTree = "<group>";
@@ -943,12 +949,13 @@
 				AD1D9CBD278CCC47002905A1 /* EPICImageSliderView.swift in Sources */,
 				ADE77B9D27412FC90061AB3F /* Event.swift in Sources */,
 				ADF0A2CD27A07AC9002C5844 /* SliderImageViewCell.swift in Sources */,
-				AD3C96D127A59917008B52E3 /* MarsRoverViewModel.swift in Sources */,
+				AD3C96D127A59917008B52E3 /* MarsRoversViewModel.swift in Sources */,
 				AD4E2C60274BE80D00686DC2 /* EventDetailsView.swift in Sources */,
 				AD9EB103277CC0E70079AF0F /* EPICImageryView.swift in Sources */,
 				ADB68EBD27A494F200F460CA /* MarsRoverView.swift in Sources */,
 				AD8206BD2769DDD7006DCEBC /* EventsBookmarkStore.swift in Sources */,
 				AD3567C7277B516A00BB9E62 /* TaskProgressView.swift in Sources */,
+				ADE59BEA27A6CE7800D234C9 /* MarsRoversFilteringView.swift in Sources */,
 				ADFFEE3827897CE60060C7B6 /* EPICImage.swift in Sources */,
 				AD62C7162768A8D6002F6AF2 /* EventsBookmarksView.swift in Sources */,
 				ADA4D975274D3CF200009099 /* EventLocationInfo.swift in Sources */,
@@ -965,6 +972,7 @@
 				AD4D15072779B39100BC6FDE /* EPICImageryService.swift in Sources */,
 				ADAEE4F4273B16A700FABA5A /* NetworkManager.swift in Sources */,
 				AD170FDA2780801700D5AF8B /* EPICImageryRouter.swift in Sources */,
+				AD66FC1527A8669800BF8887 /* SharedExtensions.swift in Sources */,
 				AD93F293273D10CD00AC7EF2 /* NaturalEventsRouter.swift in Sources */,
 				ADB68EB027A2D18900F460CA /* MarsRoversRouter.swift in Sources */,
 				ADB68EB727A2EDEA00F460CA /* MarsRoversService.swift in Sources */,

@@ -69,7 +69,8 @@ extension DateFormatter {
         return dateFormatter.date(from: stringDate)!
     }
     
-    static func date(from stringDate: String, stringDateFormat: String = "YYYY-MM-DD") -> Date {
+    /// get Date from string formatted date this formatter is only valid for format = YYYY-MM-dd
+    static func date(from stringDate: String, stringDateFormat: String = "YYYY-MM-dd") -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = stringDateFormat
         return dateFormatter.date(from: stringDate)!

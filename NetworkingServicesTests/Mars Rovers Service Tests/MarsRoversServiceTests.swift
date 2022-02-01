@@ -21,7 +21,7 @@ class MarsRoversServiceTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testRequestLastCuriosityImageryWithValidResponse_ShouldReturnDecodingError() async {
+    func testRequestLastCuriosityImageryWithValidResponse_ShouldReturnSuccessResult() async {
         arrangeSUTWithMockedNetworkManger(isResponseSuccess: true)
         
         let requestResult = await sut.requestCuriosityLastImagery(decodingType: [String : String].self)
@@ -60,6 +60,18 @@ class MarsRoversServiceTests: XCTestCase {
         case let .failure(error):
             let error = error as! ServiceError
             XCTAssertTrue(error == .networkingFailure(.badResponse))
+        }
+    }
+    
+    func testRequestFilteredImageriesFeedWithValidResponse_ShouldReturn() async {
+        arrangeSUTWithMockedNetworkManger(isResponseSuccess: true)
+        
+        let requestResult = await sut.requestFilteredImageriesFeed(date: .now, cameraType: "FHAZ", decodingType: [String : String].self)
+        switch requestResult {
+        case .success:
+            break
+        case .failure:
+            XCTFail("result should be equal to success.")
         }
     }
     

@@ -8,7 +8,6 @@
 import Foundation
 
 public class MarsRoversService {
-    
     let networkManager: NetworkManagerProtocol
     let router = MarsRoversRouter()
     
@@ -20,8 +19,13 @@ public class MarsRoversService {
     }
     
     public func requestCuriosityLastImagery<T: Decodable>(decodingType: T.Type) async -> Result<T, Error> {
-        let lastImageryURLRequest = router.curiosityLastAvailableImagery()
+        let lastImageryURLRequest = router.lastAvailableImagery()
         return await networkRequest(urlRequest: lastImageryURLRequest, decodingType: decodingType)
+    }
+    
+    public func requestFilteredImageriesFeed<T: Decodable>(date: Date, cameraType: String?, decodingType: T.Type) async -> Result<T, Error> {
+        let request = router.filteredImageriesRequest(date: date, cameraType: cameraType)
+        return await networkRequest(urlRequest: request, decodingType: decodingType)
     }
     
     private func networkRequest<T: Decodable>(urlRequest: URLRequest, decodingType: T.Type) async -> Result<T, Error> {
