@@ -53,6 +53,7 @@ struct ImageryView: View {
                 PHPhotoLibrary.requestAuthorization(for: .addOnly, handler: { _ in} )
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

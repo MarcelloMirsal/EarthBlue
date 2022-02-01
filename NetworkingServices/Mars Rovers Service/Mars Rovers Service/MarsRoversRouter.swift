@@ -92,8 +92,20 @@ struct CuriosityRoverRoutingStrategy: MarsRoversRouterStrategy {
     }
     
     func twoDaysBeforeNowStringDate() -> String {
-        let twoDaysBeforeDate = Calendar.current.date(byAdding: .day, value: -2, to: .now)!
-        return DateFormatter.string(from: twoDaysBeforeDate)
+        let currentGMTDate = getCurrentGMTDate()
+        let gmtTimeZone = TimeZone(secondsFromGMT: 0) ?? .current
+        let twoDaysBeforeDate = Calendar.current.date(byAdding: .day, value: -2, to: currentGMTDate)!
+        return DateFormatter.string(from: twoDaysBeforeDate, timeZone: gmtTimeZone)
     }
+    
+    
+    private func getCurrentGMTDate() -> Date {
+        let date = Date.now
+        let sourceOffset = TimeZone.current.secondsFromGMT(for: date)
+        let destinationOffset = (TimeZone(secondsFromGMT: 0) ?? .current).secondsFromGMT(for: date)
+        let timeInterval = TimeInterval(destinationOffset - sourceOffset)
+        return Date(timeInterval: timeInterval, since: date)
+    }
+    
     
 }

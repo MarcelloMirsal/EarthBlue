@@ -9,8 +9,9 @@ import Foundation
 
 extension DateFormatter {
     /// get formatted String date from Date, default format is YYYY-MM-dd
-    static func string(from date: Date, stringDateFormat: String = "YYYY-MM-dd") -> String {
+    static func string(from date: Date, stringDateFormat: String = "YYYY-MM-dd", timeZone: TimeZone = .current) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
         dateFormatter.dateFormat = stringDateFormat
         return dateFormatter.string(from: date)
     }
