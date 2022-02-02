@@ -15,13 +15,21 @@ struct MarsRoversRouter {
     let apiKey = "K26yGKzLmYr5Dt8kJSvaz2EC4SHbHE8002rPHV5I"
     let baseURL: URL
     let routingStrategy: MarsRoversRouterStrategy
-    init() {
+    
+    init(roverId: Int) {
         var urlComponents = URLComponents(url: URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers?")!, resolvingAgainstBaseURL: true)!
         urlComponents.queryItems = [
             .init(name: QueryItemsKeys.apiKey.rawValue, value: apiKey)
         ]
         self.baseURL = urlComponents.url!
-        routingStrategy = CuriosityRoverRoutingStrategy(baseURL: baseURL)
+        
+        switch Rovers(rawValue: roverId)! {
+        case .curiosity:
+            routingStrategy = CuriosityRoverRoutingStrategy(baseURL: baseURL)
+        case .spirit:
+            routingStrategy = SpiritRoverRoutingStrategy(baseURL: baseURL)
+        }
+        
     }
     
     func lastAvailableImagery() -> URLRequest {
@@ -47,6 +55,7 @@ struct MarsRoversRouter {
 extension MarsRoversRouter {
     enum Paths: String {
         case curiosityPhotos = "/curiosity/photos"
+        case spiritPhotos = "/spirit/photos"
     }
     
     enum QueryItemsKeys: String {
@@ -54,10 +63,16 @@ extension MarsRoversRouter {
         case earthDate = "earth_date"
         case camera = "camera"
     }
+    
+    enum Rovers: Int {
+        case curiosity = 5
+        case spirit = 7
+    }
 }
 
 protocol MarsRoversRouterStrategy {
     var baseURL: URL { get set }
+    var imageriesURLPath: String { get set }
     func lastAvailableImageryRequest() -> URLRequest
     func filteredImageriesRequest(date: String, cameraType: String?) -> URLRequest
 }
@@ -65,7 +80,7 @@ protocol MarsRoversRouterStrategy {
 extension MarsRoversRouterStrategy {
     func filteredImageriesRequest(date: String, cameraType: String?) -> URLRequest {
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
-        urlComponents.path += MarsRoversRouter.Paths.curiosityPhotos.rawValue
+        urlComponents.path += imageriesURLPath
         var queryItems = urlComponents.queryItems ?? []
         queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.earthDate.rawValue, value: date), at: 0)
         guard let cameraType = cameraType else {
@@ -80,10 +95,11 @@ extension MarsRoversRouterStrategy {
 
 struct CuriosityRoverRoutingStrategy: MarsRoversRouterStrategy {
     var baseURL: URL
+    var imageriesURLPath: String = MarsRoversRouter.Paths.curiosityPhotos.rawValue
     
     func lastAvailableImageryRequest() -> URLRequest {
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
-        urlComponents.path += MarsRoversRouter.Paths.curiosityPhotos.rawValue
+        urlComponents.path += imageriesURLPath
         var queryItems = urlComponents.queryItems ?? []
         queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.earthDate.rawValue, value: twoDaysBeforeNowStringDate()), at: 0)
         queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.camera.rawValue, value: "FHAZ"), at: 0)
@@ -106,6 +122,21 @@ struct CuriosityRoverRoutingStrategy: MarsRoversRouterStrategy {
         let timeInterval = TimeInterval(destinationOffset - sourceOffset)
         return Date(timeInterval: timeInterval, since: date)
     }
+}
+
+
+struct SpiritRoverRoutingStrategy: MarsRoversRouterStrategy {
+    var baseURL: URL
+    var imageriesURLPath: String = MarsRoversRouter.Paths.spiritPhotos.rawValue
     
+    func lastAvailableImageryRequest() -> URLRequest {
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
+        urlComponents.path += imageriesURLPath
+        var queryItems = urlComponents.queryItems ?? []
+        queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.earthDate.rawValue, value: "2010-01-08"), at: 0)
+        queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.camera.rawValue, value: "FHAZ"), at: 0)
+        urlComponents.queryItems = queryItems
+        return .init(url: urlComponents.url!)
+    }
     
 }

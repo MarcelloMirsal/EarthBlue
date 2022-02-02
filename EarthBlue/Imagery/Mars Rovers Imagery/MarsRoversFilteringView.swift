@@ -25,8 +25,6 @@ struct MarsRoversFilteringView: View {
                 Form {
                     Section {
                         DatePicker("Imageries date", selection: $viewModel.selectedDate, in: viewModel.filteringDateRange, displayedComponents: .date)
-                            .labelsHidden()
-                            .environment(\.timeZone, TimeZone(secondsFromGMT: 0)!)
                     }
                     Section {
                         DisclosureGroup(isExpanded: $isCamerasListExpanded) {

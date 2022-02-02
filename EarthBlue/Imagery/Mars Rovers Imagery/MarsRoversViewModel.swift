@@ -16,11 +16,14 @@ class MarsRoversViewModel: ObservableObject {
     @Published var feedFiltering: RoverImageryFeedFiltering?
     
     private var cancellable = Set<AnyCancellable>()
-    let marsRoversImageryService: MarsRoversService
     
-    init() {
+    let marsRoversImageryService: MarsRoversService
+    let roverInfo: RoverInfo
+    
+    init(roverInfo: RoverInfo) {
+        self.roverInfo = roverInfo
         self.imageryFeed = RoverImageryFeed(photos: [])
-        self.marsRoversImageryService = MarsRoversService()
+        self.marsRoversImageryService = MarsRoversService(roverId: roverInfo.id)
         self.$feedFiltering
             .dropFirst()
             .sink(receiveValue: self.feedFilteringUpdateHandler)
@@ -39,6 +42,9 @@ class MarsRoversViewModel: ObservableObject {
         self.error = nil
     }
     
+    var roverName: String {
+        return roverInfo.name
+    }
     
     var feedHeaderDateTitle: String {
         guard let stringDate = imageryFeed.photos.first?.earthDate else { return "" }
@@ -67,7 +73,7 @@ class MarsRoversViewModel: ObservableObject {
     func requestLatestImageryFeed() async {
         guard requestStatus != .loading else { return }
         requestStatus = .loading
-        let result = await marsRoversImageryService.requestCuriosityLastImagery(decodingType: RoverImageryFeed.self)
+        let result = await marsRoversImageryService.requestLastImageries(decodingType: RoverImageryFeed.self)
         handle(requestResult: result)
     }
     

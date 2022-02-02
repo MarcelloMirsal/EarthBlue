@@ -39,9 +39,12 @@ struct AFErrorWrapper {
                 return .noInternetConnection
             case .timedOut:
                 return .requestTimedOut
+            case .cannotConnectToHost:
+                return .requestTimedOut
             default:
                 return .badResponse
             }
+            
         default:
             print(afError.underlyingError ?? "")
             return .unspecified
@@ -64,3 +67,4 @@ public enum ServiceError: Error, LocalizedError, Equatable {
         }
     }
 }
+

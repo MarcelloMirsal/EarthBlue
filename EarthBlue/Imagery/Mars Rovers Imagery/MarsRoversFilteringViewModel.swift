@@ -18,12 +18,12 @@ class MarsRoversFilteringViewModel: ObservableObject {
             self._selectedDate = .init(wrappedValue: lastFeedFiltering.imageriesDate)
             self._selectedCameraName = .init(wrappedValue: lastFeedFiltering.selectedCameraName)
         } else {
-            self._selectedDate = .init(wrappedValue: roverInfo.lastImageryDate ?? .now)
+            self._selectedDate = .init(wrappedValue: roverInfo.lastImageriesDate ?? .now)
         }
     }
     
     var filteringDateRange: ClosedRange<Date> {
-        return .init(uncheckedBounds: (lower: roverInfo.landingDate, upper: roverInfo.lastImageryDate ?? .now))
+        return .init(uncheckedBounds: (lower: roverInfo.firstImageriesDate, upper: roverInfo.lastImageriesDate ?? .now))
     }
     
     var roverCameras: [RoverCamera.CameraName] {

@@ -32,13 +32,18 @@ struct ImageryView: View {
                     }
                     Section {
                         NavigationLink {
-                            MarsRoverView()
+                            MarsRoverView(roverInfo: RoverInfoFactory.makeCuriosityRoverInfo() )
                         } label: {
                             ImageryProviderView(imageName: "MarsCuriosityRover", title: "Curiosity Rover", providerInfo: ImageryProviderInfoFactory.makeCuriosityRoverInfo())
                         }
+                        NavigationLink {
+                            MarsRoverView(roverInfo: RoverInfoFactory.makeSpiritRoverInfo() )
+                        } label: {
+                            ImageryProviderView(imageName: "MarsSpiritRover", title: "Spirit Rover", providerInfo: ImageryProviderInfoFactory.makeSpiritRoverInfo())
+                        }
                     } header: {
                         HStack {
-                            Text("Mars Rovers")
+                            Text("MARS ROVERS")
                                 .font(.title3.weight(.heavy))
                             Spacer()
                         }
@@ -106,6 +111,7 @@ struct ImageryProviderInfoView: View {
             List {
                 Section {
                     Text(providerInfo.description)
+                        .textSelection(.enabled)
                         .foregroundColor(.primary)
                         .multilineTextAlignment(.leading)
                         .listRowSeparator(.hidden)

@@ -10,7 +10,8 @@ import XCTest
 
 class MarsRoversRouterTests: XCTestCase {
     
-    var sut = MarsRoversRouter()
+    var sut = MarsRoversRouter(roverId: MarsRoversRouter.Rovers.curiosity.rawValue)
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -48,6 +49,11 @@ class MarsRoversRouterTests: XCTestCase {
         XCTAssertEqual(MarsRoversRouter.Paths.curiosityPhotos.rawValue, expectedPath)
     }
     
+    func testSpiritPath_ShouldBeEqualToExpectedPath() {
+        let expectedPath = "/spirit/photos"
+        XCTAssertEqual(MarsRoversRouter.Paths.spiritPhotos.rawValue, expectedPath)
+    }
+    
     
     // MARK: Testing QueryItemsKeys
     func testQueryItemApiKey_ShouldBeEqualToExpectedKey() {
@@ -68,8 +74,8 @@ class MarsRoversRouterTests: XCTestCase {
 }
 
 
-class MarsRoversRoutingStrategiesTests: XCTestCase {
-    let router = MarsRoversRouter()
+class CuriosityRoverRoutingStrategiesTests: XCTestCase {
+    let router = MarsRoversRouter(roverId: MarsRoversRouter.Rovers.spirit.rawValue)
     var sut: CuriosityRoverRoutingStrategy!
     
     override func setUp() {
@@ -84,7 +90,7 @@ class MarsRoversRoutingStrategiesTests: XCTestCase {
     }
     
     func testFilteredRequest_ShouldReturnRequestWithThePassedParams() {
-        let stringDate = "2022-1-29"
+        let stringDate = "2020-03-20"
         let cameraType = "RHAZ"
         let expectedURL = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?camera=\(cameraType)&earth_date=\(stringDate)&api_key=\(router.apiKey)")
         
@@ -94,9 +100,45 @@ class MarsRoversRoutingStrategiesTests: XCTestCase {
     }
     
     func testFilteredRequestWithNilCameraType_ShouldReturnRequestWithThePassedParams() {
-        let stringDate = "2022-1-29"
+        let stringDate = "2020-03-20"
         let cameraType: String? = nil
         let expectedURL = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=\(stringDate)&api_key=\(router.apiKey)")
+        
+        let filteredFeedRequest = sut.filteredImageriesRequest(date: stringDate, cameraType: cameraType)
+        
+        XCTAssertEqual(filteredFeedRequest.url, expectedURL)
+    }
+}
+
+
+class SpiritRoversRoutingStrategiesTests: XCTestCase {
+    let router = MarsRoversRouter(roverId: MarsRoversRouter.Rovers.spirit.rawValue)
+    var sut: SpiritRoverRoutingStrategy!
+    
+    override func setUp() {
+        sut = SpiritRoverRoutingStrategy(baseURL: router.baseURL)
+    }
+    
+    func testLastAvailableImageriesRequest_ShouldReturnRequestEqualToExpectedRequestURL() {
+        let expectedURL = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?camera=FHAZ&earth_date=2010-01-08&api_key=\(router.apiKey)")
+        
+        XCTAssertEqual(expectedURL, sut.lastAvailableImageryRequest().url)
+    }
+    
+    func testFilteredRequest_ShouldReturnRequestWithThePassedParams() {
+        let stringDate = "2010-03-20"
+        let cameraType = "RHAZ"
+        let expectedURL = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?camera=\(cameraType)&earth_date=\(stringDate)&api_key=\(router.apiKey)")
+        
+        let filteredFeedRequest = sut.filteredImageriesRequest(date: stringDate, cameraType: cameraType)
+        
+        XCTAssertEqual(filteredFeedRequest.url, expectedURL)
+    }
+    
+    func testFilteredRequestWithNilCameraType_ShouldReturnRequestWithThePassedParams() {
+        let stringDate = "2010-03-20"
+        let cameraType: String? = nil
+        let expectedURL = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?earth_date=\(stringDate)&api_key=\(router.apiKey)")
         
         let filteredFeedRequest = sut.filteredImageriesRequest(date: stringDate, cameraType: cameraType)
         

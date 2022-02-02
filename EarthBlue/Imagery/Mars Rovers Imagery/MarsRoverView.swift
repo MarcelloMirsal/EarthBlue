@@ -10,9 +10,14 @@ import Kingfisher
 
 struct MarsRoverView: View {
     let gridItems: [GridItem] = Array.init(repeating: GridItem(.adaptive(minimum: 160), spacing: 4), count: 2)
-    @StateObject var viewModel: MarsRoversViewModel = .init()
+    @StateObject var viewModel: MarsRoversViewModel
     @State var selectedImagery: RoverImagery? = nil
     @State var shouldPresentFilteringView: Bool = false
+    
+    init(roverInfo: RoverInfo) {
+        self._viewModel = .init(wrappedValue: .init(roverInfo: roverInfo))
+    }
+    
     var body: some View {
         ZStack {
             List {
@@ -31,7 +36,7 @@ struct MarsRoverView: View {
                                 Button {
                                     selectedImagery = imagery
                                 } label: {
-                                    KFImage(URL(string: imagery.imageryURL)!)
+                                    KFImage(imagery.secureImageryURL())
                                         .placeholder {
                                             Color(uiColor: .lightGray.withAlphaComponent(0.25))
                                         }
@@ -58,7 +63,7 @@ struct MarsRoverView: View {
                 .listRowSeparator(.hidden)
             }
             .listStyle(PlainListStyle())
-            .navigationTitle("Curiosity Rover")
+            .navigationTitle(viewModel.roverName)
             .refreshable(action: {
                 await viewModel.refreshFeed()
             })
@@ -97,11 +102,11 @@ struct MarsRoverView: View {
         }, set: { _ in
             selectedImagery = nil
         }) ) {
-            ImagePresentationView(imageURL: .init(string: selectedImagery!.imageryURL)!)
+            ImagePresentationView(imageURL: selectedImagery!.secureImageryURL())
                 .ignoresSafeArea()
         }
         .sheet(isPresented: $shouldPresentFilteringView) {
-            MarsRoversFilteringView(roverInfo: RoverInfoFactory.makeCuriosityRoverInfo(), feedFiltering: $viewModel.feedFiltering)
+            MarsRoversFilteringView(roverInfo: viewModel.roverInfo, feedFiltering: $viewModel.feedFiltering)
         }
     }
 }
@@ -109,7 +114,7 @@ struct MarsRoverView: View {
 struct MarsRoverView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MarsRoverView()
+            MarsRoverView(roverInfo: RoverInfoFactory.makeCuriosityRoverInfo())
         }
     }
 }

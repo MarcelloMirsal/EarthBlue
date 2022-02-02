@@ -10,21 +10,22 @@ import XCTest
 
 class MarsRoversServiceTests: XCTestCase {
     
+    let roverId = MarsRoversRouter.Rovers.curiosity.rawValue
     var sut: MarsRoversService!
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        sut = .init()
+        sut = .init(roverId: roverId)
     }
     
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testRequestLastCuriosityImageryWithValidResponse_ShouldReturnSuccessResult() async {
+    func testRequestLastImageriesWithValidResponse_ShouldReturnSuccessResult() async {
         arrangeSUTWithMockedNetworkManger(isResponseSuccess: true)
         
-        let requestResult = await sut.requestCuriosityLastImagery(decodingType: [String : String].self)
+        let requestResult = await sut.requestLastImageries(decodingType: [String : String].self)
         
         switch requestResult {
         case .success:
@@ -34,10 +35,10 @@ class MarsRoversServiceTests: XCTestCase {
         }
     }
     
-    func testRequestLastCuriosityImageryWithWrongDecoding_ShouldReturnDecodingError() async {
+    func testRequestLastImageriesWithWrongDecoding_ShouldReturnDecodingError() async {
         arrangeSUTWithMockedNetworkManger(isResponseSuccess: true)
         
-        let requestResult = await sut.requestCuriosityLastImagery(decodingType: Int.self)
+        let requestResult = await sut.requestLastImageries(decodingType: Int.self)
         
         switch requestResult {
         case .success:
@@ -49,10 +50,10 @@ class MarsRoversServiceTests: XCTestCase {
         }
     }
     
-    func testRequestLastCuriosityImageryWithInvalidResponse_ShouldReturnNetworkingError() async {
+    func testRequestLastImageriesWithInvalidResponse_ShouldReturnNetworkingError() async {
         arrangeSUTWithMockedNetworkManger(isResponseSuccess: false)
         
-        let requestResult = await sut.requestCuriosityLastImagery(decodingType: Int.self)
+        let requestResult = await sut.requestLastImageries(decodingType: Int.self)
         
         switch requestResult {
         case .success:
@@ -76,6 +77,6 @@ class MarsRoversServiceTests: XCTestCase {
     }
     
     func arrangeSUTWithMockedNetworkManger(isResponseSuccess: Bool) {
-        sut = .init(networkManager: MockNetworkManager(isSuccess: isResponseSuccess))
+        sut = .init(networkManager: MockNetworkManager(isSuccess: isResponseSuccess), roverId: roverId)
     }
 }

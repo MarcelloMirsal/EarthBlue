@@ -9,16 +9,19 @@ import Foundation
 
 public class MarsRoversService {
     let networkManager: NetworkManagerProtocol
-    let router = MarsRoversRouter()
+    let router: MarsRoversRouter
     
-    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+    init(networkManager: NetworkManagerProtocol = NetworkManager(), roverId: Int) {
         self.networkManager = networkManager
-    }
-    public init() {
-        self.networkManager = NetworkManager()
+        self.router = .init(roverId: roverId)
     }
     
-    public func requestCuriosityLastImagery<T: Decodable>(decodingType: T.Type) async -> Result<T, Error> {
+    public init(roverId: Int) {
+        self.networkManager = NetworkManager()
+        self.router = .init(roverId: roverId)
+    }
+    
+    public func requestLastImageries<T: Decodable>(decodingType: T.Type) async -> Result<T, Error> {
         let lastImageryURLRequest = router.lastAvailableImagery()
         return await networkRequest(urlRequest: lastImageryURLRequest, decodingType: decodingType)
     }

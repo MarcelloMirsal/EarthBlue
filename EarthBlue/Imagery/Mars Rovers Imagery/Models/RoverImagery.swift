@@ -17,8 +17,15 @@ struct RoverImageryFeed: Codable {
 struct RoverImagery: Codable {
     let id: Int
     let camera: RoverCamera
-    let imageryURL: String
+    private let imageryURL: String
     let earthDate: String
+    
+    /// some imageries providers are old and the API is still using http, this method will return URL with  https scheme
+    func secureImageryURL() -> URL {
+        var urlComponents = URLComponents(string: imageryURL)!
+        urlComponents.scheme = "https"
+        return urlComponents.url!
+    }
     
     enum CodingKeys: String, CodingKey {
         case id, camera
@@ -42,6 +49,7 @@ struct RoverCamera: Codable, Hashable {
         case NAVCAM
         case PANCAM
         case MINITES
+        case ENTRY
         
         var fullName: String {
             switch self {
@@ -63,23 +71,38 @@ struct RoverCamera: Codable, Hashable {
                 return "Panoramic Camera"
             case .MINITES:
                 return "Miniature Thermal Emission Spectrometer (Mini-TES)"
+            case .ENTRY:
+                return "Entry, Descent, and Landing Camera"
             }
         }
     }
 }
 
 struct RoverInfo {
+    let id: Int
+    let name: String
     let availableCameras: [RoverCamera.CameraName]
-    let landingDate: Date
-    let lastImageryDate: Date?
-    let isActive: Bool
+    let firstImageriesDate: Date
+    let lastImageriesDate: Date?
 }
 
 struct RoverInfoFactory {
     static func makeCuriosityRoverInfo() -> RoverInfo {
         let cams: [RoverCamera.CameraName] = [ .FHAZ, .RHAZ, .MAST, .CHEMCAM, .MAHLI, .MARDI, .NAVCAM]
         let dateComponents = DateComponents(calendar: .current, timeZone: TimeZone.init(secondsFromGMT: 0), year: 2012, month: 8, day: 6)
-        let landingDate = dateComponents.date!
-        return .init(availableCameras: cams, landingDate: landingDate, lastImageryDate: nil, isActive: true)
+        let firstImageriesDate = dateComponents.date!
+        
+        return .init(id: 5, name: "Curiosity Rover", availableCameras: cams, firstImageriesDate: firstImageriesDate, lastImageriesDate:  nil)
+    }
+    
+    static func makeSpiritRoverInfo() -> RoverInfo {
+        let cams: [RoverCamera.CameraName] = [ .FHAZ, .RHAZ, .NAVCAM, .PANCAM, .MINITES]
+        var dateComponents = DateComponents(calendar: .current, timeZone: TimeZone.init(secondsFromGMT: 0), year: 2004, month: 1, day: 5)
+        let firstImageriesDate = dateComponents.date!
+        
+        dateComponents = DateComponents(calendar: .current, timeZone: TimeZone.init(secondsFromGMT: 0), year: 2010, month: 3, day: 21)
+        let lastUpdateDate = dateComponents.date!
+        
+        return .init(id: 7, name: "Spirit Rover", availableCameras: cams, firstImageriesDate: firstImageriesDate, lastImageriesDate: lastUpdateDate)
     }
 }
