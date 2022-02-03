@@ -19,7 +19,7 @@ struct ImageryView: View {
                         NavigationLink {
                             EPICImageryView()
                         } label: {
-                            ImageryProviderView(imageName: "EPICImageThumb", title: "Earth Polychromatic Imaging Camera (EPIC)", providerInfo: ImageryProviderInfoFactory.makeEPICImageryProviderInfo())
+                            ImageryProviderView(imageName: "EPICImageThumb", providerInfo: ImageryProviderInfoFactory.makeEPICImageryProviderInfo())
                         }
                     } header: {
                         HStack {
@@ -34,12 +34,17 @@ struct ImageryView: View {
                         NavigationLink {
                             MarsRoverView(roverInfo: RoverInfoFactory.makeCuriosityRoverInfo() )
                         } label: {
-                            ImageryProviderView(imageName: "MarsCuriosityRover", title: "Curiosity Rover", providerInfo: ImageryProviderInfoFactory.makeCuriosityRoverInfo())
+                            ImageryProviderView(imageName: "MarsCuriosityRover", providerInfo: ImageryProviderInfoFactory.makeCuriosityRoverInfo())
                         }
                         NavigationLink {
                             MarsRoverView(roverInfo: RoverInfoFactory.makeSpiritRoverInfo() )
                         } label: {
-                            ImageryProviderView(imageName: "MarsSpiritRover", title: "Spirit Rover", providerInfo: ImageryProviderInfoFactory.makeSpiritRoverInfo())
+                            ImageryProviderView(imageName: "MarsSpiritRover", providerInfo: ImageryProviderInfoFactory.makeSpiritRoverInfo())
+                        }
+                        NavigationLink {
+                            MarsRoverView(roverInfo: RoverInfoFactory.makeOpportunityRoverInfo() )
+                        } label: {
+                            ImageryProviderView(imageName: "MarsOpportunityRover", providerInfo: ImageryProviderInfoFactory.makeOpportunityRoverInfo())
                         }
                     } header: {
                         HStack {
@@ -72,7 +77,6 @@ struct ImageryView_Previews: PreviewProvider {
 struct ImageryProviderView: View {
     @State private var shouldPresentInfoView = false
     let imageName: String
-    let title: String
     let providerInfo: ImageryProviderInfo
     var body: some View {
         ZStack(alignment: .top) {
@@ -83,7 +87,7 @@ struct ImageryProviderView: View {
                     LinearGradient(colors: [.black, .clear], startPoint: .top, endPoint: .bottom)
                 )
             HStack(spacing: 8) {
-                Text(title)
+                Text(providerInfo.title)
                     .multilineTextAlignment(.leading)
                     .font(.title2.bold())
                     .foregroundColor(.white)
@@ -117,6 +121,7 @@ struct ImageryProviderInfoView: View {
                         .listRowSeparator(.hidden)
                         .lineSpacing(0.5)
                     Link("more info...", destination: providerInfo.sourceURL)
+                        .padding(.bottom, 8)
                 }
             }
             .navigationTitle(providerInfo.title)

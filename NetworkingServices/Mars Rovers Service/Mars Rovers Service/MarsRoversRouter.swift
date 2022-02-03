@@ -28,6 +28,8 @@ struct MarsRoversRouter {
             routingStrategy = CuriosityRoverRoutingStrategy(baseURL: baseURL)
         case .spirit:
             routingStrategy = SpiritRoverRoutingStrategy(baseURL: baseURL)
+        case .opportunity:
+            routingStrategy = SpiritRoverRoutingStrategy(baseURL: baseURL)
         }
         
     }
@@ -56,6 +58,7 @@ extension MarsRoversRouter {
     enum Paths: String {
         case curiosityPhotos = "/curiosity/photos"
         case spiritPhotos = "/spirit/photos"
+        case opportunityPhotos = "/opportunity/photos"
     }
     
     enum QueryItemsKeys: String {
@@ -67,6 +70,7 @@ extension MarsRoversRouter {
     enum Rovers: Int {
         case curiosity = 5
         case spirit = 7
+        case opportunity = 6
     }
 }
 
@@ -134,6 +138,22 @@ struct SpiritRoverRoutingStrategy: MarsRoversRouterStrategy {
         urlComponents.path += imageriesURLPath
         var queryItems = urlComponents.queryItems ?? []
         queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.earthDate.rawValue, value: "2010-01-08"), at: 0)
+        queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.camera.rawValue, value: "FHAZ"), at: 0)
+        urlComponents.queryItems = queryItems
+        return .init(url: urlComponents.url!)
+    }
+    
+}
+
+struct OpportunityRoverRoutingStrategy: MarsRoversRouterStrategy {
+    var baseURL: URL
+    var imageriesURLPath: String = MarsRoversRouter.Paths.opportunityPhotos.rawValue
+    
+    func lastAvailableImageryRequest() -> URLRequest {
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
+        urlComponents.path += imageriesURLPath
+        var queryItems = urlComponents.queryItems ?? []
+        queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.earthDate.rawValue, value: "2004-01-26"), at: 0)
         queryItems.insert(.init(name: MarsRoversRouter.QueryItemsKeys.camera.rawValue, value: "FHAZ"), at: 0)
         urlComponents.queryItems = queryItems
         return .init(url: urlComponents.url!)

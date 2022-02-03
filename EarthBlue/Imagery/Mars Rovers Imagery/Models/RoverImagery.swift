@@ -105,4 +105,15 @@ struct RoverInfoFactory {
         
         return .init(id: 7, name: "Spirit Rover", availableCameras: cams, firstImageriesDate: firstImageriesDate, lastImageriesDate: lastUpdateDate)
     }
+    
+    static func makeOpportunityRoverInfo() -> RoverInfo {
+        let cams: [RoverCamera.CameraName] = [ .FHAZ, .RHAZ, .NAVCAM, .PANCAM, .MINITES]
+        var dateComponents = DateComponents(calendar: .current, timeZone: TimeZone.init(secondsFromGMT: 0), year: 2004, month: 1, day: 26)
+        let firstImageriesDate = dateComponents.date!
+        
+        dateComponents = DateComponents(calendar: .current, timeZone: TimeZone.init(secondsFromGMT: 0), year: 2018, month: 6, day: 11)
+        let lastUpdateDate = dateComponents.date!
+        
+        return .init(id: 6, name: "Opportunity Rover", availableCameras: cams, firstImageriesDate: firstImageriesDate, lastImageriesDate: lastUpdateDate)
+    }
 }

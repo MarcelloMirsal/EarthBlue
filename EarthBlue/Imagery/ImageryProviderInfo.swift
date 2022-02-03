@@ -15,7 +15,7 @@ struct ImageryProviderInfo {
 
 struct ImageryProviderInfoFactory {
     static func makeEPICImageryProviderInfo() -> ImageryProviderInfo {
-        return .init(title: "EPIC", description: """
+        return .init(title: "Earth Polychromatic Imaging Camera (EPIC)", description: """
 EPIC (Earth Polychromatic Imaging Camera) is a 10-channel spectroradiometer (317 – 780 nm) onboard NOAA’s DSCOVR (Deep Space Climate Observatory) spacecraft. EPIC provides 10 narrow band spectral images of the entire sunlit face of Earth using a 2048x2048 pixel CCD (Charge Coupled Device) detector coupled to a 30-cm aperture Cassegrain telescope.
 
 The DSCOVR spacecraft is located at the Earth-Sun Lagrange-1 (L-1) point giving EPIC a unique angular perspective that will be used in science applications to measure ozone, aerosols, cloud reflectivity, cloud height, vegetation properties, and UV radiation estimates at Earth's surface.
@@ -37,5 +37,15 @@ One of two rovers launched in 2003 to explore Mars and search for signs of past 
 
 In May 2009, the rover became embedded in soft soil at a site called "Troy" with only five working wheels to aid in the rescue effort. After months of testing and carefully planned maneuvers, NASA ended efforts to free the rover and eventually ended the mission on May 25, 2011.
 """, sourceURL: .init(string: "https://www.jpl.nasa.gov/missions/mars-exploration-rover-spirit-mer-spirit")!)
+    }
+    
+    static func makeOpportunityRoverInfo() -> ImageryProviderInfo {
+        return .init(title: "Opportunity Rover", description: """
+Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of ancient water. The rover explored the Martian terrain for almost 15 years, far outlasting her planned 90-day mission.
+
+After landing on Mars in 2004, Opportunity made a number of discoveries about the Red Planet including dramatic evidence that long ago at least one area of Mars stayed wet for an extended period and that conditions could have been suitable for sustaining microbial life.
+
+The Opportunity rover stopped communicating with Earth when a severe Mars-wide dust storm blanketed its location in June 2018. After more than a thousand commands to restore contact, engineers in the Mission Control at NASA's Jet Propulsion Laboratory (JPL) made their last attempt to revive Opportunity Tuesday, February 13, 2019, to no avail. The solar-powered rover's final communication was received June 10.
+""", sourceURL: .init(string: "https://www.jpl.nasa.gov/missions/mars-exploration-rover-opportunity-mer")!)
     }
 }
