@@ -17,6 +17,10 @@ struct MainView: View {
                 .tabItem {
                     Label("Imagery", systemImage: "camera.aperture")
                 }
+            ExtraInfoView()
+                .tabItem {
+                    Label("Extra", systemImage: "ellipsis")
+                }
         }
     }
 }

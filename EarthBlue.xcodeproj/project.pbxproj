@@ -15,6 +15,7 @@
 		AD0ADAC927A9A9100078F17D /* RoverImageryFeedFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0ADAC827A9A9100078F17D /* RoverImageryFeedFiltering.swift */; };
 		AD115AEA275140E5001303F2 /* EventsFilteringViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD115AE9275140E5001303F2 /* EventsFilteringViewModelTests.swift */; };
 		AD170FDA2780801700D5AF8B /* EPICImageryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD170FD92780801600D5AF8B /* EPICImageryRouter.swift */; };
+		AD1912A327AD336700456F24 /* ExtraInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1912A227AD336700456F24 /* ExtraInfoView.swift */; };
 		AD1D9CBD278CCC47002905A1 /* EPICImageSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1D9CBC278CCC47002905A1 /* EPICImageSliderView.swift */; };
 		AD1D9CBF278CCC66002905A1 /* EPICImageSliderViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD1D9CBE278CCC66002905A1 /* EPICImageSliderViewController.storyboard */; };
 		AD3567C7277B516A00BB9E62 /* TaskProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */; };
@@ -147,6 +148,7 @@
 		AD0ADAC827A9A9100078F17D /* RoverImageryFeedFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverImageryFeedFiltering.swift; sourceTree = "<group>"; };
 		AD115AE9275140E5001303F2 /* EventsFilteringViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFilteringViewModelTests.swift; sourceTree = "<group>"; };
 		AD170FD92780801600D5AF8B /* EPICImageryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageryRouter.swift; sourceTree = "<group>"; };
+		AD1912A227AD336700456F24 /* ExtraInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraInfoView.swift; sourceTree = "<group>"; };
 		AD1D9CBC278CCC47002905A1 /* EPICImageSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPICImageSliderView.swift; sourceTree = "<group>"; };
 		AD1D9CBE278CCC66002905A1 /* EPICImageSliderViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EPICImageSliderViewController.storyboard; sourceTree = "<group>"; };
 		AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskProgressView.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				AD4AB63D2743E1C9000F3F61 /* Preview Content */,
 				AD7B284727443C4600737AF1 /* Extensions and helpers.swift */,
 				AD5F17A827774ED0003E98FE /* Imagery */,
+				AD1912A227AD336700456F24 /* ExtraInfoView.swift */,
 			);
 			path = EarthBlue;
 			sourceTree = "<group>";
@@ -963,6 +966,7 @@
 				ADB68EBD27A494F200F460CA /* MarsRoverView.swift in Sources */,
 				AD8206BD2769DDD7006DCEBC /* EventsBookmarkStore.swift in Sources */,
 				AD3567C7277B516A00BB9E62 /* TaskProgressView.swift in Sources */,
+				AD1912A327AD336700456F24 /* ExtraInfoView.swift in Sources */,
 				ADE59BEA27A6CE7800D234C9 /* MarsRoversFilteringView.swift in Sources */,
 				ADFFEE3827897CE60060C7B6 /* EPICImage.swift in Sources */,
 				AD62C7162768A8D6002F6AF2 /* EventsBookmarksView.swift in Sources */,
