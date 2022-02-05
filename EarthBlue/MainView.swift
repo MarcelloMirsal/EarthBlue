@@ -10,17 +10,8 @@ struct MainView: View {
     var body: some View {
         TabView {
             EventsView()
-                .tabItem {
-                    Label("Events", systemImage: "bell.fill")
-                }
             ImageryView()
-                .tabItem {
-                    Label("Imagery", systemImage: "camera.aperture")
-                }
             ExtraInfoView()
-                .tabItem {
-                    Label("Extra", systemImage: "ellipsis")
-                }
         }
     }
 }

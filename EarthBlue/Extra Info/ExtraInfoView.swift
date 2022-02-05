@@ -48,7 +48,10 @@ struct ExtraInfoView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
-        
+        .navigationViewStyle(StackNavigationViewStyle())
+        .tabItem {
+            Label("Extra", systemImage: "ellipsis")
+        }
     }
 }
 

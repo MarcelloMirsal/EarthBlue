@@ -33,7 +33,7 @@ struct EventsView: View {
                 } label: {
                     EmptyView()
                 }
-
+                
                 EventsList(searchText: $searchText)
                     .environmentObject(viewModel)
                     .navigationTitle("Events")
@@ -90,6 +90,9 @@ struct EventsView: View {
             }
         })
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for events in this feed")
+        .tabItem {
+            Label("Events", systemImage: "bell.fill")
+        }
     }
 }
 

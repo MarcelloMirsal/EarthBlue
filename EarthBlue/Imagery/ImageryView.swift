@@ -64,6 +64,9 @@ struct ImageryView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .tabItem {
+            Label("Imagery", systemImage: "camera.on.rectangle.fill")
+        }
     }
 }
 
