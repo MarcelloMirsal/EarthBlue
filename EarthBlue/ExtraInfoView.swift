@@ -36,8 +36,6 @@ struct ExtraInfoView: View {
                             }
                             .navigationTitle("About")
                         }
-                        Button("Share") {}
-                        Button("Contact developer") {}
                     }
                 }
                 .alert("Cache clearing", isPresented: $showCacheClearingMessage) {
