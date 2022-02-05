@@ -81,6 +81,7 @@ struct EventsView: View {
                 Text(viewModel.errorMessage ?? "Unknown error")
             })
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .onChange(of: eventsFeedFiltering, perform: { newValue in
             Task(priority: .high) {
                 canShowFeedFiltering = false
