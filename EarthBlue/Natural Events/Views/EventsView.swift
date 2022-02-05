@@ -13,6 +13,7 @@ struct EventsView: View {
     @State private var canShowFeedFiltering = false
     @State private var canShowBookmarkedEvents = false
     @State private var eventsFeedFiltering: EventsFeedFiltering?
+    @State var selectedBookmarkedEvent: Event? = nil
     
     init(viewModel: EventsViewModel = .init()) {
         self.viewModel = viewModel
@@ -21,11 +22,23 @@ struct EventsView: View {
     var body: some View {
         NavigationView {
             ZStack {
+                NavigationLink(isActive: .init(get: {
+                    return selectedBookmarkedEvent != nil
+                }, set: { _ in
+                    selectedBookmarkedEvent = nil
+                })) {
+                    EventDetailsView(event: selectedBookmarkedEvent ?? .activeEventMock)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle(selectedBookmarkedEvent?.title ?? "")
+                } label: {
+                    EmptyView()
+                }
+
                 EventsList(searchText: $searchText)
                     .environmentObject(viewModel)
                     .navigationTitle("Events")
                 Group {
-                    Text("Loading...")
+                    TaskProgressView()
                         .isHidden(!viewModel.shouldShowLoadingIndicator)
                     Text("Pull down to refresh.")
                         .isHidden(!viewModel.shouldShowPullToRefresh)
@@ -43,7 +56,7 @@ struct EventsView: View {
                         Label("", systemImage: "book")
                     }
                     .sheet(isPresented: $canShowBookmarkedEvents) {
-                        EventsBookmarksView()
+                        EventsBookmarksView(selectedBookmarkEvent: $selectedBookmarkedEvent)
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -58,6 +71,15 @@ struct EventsView: View {
                     }
                 }
             }
+            .alert("Error", isPresented: .init(get: {
+                viewModel.shouldPresentError
+            }, set: { _ in
+                viewModel.set(errorMessage: nil)
+            }), actions: {
+                Button("Ok") {}
+            }, message: {
+                Text(viewModel.errorMessage ?? "Unknown error")
+            })
         }
         .onChange(of: eventsFeedFiltering, perform: { newValue in
             Task(priority: .high) {
@@ -67,18 +89,6 @@ struct EventsView: View {
             }
         })
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for events in this feed")
-        .alert("Error", isPresented: .init(get: {
-            viewModel.shouldPresentError
-        }, set: { _ in
-            viewModel.set(errorMessage: nil)
-        }), actions: {
-            Button("Ok") {}
-        }, message: {
-            Text(viewModel.errorMessage ?? "Unknown error")
-        })
-        .task {
-            await viewModel.requestDefaultFeed()
-        }
     }
 }
 

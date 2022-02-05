@@ -13,10 +13,10 @@ class EventsBookmarksViewModel: ObservableObject {
     @Published var shouldPresentEventDetails = false
     @Published var isEventDetailsLoading = false
     @Published var errorMessage: String? = nil
+    private(set) var lastLoadedEvent: Event?
     
     private let naturalEventsService = NaturalEventsService()
     private let eventBookmarkStore: EventBookmarkStore
-    private var lastLoadedEvent: Event?
     
     var eventToShow: Event {
         return lastLoadedEvent ?? .init(id: "0", title: "", closed: "", categories: [], geometry: [], sources: [])

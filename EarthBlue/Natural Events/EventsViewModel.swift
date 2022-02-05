@@ -10,13 +10,16 @@ import NetworkingServices
 
 class EventsViewModel: ObservableObject {
     @Published private(set) var eventsFeed: EventsFeed = .init(events: [])
-    @Published private(set) var requestStatus: RequestStatus = .success
+    @Published private(set) var requestStatus: RequestStatus = .initial
     @Published private(set) var feedFiltering: EventsFeedFiltering?
+    @Published private(set) var errorMessage: String?
     private let naturalEventsService: NaturalEventsServiceProtocol
-    private(set) var errorMessage: String?
     
     init(naturalEventsService: NaturalEventsServiceProtocol = NaturalEventsService()) {
         self.naturalEventsService = naturalEventsService
+        Task {
+            await requestDefaultFeed()
+        }
     }
     
     // MARK: Accessors
@@ -70,18 +73,20 @@ class EventsViewModel: ObservableObject {
         await requestFilteredFeed(feedFiltering: feedFiltering)
     }
     
+    @MainActor
     func requestDefaultFeed() async {
         if requestStatus != .loading {
-            await set(eventsFeed: .init(events: []))
             set(requestStatus: .loading)
+            set(eventsFeed: .init(events: []))
             let feedRequestResult = await naturalEventsService.defaultEventsFeed(type: EventsFeed.self)
             await handle(feedRequestResult: feedRequestResult)
         }
     }
     
+    @MainActor
     func requestFilteredFeed(feedFiltering: EventsFeedFiltering) async {
         if requestStatus != .loading {
-            await set(eventsFeed: .init(events: []))
+            set(eventsFeed: .init(events: []))
             set(requestStatus: .loading)
             let status = map(feedStatusOption: feedFiltering.status)
             let categories = feedFiltering.categories

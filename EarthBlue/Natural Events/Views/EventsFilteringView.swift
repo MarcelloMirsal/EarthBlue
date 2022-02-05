@@ -9,8 +9,10 @@ import SwiftUI
 import Combine
 
 struct EventsFilteringView: View {
+    
     @StateObject var viewModel: EventsFilteringViewModel = .init()
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @State private var isDaysRangeActive = true
     @State private var isDateRangeActive = false
     @State private var startDate: Date = .now
@@ -18,6 +20,8 @@ struct EventsFilteringView: View {
     @State private var selectedStatus: FeedStatusOptions = .all
     @Binding private(set) var eventsFeedFiltering: EventsFeedFiltering?
     @State var numberOfDays: String = "1"
+    
+    
     var formattedNumberOfDays: String {
         return viewModel.formattedNumberOfDays(fromTextFieldString: numberOfDays)
     }
@@ -32,7 +36,7 @@ struct EventsFilteringView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 Form {
                     Section("By Days") {
                         Toggle("Last days", isOn: $isDaysRangeActive)
@@ -91,17 +95,31 @@ struct EventsFilteringView: View {
                         }
                     }
                 }
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarTitle("New Filtered Feed")
+                Button(action: {
+                    updateUI(from: viewModel.defaultFeedFiltering)
+                }, label: {
+                    Text("Reset defaults")
+                        .fontWeight(.bold)
+                        .padding(4)
+                })
+                    .padding(.bottom, 8)
+                    .controlSize(.regular)
+                    .buttonStyle(.bordered)
+                    .padding(4)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(uiColor: .systemGroupedBackground))
+                
             }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("New Filtered Feed")
             .toolbar {
                 ToolbarItem.init(placement: .navigationBarLeading) {
-                    Button("Reset") {
-                        updateUI(from: viewModel.defaultFeedFiltering)
+                    Button("Cancel") {
+                        dismiss()
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button {
                         presentationMode.wrappedValue.dismiss()
                         if isDaysRangeActive {
                             guard let formattedNumberOfDays = Int(formattedNumberOfDays) else { return }
@@ -109,6 +127,9 @@ struct EventsFilteringView: View {
                         } else if isDateRangeActive {
                             eventsFeedFiltering = viewModel.feedFilteringByDateRange(startDate: startDate, endDate: endDate, status: selectedStatus)
                         }
+                    } label: {
+                        Text("Done")
+                            .fontWeight(.bold)
                     }
                 }
             }

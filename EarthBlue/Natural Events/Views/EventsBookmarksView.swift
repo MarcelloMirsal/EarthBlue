@@ -11,6 +11,7 @@ struct EventsBookmarksView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel = EventsBookmarksViewModel()
     @State private var searchingText: String = ""
+    @Binding var selectedBookmarkEvent: Event?
     
     var eventsBookmark: [EventBookmark] {
         return searchingText.isEmpty ? viewModel.eventsBookmark : filteredBookmarks
@@ -29,10 +30,6 @@ struct EventsBookmarksView: View {
             List {
                 ForEach(eventsBookmark.sorted(), id: \.id) { bookmark in
                     ZStack(alignment: .leading) {
-                        NavigationLink(destination: EventDetailsView(event: viewModel.eventToShow), isActive: $viewModel.shouldPresentEventDetails) {
-                            EmptyView()
-                        }
-                        .disabled(true)
                         Button(bookmark.title) {
                             viewModel.eventDetails(forEventId: bookmark.id)
                         }
@@ -61,7 +58,7 @@ struct EventsBookmarksView: View {
                 .font(.body.bold())
             })
             .listStyle(PlainListStyle())
-            .searchable(text: $searchingText,placement: .navigationBarDrawer(displayMode: .always), prompt: "search bookmarks")
+            .searchable(text: $searchingText,placement: .navigationBarDrawer(displayMode: .always), prompt: "Search bookmarks")
             .navigationTitle("Bookmarks")
             .navigationBarTitleDisplayMode(.inline)
             .overlay {
@@ -69,6 +66,11 @@ struct EventsBookmarksView: View {
                     .isHidden(!viewModel.isEventDetailsLoading, remove: !viewModel.isEventDetailsLoading)
             }
         }
+        .onChange(of: viewModel.lastLoadedEvent, perform: { loadedEvent in
+            guard let loadedEvent = loadedEvent else { return }
+            selectedBookmarkEvent = loadedEvent
+            dismiss()
+        })
         .onDisappear {
             viewModel.saveEventsBookmark()
         }
@@ -79,7 +81,7 @@ struct EventsBookmarksView_Previews: PreviewProvider {
     static var previews: some View {
         Color.green
             .sheet(isPresented: .constant(true)) {
-                EventsBookmarksView()
+                EventsBookmarksView(selectedBookmarkEvent: .constant(nil))
             }
     }
 }

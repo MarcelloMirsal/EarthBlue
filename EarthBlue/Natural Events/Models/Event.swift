@@ -22,6 +22,15 @@ struct Event: Codable {
     let sources: [EventSource]
 }
 
+extension Event: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(title)
+        hasher.combine(closed)
+        hasher.combine(categories)
+    }
+}
+
 extension Event: Equatable {
     static func ==(lhs: Event, rhs: Event) -> Bool {
         return lhs.id == rhs.id

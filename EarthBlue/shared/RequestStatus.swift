@@ -11,4 +11,5 @@ enum RequestStatus {
     case loading
     case success
     case failed
+    case initial
 }

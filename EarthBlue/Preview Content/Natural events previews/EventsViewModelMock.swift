@@ -24,13 +24,13 @@ class EventsViewModelMock: EventsViewModel {
     
     override func requestDefaultFeed() async {
         let feed = EventsFeed(events: mockedEvents)
-        await set(eventsFeed: feed)
+        set(eventsFeed: feed)
         set(requestStatus: .success)
     }
     
     override func requestFilteredFeed(feedFiltering: EventsFeedFiltering) async {
         let feed = EventsFeed(events: mockedEvents.shuffled())
-        await set(eventsFeed: feed)
+        set(eventsFeed: feed)
         set(requestStatus: .success)
     }
 }

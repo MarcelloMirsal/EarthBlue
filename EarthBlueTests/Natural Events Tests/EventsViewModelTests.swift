@@ -80,7 +80,7 @@ class EventsViewModelTests: XCTestCase {
     }
     
     func testRequestStatus_ShouldBeEqualToSuccessWhenInitialized() {
-        XCTAssertEqual(sut.requestStatus, .success, "request should be in success status when first initialized, to allow the UI to send new feed requests, if request == success new request can be placed.")
+        XCTAssertEqual(sut.requestStatus, .initial, "request should be in initial status when first initialized, to allow the UI to send new feed requests, if request != loading new request can be placed.")
     }
     
     // MARK: Test Mappers

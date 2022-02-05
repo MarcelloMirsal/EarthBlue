@@ -18,7 +18,9 @@ struct EventDetailsView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: EventDetailsViewController, context: Context) {
+        
     }
+    
 }
 
 struct EventDetailsView_Previews: PreviewProvider {
