@@ -281,6 +281,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AD0844E527AF005A00B3FB8F /* Extra Info */ = {
+			isa = PBXGroup;
+			children = (
+				AD1912A227AD336700456F24 /* ExtraInfoView.swift */,
+			);
+			path = "Extra Info";
+			sourceTree = "<group>";
+		};
 		AD3C96CB27A59328008B52E3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,9 +407,8 @@
 				ADF49648273EEA84003ADB9C /* shared */,
 				ADF4964B273EEAB5003ADB9C /* Natural Events */,
 				AD4AB63D2743E1C9000F3F61 /* Preview Content */,
-				AD7B284727443C4600737AF1 /* Extensions and helpers.swift */,
 				AD5F17A827774ED0003E98FE /* Imagery */,
-				AD1912A227AD336700456F24 /* ExtraInfoView.swift */,
+				AD0844E527AF005A00B3FB8F /* Extra Info */,
 			);
 			path = EarthBlue;
 			sourceTree = "<group>";
@@ -599,6 +606,7 @@
 			children = (
 				AD3C96CB27A59328008B52E3 /* UI */,
 				AD3C96C927A59321008B52E3 /* RequestStatus.swift */,
+				AD7B284727443C4600737AF1 /* Extensions and helpers.swift */,
 			);
 			path = shared;
 			sourceTree = "<group>";
