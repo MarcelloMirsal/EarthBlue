@@ -78,8 +78,7 @@ struct MarsRoversFilteringView: View {
                     viewModel.resetFiltering()
                 }, label: {
                     Text("Reset defaults")
-                        .fontWeight(.bold)
-                        .padding(4)
+                        .fontWeight(.semibold)
                 })
                     .padding(.bottom, 8)
                     .controlSize(.regular)

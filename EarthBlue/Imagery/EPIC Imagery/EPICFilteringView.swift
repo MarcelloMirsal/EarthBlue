@@ -29,11 +29,24 @@ struct EPICFilteringView: View {
                 Section {
                     DatePicker("Images date", selection: $viewModel.selectedDate, in: viewModel.datesRange, displayedComponents: .date)
                 }
+                Button(action: {
+                    viewModel.restDefaults()
+                }, label: {
+                    Text("Reset defaults")
+                        .fontWeight(.semibold)
+                })
+                    .padding(.bottom, 8)
+                    .controlSize(.regular)
+                    .buttonStyle(.bordered)
+                    .padding(4)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(uiColor: .systemGroupedBackground))
+                    .listRowBackground(Color.clear)
             }
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("reset") {
-                        viewModel.restDefaults()
+                    Button("Cancel") {
+                        dismiss()
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {

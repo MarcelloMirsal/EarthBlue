@@ -20,7 +20,7 @@ struct MarsRoverView: View {
     
     var body: some View {
         ZStack {
-            List {
+            ScrollView {
                 HStack(alignment: .center) {
                     Text(viewModel.feedHeaderDateTitle)
                         .font(.title3)
@@ -28,7 +28,6 @@ struct MarsRoverView: View {
                     Spacer()
                 }
                 .padding(8)
-                .listRowSeparator(.hidden)
                 LazyVGrid(columns: gridItems, spacing: 4, pinnedViews: [.sectionHeaders]) {
                     ForEach(viewModel.cameraTypes, id: \.name) { camera in
                         Section {
@@ -59,10 +58,7 @@ struct MarsRoverView: View {
                         }
                     }
                 }
-                .listRowInsets(.init(top: 0, leading: 4, bottom: 0, trailing: 4))
-                .listRowSeparator(.hidden)
             }
-            .listStyle(PlainListStyle())
             .navigationTitle(viewModel.roverName)
             .refreshable(action: {
                 await viewModel.refreshFeed()
@@ -71,8 +67,12 @@ struct MarsRoverView: View {
                 TaskProgressView()
             }
             if viewModel.requestStatus == .failed && viewModel.imageryFeed.photos.isEmpty {
-                Text("pull down to refresh")
-                    .foregroundColor(.secondary)
+                Button("Tap here to refresh") {
+                    Task {
+                        await viewModel.refreshFeed()
+                    }
+                }
+                .foregroundColor(.secondary)
             }
             if viewModel.requestStatus == .success && viewModel.imageryFeed.photos.isEmpty {
                 Text("Sorry, imageries are not available yet for this date.")

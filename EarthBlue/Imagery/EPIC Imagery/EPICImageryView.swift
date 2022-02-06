@@ -20,7 +20,7 @@ struct EPICImageryView: View {
     
     var body: some View {
         ZStack {
-            List {
+            ScrollView {
                 LazyVGrid(columns: columns, spacing: 2) {
                     Section {
                         ForEach(viewModel.feedImages) { identifiableImage in
@@ -29,6 +29,9 @@ struct EPICImageryView: View {
                                 selectedEPICImage = identifiableImage
                             } label: {
                                 EPICImageView(imageURL: url)
+                                    .onAppear {
+                                        print(identifiableImage.id)
+                                    }
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
@@ -42,15 +45,8 @@ struct EPICImageryView: View {
                         .padding()
                     }
                 }
-                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                .listRowSeparator(.hidden)
             }
-            .listStyle(PlainListStyle())
-            .ignoresSafeArea(edges: .horizontal)
             .navigationTitle("EPIC")
-            .refreshable {
-                await viewModel.refreshFeed()
-            }
             .toolbar(content: {
                 ToolbarItem {
                     Button {
@@ -67,21 +63,23 @@ struct EPICImageryView: View {
             .sheet(isPresented: $shouldShowFilteringView, content: {
                 EPICFilteringView(imageryFiltering: $viewModel.imageryFiltering)
             })
-            .alert("Error", isPresented: .init(get: {
+            .alert(isPresented: .init(get: {
                 return viewModel.error != nil
             }, set: { _ in
                 viewModel.set(error: nil)
-            })) {
-                Button("Ok") {}
-            } message: {
-                Text(viewModel.error?.localizedDescription ?? "an error occurred please try again.")
-            }
+            }), content: {
+                Alert(title: Text("\(viewModel.error?.localizedDescription ?? "an error occurred")"))
+            })
             if viewModel.isFeedLoading && viewModel.epicImagesFeed.epicImages.isEmpty {
                 TaskProgressView()
             }
             if viewModel.isFailedLoading && viewModel.epicImagesFeed.epicImages.isEmpty {
-                Text("pull down to refresh")
-                    .foregroundColor(.secondary)
+                Button("Tap here to refresh") {
+                    Task {
+                        await viewModel.refreshFeed()
+                    }
+                }
+                .foregroundColor(.secondary)
             }
             if viewModel.isFeedImagesEmpty {
                 Text("Sorry, images are not available yet for this date.")

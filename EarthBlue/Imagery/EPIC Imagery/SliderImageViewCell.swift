@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class SliderImageViewCell: UICollectionViewCell, UIScrollViewDelegate {
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()

@@ -33,20 +33,23 @@ struct EventsView: View {
                 } label: {
                     EmptyView()
                 }
-                
                 EventsList(searchText: $searchText)
                     .environmentObject(viewModel)
                     .navigationTitle("Events")
-                Group {
-                    TaskProgressView()
-                        .isHidden(!viewModel.shouldShowLoadingIndicator)
-                    Text("Pull down to refresh.")
-                        .isHidden(!viewModel.shouldShowPullToRefresh)
-                    Text("No events found, try another feed filtering options.")
-                        .multilineTextAlignment(.center)
-                        .isHidden(!viewModel.shouldShowNoEventsFound)
+                TaskProgressView()
+                    .isHidden(!viewModel.shouldShowLoadingIndicator)
+                if viewModel.shouldShowPullToRefresh {
+                    Button("Tap here to refresh") {
+                        Task {
+                            await viewModel.refreshEventsFeed()
+                        }
+                    }
+                    .foregroundColor(.secondary)
                 }
-                .foregroundColor(.secondary)
+                Text("No events found, try another feed filtering options.")
+                    .multilineTextAlignment(.center)
+                    .isHidden(!viewModel.shouldShowNoEventsFound)
+                    .foregroundColor(.secondary)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -71,6 +74,13 @@ struct EventsView: View {
                     }
                 }
             }
+            .alert(isPresented: .init(get: {
+                return viewModel.errorMessage != nil
+            }, set: { _ in
+                viewModel.set(errorMessage: nil)
+            }), content: {
+                Alert(title: Text(viewModel.errorMessage ?? "an error occurred") )
+            })
             .alert("Error", isPresented: .init(get: {
                 viewModel.shouldPresentError
             }, set: { _ in

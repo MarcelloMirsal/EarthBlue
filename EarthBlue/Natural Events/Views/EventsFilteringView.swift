@@ -20,14 +20,13 @@ struct EventsFilteringView: View {
     @State private var selectedStatus: FeedStatusOptions = .all
     @Binding private(set) var eventsFeedFiltering: EventsFeedFiltering?
     @State var numberOfDays: String = "1"
-    
+    @FocusState var isNumberOfDaysFocused: Bool
+    @State var isCategoriesExpanded = false
+    let statusOptions = FeedStatusOptions.allCases
     
     var formattedNumberOfDays: String {
         return viewModel.formattedNumberOfDays(fromTextFieldString: numberOfDays)
     }
-    @FocusState var isNumberOfDaysFocused: Bool
-    @State var isCategoriesExpanded = false
-    let statusOptions = FeedStatusOptions.allCases
     
     init(eventsFeedFiltering: Binding<EventsFeedFiltering?>) {
         self._eventsFeedFiltering = eventsFeedFiltering
@@ -49,8 +48,12 @@ struct EventsFilteringView: View {
                             }, set: { newValue in
                                 numberOfDays = newValue
                             }), prompt: nil)
+                                .focused($isNumberOfDaysFocused)
                                 .keyboardType(.asciiCapableNumberPad)
                                 .onReceive(Just(numberOfDays)) { val in
+                                    if val.isEmpty {
+                                        numberOfDays = viewModel.daysRange.lowerBound.description
+                                    }
                                     guard val != formattedNumberOfDays else { return }
                                     numberOfDays = formattedNumberOfDays
                                 }
@@ -94,21 +97,20 @@ struct EventsFilteringView: View {
                                 }
                         }
                     }
-                }
-                Button(action: {
-                    updateUI(from: viewModel.defaultFeedFiltering)
-                }, label: {
-                    Text("Reset defaults")
-                        .fontWeight(.bold)
+                    Button(action: {
+                        updateUI(from: viewModel.defaultFeedFiltering)
+                    }, label: {
+                        Text("Reset defaults")
+                            .fontWeight(.semibold)
+                    })
+                        .padding(.top, 8)
+                        .controlSize(.regular)
+                        .buttonStyle(.bordered)
                         .padding(4)
-                })
-                    .padding(.bottom, 8)
-                    .controlSize(.regular)
-                    .buttonStyle(.bordered)
-                    .padding(4)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(uiColor: .systemGroupedBackground))
-                
+                        .frame(maxWidth: .infinity)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarTitle("New Filtered Feed")
@@ -134,6 +136,7 @@ struct EventsFilteringView: View {
                 }
             }
         }
+        .interactiveDismissDisabled()
         .task {
             updateUI(from: eventsFeedFiltering ?? .defaultFiltering)
         }

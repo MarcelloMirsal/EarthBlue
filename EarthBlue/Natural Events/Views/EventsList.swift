@@ -42,9 +42,6 @@ struct EventsList: View {
             }
         }
         .listStyle(PlainListStyle())
-        .refreshable(action: {
-            await viewModel.refreshEventsFeed()
-        })
         .overlay {
             if isSearching && !searchText.isEmpty {
                 EventsSearchResultsList(events: filteredEvents)
