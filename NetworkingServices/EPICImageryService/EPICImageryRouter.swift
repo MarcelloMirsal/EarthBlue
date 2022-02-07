@@ -65,14 +65,8 @@ public struct EPICImageryRouter {
         archiveBaseURL.appendPathComponent(imageRootPath)
         
         archiveBaseURL.appendPathComponent(imageType == .thumb ? Paths.thumbImages.rawValue : Paths.originalImages.rawValue)
-        
         archiveBaseURL.appendPathComponent(imageName)
-        switch imageType {
-        case .thumb:
-            archiveBaseURL.appendPathExtension("jpg")
-        case .original:
-            archiveBaseURL.appendPathExtension("png")
-        }
+        archiveBaseURL.appendPathExtension("jpg")
         return archiveBaseURL
     }
     
@@ -98,8 +92,8 @@ public struct EPICImageryRouter {
         case defaultFeed = "/natural/images"
         case naturalFiltered = "/natural/date"
         case enhancedFiltered = "/enhanced/date"
-        case thumbImages = "/jpg"
-        case originalImages = "/png"
+        case thumbImages = "/thumbs"
+        case originalImages = "/jpg"
         case natural = "/natural"
         case enhanced = "/enhanced"
         case naturalDates = "/natural/available"

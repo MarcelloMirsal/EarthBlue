@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct MarsRoverView: View {
-    let gridItems: [GridItem] = Array.init(repeating: GridItem(.adaptive(minimum: 160), spacing: 4), count: 2)
+    let gridItems: [GridItem] = Array.init(repeating: GridItem(.adaptive(minimum: 160), spacing: 2), count: 2)
     @StateObject var viewModel: MarsRoversViewModel
     @State var selectedImagery: RoverImagery? = nil
     @State var shouldPresentFilteringView: Bool = false
@@ -28,7 +28,7 @@ struct MarsRoverView: View {
                     Spacer()
                 }
                 .padding(8)
-                LazyVGrid(columns: gridItems, spacing: 4, pinnedViews: [.sectionHeaders]) {
+                LazyVGrid(columns: gridItems, spacing: 2, pinnedViews: [.sectionHeaders]) {
                     ForEach(viewModel.cameraTypes, id: \.name) { camera in
                         Section {
                             ForEach(viewModel.imageries(fromCameraType: camera), id: \.id) { imagery in
@@ -39,10 +39,11 @@ struct MarsRoverView: View {
                                         .placeholder {
                                             Color(uiColor: .lightGray.withAlphaComponent(0.25))
                                         }
-                                        .retry(maxCount: 2, interval: .seconds(2))
                                         .cancelOnDisappear(true)
+                                        .retry(maxCount: 2, interval: .seconds(2))
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
+                                        .border(Color.gray.opacity(0.5), width: 0.5)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }

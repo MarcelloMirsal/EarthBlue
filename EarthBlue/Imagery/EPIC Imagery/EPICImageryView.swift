@@ -29,9 +29,6 @@ struct EPICImageryView: View {
                                 selectedEPICImage = identifiableImage
                             } label: {
                                 EPICImageView(imageURL: url)
-                                    .onAppear {
-                                        print(identifiableImage.id)
-                                    }
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
@@ -109,6 +106,7 @@ struct EPICImageView: View {
             .placeholder({
                 Color(uiColor: .lightGray.withAlphaComponent(0.25))
             })
+            .cancelOnDisappear(true)
             .retry(maxCount: 2, interval: .seconds(2))
             .resizable()
             .aspectRatio(contentMode: .fit)
