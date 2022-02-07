@@ -14,13 +14,13 @@ class EPICImageryViewModel: ObservableObject {
     @Published private(set) var requestStatus: RequestStatus = .initial
     @Published var imageryFiltering: EPICImageryFiltering? = nil
     var cancellable = Set<AnyCancellable>()
-    
+
     let imageryService = EPICImageryService()
-    
+
     var feedImages: [EPICImageIdentifiable] {
         return epicImagesFeed.epicImages.map({ EPICImageIdentifiable(epicImage: $0) })
     }
-    
+
     init() {
         self.epicImagesFeed = .init(isEnhanced: false, epicImages: [])
         Task {

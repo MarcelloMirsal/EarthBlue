@@ -9,13 +9,11 @@ import SwiftUI
 import Kingfisher
 
 struct EPICImageryView: View {
-    @StateObject var viewModel: EPICImageryViewModel
+    @StateObject var viewModel: EPICImageryViewModel = .init()
     @State private var shouldShowFilteringView = false
     @State private var shouldShowImageSliderView = false
     @State private var selectedEPICImage: EPICImageryViewModel.EPICImageIdentifiable?
-    init(viewModel: EPICImageryViewModel = .init()) {
-        self._viewModel = .init(wrappedValue: viewModel)
-    }
+    
     var columns: [GridItem] = Array(repeating: GridItem(.adaptive(minimum: 150), spacing: 2) , count: 2)
     
     var body: some View {
