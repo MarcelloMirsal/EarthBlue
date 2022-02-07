@@ -1,15 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "Curiosiry.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "MarsCuriosityRover@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "MarsCuriosityRover@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

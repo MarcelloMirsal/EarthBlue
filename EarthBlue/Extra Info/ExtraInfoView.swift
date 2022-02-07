@@ -54,6 +54,12 @@ struct ExtraInfoView: View {
                         }
                         .navigationTitle("About")
                     }
+                    HStack {
+                        Text("Version")
+                        Spacer()
+                        Text("1.0")
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
             .navigationTitle("Extra")

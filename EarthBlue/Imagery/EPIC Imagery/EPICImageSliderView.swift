@@ -106,6 +106,7 @@ class EPICImageSliderViewController: UIViewController, UICollectionViewDelegate,
         
         if ImageCache.default.isCached(forKey: originalURLRequest.url!.absoluteString) {
             cell.imageView.kf.setImage(with: originalURLRequest.url!)
+            
         } else {
             cell.imageView.kf.setImage(with: thumbImageURLRequest.url!, options: [.retryStrategy(DelayRetryStrategy(maxRetryCount: 3, retryInterval: .seconds(2)))])
         }

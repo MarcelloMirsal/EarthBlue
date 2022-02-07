@@ -1,15 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "CDKcZo1YHO.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "EPICImageThumb@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "EPICImageThumb@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

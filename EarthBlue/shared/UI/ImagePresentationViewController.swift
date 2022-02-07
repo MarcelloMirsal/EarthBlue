@@ -30,6 +30,11 @@ class ImagePresentationViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     var imageURL: URL!
+    var isStatusBarHidden = false
+    override var prefersStatusBarHidden: Bool {
+        return isStatusBarHidden
+    }
+    
     convenience init(imageURL: URL) {
         self.init()
         self.imageURL = imageURL
@@ -97,6 +102,8 @@ class ImagePresentationViewController: UIViewController, UIScrollViewDelegate {
             self.dismissButton.transform = .identity
             self.imageOptionsButton.alpha = 1
             self.dismissButton.alpha = 1
+            self.isStatusBarHidden = false
+            self.setNeedsStatusBarAppearanceUpdate()
         }
     }
     
@@ -106,6 +113,8 @@ class ImagePresentationViewController: UIViewController, UIScrollViewDelegate {
             self.dismissButton.transform = CGAffineTransform(translationX: 0, y: -32)
             self.imageOptionsButton.alpha = 0
             self.dismissButton.alpha = 0
+            self.isStatusBarHidden = true
+            self.setNeedsStatusBarAppearanceUpdate()
         }
     }
     

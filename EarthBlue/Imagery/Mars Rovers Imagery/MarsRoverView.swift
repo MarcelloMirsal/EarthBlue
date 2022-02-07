@@ -40,7 +40,7 @@ struct MarsRoverView: View {
                                             Color(uiColor: .lightGray.withAlphaComponent(0.25))
                                         }
                                         .cancelOnDisappear(true)
-                                        .retry(maxCount: 2, interval: .seconds(2))
+                                        .retry(maxCount: 5, interval: .seconds(2))
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .border(Color.gray.opacity(0.5), width: 0.5)
