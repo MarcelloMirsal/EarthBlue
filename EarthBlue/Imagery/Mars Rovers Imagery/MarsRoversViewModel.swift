@@ -97,8 +97,8 @@ class MarsRoversViewModel: ObservableObject {
         }
     }
     
-    lazy var feedFilteringUpdateHandler: (RoverImageryFeedFiltering?) -> () = { newFeedFiltering in
-        self.imageryFeed = .init(photos: [])
+    lazy var feedFilteringUpdateHandler: (RoverImageryFeedFiltering?) -> () = { [weak self] newFeedFiltering in
+        self?.imageryFeed = .init(photos: [])
         Task { [weak self] in
             await self?.requestFilteredImageries()
         }

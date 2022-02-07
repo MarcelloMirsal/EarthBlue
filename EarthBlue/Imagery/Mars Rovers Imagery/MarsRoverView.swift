@@ -13,7 +13,7 @@ struct MarsRoverView: View {
     @StateObject var viewModel: MarsRoversViewModel
     @State var selectedImagery: RoverImagery? = nil
     @State var shouldPresentFilteringView: Bool = false
-    
+
     init(roverInfo: RoverInfo) {
         self._viewModel = .init(wrappedValue: .init(roverInfo: roverInfo))
     }
