@@ -29,13 +29,13 @@ class ImagePresentationViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var imageOptionsButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
-    var imageURL: URL!
+    fileprivate  var imageURL: URL!
     var isStatusBarHidden = false
     override var prefersStatusBarHidden: Bool {
         return isStatusBarHidden
     }
     
-    convenience init(imageURL: URL) {
+    fileprivate convenience init(imageURL: URL) {
         self.init()
         self.imageURL = imageURL
     }
@@ -69,11 +69,10 @@ class ImagePresentationViewController: UIViewController, UIScrollViewDelegate {
         let alertController = UIAlertController(title: "Imagery options", message: nil, preferredStyle: .actionSheet)
         [
             UIAlertAction(title: "Save", style: .default) { [weak self] action in
-                self?.saveImageActionHandler(action, image)
+                self?.saveImageActionHandler(action: action, image: image)
             },
             UIAlertAction(title: "Share", style: .default) { [weak self]  action in
-                let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-                self?.present(activityController, animated: true, completion: nil)
+                self?.shareImageHandler(image: image)
             },
             UIAlertAction(title: "cancel", style: .cancel),
         ].forEach({ alertController.addAction($0) })
@@ -119,13 +118,19 @@ class ImagePresentationViewController: UIViewController, UIScrollViewDelegate {
     }
     
     // MARK: handlers
-    lazy var saveImageActionHandler: (UIAlertAction, UIImage) -> () = { [weak self] action, image  in
+    func saveImageActionHandler(action: UIAlertAction, image: UIImage) {
         if PHPhotoLibrary.authorizationStatus(for: .addOnly) == .authorized {
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         } else {
-            self?.present(UIAlertController.imageAuthNotGrantedAlertController(), animated: true, completion: nil)
+            present(UIAlertController.imageAuthNotGrantedAlertController(), animated: true, completion: nil)
         }
     }
+    
+    func shareImageHandler(image: UIImage) {
+        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
+    }
+
     
     @objc
     func handleDoubleTap(gesture: UITapGestureRecognizer) {

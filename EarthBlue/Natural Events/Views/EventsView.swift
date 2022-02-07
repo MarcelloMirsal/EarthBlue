@@ -81,15 +81,6 @@ struct EventsView: View {
             }), content: {
                 Alert(title: Text(viewModel.errorMessage ?? "an error occurred") )
             })
-            .alert("Error", isPresented: .init(get: {
-                viewModel.shouldPresentError
-            }, set: { _ in
-                viewModel.set(errorMessage: nil)
-            }), actions: {
-                Button("Ok") {}
-            }, message: {
-                Text(viewModel.errorMessage ?? "Unknown error")
-            })
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onChange(of: eventsFeedFiltering, perform: { newValue in

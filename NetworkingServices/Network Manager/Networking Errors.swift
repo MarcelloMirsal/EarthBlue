@@ -46,7 +46,7 @@ struct AFErrorWrapper {
             }
             
         default:
-            print(afError.underlyingError ?? "")
+//            print(afError.underlyingError ?? "")
             return .unspecified
         }
     }

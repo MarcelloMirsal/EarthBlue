@@ -11,7 +11,7 @@ import Combine
 class EPICImageryViewModel: ObservableObject {
     @Published private(set) var epicImagesFeed: EPICImagesFeed
     @Published private(set) var error: Error?
-    @Published private(set) var requestStatus: RequestStatus = .success
+    @Published private(set) var requestStatus: RequestStatus = .initial
     @Published var imageryFiltering: EPICImageryFiltering? = nil
     var cancellable = Set<AnyCancellable>()
     

@@ -29,9 +29,6 @@ struct EPICImageryView: View {
                                 selectedEPICImage = identifiableImage
                             } label: {
                                 EPICImageView(imageURL: url)
-                                    .onAppear {
-                                        print(identifiableImage.id)
-                                    }
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
@@ -56,19 +53,18 @@ struct EPICImageryView: View {
                     }
                 }
             })
-            .fullScreenCover(item: $selectedEPICImage, content: { selectedImage in
-                let selectedImageFeed = EPICImagesFeed(isEnhanced: viewModel.epicImagesFeed.isEnhanced, epicImages: [selectedImage.epicImage])
-                EPICImageSliderView(epicImagesFeed: selectedImageFeed)
-            })
-            .sheet(isPresented: $shouldShowFilteringView, content: {
-                EPICFilteringView(imageryFiltering: $viewModel.imageryFiltering)
-            })
             .alert(isPresented: .init(get: {
                 return viewModel.error != nil
             }, set: { _ in
                 viewModel.set(error: nil)
             }), content: {
                 Alert(title: Text("\(viewModel.error?.localizedDescription ?? "an error occurred")"))
+            })
+            .fullScreenCover(item: $selectedEPICImage, content: { selectedImage in
+                EPICImageSliderView(epicImage: selectedImage.epicImage, isEnhanced: viewModel.epicImagesFeed.isEnhanced)
+            })
+            .sheet(isPresented: $shouldShowFilteringView, content: {
+                EPICFilteringView(imageryFiltering: $viewModel.imageryFiltering)
             })
             if viewModel.isFeedLoading && viewModel.epicImagesFeed.epicImages.isEmpty {
                 TaskProgressView()
