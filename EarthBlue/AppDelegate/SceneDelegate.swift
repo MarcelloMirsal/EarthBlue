@@ -21,5 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = UIHostingController(rootView: MainView())
         window?.makeKeyAndVisible()
     }
+    
+    func sceneWillResignActive(_ scene: UIScene) {
+        dismissAlertController()
+    }
+    
+    private func dismissAlertController() {
+        guard let currentVC = window?.rootViewController, let _ = currentVC.presentedViewController as? UIAlertController else {return}
+        currentVC.dismiss(animated: false, completion: nil)
+    }
 }
 

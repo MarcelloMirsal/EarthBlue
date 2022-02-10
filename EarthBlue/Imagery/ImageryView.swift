@@ -39,12 +39,12 @@ struct ImageryView: View {
                         NavigationLink {
                             MarsRoverView(roverInfo: RoverInfoFactory.makeSpiritRoverInfo() )
                         } label: {
-                            ImageryProviderView(imageName: "MarsSpiritAndOpportunityRovers", providerInfo: ImageryProviderInfoFactory.makeSpiritRoverInfo())
+                            ImageryProviderView(imageName: "MarsSpiritRover", providerInfo: ImageryProviderInfoFactory.makeSpiritRoverInfo())
                         }
                         NavigationLink {
                             MarsRoverView(roverInfo: RoverInfoFactory.makeOpportunityRoverInfo() )
                         } label: {
-                            ImageryProviderView(imageName: "MarsSpiritAndOpportunityRovers", providerInfo: ImageryProviderInfoFactory.makeOpportunityRoverInfo())
+                            ImageryProviderView(imageName: "MarsOpportunityRover", providerInfo: ImageryProviderInfoFactory.makeOpportunityRoverInfo())
                         }
                     } header: {
                         HStack {

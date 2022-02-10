@@ -50,7 +50,7 @@ extension UIAlertController {
         let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
         alertController.addAction(cancelAction)
         alertController.addAction(permissionsSettingsAction)
-        alertController.preferredAction = permissionsSettingsAction
+        alertController.preferredAction = cancelAction
         return alertController
     }
 }

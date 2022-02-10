@@ -33,6 +33,13 @@ struct EventsView: View {
                 } label: {
                     EmptyView()
                 }
+                .alert(isPresented: .init(get: {
+                    return viewModel.errorMessage != nil
+                }, set: { _ in
+                    viewModel.set(errorMessage: nil)
+                }), content: {
+                    Alert(title: Text(viewModel.errorMessage ?? "an error occurred") )
+                })
                 EventsList(searchText: $searchText)
                     .environmentObject(viewModel)
                     .navigationTitle("Events")
@@ -74,13 +81,6 @@ struct EventsView: View {
                     }
                 }
             }
-            .alert(isPresented: .init(get: {
-                return viewModel.errorMessage != nil
-            }, set: { _ in
-                viewModel.set(errorMessage: nil)
-            }), content: {
-                Alert(title: Text(viewModel.errorMessage ?? "an error occurred") )
-            })
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onChange(of: eventsFeedFiltering, perform: { newValue in
