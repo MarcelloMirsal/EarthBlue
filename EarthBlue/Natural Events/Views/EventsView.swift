@@ -45,13 +45,12 @@ struct EventsView: View {
                     .navigationTitle("Events")
                 TaskProgressView()
                     .isHidden(!viewModel.shouldShowLoadingIndicator)
-                if viewModel.shouldShowPullToRefresh {
-                    Button("Tap here to refresh") {
+                if viewModel.shouldShowTryAgainButton {
+                    TryAgainFeedButton(action: {
                         Task {
                             await viewModel.refreshEventsFeed()
                         }
-                    }
-                    .foregroundColor(.secondary)
+                    })
                 }
                 Text("No events found, try another feed filtering options.")
                     .multilineTextAlignment(.center)
@@ -106,3 +105,5 @@ struct EventsView_Previews: PreviewProvider {
         .previewLayout(.sizeThatFits)
     }
 }
+
+

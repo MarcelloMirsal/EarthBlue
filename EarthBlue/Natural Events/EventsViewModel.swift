@@ -52,7 +52,7 @@ class EventsViewModel: ObservableObject {
         return events.isEmpty && requestStatus == .loading
     }
     
-    var shouldShowPullToRefresh: Bool {
+    var shouldShowTryAgainButton: Bool {
         return events.isEmpty && requestStatus == .failed
     }
     

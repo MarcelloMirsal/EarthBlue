@@ -53,7 +53,7 @@ class EPICImageryRouterTests: XCTestCase {
     func testThumbImageRequest_ShouldReturnURLEqualToExpectedURL() {
         let imageDate = "2015-10-31 19:00:00"
         let imageName = "epic_1b_20151031074844"
-        let expectedURL = URL(string: "https://epic.gsfc.nasa.gov/archive/natural/2015/10/31/jpg/epic_1b_20151031074844.jpg?api_key=\(EPICImageryRouter().apiKey)")
+        let expectedURL = URL(string: "https://epic.gsfc.nasa.gov/archive/natural/2015/10/31/thumbs/epic_1b_20151031074844.jpg?api_key=\(EPICImageryRouter().apiKey)")
         
         let thumbImageRequest = sut.thumbImageRequest(imageName: imageName, stringDate: imageDate, isEnhanced: false)
         
@@ -63,7 +63,7 @@ class EPICImageryRouterTests: XCTestCase {
     func testThumbImageRequestForEnhanced_ShouldReturnURLEqualToExpectedURL() {
         let imageDate = "2015-10-31 19:00:00"
         let imageName = "epic_1b_20151031074844"
-        let expectedURL = URL(string: "https://epic.gsfc.nasa.gov/archive/enhanced/2015/10/31/jpg/epic_1b_20151031074844.jpg?api_key=\(EPICImageryRouter().apiKey)")
+        let expectedURL = URL(string: "https://epic.gsfc.nasa.gov/archive/enhanced/2015/10/31/thumbs/epic_1b_20151031074844.jpg?api_key=\(EPICImageryRouter().apiKey)")
         
         let thumbImageRequest = sut.thumbImageRequest(imageName: imageName, stringDate: imageDate, isEnhanced: true)
         

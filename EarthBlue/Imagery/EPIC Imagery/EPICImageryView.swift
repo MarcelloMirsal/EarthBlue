@@ -68,15 +68,12 @@ struct EPICImageryView: View {
                 TaskProgressView()
             }
             if viewModel.isFailedLoading && viewModel.epicImagesFeed.epicImages.isEmpty {
-                Button("Tap here to refresh") {
-                    Task {
-                        await viewModel.refreshFeed()
-                    }
-                }
-                .foregroundColor(.secondary)
+                TryAgainFeedButton(action: {
+                    Task {await viewModel.refreshFeed()}
+                })
             }
             if viewModel.isFeedImagesEmpty {
-                Text("Sorry, images are not available yet for this date.")
+                Text("Imageries are not available yet, please try another filtering date.")
                     .foregroundColor(.secondary)
             }
         }

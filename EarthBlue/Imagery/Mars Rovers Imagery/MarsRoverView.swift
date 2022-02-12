@@ -61,22 +61,18 @@ struct MarsRoverView: View {
                 }
             }
             .navigationTitle(viewModel.roverName)
-            .refreshable(action: {
-                await viewModel.refreshFeed()
-            })
             if viewModel.requestStatus == .loading && viewModel.imageryFeed.photos.isEmpty {
                 TaskProgressView()
             }
             if viewModel.requestStatus == .failed && viewModel.imageryFeed.photos.isEmpty {
-                Button("Tap here to refresh") {
+                TryAgainFeedButton(action: {
                     Task {
                         await viewModel.refreshFeed()
                     }
-                }
-                .foregroundColor(.secondary)
+                })
             }
             if viewModel.requestStatus == .success && viewModel.imageryFeed.photos.isEmpty {
-                Text("Sorry, imageries are not available yet for this date.")
+                Text("Imageries are not available yet, please try another filtering date.")
                     .multilineTextAlignment(.center)
                     .foregroundColor(.secondary)
                     .padding()

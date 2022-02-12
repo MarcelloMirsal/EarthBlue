@@ -76,6 +76,7 @@
 		ADB68EBD27A494F200F460CA /* MarsRoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB68EBC27A494F200F460CA /* MarsRoverView.swift */; };
 		ADC00577273D664A005D5EF2 /* NaturalEventsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */; };
 		ADC00579273D6DA0005D5EF2 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */; };
+		ADD4E6B527B7BE3F003F47E2 /* TryAgainFeedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD4E6B427B7BE3F003F47E2 /* TryAgainFeedButton.swift */; };
 		ADD616152736C8C4007A1D1D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD616142736C8C4007A1D1D /* MainView.swift */; };
 		ADD8881B274DAB4C00B7B89C /* EventMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD8881A274DAB4C00B7B89C /* EventMocks.swift */; };
 		ADE59BEA27A6CE7800D234C9 /* MarsRoversFilteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE59BE927A6CE7800D234C9 /* MarsRoversFilteringView.swift */; };
@@ -210,6 +211,7 @@
 		ADB68EBC27A494F200F460CA /* MarsRoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoverView.swift; sourceTree = "<group>"; };
 		ADC00576273D664A005D5EF2 /* NaturalEventsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NaturalEventsServiceTests.swift; path = "NetworkingServices/Natural Events Service/NaturalEventsServiceTests.swift"; sourceTree = SOURCE_ROOT; };
 		ADC00578273D6DA0005D5EF2 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
+		ADD4E6B427B7BE3F003F47E2 /* TryAgainFeedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryAgainFeedButton.swift; sourceTree = "<group>"; };
 		ADD616142736C8C4007A1D1D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		ADD8881A274DAB4C00B7B89C /* EventMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMocks.swift; sourceTree = "<group>"; };
 		ADE59BE927A6CE7800D234C9 /* MarsRoversFilteringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsRoversFilteringView.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				AD3567C6277B516A00BB9E62 /* TaskProgressView.swift */,
 				AD3C96DA27A59D73008B52E3 /* ImagePresentationViewController.swift */,
 				AD3C96DB27A59D73008B52E3 /* ImagePresentationViewController.xib */,
+				ADD4E6B427B7BE3F003F47E2 /* TryAgainFeedButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				AD1D9CBD278CCC47002905A1 /* EPICImageSliderView.swift in Sources */,
 				ADE77B9D27412FC90061AB3F /* Event.swift in Sources */,
 				ADF0A2CD27A07AC9002C5844 /* SliderImageViewCell.swift in Sources */,
+				ADD4E6B527B7BE3F003F47E2 /* TryAgainFeedButton.swift in Sources */,
 				AD3C96D127A59917008B52E3 /* MarsRoversViewModel.swift in Sources */,
 				AD4E2C60274BE80D00686DC2 /* EventDetailsView.swift in Sources */,
 				AD0ADAC927A9A9100078F17D /* RoverImageryFeedFiltering.swift in Sources */,
