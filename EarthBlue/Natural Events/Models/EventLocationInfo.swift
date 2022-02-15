@@ -9,6 +9,6 @@ import CoreLocation
 
 struct EventLocationInfo {
     var id: UUID = .init()
-    var date: String
+    var date: Date
     let location: CLLocationCoordinate2D
 }

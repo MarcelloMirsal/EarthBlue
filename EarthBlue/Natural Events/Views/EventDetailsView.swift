@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import SwiftUI
+import Combine
 
 struct EventDetailsView: UIViewControllerRepresentable {
     typealias UIViewControllerType = EventDetailsViewController
@@ -25,7 +26,7 @@ struct EventDetailsView: UIViewControllerRepresentable {
 
 struct EventDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        EventDetailsView(event: .polygonDetailedEventMock)
+        EventDetailsView(event: .activeEventMock)
     }
 }
 
@@ -34,14 +35,15 @@ class EventDetailsViewController: UIViewController {
     private let mapView = MKMapView()
     private var viewModel: EventDetailsViewModel!
     private let pointIdentifier = "pointIdentifier"
-    
     private let mapTypeButton: UIButton = {
         let button = UIButton(type: .system)
         button.showsMenuAsPrimaryAction = true
-        button.setTitle("Map type", for: .normal)
-        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        let image = UIImage(systemName: "map.fill", withConfiguration: UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .headline)))
+        button.setImage(image, for: .normal)
         return button
     }()
+    
+    private var cancellable = Set<AnyCancellable>()
     
     private let infoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -50,11 +52,19 @@ class EventDetailsViewController: UIViewController {
         return button
     }()
     
+    private let shareButton: UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(systemName: "square.and.arrow.up", withConfiguration: UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .headline)))
+        button.setImage(image, for: .normal)
+        return button
+    }()
+    
     private lazy var optionsStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [mapTypeButton, infoButton])
+        let stackView = UIStackView(arrangedSubviews: [mapTypeButton, infoButton, shareButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.spacing = 24
+        stackView.alignment = .center
         return stackView
     }()
     
@@ -78,20 +88,19 @@ class EventDetailsViewController: UIViewController {
         setupViews()
         setupMapView()
         setupMapTypeOptionsMenu()
+        setupMapViewToSelectLastAnnotation()
         infoButton.addTarget(self, action: #selector(handleInfo), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(handleShare), for: .touchUpInside)
     }
-    @objc
-    func handleInfo() {
-        let hostingView = UIHostingController(rootView: EventDetailsInfoView(event: viewModel.event))
-        if let sheet = hostingView.sheetPresentationController {
-            sheet.detents = [.medium(), .large()]
-            sheet.prefersGrabberVisible = true
-        }
-        present(hostingView, animated: true)
-    }
-    
     
     // MARK: setup methods
+    func setupMapViewToSelectLastAnnotation() {
+        guard let annotation = mapView.annotations.lazy.first(where: { [locationsInfo = viewModel.locationsInfo] annotation in
+            return (locationsInfo.last?.location.latitude == annotation.coordinate.latitude) && (locationsInfo.last?.location.longitude == annotation.coordinate.longitude)
+        }) else {return}
+        mapView.selectAnnotation(annotation, animated: false)
+    }
+    
     private func setupViews() {
         view.addSubview(mapView)
         NSLayoutConstraint.activate([
@@ -103,8 +112,8 @@ class EventDetailsViewController: UIViewController {
         
         view.addSubview(optionsBlurView)
         NSLayoutConstraint.activate([
-            optionsBlurView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
-            optionsBlurView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            optionsBlurView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32),
+            optionsBlurView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
         NSLayoutConstraint.activate([
             optionsStackView.topAnchor.constraint(equalTo: optionsBlurView.topAnchor, constant: 8),
@@ -141,23 +150,70 @@ class EventDetailsViewController: UIViewController {
     }
     
     private func addingAnnotationToMapView() {
-        let locationsInfo = viewModel.locationsInfo()
+        let locationsInfo = viewModel.locationsInfo
         for locationInfo in locationsInfo {
             let annotation = MKPointAnnotation()
             annotation.coordinate = locationInfo.location
-            annotation.title = locationInfo.date
+            annotation.title = viewModel.formattedDate(for: locationInfo)
             mapView.addAnnotation(annotation)
         }
         mapView.showAnnotations(mapView.annotations, animated: true)
     }
     
     private func addingPolygonOverlay() {
-        let locationsInfo = viewModel.locationsInfo()
+        let locationsInfo = viewModel.locationsInfo
         let coordinates = locationsInfo.map({$0.location})
         let polygonOverlay = MKPolygon(coordinates: coordinates, count: coordinates.count)
         mapView.addOverlay(polygonOverlay)
-        mapView.centerCoordinate = coordinates.last ?? .init()
         mapView.centerCoordinate = polygonOverlay.coordinate
+    }
+    
+    // MARK: handlers
+    @objc
+    func handleInfo() {
+        let hostingView = UIHostingController(rootView: EventDetailsInfoView(event: viewModel.event))
+        if let sheet = hostingView.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+            sheet.selectedDetentIdentifier = .medium
+            sheet.largestUndimmedDetentIdentifier = .medium
+        }
+        present(hostingView, animated: true)
+    }
+    
+    @objc
+    func handleShare() {
+        let sharingConfirmationAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let locationCoordinateToShare = getSelectedAnnotationCoordinate()
+        
+        let openInMapsAction = UIAlertAction(title: "Open in Maps", style: .default) {[ mapItem = viewModel.mapItem(for: locationCoordinateToShare) ] _ in
+            mapItem.openInMaps(launchOptions: nil)
+        }
+        let copyCoordinateAction = UIAlertAction(title: "Copy coordinates", style: .default) {[ formattedCoordinate = viewModel.formattedLocationCoordinate(from: locationCoordinateToShare) ] _ in
+            UIPasteboard.general.string = formattedCoordinate
+        }
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        sharingConfirmationAlertController.addAction(openInMapsAction)
+        sharingConfirmationAlertController.addAction(copyCoordinateAction)
+        sharingConfirmationAlertController.addAction(cancelAction)
+        present(sharingConfirmationAlertController, animated: true)
+    }
+    
+    private func getSelectedAnnotationCoordinate() -> CLLocationCoordinate2D {
+        guard let isCoordinateInPoint = viewModel.isCoordinatesInPoint() else {return .init()}
+        if isCoordinateInPoint {
+            return selectedAnnotationCoordinate()
+        } else {
+            return overlayCenterCoordinate()
+        }
+    }
+    
+    private func selectedAnnotationCoordinate() -> CLLocationCoordinate2D {
+        return mapView.selectedAnnotations.last?.coordinate ?? (viewModel.locationsInfo.last?.location ?? .init())
+    }
+    
+    private func overlayCenterCoordinate() -> CLLocationCoordinate2D {
+        return mapView.overlays.last?.coordinate ?? .init()
     }
 }
 
@@ -173,9 +229,7 @@ extension EventDetailsViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let selectedAnnotation = view.annotation else { return }
-        UIView.animate(withDuration: 0.5) {
-            mapView.centerCoordinate = selectedAnnotation.coordinate
-        }
+        mapView.setCenter(selectedAnnotation.coordinate, animated: true)
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -188,44 +242,59 @@ extension EventDetailsViewController: MKMapViewDelegate {
 
 
 struct EventDetailsInfoView: View {
+    @Environment(\.dismiss) var dismiss
+    
     let event: Event
     var body: some View {
-        List {
-            Section {
-                InfoItemView(headline: "Category") {
-                    ForEach(event.categories, id: \.id) { category in
-                        Text(category.title)
+        NavigationView {
+            List {
+                Section {
+                    Text(event.title)
+                        .padding()
+                        .multilineTextAlignment(.leading)
+                        .font(.largeTitle.bold())
+                        .foregroundColor(.primary)
+                        .shadow(radius: 32)
+                    InfoItemView(headline: "Category") {
+                        ForEach(event.categories, id: \.id) { category in
+                            Text(category.title)
+                        }
                     }
-                }
-                InfoItemView(headline: "Status", content: {
-                    Text(event.isActive ? "ACTIVE" : "CLOSED")
-                })
-                InfoItemView(headline: "Last update date", content: {
-                    Text(event.lastUpdatedDate)
-                })
-                InfoItemView(headline: "Sources", content: {})
-                ForEach(event.sources, id: \.id) { source in
-                    if let url = URL(string: source.url) {
-                        Link(source.id, destination: url)
-                            .foregroundColor(.blue)
-                            
+                    InfoItemView(headline: "Status", content: {
+                        Text(event.isActive ? "ACTIVE" : "CLOSED")
+                    })
+                    InfoItemView(headline: "Last update date", content: {
+                        Text(event.lastUpdatedDate)
+                    })
+                    InfoItemView(headline: "Sources", content: {})
+                    ForEach(event.sources, id: \.id) { source in
+                        if let url = URL(string: source.url) {
+                            Link(source.id, destination: url)
+                                .foregroundColor(.blue)
+                                
+                        }
                     }
+                    .padding(.horizontal)
+                    .listRowBackground(Color.clear)
+                    
                 }
-                .padding(.horizontal)
-                .listRowBackground(Color.clear)
-                
-            } header: {
-                Text(event.title)
-                    .padding()
-                    .multilineTextAlignment(.leading)
-                    .font(.largeTitle.bold())
-                    .foregroundColor(.primary)
-                    .shadow(radius: 32)
+                .listRowInsets(EdgeInsets.init(top: 16, leading: 0, bottom: 0, trailing: 0))
+                .listRowSeparator(.hidden)
             }
-            .listRowInsets(EdgeInsets.init(top: 16, leading: 0, bottom: 0, trailing: 0))
-            .listRowSeparator(.hidden)
+            .listStyle(PlainListStyle())
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Done")
+                            .fontWeight(.bold)
+                    }
+                }
+            }
         }
-        .listStyle(PlainListStyle())
+
     }
 }
 

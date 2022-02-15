@@ -63,6 +63,12 @@ extension DateFormatter {
         return newDateFormatter.string(from: dateAfterMapping)
     }
     
+    static func eventDate(ISO8601Date date: Date) -> String {
+        let newDateFormatter = DateFormatter()
+        newDateFormatter.dateFormat = "MMM d, yyyy - h:mm a"
+        return newDateFormatter.string(from: date)
+    }
+    
     static func date(fromISO8601StringDate stringDate: String) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"

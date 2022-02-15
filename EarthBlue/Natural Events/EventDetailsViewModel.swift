@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 class EventDetailsViewModel {
     let event: Event
@@ -14,10 +15,12 @@ class EventDetailsViewModel {
         self.event = event
     }
     
-    func locationsInfo() -> [EventLocationInfo] {
-        
+    lazy var locationsInfo: [EventLocationInfo] = getLocationsInfo()
+    
+    private func getLocationsInfo() -> [EventLocationInfo] {
         let locationsInfo: [[EventLocationInfo]] = event.geometry.map { geoDetails in
-            let formattedDate = DateFormatter.eventDate(ISO8601StringDate: geoDetails.date)
+        
+            let formattedDate = DateFormatter.date(fromISO8601StringDate: geoDetails.date)
             switch geoDetails.coordinates {
             case .pointCoordinates(let pointCoordinate):
                 return [EventLocationInfo(date: formattedDate, location: .init(coordinate: pointCoordinate))]
@@ -25,17 +28,21 @@ class EventDetailsViewModel {
                 return mapPolygonCoordinates(polygonCoordinates: polygonCoordinate, date: formattedDate)
             }
         }
-        return locationsInfo.flatMap({$0})
+        return locationsInfo.flatMap({$0}).sorted(by: { lhs, rhs in
+            lhs.date < rhs.date
+        })
     }
     
-    private func mapPolygonCoordinates(polygonCoordinates: [[[Double]]], date: String) -> [EventLocationInfo] {
+    private func mapPolygonCoordinates(polygonCoordinates: [[[Double]]], date: Date) -> [EventLocationInfo] {
         let flattedCoordinates = polygonCoordinates.flatMap({$0})
         return flattedCoordinates.map { coordinate in
             return EventLocationInfo(date: date, location: .init(coordinate: coordinate))
         }
     }
     
-    
+    func formattedDate(for locationInfo: EventLocationInfo) -> String {
+        return DateFormatter.eventDate(ISO8601Date: locationInfo.date)
+    }
     func isCoordinatesInPoint() -> Bool? {
         switch event.geometry.first?.coordinates {
         case .pointCoordinates:
@@ -46,5 +53,14 @@ class EventDetailsViewModel {
             return nil
         }
     }
+    
+    func mapItem(for coordinate: CLLocationCoordinate2D) -> MKMapItem {
+        return .init(placemark: .init(coordinate: coordinate))
+    }
+    
+    func formattedLocationCoordinate(from coordinate: CLLocationCoordinate2D) -> String {
+        return "Longitude: \(coordinate.longitude), Latitude: \(coordinate.latitude)"
+    }
+    
     
 }

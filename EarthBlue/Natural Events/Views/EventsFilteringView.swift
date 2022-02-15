@@ -11,7 +11,6 @@ import Combine
 struct EventsFilteringView: View {
     
     @StateObject var viewModel: EventsFilteringViewModel = .init()
-    @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
     @State private var isDaysRangeActive = true
     @State private var isDateRangeActive = false
@@ -51,9 +50,6 @@ struct EventsFilteringView: View {
                                 .focused($isNumberOfDaysFocused)
                                 .keyboardType(.asciiCapableNumberPad)
                                 .onReceive(Just(numberOfDays)) { val in
-                                    if val.isEmpty {
-                                        numberOfDays = viewModel.daysRange.lowerBound.description
-                                    }
                                     guard val != formattedNumberOfDays else { return }
                                     numberOfDays = formattedNumberOfDays
                                 }
@@ -122,18 +118,24 @@ struct EventsFilteringView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        presentationMode.wrappedValue.dismiss()
+                        isNumberOfDaysFocused = false
                         if isDaysRangeActive {
                             guard let formattedNumberOfDays = Int(formattedNumberOfDays) else { return }
                             eventsFeedFiltering = viewModel.feedFiltering(byDays: formattedNumberOfDays, status: selectedStatus)
                         } else if isDateRangeActive {
                             eventsFeedFiltering = viewModel.feedFilteringByDateRange(startDate: startDate, endDate: endDate, status: selectedStatus)
                         }
+                        dismiss()
                     } label: {
                         Text("Done")
                             .fontWeight(.bold)
                     }
                 }
+            }
+        }
+        .onChange(of: isNumberOfDaysFocused) { newValue in
+            if isNumberOfDaysFocused == false && numberOfDays.isEmpty {
+                numberOfDays = viewModel.daysRange.lowerBound.description
             }
         }
         .interactiveDismissDisabled()

@@ -20,7 +20,7 @@ class EventDetailsViewModelTests: XCTestCase {
     }
     
     func testGetEventLocationInfoFromPointCoordinates_ShouldReturnNotEmptyArray() {
-        let locationsInfo = sut.locationsInfo()
+        let locationsInfo = sut.locationsInfo
         
         XCTAssertTrue(!locationsInfo.isEmpty,
                       "locations info should return not empty LocationInfo array that has been mapped from event geometry point coordinates.")
@@ -29,7 +29,7 @@ class EventDetailsViewModelTests: XCTestCase {
     func testGetEventLocationInfoFromPolygonCoordinates_ShouldReturnNotEmptyArray() {
         sut = .init(event: .polygonDetailedEventMock)
         
-        let locationsInfo = sut.locationsInfo()
+        let locationsInfo = sut.locationsInfo
         
         XCTAssertTrue(!locationsInfo.isEmpty,
                       "locations info should return not empty LocationInfo array that has been mapped from event geometry polygon coordinates.")
