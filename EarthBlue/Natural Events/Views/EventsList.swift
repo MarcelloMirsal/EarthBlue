@@ -63,6 +63,17 @@ fileprivate struct EventsSearchResultsList: View {
             } label: {
                 EventSearchResultRow(title: event.title, category: event.category)
             }
+            .swipeActions {
+                Button {
+                    let bookmarkStore = EventBookmarkStore()
+                    bookmarkStore.append(eventBookmark: .init(id: event.id, title: event.title))
+                } label: {
+                    Image(systemName: "book")
+                }
+                .tint(.blue)
+
+            }
+            
             
         }
         .listStyle(PlainListStyle())

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventsView: View {
-    @ObservedObject var viewModel: EventsViewModel
+    @StateObject var viewModel: EventsViewModel
     @State private var searchText: String = ""
     @State private var canShowFeedFiltering = false
     @State private var canShowBookmarkedEvents = false
@@ -16,7 +16,7 @@ struct EventsView: View {
     @State var selectedBookmarkedEvent: Event? = nil
     
     init(viewModel: EventsViewModel = .init()) {
-        self.viewModel = viewModel
+        self._viewModel = .init(wrappedValue: viewModel)
     }
     
     var body: some View {
@@ -33,20 +33,13 @@ struct EventsView: View {
                 } label: {
                     EmptyView()
                 }
-                .alert(isPresented: .init(get: {
-                    return viewModel.errorMessage != nil
-                }, set: { _ in
-                    viewModel.set(errorMessage: nil)
-                }), content: {
-                    Alert(title: Text(viewModel.errorMessage ?? "an error occurred") )
-                })
                 EventsList(searchText: $searchText)
                     .environmentObject(viewModel)
                     .navigationTitle("Events")
                 TaskProgressView()
                     .isHidden(!viewModel.shouldShowLoadingIndicator)
                 if viewModel.shouldShowTryAgainButton {
-                    TryAgainFeedButton(action: {
+                    TryAgainFeedButton(descriptionMessage: viewModel.errorMessage,action: {
                         Task {
                             await viewModel.refreshEventsFeed()
                         }

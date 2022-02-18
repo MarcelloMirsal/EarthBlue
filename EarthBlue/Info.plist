@@ -19,7 +19,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>EarthBlue need to access Photos to save Imageries.</string>
 </dict>
 </plist>

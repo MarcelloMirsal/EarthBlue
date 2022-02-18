@@ -25,23 +25,18 @@ struct EPICFilteringView: View {
                 } footer: {
                     Text("enhanced images were processed to enhance land features.")
                 }
-                
                 Section {
                     DatePicker("Images date", selection: $viewModel.selectedDate, in: viewModel.datesRange, displayedComponents: .date)
                 }
-                Button(action: {
+                Button("Reset to Defaults") {
                     viewModel.restDefaults()
-                }, label: {
-                    Text("Reset defaults")
-                        .fontWeight(.semibold)
-                })
-                    .padding(.bottom, 8)
-                    .controlSize(.regular)
-                    .buttonStyle(.bordered)
-                    .padding(4)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(uiColor: .systemGroupedBackground))
-                    .listRowBackground(Color.clear)
+                }
+                .font(.body.weight(.semibold))
+                .controlSize(.regular)
+                .buttonStyle(.bordered)
+                .frame(maxWidth: .infinity)
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
             }
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
