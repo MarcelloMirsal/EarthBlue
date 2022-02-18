@@ -28,6 +28,17 @@ struct EventsBookmarksView: View {
     var body: some View {
         NavigationView {
             List {
+                if eventsBookmark.isEmpty {
+                    VStack(spacing: 8) {
+                        Text("No Bookmarked Events")
+                            .font(Font.headline)
+                        Text("Bookmarks lets you save events to keep tack of them. Swipe an event to add it to Bookmarks.")
+                    }
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .listRowSeparator(.hidden)
+                }
                 ForEach(eventsBookmark.sorted(), id: \.id) { bookmark in
                     ZStack(alignment: .leading) {
                         Button(bookmark.title) {

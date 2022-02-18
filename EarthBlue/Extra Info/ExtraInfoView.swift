@@ -45,14 +45,14 @@ struct ExtraInfoView: View {
                 }
                 
                 Section("About") {
-                    NavigationLink("About") {
+                    NavigationLink("Privacy Policy") {
                         List {
-                            Text("EarthBlue is using public APIs to get data for services like natural events, EPIC imagery and mars rovers imageries. these data are provided by NASA, all thanks to NASA's team who made this incredible data available.")
+                            Text(privacyPolicy())
                                 .lineSpacing(4)
                                 .padding(.vertical, 8)
                                 .listRowSeparator(.hidden)
                         }
-                        .navigationTitle("About")
+                        .navigationTitle("Privacy Policy")
                     }
                     HStack {
                         Text("Version")
@@ -93,6 +93,10 @@ struct ExtraInfoView: View {
                 isClearCacheDisabled = false
             }
         }
+    }
+    
+    func privacyPolicy() -> String {
+        return "EarthBlue do not collect, use, save, share, or have access to any of your personal data."
     }
 }
 

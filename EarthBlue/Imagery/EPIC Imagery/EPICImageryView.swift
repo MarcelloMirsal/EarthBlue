@@ -49,17 +49,12 @@ struct EPICImageryView: View {
                     } label: {
                         Image(systemName: "line.3.horizontal.decrease.circle")
                     }
+                    .disabled(viewModel.isFeedLoading)
                 }
-            })
-            .alert(isPresented: .init(get: {
-                return viewModel.error != nil
-            }, set: { _ in
-                viewModel.set(error: nil)
-            }), content: {
-                Alert(title: Text("\(viewModel.error?.localizedDescription ?? "an error occurred")"))
             })
             .fullScreenCover(item: $selectedEPICImage, content: { selectedImage in
                 EPICImageSliderView(epicImage: selectedImage.epicImage, isEnhanced: viewModel.epicImagesFeed.isEnhanced)
+                    .ignoresSafeArea()
             })
             .sheet(isPresented: $shouldShowFilteringView, content: {
                 EPICFilteringView(imageryFiltering: $viewModel.imageryFiltering)
@@ -68,12 +63,12 @@ struct EPICImageryView: View {
                 TaskProgressView()
             }
             if viewModel.isFailedLoading && viewModel.epicImagesFeed.epicImages.isEmpty {
-                TryAgainFeedButton(action: {
+                TryAgainFeedButton(descriptionMessage: viewModel.error?.localizedDescription, action: {
                     Task {await viewModel.refreshFeed()}
                 })
             }
             if viewModel.isFeedImagesEmpty {
-                Text("Imageries are not available yet, please try another filtering date.")
+                Text("Imageries are not available yet, please try another filtering options.")
                     .foregroundColor(.secondary)
             }
         }

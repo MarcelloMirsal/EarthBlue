@@ -61,7 +61,7 @@ class ImagePresentationViewController: UIViewController, UIScrollViewDelegate {
     
     fileprivate func setupImageView() {
         imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: imageURL, options: [.retryStrategy(DelayRetryStrategy(maxRetryCount: 3, retryInterval: .seconds(3)))])
+        imageView.kf.setImage(with: imageURL, options: [.retryStrategy(DelayRetryStrategy(maxRetryCount: 5, retryInterval: .seconds(2)))])
     }
     
     // MARK: Image Options AlertController

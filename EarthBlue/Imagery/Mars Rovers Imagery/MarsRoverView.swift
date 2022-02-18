@@ -65,7 +65,7 @@ struct MarsRoverView: View {
                 TaskProgressView()
             }
             if viewModel.requestStatus == .failed && viewModel.imageryFeed.photos.isEmpty {
-                TryAgainFeedButton(action: {
+                TryAgainFeedButton(descriptionMessage: viewModel.error?.localizedDescription,action: {
                     Task {
                         await viewModel.refreshFeed()
                     }
@@ -85,14 +85,8 @@ struct MarsRoverView: View {
                 } label: {
                     Image(systemName: "line.3.horizontal.decrease.circle")
                 }
+                .disabled(viewModel.requestStatus == .loading)
             }
-        })
-        .alert(isPresented: .init(get: {
-            return viewModel.error != nil
-        }, set: { _ in
-            viewModel.set(error: nil)
-        }), content: {
-            Alert(title: Text("\(viewModel.error?.localizedDescription ?? "an error occurred")"))
         })
         .fullScreenCover(isPresented: .init(get: {
             return selectedImagery != nil

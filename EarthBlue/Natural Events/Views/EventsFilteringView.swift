@@ -93,19 +93,17 @@ struct EventsFilteringView: View {
                                 }
                         }
                     }
-                    Button(action: {
+                    Button("Reset to Defaults") {
                         updateUI(from: viewModel.defaultFeedFiltering)
-                    }, label: {
-                        Text("Reset defaults")
-                            .fontWeight(.semibold)
-                    })
-                        .padding(.top, 8)
-                        .controlSize(.regular)
-                        .buttonStyle(.bordered)
-                        .padding(4)
-                        .frame(maxWidth: .infinity)
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
+                    }
+                    .font(.body.weight(.semibold))
+                    .padding(.top, 16)
+                    .controlSize(.regular)
+                    .buttonStyle(.bordered)
+                    .padding(4)
+                    .frame(maxWidth: .infinity)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
