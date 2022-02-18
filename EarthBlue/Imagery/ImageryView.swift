@@ -117,6 +117,12 @@ struct ImageryProviderInfoView: View {
         NavigationView {
             List {
                 Section {
+                    Text(providerInfo.title)
+                        .padding(.vertical)
+                        .multilineTextAlignment(.leading)
+                        .font(.largeTitle.bold())
+                        .foregroundColor(.primary)
+                        .shadow(radius: 32)
                     Text(providerInfo.description)
                         .textSelection(.enabled)
                         .foregroundColor(.primary)
@@ -126,9 +132,13 @@ struct ImageryProviderInfoView: View {
                     Link("more info...", destination: providerInfo.sourceURL)
                         .padding(.bottom, 8)
                 }
+                .padding()
+                .listRowInsets(EdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .listRowSeparator(.hidden)
             }
-            .navigationTitle(providerInfo.title)
             .listStyle(PlainListStyle())
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("Info")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {

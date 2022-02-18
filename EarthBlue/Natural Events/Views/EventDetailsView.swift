@@ -276,13 +276,13 @@ struct EventDetailsInfoView: View {
                     }
                     .padding(.horizontal)
                     .listRowBackground(Color.clear)
-                    
                 }
-                .listRowInsets(EdgeInsets.init(top: 16, leading: 0, bottom: 0, trailing: 0))
+                .listRowInsets(EdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                 .listRowSeparator(.hidden)
             }
             .listStyle(PlainListStyle())
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("Info")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {

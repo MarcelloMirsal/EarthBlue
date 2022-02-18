@@ -40,9 +40,9 @@ final class EPICImageSliderViewController: ImagePresentationViewController {
         progressView.translatesAutoresizingMaskIntoConstraints = false
         view.insertSubview(progressView, at: 0)
         NSLayoutConstraint.activate([
-            progressView.topAnchor.constraint(equalTo: view.topAnchor),
-            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         progressView.isHidden = true
         return progressView
