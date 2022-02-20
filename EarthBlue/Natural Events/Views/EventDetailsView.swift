@@ -255,26 +255,28 @@ struct EventDetailsInfoView: View {
                         .font(.largeTitle.bold())
                         .foregroundColor(.primary)
                         .shadow(radius: 32)
-                    InfoItemView(headline: "Category") {
-                        ForEach(event.categories, id: \.id) { category in
-                            Text(category.title)
+                    VStack(alignment: .leading, spacing: 20) {
+                        InfoItemView(headline: "Category") {
+                            ForEach(event.categories, id: \.id) { category in
+                                Text(category.title)
+                            }
                         }
-                    }
-                    InfoItemView(headline: "Status", content: {
-                        Text(event.isActive ? "ACTIVE" : "CLOSED")
-                    })
-                    InfoItemView(headline: "Last update date", content: {
-                        Text(event.lastUpdatedDate)
-                    })
-                    InfoItemView(headline: "Sources", content: {})
-                    ForEach(event.sources, id: \.id) { source in
-                        if let url = URL(string: source.url) {
-                            Link(source.id, destination: url)
-                                .foregroundColor(.blue)
-                                
+                        InfoItemView(headline: "Status", content: {
+                            Text(event.isActive ? "ACTIVE" : "CLOSED")
+                        })
+                        InfoItemView(headline: "Last update date", content: {
+                            Text(event.lastUpdatedDate)
+                        })
+                        InfoItemView(headline: "Sources", content: {})
+                        ForEach(event.sources, id: \.id) { source in
+                            if let url = URL(string: source.url) {
+                                Link(source.id, destination: url)
+                                    .foregroundColor(.blue)
+                            }
                         }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
+                    
                     .listRowBackground(Color.clear)
                 }
                 .listRowInsets(EdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0))
@@ -294,7 +296,7 @@ struct EventDetailsInfoView: View {
                 }
             }
         }
-
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

@@ -89,7 +89,7 @@ struct ImageryProviderView: View {
                 .overlay(
                     LinearGradient(colors: [.black, .clear], startPoint: .top, endPoint: .bottom)
                 )
-            HStack(spacing: 8) {
+            HStack(alignment: .firstTextBaseline , spacing: 8) {
                 Text(providerInfo.title)
                     .multilineTextAlignment(.leading)
                     .font(.title2.bold())
@@ -151,6 +151,5 @@ struct ImageryProviderInfoView: View {
                 }
             }
         }
-        
     }
 }
