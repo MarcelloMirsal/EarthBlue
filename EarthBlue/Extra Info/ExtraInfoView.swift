@@ -45,15 +45,7 @@ struct ExtraInfoView: View {
                 }
                 
                 Section("About") {
-                    NavigationLink("Privacy Policy") {
-                        List {
-                            Text(privacyPolicy())
-                                .lineSpacing(4)
-                                .padding(.vertical, 8)
-                                .listRowSeparator(.hidden)
-                        }
-                        .navigationTitle("Privacy Policy")
-                    }
+                    Link("Privacy Policy", destination: .init(string: "https://sites.google.com/view/earthblue/privacy-policy")!)
                     HStack {
                         Text("Version")
                         Spacer()
@@ -93,10 +85,6 @@ struct ExtraInfoView: View {
                 isClearCacheDisabled = false
             }
         }
-    }
-    
-    func privacyPolicy() -> String {
-        return "EarthBlue do not collect, use, save, share, or have access to any of your personal data."
     }
 }
 
