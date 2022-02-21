@@ -93,6 +93,11 @@ class EventDetailsViewController: UIViewController {
         shareButton.addTarget(self, action: #selector(handleShare), for: .touchUpInside)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presentedViewController?.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: setup methods
     func setupMapViewToSelectLastAnnotation() {
         guard let annotation = mapView.annotations.lazy.first(where: { [locationsInfo = viewModel.locationsInfo] annotation in
