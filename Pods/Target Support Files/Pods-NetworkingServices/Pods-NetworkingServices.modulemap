@@ -1,6 +1,0 @@
-framework module Pods_NetworkingServices {
-  umbrella header "Pods-NetworkingServices-umbrella.h"
-
-  export *
-  module * { export * }
-}
