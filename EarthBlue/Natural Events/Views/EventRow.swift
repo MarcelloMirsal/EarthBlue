@@ -12,7 +12,7 @@ struct EventRow: View {
     let isActive: Bool
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(category)
+            Text(LocalizedStringKey(category))
                 .font(.subheadline)
                 .fontWeight(.heavy)
             Text(title)

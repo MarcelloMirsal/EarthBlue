@@ -28,8 +28,16 @@ struct EPICFilteringView: View {
                 Section {
                     DatePicker("Images date", selection: $viewModel.selectedDate, in: viewModel.datesRange, displayedComponents: .date)
                 }
-                Button("Reset to Defaults") {
-                    viewModel.restDefaults()
+                Section {
+                    Button("Reset to Defaults") {
+                        viewModel.restDefaults()
+                    }
+                    .font(.body.weight(.semibold))
+                    .controlSize(.regular)
+                    .buttonStyle(.bordered)
+                    .frame(maxWidth: .infinity)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                 }
                 .font(.body.weight(.semibold))
                 .controlSize(.regular)

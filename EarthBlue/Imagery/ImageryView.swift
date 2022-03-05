@@ -14,7 +14,7 @@ struct ImageryView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: [gridItem], alignment: .center, spacing: 0) {
+                LazyVGrid(columns: [gridItem], alignment: .center, spacing: 0, pinnedViews: [.sectionHeaders]) {
                     Section {
                         NavigationLink {
                             EPICImageryView()
@@ -27,8 +27,9 @@ struct ImageryView: View {
                                 .font(.title3.weight(.heavy))
                             Spacer()
                         }
-                        .padding(8)
+                        .padding(6)
                         .shadow(radius: 8)
+                        .background(Colors.systemBackground)
                     }
                     Section {
                         NavigationLink {
@@ -52,8 +53,9 @@ struct ImageryView: View {
                                 .font(.title3.weight(.heavy))
                             Spacer()
                         }
-                        .padding(8)
+                        .padding(6)
                         .shadow(radius: 8)
+                        .background(Colors.systemBackground)
                     }
                 }
             }

@@ -36,7 +36,7 @@ struct EventsFilteringView: View {
         NavigationView {
             VStack(spacing: 0) {
                 Form {
-                    Section("By Days") {
+                    Section(LocalizedStringKey("BY DAYS")) {
                         Toggle("Last days", isOn: $isDaysRangeActive)
                             .onChange(of: isDaysRangeActive) { newValue in
                                 isDateRangeActive = !newValue
@@ -55,31 +55,33 @@ struct EventsFilteringView: View {
                                 }
                         }
                     }
-                    Section("By Date") {
+                    Section(LocalizedStringKey("BY DATE")) {
                         Toggle("Date range", isOn: $isDateRangeActive)
                             .onChange(of: isDateRangeActive) { newValue in
                                 isDaysRangeActive = !newValue
                             }
                         if isDateRangeActive {
-                            DatePicker("start",
+                            DatePicker(LocalizedStringKey("start"),
                                        selection: $startDate,
                                        in: viewModel.startingDatePickerRange(),
                                        displayedComponents: .date
                             )
+                                .environment(\.calendar, .init(identifier: .gregorian))
                                 .onChange(of: startDate) { newValue in
                                     endDate = newValue
                                 }
-                            DatePicker("end",
+                            DatePicker(LocalizedStringKey("end"),
                                        selection: $endDate,
                                        in: viewModel.endingDatePickerRange(startDate: startDate),
                                        displayedComponents: .date
                             )
+                                .environment(\.calendar, .init(identifier: .gregorian))
                         }
                     }
-                    Section("Status") {
+                    Section(LocalizedStringKey("STATUS")) {
                         Picker("Selected status", selection: $selectedStatus) {
                             ForEach(statusOptions, id: \.self) { status in
-                                Text(status.rawValue).tag(status)
+                                Text(LocalizedStringKey(status.rawValue)).tag(status)
                             }
                         }
                     }
@@ -93,17 +95,17 @@ struct EventsFilteringView: View {
                                 }
                         }
                     }
-                    Button("Reset to Defaults") {
-                        updateUI(from: viewModel.defaultFeedFiltering)
+                    Section {
+                        Button("Reset to Defaults") {
+                            updateUI(from: viewModel.defaultFeedFiltering)
+                        }
+                        .font(.body.weight(.semibold))
+                        .controlSize(.regular)
+                        .buttonStyle(.bordered)
+                        .frame(maxWidth: .infinity)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
                     }
-                    .font(.body.weight(.semibold))
-                    .padding(.top, 16)
-                    .controlSize(.regular)
-                    .buttonStyle(.bordered)
-                    .padding(4)
-                    .frame(maxWidth: .infinity)
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -165,14 +167,15 @@ struct EventsFilteringView_Previews: PreviewProvider {
         }
         .sheet(isPresented: .constant(true)) {
             EventsFilteringView(eventsFeedFiltering: .constant(datesFeedFiltering))
+                .environment(\.locale, .init(identifier: "ar"))
         }
     }
 }
 
 enum FeedStatusOptions: String, CaseIterable {
-    case active
-    case closed
-    case all
+    case active = "active"
+    case closed = "closed"
+    case all = "all"
 }
 
 
@@ -181,7 +184,7 @@ fileprivate struct CategoryView: View {
     let isSelected: Bool
     var body: some View {
         HStack {
-            Text(title)
+            Text(LocalizedStringKey(title))
             Spacer()
             Image(systemName: "checkmark")
                 .font(.body.weight(.medium))

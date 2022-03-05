@@ -1,0 +1,150 @@
+/* No comment provided by engineer. */
+"ACTIVE" = "فعّال";
+
+/* No comment provided by engineer. */
+"Cache clearing" = "حذف الذاكرة المؤقتة";
+
+/* No comment provided by engineer. */
+"cache has been cleared." = " لقد تم حذف الذاكرة المؤقتة.";
+
+/* No comment provided by engineer. */
+"Cancel" = "إلغاء";
+"cancel" = "إلغاء";
+
+/* No comment provided by engineer. */
+"Categories" = "الأصناف";
+
+/* No comment provided by engineer. */
+"Clear cache" = "حذف الذاكرة المؤقتة";
+
+/* No comment provided by engineer. */
+"Clear Cached Images" = "حذف الصور من الذاكرة المؤقتة";
+
+/* No comment provided by engineer. */
+"CLOSED" = "مغلق";
+
+/* No comment provided by engineer. */
+"Date range" = "فترة تاريخية";
+
+/* No comment provided by engineer. */
+"Done" = "تم";
+
+/* No comment provided by engineer. */
+"EarthBlue is caching images after been downloaded to avoid re-downloading them when required, Clear cache will delete all images in the cache." = "إن EarthBlue يقوم بتخزين الصور في الذاكرة المؤقتة بعد تحميلها لتجنب إعادة تحميلها عند الحاجة لها،  حذف الذاكرة المؤقتة سوف يقوم بحذف جميع الصور المحفوظة. ";
+
+/* No comment provided by engineer. */
+"enhanced images" = "صور محسّنة";
+
+/* No comment provided by engineer. */
+"enhanced images were processed to enhance land features." = "الصور المحسّنة تمت معالجتها لإظهار خصائص الأرض على الصور. ";
+
+/* No comment provided by engineer. */
+"Events" = "الأحداث";
+
+/* No comment provided by engineer. */
+"Extra" = "المزيد";
+
+/* No comment provided by engineer. */
+"Feed Filtering" = "فلترة القائمة";
+
+/* No comment provided by engineer. */
+"Imageries are not available yet, please try another filtering date." = "الصور غير متوفرة الان، الرجاء أختيار تاريخ آخر للفلترة.";
+
+/* No comment provided by engineer. */
+"Imageries are not available yet, please try another filtering options." = "الصور غير متوفرة الان، الرجاء أختيار خيار آخر للفلترة.";
+
+/* No comment provided by engineer. */
+"Imagery" = "الصور";
+
+/* No comment provided by engineer. */
+"Info" = "معلومات إضافية";
+
+/* No comment provided by engineer. */
+"Last days" = "آخر أيام";
+
+/* No comment provided by engineer. */
+"MARS ROVERS" = "آليات إستكشاف المريخ";
+
+/* No comment provided by engineer. */
+"more info..." = "المزيد من المعلومات...";
+
+/* No comment provided by engineer. */
+"New Filtered Feed" = "قائمة مفلترة جديدة";
+
+/* No comment provided by engineer. */
+"No events found, try another feed filtering options." = "لا توجد أحداث، الرجاء اختيار فلترة اخرى.";
+
+/* No comment provided by engineer. */
+"Number of days" = "عدد الأيام";
+
+/* No comment provided by engineer. */
+"OK" = "تم";
+
+/* No comment provided by engineer. */
+"Privacy Policy" = "سياسة الخصوصية";
+
+/* No comment provided by engineer. */
+"Reset to Defaults" = "استعادة الإفتراضيات";
+
+/* No comment provided by engineer. */
+"SATELLITES" = "أقمار صناعية";
+
+/* No comment provided by engineer. */
+"Search for events in this feed" = "البحث عن أحداث في القائمة";
+
+/* No comment provided by engineer. */
+"Selected status" = "الحالة المختارة";
+
+/* No comment provided by engineer. */
+"Storage" = "التخزين";
+
+/* No comment provided by engineer. */
+"Version" = "الإصدار";
+
+
+
+/* EventRow */
+"Last update: %@" = "آخر تحديث: %@";
+
+/* Event Categories */
+"Drought" = "جفاف";
+"Dust and Haze" = "غبار وضباب";
+"Earthquakes" = "زلازل";
+"Floods" = "فيضانات";
+"Landslides" = "انهيارات أرضية";
+"Manmade" = "من صنع الإنسان";
+"Sea and Lake Ice" = "البحر وجليد البحيرة";
+"Severe Storms" = "عواصف شديدة";
+"Snow" = "ثلوج";
+"Temperature Extremes" = "درجات الحرارة القصوى";
+"Volcanoes" = "براكين";
+"Water Color" = "لون الماء";
+"Wildfires" = "حرائق الغابات";
+
+/* EventsBookmarksView */
+"No Bookmarked Events" = "لاتوجد أحداث محفوظة";
+"Bookmarks lets you save events to keep track of them. Swipe an event to add it to Bookmarks." = "المحفوظات تسمح بحفظ الأحداث لمتابعتها لاحقاً. الرجاء التمرير على حدث لإضافته الى المحفوظات.";
+"Search bookmarks" = "البحث في المحفوظات";
+"Bookmarks" = "المحفوظات";
+
+/* EventsFilteringView */
+"BY DAYS" = "بالأيام";
+"BY DATE" = "بالتاريخ";
+"STATUS" = "الحالة";
+"active" = "مغلق";
+"closed" = "فعّال";
+"all" = "الكل";
+"start" = "بداية";
+"end" = "نهاية";
+
+
+/* EventDetailsInfoView */
+"Category" = "الصنف";
+"Status" = "الحالة";
+"Sources" = "المصادر";
+"Last update date" = "آخر تحديث";
+"Copy coordinates" = "نسخ إحداثيات الموقع";
+"Open in Maps" = "فتح في الخرائط";
+"Satellite" = "قمر صناعي";
+"Standard" = "عادي";
+"Map type" = "نوع الخريطة";

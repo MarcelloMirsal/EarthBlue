@@ -41,6 +41,7 @@
 		AD6A96542757841100D060F2 /* EventsFeedFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A96532757841100D060F2 /* EventsFeedFiltering.swift */; };
 		AD6A96562757892600D060F2 /* EventsFilteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */; };
 		AD7642CB2770A7E700B69C3D /* Networking Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7642CA2770A7E700B69C3D /* Networking Errors.swift */; };
+		AD78C60427D3A50A00896B6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD78C60227D3A50A00896B6A /* Localizable.strings */; };
 		AD7B284827443C4600737AF1 /* Extensions and helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7B284727443C4600737AF1 /* Extensions and helpers.swift */; };
 		AD8206BD2769DDD7006DCEBC /* EventsBookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8206BC2769DDD7006DCEBC /* EventsBookmarkStore.swift */; };
 		AD8206BF2769DE0C006DCEBC /* EventBookmarkStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8206BE2769DE0C006DCEBC /* EventBookmarkStoreTests.swift */; };
@@ -160,7 +161,6 @@
 		AD4E2C5B274BDA4100686DC2 /* EventDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		AD4E2C5D274BDF6500686DC2 /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		AD4E2C5F274BE80D00686DC2 /* EventDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsView.swift; sourceTree = "<group>"; };
-		AD59982C27D0E497002CE6F3 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		AD5EC6BC2736BD96007BAD06 /* EarthBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD5EC6BF2736BD96007BAD06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD5EC6C12736BD96007BAD06 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +172,7 @@
 		AD6A96532757841100D060F2 /* EventsFeedFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFeedFiltering.swift; sourceTree = "<group>"; };
 		AD6A96552757892600D060F2 /* EventsFilteringViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsFilteringViewModel.swift; sourceTree = "<group>"; };
 		AD7642CA2770A7E700B69C3D /* Networking Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Networking Errors.swift"; sourceTree = "<group>"; };
+		AD78C60327D3A50A00896B6A /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AD7B284727443C4600737AF1 /* Extensions and helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions and helpers.swift"; sourceTree = "<group>"; };
 		AD8206BC2769DDD7006DCEBC /* EventsBookmarkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsBookmarkStore.swift; sourceTree = "<group>"; };
 		AD8206BE2769DE0C006DCEBC /* EventBookmarkStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventBookmarkStoreTests.swift; path = "EarthBlue/Natural Events/EventBookmarkStoreTests.swift"; sourceTree = SOURCE_ROOT; };
@@ -375,6 +376,7 @@
 				ADD6160C2736C24D007A1D1D /* AppDelegate */,
 				ADD6160D2736C25B007A1D1D /* Assets */,
 				AD5EC6CD2736BD97007BAD06 /* Info.plist */,
+				AD78C60227D3A50A00896B6A /* Localizable.strings */,
 				ADF49648273EEA84003ADB9C /* shared */,
 				ADF4964B273EEAB5003ADB9C /* Natural Events */,
 				AD4AB63D2743E1C9000F3F61 /* Preview Content */,
@@ -742,6 +744,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD4AB63C2743E1C4000F3F61 /* Previews.xcassets in Resources */,
+				AD78C60427D3A50A00896B6A /* Localizable.strings in Resources */,
 				AD3C96DD27A59D73008B52E3 /* ImagePresentationViewController.xib in Resources */,
 				AD5EC6CC2736BD97007BAD06 /* LaunchScreen.storyboard in Resources */,
 				AD5EC6C92736BD97007BAD06 /* Assets.xcassets in Resources */,
@@ -900,9 +903,16 @@
 			isa = PBXVariantGroup;
 			children = (
 				AD5EC6CB2736BD97007BAD06 /* Base */,
-				AD59982C27D0E497002CE6F3 /* ar */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		AD78C60227D3A50A00896B6A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD78C60327D3A50A00896B6A /* ar */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1034,7 +1044,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "EarthBlue/Preview\\ Content";
 				DEVELOPMENT_TEAM = 45VBTWJ842;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1065,7 +1075,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "EarthBlue/Preview\\ Content";
 				DEVELOPMENT_TEAM = 45VBTWJ842;
 				GENERATE_INFOPLIST_FILE = YES;

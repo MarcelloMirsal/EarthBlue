@@ -142,14 +142,14 @@ class EventDetailsViewController: UIViewController {
     
     private func setupMapTypeOptionsMenu() {
         let actions: [UIAction] = [
-            .init(title: "Satellite", state: .off, handler: { [weak self] action in
+            .init(title: NSLocalizedString("Satellite", comment: ""), state: .off, handler: { [weak self] action in
                 self?.mapView.mapType = .satellite
             }),
-            .init(title: "Standard", state: .on, handler: { [weak self] action in
+            .init(title: NSLocalizedString("Standard", comment: ""), state: .on, handler: { [weak self] action in
                 self?.mapView.mapType = .standard
             })
         ]
-        let menu = UIMenu(title: "Map type", options: [.singleSelection], children: actions)
+        let menu = UIMenu(title: NSLocalizedString("Map type", comment: ""), options: [.singleSelection], children: actions)
         mapTypeButton.menu = menu
         mapTypeButton.showsMenuAsPrimaryAction = true
     }
@@ -191,13 +191,14 @@ class EventDetailsViewController: UIViewController {
         let sharingConfirmationAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let locationCoordinateToShare = getSelectedAnnotationCoordinate()
         
-        let openInMapsAction = UIAlertAction(title: "Open in Maps", style: .default) {[ mapItem = viewModel.mapItem(for: locationCoordinateToShare) ] _ in
+        let openInMapsAction = UIAlertAction(title: NSLocalizedString("Open in Maps", comment: ""), style: .default) {[ mapItem = viewModel.mapItem(for: locationCoordinateToShare) ] _ in
             mapItem.openInMaps(launchOptions: nil)
         }
-        let copyCoordinateAction = UIAlertAction(title: "Copy coordinates", style: .default) {[ formattedCoordinate = viewModel.formattedLocationCoordinate(from: locationCoordinateToShare) ] _ in
+        let copyCoordinateAction = UIAlertAction(title: NSLocalizedString("Copy coordinates", comment: ""), style: .default) {[ formattedCoordinate = viewModel.formattedLocationCoordinate(from: locationCoordinateToShare) ] _ in
             UIPasteboard.general.string = formattedCoordinate
         }
-        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
+        
         sharingConfirmationAlertController.addAction(openInMapsAction)
         sharingConfirmationAlertController.addAction(copyCoordinateAction)
         sharingConfirmationAlertController.addAction(cancelAction)
@@ -263,7 +264,7 @@ struct EventDetailsInfoView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         InfoItemView(headline: "Category") {
                             ForEach(event.categories, id: \.id) { category in
-                                Text(category.title)
+                                Text(LocalizedStringKey(category.title))
                             }
                         }
                         InfoItemView(headline: "Status", content: {
@@ -306,9 +307,9 @@ struct EventDetailsInfoView: View {
 }
 
 fileprivate struct InfoItemView<Content: View>: View {
-    let headline: String
+    let headline: LocalizedStringKey
     var content: Content
-    init(headline: String, @ViewBuilder content: () -> Content ) {
+    init(headline: LocalizedStringKey, @ViewBuilder content: () -> Content ) {
         self.headline = headline
         self.content = content()
     }

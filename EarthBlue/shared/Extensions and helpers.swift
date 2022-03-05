@@ -59,18 +59,21 @@ extension DateFormatter {
     static func eventDate(ISO8601StringDate eventDate: String) -> String {
         let dateAfterMapping = DateFormatter.date(fromISO8601StringDate: eventDate)
         let newDateFormatter = DateFormatter()
+        newDateFormatter.calendar = Calendar.init(identifier: Calendar.Identifier.gregorian)
         newDateFormatter.dateFormat = "MMM d, yyyy - h:mm a"
         return newDateFormatter.string(from: dateAfterMapping)
     }
     
     static func eventDate(ISO8601Date date: Date) -> String {
         let newDateFormatter = DateFormatter()
+        newDateFormatter.calendar = Calendar.init(identifier: Calendar.Identifier.gregorian)
         newDateFormatter.dateFormat = "MMM d, yyyy - h:mm a"
         return newDateFormatter.string(from: date)
     }
     
     static func date(fromISO8601StringDate stringDate: String) -> Date {
         let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar.init(identifier: Calendar.Identifier.gregorian)
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return dateFormatter.date(from: stringDate)!
     }

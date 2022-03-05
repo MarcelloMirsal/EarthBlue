@@ -54,15 +54,17 @@ struct MarsRoversFilteringView: View {
                         }
                     }
                 }
-                Button("Reset to Defaults") {
-                    viewModel.resetFiltering()
+                Section {
+                    Button("Reset to Defaults") {
+                        viewModel.resetFiltering()
+                    }
+                    .font(.body.weight(.semibold))
+                    .controlSize(.regular)
+                    .buttonStyle(.bordered)
+                    .frame(maxWidth: .infinity)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                 }
-                .font(.body.weight(.semibold))
-                .controlSize(.regular)
-                .buttonStyle(.bordered)
-                .frame(maxWidth: .infinity)
-                .listRowBackground(Color.clear)
-                .listRowSeparator(.hidden)
             }
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {

@@ -32,7 +32,7 @@ struct EventsBookmarksView: View {
                     VStack(spacing: 8) {
                         Text("No Bookmarked Events")
                             .font(Font.headline)
-                        Text("Bookmarks lets you save events to keep tack of them. Swipe an event to add it to Bookmarks.")
+                        Text(LocalizedStringKey("Bookmarks lets you save events to keep track of them. Swipe an event to add it to Bookmarks."))
                     }
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -69,8 +69,8 @@ struct EventsBookmarksView: View {
                 .font(.body.bold())
             })
             .listStyle(PlainListStyle())
-            .searchable(text: $searchingText,placement: .navigationBarDrawer(displayMode: .always), prompt: "Search bookmarks")
-            .navigationTitle("Bookmarks")
+            .searchable(text: $searchingText,placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search bookmarks"))
+            .navigationTitle(Text("Bookmarks"))
             .navigationBarTitleDisplayMode(.inline)
             .overlay {
                 TaskProgressView()
