@@ -92,7 +92,7 @@ struct ImageryProviderView: View {
                     LinearGradient(colors: [.black, .clear], startPoint: .top, endPoint: .bottom)
                 )
             HStack(alignment: .firstTextBaseline , spacing: 8) {
-                Text(providerInfo.title)
+                Text(LocalizedStringKey(providerInfo.title))
                     .multilineTextAlignment(.leading)
                     .font(.title2.bold())
                     .foregroundColor(.white)
@@ -119,7 +119,7 @@ struct ImageryProviderInfoView: View {
         NavigationView {
             List {
                 Section {
-                    Text(providerInfo.title)
+                    Text(LocalizedStringKey(providerInfo.title))
                         .padding(.vertical)
                         .multilineTextAlignment(.leading)
                         .font(.largeTitle.bold())

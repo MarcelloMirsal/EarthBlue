@@ -50,6 +50,7 @@ class MarsRoversViewModel: ObservableObject {
         guard let stringDate = imageryFeed.photos.first?.earthDate else { return "" }
         let date = DateFormatter.date(from: stringDate)
         let styledDateFormatter = DateFormatter()
+        styledDateFormatter.calendar = .init(identifier: .gregorian)
         styledDateFormatter.dateFormat = "MMM d, yyyy"
         return styledDateFormatter.string(from: date)
     }

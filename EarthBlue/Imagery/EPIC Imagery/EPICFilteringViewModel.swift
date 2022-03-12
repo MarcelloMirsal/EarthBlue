@@ -25,7 +25,7 @@ class EPICFilteringViewModel: ObservableObject {
     }
     
     var datesRange: ClosedRange<Date> {
-        let dateComponents = DateComponents(calendar: .current, timeZone: .current, year: 2015, month: 6, day: 17, hour: 0, minute: 0, second: 0, nanosecond: 0)
+        let dateComponents = DateComponents(calendar: .init(identifier: .gregorian), timeZone: .current, year: 2015, month: 6, day: 17, hour: 0, minute: 0, second: 0, nanosecond: 0)
         return .init(uncheckedBounds: (lower: dateComponents.date!, upper: EPICImageryFiltering.defaultFiltering.date))
     }
     

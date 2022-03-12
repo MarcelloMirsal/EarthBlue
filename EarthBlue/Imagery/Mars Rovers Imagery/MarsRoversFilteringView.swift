@@ -23,7 +23,8 @@ struct MarsRoversFilteringView: View {
         NavigationView {
             Form {
                 Section {
-                    DatePicker("Imageries date", selection: $viewModel.selectedDate, in: viewModel.filteringDateRange, displayedComponents: .date)
+                    DatePicker(LocalizedStringKey("Imageries date"), selection: $viewModel.selectedDate, in: viewModel.filteringDateRange, displayedComponents: .date)
+                        .environment(\.calendar, .init(identifier: .gregorian))
                 }
                 Section {
                     DisclosureGroup(isExpanded: $isCamerasListExpanded) {
@@ -32,7 +33,7 @@ struct MarsRoversFilteringView: View {
                                 viewModel.select(cameraName: cameraName)
                             }, label: {
                                 HStack {
-                                    Text(cameraName.fullName)
+                                    Text(LocalizedStringKey(cameraName.fullName))
                                         .padding(.vertical, 8)
                                     Spacer()
                                     Image(systemName: "checkmark")
@@ -49,7 +50,7 @@ struct MarsRoversFilteringView: View {
                         HStack {
                             Text("Select a camera")
                             Spacer()
-                            Text(viewModel.selectedCameraName?.rawValue ?? "all")
+                            Text(viewModel.getSelectedCamera)
                                 .foregroundColor(.secondary)
                         }
                     }

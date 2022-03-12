@@ -26,7 +26,8 @@ struct EPICFilteringView: View {
                     Text("enhanced images were processed to enhance land features.")
                 }
                 Section {
-                    DatePicker("Images date", selection: $viewModel.selectedDate, in: viewModel.datesRange, displayedComponents: .date)
+                    DatePicker(LocalizedStringKey("Imageries date"), selection: $viewModel.selectedDate, in: viewModel.datesRange, displayedComponents: .date)
+                        .environment(\.calendar, .init(identifier: .gregorian))
                 }
                 Section {
                     Button("Reset to Defaults") {

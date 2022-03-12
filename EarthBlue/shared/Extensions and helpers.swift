@@ -43,11 +43,11 @@ extension View {
 
 extension UIAlertController {
     static func imageAuthNotGrantedAlertController() -> UIAlertController {
-        let alertController = UIAlertController(title: "can't save image, please grant permission from Settings.", message: nil, preferredStyle: .alert)
-        let permissionsSettingsAction = UIAlertAction(title: "Settings", style: .default) { action in
+        let alertController = UIAlertController(title: NSLocalizedString("can't save image, please grant permission from Settings.", comment: "Image saving rejected due to access permission is not yet granted"), message: nil, preferredStyle: .alert)
+        let permissionsSettingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default) { action in
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
         }
-        let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel)
         alertController.addAction(cancelAction)
         alertController.addAction(permissionsSettingsAction)
         alertController.preferredAction = cancelAction
@@ -81,6 +81,7 @@ extension DateFormatter {
     /// get Date from string formatted date this formatter is only valid for format = YYYY-MM-dd
     static func date(from stringDate: String, stringDateFormat: String = "YYYY-MM-dd") -> Date {
         let dateFormatter = DateFormatter()
+        dateFormatter.calendar = .init(identifier: .gregorian)
         dateFormatter.dateFormat = stringDateFormat
         return dateFormatter.date(from: stringDate)!
     }

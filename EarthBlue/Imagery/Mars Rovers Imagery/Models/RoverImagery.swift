@@ -89,7 +89,7 @@ struct RoverInfo {
 struct RoverInfoFactory {
     static func makeCuriosityRoverInfo() -> RoverInfo {
         let cams: [RoverCamera.CameraName] = [ .FHAZ, .RHAZ, .MAST, .CHEMCAM, .MAHLI, .MARDI, .NAVCAM]
-        let dateComponents = DateComponents(calendar: .current, timeZone: TimeZone.init(secondsFromGMT: 0), year: 2012, month: 8, day: 6)
+        let dateComponents = DateComponents(calendar: .init(identifier: .gregorian), timeZone: TimeZone.init(secondsFromGMT: 0), year: 2012, month: 8, day: 6)
         let firstImageriesDate = dateComponents.date!
         
         return .init(id: 5, name: "Curiosity Rover", availableCameras: cams, firstImageriesDate: firstImageriesDate, lastImageriesDate:  nil)
@@ -97,10 +97,10 @@ struct RoverInfoFactory {
     
     static func makeSpiritRoverInfo() -> RoverInfo {
         let cams: [RoverCamera.CameraName] = [ .FHAZ, .RHAZ, .NAVCAM, .PANCAM, .MINITES]
-        var dateComponents = DateComponents(calendar: .current, timeZone: TimeZone.init(secondsFromGMT: 0), year: 2004, month: 1, day: 5)
+        var dateComponents = DateComponents(calendar: .init(identifier: .gregorian), timeZone: TimeZone.init(secondsFromGMT: 0), year: 2004, month: 1, day: 5)
         let firstImageriesDate = dateComponents.date!
         
-        dateComponents = DateComponents(calendar: .current, timeZone: TimeZone.init(secondsFromGMT: 0), year: 2010, month: 3, day: 21)
+        dateComponents = DateComponents(calendar: .init(identifier: .gregorian), timeZone: TimeZone.init(secondsFromGMT: 0), year: 2010, month: 3, day: 21)
         let lastUpdateDate = dateComponents.date!
         
         return .init(id: 7, name: "Spirit Rover", availableCameras: cams, firstImageriesDate: firstImageriesDate, lastImageriesDate: lastUpdateDate)
@@ -108,10 +108,10 @@ struct RoverInfoFactory {
     
     static func makeOpportunityRoverInfo() -> RoverInfo {
         let cams: [RoverCamera.CameraName] = [ .FHAZ, .RHAZ, .NAVCAM, .PANCAM, .MINITES]
-        var dateComponents = DateComponents(calendar: .current, timeZone: TimeZone.init(secondsFromGMT: 0), year: 2004, month: 1, day: 26)
+        var dateComponents = DateComponents(calendar: .init(identifier: .gregorian), timeZone: TimeZone.init(secondsFromGMT: 0), year: 2004, month: 1, day: 26)
         let firstImageriesDate = dateComponents.date!
         
-        dateComponents = DateComponents(calendar: .current, timeZone: TimeZone.init(secondsFromGMT: 0), year: 2018, month: 6, day: 11)
+        dateComponents = DateComponents(calendar: .init(identifier: .gregorian), timeZone: TimeZone.init(secondsFromGMT: 0), year: 2018, month: 6, day: 11)
         let lastUpdateDate = dateComponents.date!
         
         return .init(id: 6, name: "Opportunity Rover", availableCameras: cams, firstImageriesDate: firstImageriesDate, lastImageriesDate: lastUpdateDate)

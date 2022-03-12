@@ -114,7 +114,7 @@ struct CuriosityRoverRoutingStrategy: MarsRoversRouterStrategy {
     func twoDaysBeforeNowStringDate() -> String {
         let currentGMTDate = getCurrentGMTDate()
         let gmtTimeZone = TimeZone(secondsFromGMT: 0) ?? .current
-        let twoDaysBeforeDate = Calendar.current.date(byAdding: .day, value: -2, to: currentGMTDate)!
+        let twoDaysBeforeDate = Calendar.init(identifier: .gregorian).date(byAdding: .day, value: -2, to: currentGMTDate)!
         return DateFormatter.string(from: twoDaysBeforeDate, timeZone: gmtTimeZone)
     }
     

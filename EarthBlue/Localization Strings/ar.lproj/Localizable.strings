@@ -1,0 +1,211 @@
+/* No comment provided by engineer. */
+"about" = "نبذة";
+"ACTIVE" = "فعّال";
+"Try Again" = "حاول مرة أخرى";
+"can't save image, please grant permission from Settings." = "لا يمكن حفظ الصورة، يرجى منح الإذن من الإعدادات.";
+"Settings" = "الإعدادات";
+
+/* No comment provided by engineer. */
+"Cache clearing" = "حذف الذاكرة المؤقتة";
+
+/* No comment provided by engineer. */
+"cache has been cleared." = " لقد تم حذف الذاكرة المؤقتة.";
+
+/* No comment provided by engineer. */
+"Cancel" = "إلغاء";
+"cancel" = "إلغاء";
+
+/* No comment provided by engineer. */
+"Categories" = "الأصناف";
+
+/* No comment provided by engineer. */
+"Clear cache" = "حذف الذاكرة المؤقتة";
+
+/* No comment provided by engineer. */
+"Clear Cached Images" = "حذف الصور من الذاكرة المؤقتة";
+
+/* No comment provided by engineer. */
+"CLOSED" = "مغلق";
+
+/* No comment provided by engineer. */
+"Date range" = "فترة تاريخية";
+
+/* No comment provided by engineer. */
+"Done" = "تم";
+
+/* No comment provided by engineer. */
+"EarthBlue is caching images after been downloaded to avoid re-downloading them when required, Clear cache will delete all images in the cache." = "إن EarthBlue يقوم بتخزين الصور في الذاكرة المؤقتة بعد تحميلها لتجنب إعادة تحميلها عند الحاجة لها،  حذف الذاكرة المؤقتة سوف يقوم بحذف جميع الصور المحفوظة. ";
+
+/* No comment provided by engineer. */
+"enhanced images" = "صور محسّنة";
+
+/* No comment provided by engineer. */
+"enhanced images were processed to enhance land features." = "الصور المحسّنة تمت معالجتها لإظهار خصائص الأرض على الصور. ";
+
+/* No comment provided by engineer. */
+"Events" = "الأحداث";
+
+/* No comment provided by engineer. */
+"Extra" = "المزيد";
+
+/* No comment provided by engineer. */
+"Feed Filtering" = "فلترة القائمة";
+
+/* No comment provided by engineer. */
+"Imageries are not available yet, please try another filtering date." = "الصور غير متوفرة الان، الرجاء أختيار تاريخ آخر للفلترة.";
+
+/* No comment provided by engineer. */
+"Imageries are not available yet, please try another filtering options." = "الصور غير متوفرة الان، الرجاء أختيار خيار آخر للفلترة.";
+
+/* No comment provided by engineer. */
+"Imagery" = "الصور";
+
+/* No comment provided by engineer. */
+"Info" = "معلومات إضافية";
+
+/* No comment provided by engineer. */
+"Last days" = "آخر أيام";
+
+/* No comment provided by engineer. */
+"MARS ROVERS" = "مركبات إستكشاف المريخ";
+
+/* No comment provided by engineer. */
+"more info..." = "المزيد من المعلومات...";
+
+/* No comment provided by engineer. */
+"New Filtered Feed" = "قائمة مفلترة جديدة";
+
+/* No comment provided by engineer. */
+"No events found, try another feed filtering options." = "لا توجد أحداث، الرجاء اختيار فلترة اخرى.";
+
+/* No comment provided by engineer. */
+"Number of days" = "عدد الأيام";
+
+/* No comment provided by engineer. */
+"OK" = "تم";
+
+/* No comment provided by engineer. */
+"Privacy Policy" = "سياسة الخصوصية";
+
+/* No comment provided by engineer. */
+"Reset to Defaults" = "استعادة الإفتراضيات";
+
+/* No comment provided by engineer. */
+"SATELLITES" = "أقمار صناعية";
+
+/* No comment provided by engineer. */
+"Search for events in this feed" = "البحث عن أحداث في القائمة";
+
+/* No comment provided by engineer. */
+"Selected status" = "الحالة المختارة";
+
+/* No comment provided by engineer. */
+"Storage" = "التخزين";
+
+/* No comment provided by engineer. */
+"Version" = "الإصدار";
+
+
+
+/* EventRow */
+"Last update: %@" = "آخر تحديث: %@";
+
+/* Event Categories */
+"Drought" = "جفاف";
+"Dust and Haze" = "غبار وضباب";
+"Earthquakes" = "زلازل";
+"Floods" = "فيضانات";
+"Landslides" = "انهيارات أرضية";
+"Manmade" = "من صنع الإنسان";
+"Sea and Lake Ice" = "البحر وجليد البحيرة";
+"Severe Storms" = "عواصف شديدة";
+"Snow" = "ثلوج";
+"Temperature Extremes" = "درجات الحرارة القصوى";
+"Volcanoes" = "براكين";
+"Water Color" = "لون الماء";
+"Wildfires" = "حرائق الغابات";
+
+/* EventsBookmarksView */
+"No Bookmarked Events" = "لاتوجد أحداث محفوظة";
+"Bookmarks lets you save events to keep track of them. Swipe an event to add it to Bookmarks." = "المحفوظات تسمح بحفظ الأحداث لمتابعتها لاحقاً. الرجاء التمرير على حدث لإضافته الى المحفوظات.";
+"Search bookmarks" = "البحث في المحفوظات";
+"Bookmarks" = "المحفوظات";
+
+/* EventsFilteringView */
+"BY DAYS" = "بالأيام";
+"BY DATE" = "بالتاريخ";
+"STATUS" = "الحالة";
+"active" = "مغلق";
+"closed" = "فعّال";
+"all" = "الكل";
+"start" = "بداية";
+"end" = "نهاية";
+
+
+/* EventDetailsInfoView */
+"Category" = "الصنف";
+"Status" = "الحالة";
+"Sources" = "المصادر";
+"Last update date" = "آخر تحديث";
+"Copy coordinates" = "نسخ إحداثيات الموقع";
+"Open in Maps" = "فتح في الخرائط";
+"Satellite" = "قمر صناعي";
+"Standard" = "عادي";
+"Map type" = "نوع الخريطة";
+
+
+/* ImageryView */
+"Earth Polychromatic Imaging Camera (EPIC)" = "كاميرا تصوير الأرض متعددة الألوان EPIC";
+"Curiosity Rover" = "المستكشف Curiosity";
+"Spirit Rover" = "المستكشف Spirit";
+"Opportunity Rover" = "المستكشف Opportunity";
+
+
+/* ImageryProviderInfoView */
+"EPIC.ProviderInfo" = "كاميرا التصوير متعدد الألوان للأرض (EPIC) عبارة عن مقياس طيفي مكون من 10 قنوات (317-780 نانومتر) على متن مركبة الفضاء DSCOVR NOAA (مرصد المناخ في الفضاء العميق). يوفر EPIC عشر صور طيفية ضيقة النطاق لكامل وجه الأرض المضاء بنور الشمس باستخدام كشاف CCD مزدوج الشحن 2048x2048 بكسل مقترنًا بتلسكوب";
+
+"Curiosity.ProviderInfo" = "تعتبر Curiosity جزء من مهمة مختبر علوم المريخ التابع لوكالة ناسا، أكبر مركبة متجولة وأكثرها قدرة على الإطلاق تُرسل إلى المريخ. تم إطلاقه في 26 نوفمبر 2011 وهبط على سطح المريخ في الساعة 10:32 مساءً. PDT في 5 أغسطس 2012 (1:32 صباحًا بتوقيت شرق الولايات المتحدة في 6 أغسطس 2012). انطلقت Curiosity للإجابة على السؤال التالي: هل يتمتع المريخ بالظروف البيئية المناسبة لدعم أشكال الحياة الصغيرة التي تسمى الميكروبات؟ في وقت مبكر من مهمتها، وجدت أدوات Curiosity العلمية أدلة كيميائية ومعدنية لبيئات سابقة للسكن على سطح المريخ. يتواصل استكشاف السجل الصخري من وقت ما كان من الممكن أن يكون في المريخ موطنًا للحياة الميكروبية.";
+
+"Spirit.ProviderInfo" = "واحدة من اثنين من مركبات الاستكشاف التي تم إطلاقها في عام 2003 لاستكشاف المريخ والبحث عن علامات الحياة الماضية ، وقد تجاوزت Spirit مهمتها المخطط لها التي استغرقت 90 يومًا ، واستمرت أكثر من ست سنوات. من بين اكتشافاتها العديدة ، وجدت Spirit دليلاً على أن المريخ كان يومًا ما أكثر رطوبة مما هو عليه اليوم وساعدت العلماء على فهم رياح المريخ بشكل أفضل.
+في مايو 2009 ، دخلت العربة الجوالة في تربة ناعمة في موقع يسمى \"Troy\" بخمس عجلات عاملة فقط للمساعدة في جهود الإنقاذ. بعد أشهر من الاختبارات والمناورات المخططة بعناية ، أنهت وكالة ناسا الجهود المبذولة لتحرير العربة المستكشفة وأنهت المهمة في النهاية في 25 مايو 2011.";
+
+"Opportunity.ProviderInfo" = "كانت Opportunity الثانية من بين مركبتين تم إطلاقهما في عام 2003 للهبوط على سطح المريخ والبدء في عبور الكوكب الأحمر بحثًا عن علامات المياه القديمة. استكشفت العربة Opportunity تضاريس المريخ لما يقرب من 15 عامًا ، وهي أطول بكثير من مهمتها المخطط لها التي استغرقت 90 يومًا.
+ بعد الهبوط على المريخ في عام 2004 ، قامت Opportunity بعدد من الاكتشافات حول الكوكب الأحمر ، بما في ذلك أدلة مثيرة على أن منطقة واحدة على الأقل من المريخ ظلت مبللة لفترة طويلة وأن الظروف كان من الممكن أن تكون مناسبة لاستمرار الحياة الميكروبية.
+ توقفت المركبة الفضائية Opportunity عن الاتصال بالأرض عندما غطت عاصفة ترابية شديدة على مستوى المريخ موقعها في يونيو 2018. وبعد أكثر من ألف أمر لاستعادة الاتصال ، قام المهندسون في مركز التحكم في المهمة في مختبر الدفع النفاث التابع لناسا (JPL) بمحاولة احياء Opportunity ولكن دون جدوى. تم استلام الرسالة النهائية للمركبة التي تعمل بالطاقة الشمسية في 10 يونيو.";
+
+
+/* EPICFilteringView */
+"Imageries date" = "تاريخ الصور";
+
+
+/* MarsRoversFilteringView */
+"Select a camera" = "اختر كاميرا";
+
+"Chemistry and Camera Complex" = "مجمع الكيمياء والكاميرا";
+"Front Hazard Avoidance Camera" = "كاميرا أمامية لتجنب المخاطر";
+"Mars Hand Lens Imager" = "عدسة تصوير اليد";
+"Mast Camera" = "كاميرا التضاريس";
+"Navigation Camera" = "كاميرا ملاحة";
+"Rear Hazard Avoidance Camera" = "كاميرا خلفية لتجنب المخاطر";
+"Mars Descent Imager" = "تصوير الهبوط على المريخ";
+"Panoramic Camera" = "كاميرا بانورامية";
+"Miniature Thermal Emission Spectrometer (Mini-TES)" = "مطياف الانبعاث الحراري المصغر (Mini-TES)";
+"Entry, Descent, and Landing Camera" = "كاميرا الدخول والنزول والهبوط";
+
+/* Networking errors */
+"The Internet connection appears to be offline." = "لايوجد اتصال بالإنترنت";
+"the request timed out, please try again." = "انتهى وقت الطلب، الرجاء المحاولة مرة أخرى";
+"invalid response from server." = "خطأ من الخادم";
+"Unspecified error occurred." = "حدث خطأ ما غير معروف";
+"An error occurred while processing data, please try again." = "حصل خطأ ما اثناء معالجة البيانات، حاول مرة اخرى";
+
+
+/* ImagePresentationView */
+"Imagery options" = "خيارات الصورة";
+"Save" = "حفظ";
+"Share" = "مشاركة";
+"Load high quality imagery" = "تحميل الصورة بدقة عالية";
+
+/* ExtraInfoView */
+
+"privacy-policy-link" = "https://sites.google.com/view/earthblue/privacy-policy/PrivacyPolicyArabic";

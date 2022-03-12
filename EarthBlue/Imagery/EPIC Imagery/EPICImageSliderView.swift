@@ -90,18 +90,23 @@ final class EPICImageSliderViewController: ImagePresentationViewController {
     
     // MARK: Image Options AlertController
     override func makeImageOptionsAlertController(forImage image: UIImage) -> UIAlertController {
-        let alertController = UIAlertController(title: "Imagery options", message: nil, preferredStyle: .actionSheet)
+        let alertTitle = NSLocalizedString("Imagery options", comment: "")
+        let saveActionTitle = NSLocalizedString("Save", comment: "")
+        let shareActionTitle = NSLocalizedString("Share", comment: "")
+        let cancelActionTitle = NSLocalizedString("cancel", comment: "")
+        let qualityImageryActionTitle = NSLocalizedString("Load high quality imagery", comment: "")
+        let alertController = UIAlertController(title: alertTitle, message: nil, preferredStyle: .actionSheet)
         [
-            UIAlertAction(title: "Save", style: .default) { [weak self] action in
+            UIAlertAction(title: saveActionTitle, style: .default) { [weak self] action in
                 self?.saveImageActionHandler(action: action, image: image)
             },
-            UIAlertAction(title: "Load high quality imagery", style: .default) { [weak self, epicImage = self.epicImage] action in
+            UIAlertAction(title: qualityImageryActionTitle, style: .default) { [weak self, epicImage = self.epicImage] action in
                 self?.loadHighQualityImage(epicImage: epicImage)
             },
-            UIAlertAction(title: "Share", style: .default) { [weak self]  action in
+            UIAlertAction(title: shareActionTitle, style: .default) { [weak self]  action in
                 self?.shareImageHandler(image: image)
             },
-            UIAlertAction(title: "cancel", style: .cancel),
+            UIAlertAction(title: cancelActionTitle, style: .cancel),
         ].forEach({ alertController.addAction($0) })
         return alertController
     }

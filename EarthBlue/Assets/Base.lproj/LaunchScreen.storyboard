@@ -11,6 +11,7 @@
         <!--View Controller-->
         <scene sceneID="bfK-vO-ero">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CpR-pk-fv7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="BUJ-wc-7YS" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QWS-Vs-eXV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -18,10 +19,10 @@
                         <viewLayoutGuide key="safeArea" id="zqJ-zf-VJ8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="p4V-nq-tOj"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CpR-pk-fv7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="69"/>
+            <point key="canvasLocation" x="2759.4202898550725" y="68.973214285714278"/>
         </scene>
     </scenes>
     <resources>

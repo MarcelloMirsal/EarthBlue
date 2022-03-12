@@ -70,8 +70,7 @@ class EPICImageryViewModel: ObservableObject {
         guard let imageDate = epicImage?.date else { return "" }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatter.locale = .current
-        dateFormatter.calendar = .current
+        dateFormatter.calendar = .init(identifier: .gregorian)
         let date = dateFormatter.date(from: imageDate)!
         dateFormatter.dateFormat = "MMM d, yyyy"
         return dateFormatter.string(from: date)

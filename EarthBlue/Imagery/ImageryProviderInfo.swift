@@ -15,37 +15,19 @@ struct ImageryProviderInfo {
 
 struct ImageryProviderInfoFactory {
     static func makeEPICImageryProviderInfo() -> ImageryProviderInfo {
-        return .init(title: "Earth Polychromatic Imaging Camera (EPIC)", description: """
-EPIC (Earth Polychromatic Imaging Camera) is a 10-channel spectroradiometer (317 – 780 nm) onboard NOAA’s DSCOVR (Deep Space Climate Observatory) spacecraft. EPIC provides 10 narrow band spectral images of the entire sunlit face of Earth using a 2048x2048 pixel CCD (Charge Coupled Device) detector coupled to a 30-cm aperture Cassegrain telescope.
-
-The DSCOVR spacecraft is located at the Earth-Sun Lagrange-1 (L-1) point giving EPIC a unique angular perspective that will be used in science applications to measure ozone, aerosols, cloud reflectivity, cloud height, vegetation properties, and UV radiation estimates at Earth's surface.
-""", sourceURL: .init(string: "https://epic.gsfc.nasa.gov/about/epic")!)
+        return .init(title: "Earth Polychromatic Imaging Camera (EPIC)", description: NSLocalizedString("EPIC.ProviderInfo", comment: ""), sourceURL: .init(string: "https://epic.gsfc.nasa.gov/about/epic")!)
     }
     
     
     static func makeCuriosityRoverInfo() -> ImageryProviderInfo {
-        return .init(title: "Curiosity Rover", description: """
-Part of NASA's Mars Science Laboratory mission, Curiosity is the largest and most capable rover ever sent to Mars. It launched Nov. 26, 2011 and landed on Mars at 10:32 p.m. PDT on Aug. 5, 2012 (1:32 a.m. EDT on Aug. 6, 2012).
-
-Curiosity set out to answer the question: Did Mars ever have the right environmental conditions to support small life forms called microbes? Early in its mission, Curiosity's scientific tools found chemical and mineral evidence of past habitable environments on Mars. It continues to explore the rock record from a time when Mars could have been home to microbial life.
-""", sourceURL: .init(string: "https://mars.nasa.gov/msl/mission/overview")!)
+        return .init(title: "Curiosity Rover", description: NSLocalizedString("Curiosity.ProviderInfo", comment: ""), sourceURL: .init(string: "https://mars.nasa.gov/msl/mission/overview")!)
     }
     
     static func makeSpiritRoverInfo() -> ImageryProviderInfo {
-        return .init(title: "Spirit Rover", description: """
-One of two rovers launched in 2003 to explore Mars and search for signs of past life, Spirit far outlasted her planned 90-day mission, lasting over six years. Among her myriad discoveries, Spirit found evidence that Mars was once much wetter than it is today and helped scientists better understand the Martian wind.
-
-In May 2009, the rover became embedded in soft soil at a site called "Troy" with only five working wheels to aid in the rescue effort. After months of testing and carefully planned maneuvers, NASA ended efforts to free the rover and eventually ended the mission on May 25, 2011.
-""", sourceURL: .init(string: "https://www.jpl.nasa.gov/missions/mars-exploration-rover-spirit-mer-spirit")!)
+        return .init(title: "Spirit Rover", description: NSLocalizedString("Spirit.ProviderInfo", comment: ""), sourceURL: .init(string: "https://www.jpl.nasa.gov/missions/mars-exploration-rover-spirit-mer-spirit")!)
     }
     
     static func makeOpportunityRoverInfo() -> ImageryProviderInfo {
-        return .init(title: "Opportunity Rover", description: """
-Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of ancient water. The rover explored the Martian terrain for almost 15 years, far outlasting her planned 90-day mission.
-
-After landing on Mars in 2004, Opportunity made a number of discoveries about the Red Planet including dramatic evidence that long ago at least one area of Mars stayed wet for an extended period and that conditions could have been suitable for sustaining microbial life.
-
-The Opportunity rover stopped communicating with Earth when a severe Mars-wide dust storm blanketed its location in June 2018. After more than a thousand commands to restore contact, engineers in the Mission Control at NASA's Jet Propulsion Laboratory (JPL) made their last attempt to revive Opportunity Tuesday, February 13, 2019, to no avail. The solar-powered rover's final communication was received June 10.
-""", sourceURL: .init(string: "https://www.jpl.nasa.gov/missions/mars-exploration-rover-opportunity-mer")!)
+        return .init(title: "Opportunity Rover", description: NSLocalizedString("Opportunity.ProviderInfo", comment: ""), sourceURL: .init(string: "https://www.jpl.nasa.gov/missions/mars-exploration-rover-opportunity-mer")!)
     }
 }

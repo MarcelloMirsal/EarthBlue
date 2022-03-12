@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  EarthBlue
+
+  Created by Marcello Mirsal on 06/03/2022.
+  
+*/
+
+"NSPhotoLibraryAddUsageDescription" = "إن EarthBlue يحتاج الوصول الى تطبيق الصور لحفظ الصور.";

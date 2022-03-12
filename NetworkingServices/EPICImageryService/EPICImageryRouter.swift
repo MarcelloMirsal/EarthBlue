@@ -25,6 +25,8 @@ public struct EPICImageryRouter {
     public func filteredFeedRequest(isImageryEnhanced: Bool, date: Date) -> URLRequest {
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
         let dateFormatter = DateFormatter()
+        dateFormatter.calendar = .init(identifier: .gregorian)
+        dateFormatter.locale = .init(identifier: "en")
         dateFormatter.dateFormat = "/yyyy-MM-dd"
         let imageRootPath = dateFormatter.string(from: date)
         let path = isImageryEnhanced ? Paths.enhancedFiltered.rawValue : Paths.naturalFiltered.rawValue
@@ -51,6 +53,8 @@ public struct EPICImageryRouter {
     
     private func date(fromISO8601DateFormat stringDate: String ) -> Date {
         let dateFormatter = DateFormatter()
+        dateFormatter.calendar = .init(identifier: .gregorian)
+        dateFormatter.locale = .init(identifier: "en")
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return dateFormatter.date(from: stringDate)!
     }
@@ -61,6 +65,8 @@ public struct EPICImageryRouter {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.calendar = .init(identifier: .gregorian)
+        dateFormatter.locale = .init(identifier: "en")
         let imageRootPath = dateFormatter.string(from: date)
         archiveBaseURL.appendPathComponent(imageRootPath)
         

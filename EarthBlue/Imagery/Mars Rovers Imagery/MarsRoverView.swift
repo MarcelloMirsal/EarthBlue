@@ -49,7 +49,7 @@ struct MarsRoverView: View {
                             }
                         } header: {
                             HStack(alignment: .center) {
-                                Text(camera.name.fullName)
+                                Text(LocalizedStringKey(camera.name.fullName))
                                     .font(.title2)
                                     .fontWeight(.bold)
                                 Spacer()
@@ -60,7 +60,7 @@ struct MarsRoverView: View {
                     }
                 }
             }
-            .navigationTitle(viewModel.roverName)
+            .navigationBarTitle(LocalizedStringKey(viewModel.roverName))
             if viewModel.requestStatus == .loading && viewModel.imageryFeed.photos.isEmpty {
                 TaskProgressView()
             }

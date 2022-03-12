@@ -93,7 +93,7 @@ fileprivate struct EventSearchResultRow: View {
                     .foregroundColor(.secondary)
             }
             Spacer()
-            Text(category)
+            Text(LocalizedStringKey(category))
                 .multilineTextAlignment(.trailing)
                 .foregroundColor(.secondary)
         }

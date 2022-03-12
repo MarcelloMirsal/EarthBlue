@@ -54,6 +54,8 @@ public class NaturalEventsRouter: ResponseParser {
     
     func stringDateForQuery(from date: Date) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.calendar = .init(identifier: .gregorian)
+        dateFormatter.locale = .init(identifier: "en")
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: date)
     }

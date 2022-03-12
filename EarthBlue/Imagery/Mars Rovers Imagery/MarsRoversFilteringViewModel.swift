@@ -5,12 +5,12 @@
 //  Created by Marcello Mirsal on 01/02/2022.
 //
 
-import Foundation
+import SwiftUI
 
 class MarsRoversFilteringViewModel: ObservableObject {
     let roverInfo: RoverInfo
     @Published var selectedDate: Date
-    @Published private(set) var selectedCameraName: RoverCamera.CameraName? = nil
+    @Published private var selectedCameraName: RoverCamera.CameraName? = nil
     
     init(roverInfo: RoverInfo, lastFeedFiltering: RoverImageryFeedFiltering?) {
         self.roverInfo = roverInfo
@@ -30,6 +30,11 @@ class MarsRoversFilteringViewModel: ObservableObject {
         return roverInfo.availableCameras.sorted(by: { lhs, rhs in
             lhs.rawValue < rhs.rawValue
         })
+    }
+    
+    var getSelectedCamera: LocalizedStringKey {
+        guard let name = selectedCameraName?.rawValue else { return .init("all") }
+        return .init(name)
     }
     
     func select(cameraName: RoverCamera.CameraName) {

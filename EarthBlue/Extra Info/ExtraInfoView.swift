@@ -44,12 +44,12 @@ struct ExtraInfoView: View {
                     Text("EarthBlue is caching images after been downloaded to avoid re-downloading them when required, Clear cache will delete all images in the cache.")
                 }
                 
-                Section("About") {
-                    Link("Privacy Policy", destination: .init(string: "https://sites.google.com/view/earthblue/privacy-policy")!)
+                Section(LocalizedStringKey("about")) {
+                    Link("Privacy Policy", destination: .init(string: NSLocalizedString("privacy-policy-link", comment: "privacy policy URL"))!)
                     HStack {
                         Text("Version")
                         Spacer()
-                        Text("1.0")
+                        Text("1.1")
                             .foregroundColor(.secondary)
                     }
                 }

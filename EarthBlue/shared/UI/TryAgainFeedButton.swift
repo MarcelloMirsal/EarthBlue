@@ -13,12 +13,12 @@ struct TryAgainFeedButton: View {
     let action: () -> ()
     var body: some View {
         VStack(spacing: 10) {
-            Text(descriptionMessage ?? "")
+            Text(LocalizedStringKey(descriptionMessage ?? ""))
                 .foregroundColor(.secondary)
             Button {
                 action()
             } label: {
-                Label(buttonTitle.capitalized, systemImage: "arrow.clockwise")
+                Label(LocalizedStringKey(buttonTitle), systemImage: "arrow.clockwise")
             }
         }
     }
